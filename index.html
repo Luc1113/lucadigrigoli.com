@@ -4,21 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Luca DiGrigoli</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Comfortaa', sans-serif;
       margin: 0;
-      background-color: #111;
-      color: #f4f4f4;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    header, footer, nav {
+      background: #343a40;
+      color: #f8f9fa;
     }
     header, footer {
-      background: #222;
       text-align: center;
       padding: 2rem 1rem;
     }
     header h1 {
-      color: #ff3b3b;
       margin: 0;
+      font-size: 2.5rem;
     }
     section {
       max-width: 900px;
@@ -36,12 +40,53 @@
       align-items: center;
       margin-bottom: 1.5rem;
     }
+    .band-images {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .band-images img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+    }
     a {
-      color: #ff3b3b;
+      color: #dc3545;
+    }
+    nav {
+      padding: 1rem;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+    nav li {
+      margin: 0 1rem;
+    }
+    nav a {
+      color: #f8f9fa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="https://lucadigrigoli.com">Home</a></li>
+      <li><a href="https://linktr.ee/lucadigrigoli">LinkTree</a></li>
+      <li><a href="https://github.com/Luc1113">GitHub</a></li>
+      <li><a href="https://www.youtube.com/@lucadigrigoli7513">YouTube</a></li>
+    </ul>
+  </nav>
+
   <header>
     <h1>Luca DiGrigoli</h1>
     <p>Artist and Computer Science Graduate</p>
@@ -79,6 +124,10 @@
       <p>Member of Binghamton University's alt-rock a cappella group. <a href="https://www.instagram.com/binghamtontreblemakers/">Check us out</a>.</p>
       <h3>Jesters</h3>
       <p>Pop-rock band formed with close friends. Playing live and releasing music soon. <a href="https://jestersband.com">Visit our website</a>.</p>
+    </div>
+    <div class="band-images">
+      <img src="images/trebz1.jpg" alt="Treblemakers">
+      <img src="images/binghamtonLogo.png" alt="Binghamton University">
     </div>
   </section>
 
