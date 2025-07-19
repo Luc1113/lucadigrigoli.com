@@ -1,159 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Luca DiGrigoli</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Comfortaa', sans-serif;
-      margin: 0;
-      background-color: #f8f9fa;
-      color: #212529;
-    }
-    header, footer, nav {
-      background: #343a40;
-      color: #f8f9fa;
-    }
-    header, footer {
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    img.album {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      margin-right: 1rem;
-    }
-    .media {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-    .band-images {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
-    .band-images img {
-      width: 200px;
-      height: auto;
-      border-radius: 10px;
-    }
-    a {
-      color: #dc3545;
-    }
-    nav {
-      padding: 1rem;
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 0;
-      padding: 0;
-    }
-    nav li {
-      margin: 0.5rem 1rem;
-    }
-    nav a {
-      color: #f8f9fa;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    iframe.instagram-embed {
-      width: 100%;
-      height: 600px;
-      border: none;
-      margin-top: 2rem;
-    }
-  </style>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Comfortaa Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="https://lucadigrigoli.com">Home</a></li>
-      <li><a href="https://linktr.ee/lucadigrigoli">LinkTree</a></li>
-      <li><a href="https://github.com/Luc1113">GitHub</a></li>
-      <li><a href="https://www.youtube.com/@lucadigrigoli7513">YouTube</a></li>
-      <li><a href="https://www.linkedin.com/in/lucadigrigoli/">LinkedIn</a></li>
-    </ul>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Luca DiGrigoli</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="https://lucadigrigoli.com">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://linktr.ee/lucadigrigoli">LinkTree</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://github.com/Luc1113">GitHub</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.youtube.com/@lucadigrigoli7513">YouTube</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/lucadigrigoli/">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-  <header>
-    <h1>Luca DiGrigoli</h1>
-    <p>Artist and Computer Science Graduate</p>
+  <!-- Hero -->
+  <header class="bg-light py-5 text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Luca DiGrigoli</h1>
+      <p class="lead">Artist and Computer Science Graduate</p>
+    </div>
   </header>
 
-  <section>
-    <h2>Musicianship</h2>
-    <div class="media">
-      <img src="images/521cover.jpg" alt="521" class="album">
-      <div>
-        <h3>521</h3>
-        <p>My debut studio album released in 2021, featuring "Lose Your Mind," "Apologize," and more. <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521">Listen here</a>.</p>
+  <main class="container my-5">
+    <!-- Musicianship -->
+    <section class="mb-5">
+      <h2 class="mb-4">Musicianship</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <img src="images/521cover.jpg" class="card-img-top" alt="521" />
+            <div class="card-body">
+              <h5 class="card-title">521</h5>
+              <p class="card-text">My debut studio album released in 2021, featuring "Lose Your Mind," "Apologize," and more.</p>
+              <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" class="btn btn-outline-dark" target="_blank">Listen</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <img src="images/valerie.jpeg" class="card-img-top" alt="Valerie" />
+            <div class="card-body">
+              <h5 class="card-title">Valerie</h5>
+              <p class="card-text">Dedicated to that special someone you're still finding. My first track to reach 10k+ streams.</p>
+              <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" class="btn btn-outline-dark" target="_blank">Stream</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <img src="images/comingSono.gif" class="card-img-top" alt="Coming Soon" />
+            <div class="card-body">
+              <h5 class="card-title">Untitled EP...</h5>
+              <p class="card-text">New originals in the works! Follow me on Instagram for updates.</p>
+              <a href="https://www.instagram.com/luca.digrigoli/" class="btn btn-outline-dark" target="_blank">@luca.digrigoli</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="media">
-      <img src="images/valerie.jpeg" alt="Valerie" class="album">
-      <div>
-        <h3>Valerie</h3>
-        <p>Dedicated to that special someone you're still finding. My first track to reach 10k+ streams. <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2">Stream here</a>.</p>
+    </section>
+
+    <!-- Bands & Collabs -->
+    <section class="mb-5">
+      <h2 class="mb-4">Bands & Collaborations</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="images/trebz1.jpg" class="card-img-top" alt="Treblemakers" />
+            <div class="card-body">
+              <h5 class="card-title">Treblemakers</h5>
+              <p class="card-text">Member of Binghamton University's alt-rock a cappella group.</p>
+              <a href="https://www.instagram.com/binghamtontreblemakers/" class="btn btn-outline-dark" target="_blank">Check us out</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="images/binghamtonLogo.png" class="card-img-top" alt="Binghamton" />
+            <div class="card-body">
+              <h5 class="card-title">Jesters</h5>
+              <p class="card-text">Pop-rock band formed with close friends. Playing live and releasing music soon.</p>
+              <a href="https://jestersband.com" class="btn btn-outline-dark" target="_blank">Visit Website</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="media">
-      <img src="images/comingSono.gif" alt="EP Coming Soon" class="album">
-      <div>
-        <h3>The Untitled EP...</h3>
-        <p>New originals in the works! Follow <a href="https://www.instagram.com/luca.digrigoli/">@luca.digrigoli</a> for updates.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Bands & Collaborations</h2>
-    <div>
-      <h3>Treblemakers</h3>
-      <p>Member of Binghamton University's alt-rock a cappella group. <a href="https://www.instagram.com/binghamtontreblemakers/">Check us out</a>.</p>
-      <h3>Jesters</h3>
-      <p>Pop-rock band formed with close friends. Playing live and releasing music soon. <a href="https://jestersband.com">Visit our website</a>.</p>
-    </div>
-    <div class="band-images">
-      <img src="images/trebz1.jpg" alt="Treblemakers">
-      <img src="images/binghamtonLogo.png" alt="Binghamton University">
-    </div>
-  </section>
+    <!-- Instagram Icon -->
+    <section class="text-center my-5">
+      <h2 class="mb-3">Instagram</h2>
+      <a href="https://www.instagram.com/luca.digrigoli/" target="_blank" style="font-size: 3rem; color: #343a40;">
+        <i class="bi bi-instagram"></i>
+      </a>
+    </section>
 
-  <section>
-    <h2>Instagram</h2>
-    <iframe class="instagram-embed" src="https://www.instagram.com/luca.digrigoli/embed" allowfullscreen></iframe>
-    <p style="text-align:center;">
-      <a href="https://www.instagram.com/luca.digrigoli/" target="_blank">@luca.digrigoli on Instagram</a>
-    </p>
-  </section>
+    <!-- Personal Note -->
+    <section>
+      <h2 class="mb-3">Why This Site?</h2>
+      <p>This site is hand-coded — no Wix or template builders here. As a CS graduate, I wanted to make something that evolves as I do. Thanks for stopping by!</p>
+    </section>
+  </main>
 
-  <section>
-    <h2>Why This Site?</h2>
-    <p>This site is hand-coded — no Wix or template builders here. As a CS graduate, I wanted to make something that evolves as I do. Thanks for stopping by!</p>
-  </section>
-
-  <footer>
-    <p>&copy; Luca DiGrigoli, 2020–2025. All rights reserved.</p>
+  <footer class="bg-dark text-light text-center py-4">
+    <p class="mb-0">&copy; Luca DiGrigoli, 2020–2025. All rights reserved.</p>
   </footer>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

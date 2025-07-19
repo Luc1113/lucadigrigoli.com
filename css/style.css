@@ -1,0 +1,18 @@
+body {
+  font-family: 'Comfortaa', sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+h1, h2, h5 {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card img {
+  object-fit: cover;
+  height: 200px;
+}
