@@ -20,3 +20,26 @@ h1, h2, h5 {
   object-fit: cover;
   max-height: 100px;
 }
+
+/* Distinct top navbar */
+.navbar {
+  background-color: #e8e8e8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card text color override for dark mode */
+body.dark-mode .card-body,
+body.dark-mode .card-text,
+body.dark-mode .card-title {
+  color: white !important;
+}
+
+/* Social icons */
+.social-icons i {
+  font-size: 2rem;
+  margin: 0 1rem;
+  transition: transform 0.2s ease;
+}
+.social-icons i:hover {
+  transform: scale(1.2);
+}
