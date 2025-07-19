@@ -1,32 +1,21 @@
 body {
-  font-family: 'Comfortaa', sans-serif;
-  background-color: #f8f9fa;
-  color: #212529;
-  transition: background-color 0.5s ease;
-}
-
-.card {
-  position: relative;
-  overflow: hidden;
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.01);
+  font-family: 'Comfortaa', cursive;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .card img {
-  object-fit: contain;
+  object-fit: cover;
+  height: 100%;
   width: 100%;
-  max-height: 200px;
-  background-color: #fff;
+  max-height: 150px;
 }
 
-/* Background classes triggered via JS */
-.bg-521 { background-color: #bda67e !important; }
+.hover-bg-521:hover ~ body {
+  background-color: #bda67e;
+}
+
+/* Hover Background Theme Swaps */
+.bg-521     { background-color: #bda67e !important; }
 .bg-valerie { background-color: #edb2d9 !important; }
-.bg-trebz { background-color: #d3d1ff !important; }
-.bg-bing { background-color: #005A43 !important; }
+.bg-trebz   { background-color: #d3d1ff !important; }
+.bg-bing    { background-color: #005A43 !important; }

@@ -4,27 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luca DiGrigoli</title>
+
+  <!-- Bootstrap & Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="css/light.css" />
+
+  <!-- Custom -->
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 </head>
 <body>
 
+  <!-- Toggle Button -->
+  <nav class="d-flex justify-content-end p-3">
+    <button id="theme-toggle" class="btn btn-sm btn-outline-secondary">Toggle Dark Mode</button>
+  </nav>
+
+  <!-- Main Content -->
   <main class="container my-5">
-    <h2 class="text-center mb-4">Musicianship</h2>
+    <h2 class="text-center mb-4">Musicianship & More</h2>
     <div class="row g-4">
-      <!-- 521 Card -->
+      <!-- 521 -->
       <div class="col-md-6">
         <div class="card card-521 p-3 h-100 hover-bg-521">
           <div class="row g-0 align-items-center">
             <div class="col-4">
-              <img src="images/521cover.jpg" class="img-fluid rounded" alt="521 album cover">
+              <img src="images/521cover.jpg" class="img-fluid rounded" alt="521 album">
             </div>
             <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title">521</h5>
                 <p class="card-text">
-                  My debut studio album released in 2021, featuring "Lose Your Mind," "Apologize," and more.
+                  Debut studio album with “Lose Your Mind,” “Apologize,” and more. 
                   <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank">Listen here</a>.
                 </p>
               </div>
@@ -33,18 +47,18 @@
         </div>
       </div>
 
-      <!-- Valerie Card -->
+      <!-- Valerie -->
       <div class="col-md-6">
         <div class="card card-valerie p-3 h-100 hover-bg-valerie">
           <div class="row g-0 align-items-center">
             <div class="col-4">
-              <img src="images/valerie.jpeg" class="img-fluid rounded" alt="Valerie cover art">
+              <img src="images/valerie.jpeg" class="img-fluid rounded" alt="Valerie album">
             </div>
             <div class="col-8">
               <div class="card-body">
                 <h5 class="card-title">Valerie</h5>
                 <p class="card-text">
-                  Dedicated to that special someone you're still finding. First track to reach 10k+ streams.
+                  Dedicated to that special someone you're still finding. First track to reach 10k+ streams.  
                   <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank">Stream here</a>.
                 </p>
               </div>
@@ -64,8 +78,8 @@
               <div class="card-body">
                 <h5 class="card-title">Treblemakers</h5>
                 <p class="card-text">
-                  Binghamton University's alt-rock a cappella group. Arrangements, energy, and community. 
-                  <a href="https://www.instagram.com/binghamtontreblemakers/" target="_blank">See more</a>.
+                  Member of Binghamton University's alt-rock a cappella group. 
+                  <a href="https://www.instagram.com/binghamtontreblemakers/" target="_blank">Check us out</a>.
                 </p>
               </div>
             </div>
@@ -73,7 +87,7 @@
         </div>
       </div>
 
-      <!-- Binghamton University -->
+      <!-- Binghamton -->
       <div class="col-md-6">
         <div class="card card-bing p-3 h-100 hover-bg-bing">
           <div class="row g-0 align-items-center">
@@ -84,7 +98,7 @@
               <div class="card-body">
                 <h5 class="card-title">Binghamton University</h5>
                 <p class="card-text">
-                  CS Graduate 2025. Focused on systems, tools, and creative coding. 
+                  CS Graduate '25 — systems, tools, creative coding. 
                   <a href="https://www.binghamton.edu/" target="_blank">Visit site</a>.
                 </p>
               </div>
@@ -96,13 +110,13 @@
     </div>
   </main>
 
-  <!-- Social Icons -->
+  <!-- Socials -->
   <section class="text-center my-5">
     <h2 class="mb-3">Follow Me</h2>
     <div class="d-flex justify-content-center gap-4 fs-1">
-      <a href="https://www.instagram.com/luca.digrigoli/" target="_blank" class="text-dark"><i class="bi bi-instagram"></i></a>
-      <a href="https://www.tiktok.com/@luca_digrigoli" target="_blank" class="text-dark"><i class="bi bi-tiktok"></i></a>
-      <a href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank" class="text-dark"><i class="bi bi-linkedin"></i></a>
+      <a href="https://www.instagram.com/luca.digrigoli/" target="_blank" class="text-reset"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.tiktok.com/@luca_digrigoli" target="_blank" class="text-reset"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank" class="text-reset"><i class="bi bi-linkedin"></i></a>
     </div>
   </section>
 
@@ -110,7 +124,24 @@
     &copy; Luca DiGrigoli, 2020–2025. All rights reserved.
   </footer>
 
+  <!-- Theme Toggle Script -->
   <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeLink = document.getElementById('theme-style');
+
+    function setTheme(mode) {
+      themeLink.href = `css/${mode}.css`;
+      localStorage.setItem('theme', mode);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const current = themeLink.href.includes('dark.css') ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    const saved = localStorage.getItem('theme') || 'light';
+    setTheme(saved);
+
     const body = document.body;
     const bgMap = {
       "hover-bg-521": "bg-521",
@@ -118,15 +149,10 @@
       "hover-bg-trebz": "bg-trebz",
       "hover-bg-bing": "bg-bing"
     };
-
     Object.keys(bgMap).forEach(cls => {
       document.querySelectorAll(`.${cls}`).forEach(card => {
-        card.addEventListener("mouseenter", () => {
-          body.classList.add(bgMap[cls]);
-        });
-        card.addEventListener("mouseleave", () => {
-          body.classList.remove(bgMap[cls]);
-        });
+        card.addEventListener("mouseenter", () => body.classList.add(bgMap[cls]));
+        card.addEventListener("mouseleave", () => body.classList.remove(bgMap[cls]));
       });
     });
   </script>
