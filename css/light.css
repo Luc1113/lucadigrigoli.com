@@ -1,11 +1,10 @@
 body {
   background-color: #f8f9fa;
   color: #212529;
+  font-family: 'Comfortaa', sans-serif;
+  transition: background-color 0.4s ease;
 }
 .card {
-  background-color: white;
-  color: #212529;
-}
-footer, .text-muted {
-  color: #6c757d !important;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
 }
