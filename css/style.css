@@ -1,16 +1,21 @@
 body {
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Comfortaa', sans-serif;
   background-color: #f8f9fa;
   color: #212529;
+  transition: background-color 0.5s ease;
 }
 
 .card {
   position: relative;
   overflow: hidden;
-  z-index: 0;
   background-color: #fff;
   border: none;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.01);
 }
 
 .card img {
@@ -20,31 +25,8 @@ body {
   background-color: #fff;
 }
 
-/* Sweep Animation Base */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  transition: left 0.4s ease;
-}
-
-.card:hover::before {
-  left: 0;
-}
-
-.card .card-body {
-  position: relative;
-  z-index: 1;
-}
-
-.card.card-521::before {
-  background-color: #bda67e;
-}
-
-.card.card-valerie::before {
-  background-color: #edb2d9;
-}
+/* Background classes triggered via JS */
+.bg-521 { background-color: #bda67e !important; }
+.bg-valerie { background-color: #edb2d9 !important; }
+.bg-trebz { background-color: #d3d1ff !important; }
+.bg-bing { background-color: #005A43 !important; }
