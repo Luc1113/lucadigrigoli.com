@@ -7,25 +7,35 @@
 
   <!-- Bootstrap & Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-
-  <!-- Theme CSS -->
-  <link id="theme-style" rel="stylesheet" href="css/light.css" />
-
-  <!-- Custom -->
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link id="theme-style" rel="stylesheet" href="css/light.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 </head>
 <body>
 
-  <!-- Toggle Button -->
-  <nav class="d-flex justify-content-end p-3">
-    <button id="theme-toggle" class="btn btn-sm btn-outline-secondary">Toggle Dark Mode</button>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Luca DiGrigoli</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav me-auto"></ul>
+          <li class="nav-item"><a class="nav-link" href="#music">Musicianship</a></li>
+          <li class="nav-item"><a class="nav-link" href="#collabs">Collaborations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#socials">Socials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why">About This Site</a></li>
+        </ul>
+        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary ms-lg-3">Toggle Dark Mode</button>
+      </div>
+    </div>
   </nav>
 
-  <!-- Main Content -->
-  <main class="container my-5">
-    <h2 class="text-center mb-4">Musicianship & More</h2>
+  <!-- Music Section -->
+  <main class="container my-5" id="music">
+    <h2 class="text-center mb-4">Musicianship</h2>
     <div class="row g-4">
       <!-- 521 -->
       <div class="col-md-6">
@@ -58,7 +68,7 @@
               <div class="card-body">
                 <h5 class="card-title">Valerie</h5>
                 <p class="card-text">
-                  Dedicated to that special someone you're still finding. First track to reach 10k+ streams.  
+                  A song dedicated to that special someone you're still finding. Also, my first track to reach 10k+ streams!
                   <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank">Stream here</a>.
                 </p>
               </div>
@@ -66,7 +76,13 @@
           </div>
         </div>
       </div>
+    </div>
+  </main>
 
+  <!-- Collabs Section -->
+  <section class="container my-5" id="collabs">
+    <h2 class="text-center mb-4">Bands & School</h2>
+    <div class="row g-4">
       <!-- Treblemakers -->
       <div class="col-md-6">
         <div class="card card-trebz p-3 h-100 hover-bg-trebz">
@@ -78,7 +94,7 @@
               <div class="card-body">
                 <h5 class="card-title">Treblemakers</h5>
                 <p class="card-text">
-                  Member of Binghamton University's alt-rock a cappella group. 
+                  Binghamton's alt-rock a cappella group. 
                   <a href="https://www.instagram.com/binghamtontreblemakers/" target="_blank">Check us out</a>.
                 </p>
               </div>
@@ -98,7 +114,7 @@
               <div class="card-body">
                 <h5 class="card-title">Binghamton University</h5>
                 <p class="card-text">
-                  CS Graduate '25 — systems, tools, creative coding. 
+                  CS Grad ‘25 — focused on tools, systems, and creative code. 
                   <a href="https://www.binghamton.edu/" target="_blank">Visit site</a>.
                 </p>
               </div>
@@ -106,12 +122,11 @@
           </div>
         </div>
       </div>
-
     </div>
-  </main>
+  </section>
 
-  <!-- Socials -->
-  <section class="text-center my-5">
+  <!-- Socials Section -->
+  <section class="text-center my-5" id="socials">
     <h2 class="mb-3">Follow Me</h2>
     <div class="d-flex justify-content-center gap-4 fs-1">
       <a href="https://www.instagram.com/luca.digrigoli/" target="_blank" class="text-reset"><i class="bi bi-instagram"></i></a>
@@ -120,11 +135,23 @@
     </div>
   </section>
 
+  <!-- Why This Site -->
+  <section class="container my-5" id="why">
+    <h2 class="text-center mb-4">Why This Site?</h2>
+    <p class="text-center">
+      This was made to evolve alongside me, stay tuned for more soon. Thanks for visiting!
+    </p>
+  </section>
+
+  <!-- Footer -->
   <footer class="text-center py-4 text-muted">
     &copy; Luca DiGrigoli, 2020–2025. All rights reserved.
   </footer>
 
-  <!-- Theme Toggle Script -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Theme & Hover Logic -->
   <script>
     const toggleBtn = document.getElementById('theme-toggle');
     const themeLink = document.getElementById('theme-style');
