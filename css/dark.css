@@ -1,10 +1,16 @@
 body {
   background-color: #121212;
-  color: #f8f9fa;
-  font-family: 'Comfortaa', sans-serif;
-  transition: background-color 0.4s ease;
+  color: #eaeaea;
 }
+
 .card {
   background-color: #1e1e1e;
-  border: 1px solid #333;
+  border: 1px solid #444;
 }
+
+/* Same hover classes — no need to change */
+.bg-521 { background-color: #bda67e !important; }
+.bg-valerie { background-color: #edb2d9 !important; }
+.bg-trebz { background-color: #d3d1ff !important; }
+.bg-bing { background-color: #005A43 !important; color: white !important; }
+.bg-jesters { background-color: #88c7dd !important; }

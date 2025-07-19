@@ -9,10 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
   <link id="theme-style" rel="stylesheet" href="css/light.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="css/style.css" />
+
+
 </head>
 <body>
 
-  <!-- Top Navigation -->
+  <!-- Top Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
     <a class="navbar-brand fw-bold fs-4" href="#">Luca DiGrigoli</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
@@ -29,7 +33,13 @@
     </div>
   </nav>
 
-  <!-- Cards Section -->
+  <!-- Hero Section -->
+  <header class="text-center py-5">
+    <h1 class="display-3 fw-bold">Luca DiGrigoli</h1>
+    <p class="lead">Artist. Engineer. Creator.</p>
+  </header>
+
+  <!-- Cards -->
   <main class="container my-5">
     <div class="row g-4">
       <!-- 521 -->
@@ -103,14 +113,33 @@
           </div>
         </div>
       </div>
+
+      <!-- Jesters -->
+      <div class="col-md-6">
+        <div class="card card-jesters p-3 h-100 hover-bg-jesters">
+          <div class="row g-0 align-items-center">
+            <div class="col-4"><img src="images/jesters.jpg" class="img-fluid rounded" alt="Jesters" /></div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title">Jesters</h5>
+                <p class="card-text">
+                  Long Island-based pop-rock band formed with close friends.
+                  <a href="https://jestersband.com" target="_blank">Visit website</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="text-center py-4 text-muted">
     &copy; Luca DiGrigoli, 2020–2025. All rights reserved.
   </footer>
 
+  <!-- Theme Toggle + Background Hover Script -->
   <script>
     const themeToggle = document.getElementById("theme-toggle");
     const themeLink = document.getElementById("theme-style");
@@ -125,9 +154,29 @@
       setTheme(current === "dark" ? "light" : "dark");
     });
 
-    // Load saved theme on first load
     const saved = localStorage.getItem("theme") || "light";
     setTheme(saved);
+
+    const body = document.body;
+    const bgMap = {
+      "hover-bg-521": "bg-521",
+      "hover-bg-valerie": "bg-valerie",
+      "hover-bg-trebz": "bg-trebz",
+      "hover-bg-bing": "bg-bing",
+      "hover-bg-jesters": "bg-jesters"
+    };
+
+    Object.keys(bgMap).forEach(cls => {
+      document.querySelectorAll(`.${cls}`).forEach(card => {
+        card.addEventListener("mouseenter", () => {
+          body.classList.add(bgMap[cls]);
+        });
+        card.addEventListener("mouseleave", () => {
+          body.classList.remove(bgMap[cls]);
+        });
+      });
+    });
   </script>
+
 </body>
 </html>

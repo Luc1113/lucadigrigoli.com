@@ -1,21 +1,22 @@
 body {
-  font-family: 'Comfortaa', cursive;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  font-family: 'Comfortaa', sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-.card img {
+h1, h2, h5 {
+  font-weight: bold;
+}
+
+.card {
+  transition: transform 0.2s ease;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.img-fluid {
   object-fit: cover;
-  height: 100%;
-  width: 100%;
-  max-height: 150px;
+  max-height: 100px;
 }
-
-.hover-bg-521:hover ~ body {
-  background-color: #bda67e;
-}
-
-/* Hover Background Theme Swaps */
-.bg-521     { background-color: #bda67e !important; }
-.bg-valerie { background-color: #edb2d9 !important; }
-.bg-trebz   { background-color: #d3d1ff !important; }
-.bg-bing    { background-color: #005A43 !important; }
