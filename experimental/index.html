@@ -2,55 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Experimental Liquid Glass UI</title>
+  <title>Experimental | Lucadigrigoli.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a href="#main-content" class="skip-nav">Skip Navigation</a>
-  <header class="liquid-glass nav-header">
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-    <input type="search" aria-label="Search" placeholder="Search..." class="search-bar">
-  </header>
-  <main id="main-content">
-    <section class="hero liquid-glass">
-      <h1>Welcome to Liquid Glass UI</h1>
-      <p>Experience an interface inspired by Apple’s latest design system. Dimensional, fluid, and harmonious.</p>
-      <button class="primary-btn">Get Started</button>
+  <nav id="top-bar">
+    <button data-section="about">About</button>
+    <button data-section="projects">Projects</button>
+    <button data-section="contact">Contact</button>
+  </nav>
+  <div id="sections-wrapper">
+    <section id="about" class="section">
+      <h1>About Me</h1>
+      <p>Welcome to my experimental space! Here you'll find info about me.</p>
     </section>
-    <section class="features">
-      <h2>Features</h2>
-      <div class="feature-list">
-        <div class="feature liquid-glass">
-          <img src="icon1.svg" alt="" aria-hidden="true">
-          <h3>Dynamic Material</h3>
-          <p>Fluid glassy backgrounds with soft blur and transparency.</p>
-        </div>
-        <div class="feature liquid-glass">
-          <img src="icon2.svg" alt="" aria-hidden="true">
-          <h3>Universal Navigation</h3>
-          <p>Consistent navigation, search, and layout across devices.</p>
-        </div>
-        <div class="feature liquid-glass">
-          <img src="icon3.svg" alt="" aria-hidden="true">
-          <h3>Responsive Design</h3>
-          <p>Adapts to every window size, from mobile to desktop.</p>
-        </div>
-      </div>
+    <section id="projects" class="section">
+      <h1>Projects</h1>
+      <p>Details about my projects go here.</p>
     </section>
-  </main>
-  <footer class="toolbar liquid-glass">
-    <button title="Home"><img src="icon1.svg" alt="Home"></button>
-    <button title="Search"><img src="icon2.svg" alt="Search"></button>
-    <button title="Settings"><img src="icon3.svg" alt="Settings"></button>
-  </footer>
+    <section id="contact" class="section">
+      <h1>Contact</h1>
+      <p>How to reach me: lucadigrigoli [at] example.com</p>
+    </section>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
