@@ -1,0 +1,168 @@
+/* Reset and base styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: linear-gradient(120deg, #dde7f4 0%, #f7f8fa 100%);
+  color: #222;
+}
+
+.skip-nav {
+  position: absolute;
+  left: -999px;
+  top: 10px;
+  background: #fff;
+  color: #000;
+  padding: 8px 16px;
+  z-index: 100;
+}
+.skip-nav:focus {
+  left: 10px;
+}
+
+.liquid-glass {
+  background: rgba(255,255,255,0.20);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 18px;
+  box-shadow: 0 2px 24px 0 rgba(30, 34, 36, 0.08);
+  border: 1px solid rgba(200,200,220,0.28);
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  margin: 20px auto 0 auto;
+  max-width: 900px;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 7px;
+  transition: background 0.2s;
+}
+nav a:hover,
+nav a:focus {
+  background: rgba(170,200,255,0.12);
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(240,245,255,0.9);
+  margin-left: 2rem;
+}
+
+.hero {
+  text-align: center;
+  margin: 40px auto 32px auto;
+  padding: 3rem 2rem;
+  max-width: 700px;
+  background: rgba(255,255,255,0.24);
+}
+
+.primary-btn {
+  background: #0066ff;
+  color: #fff;
+  padding: 0.8em 2em;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px rgba(0,60,255,0.08);
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background 0.2s;
+}
+.primary-btn:hover {
+  background: #0052cc;
+}
+
+.features {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.feature-list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.feature {
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 260px;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.feature img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1em;
+}
+
+.toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.6rem 0;
+  z-index: 20;
+  border-top: 1px solid rgba(200,200,220,0.18);
+}
+
+.toolbar button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toolbar button:focus,
+.toolbar button:hover {
+  background: rgba(170,200,255,0.18);
+}
+.toolbar img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .nav-header, .features {
+    max-width: 98vw;
+    padding: 1rem;
+  }
+  .hero {
+    max-width: 98vw;
+    padding: 2rem 1rem;
+  }
+  .feature-list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

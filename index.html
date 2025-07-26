@@ -7,202 +7,207 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-  <link id="theme-style" rel="stylesheet" href="css/light.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
   <link rel="stylesheet" href="css/style.css" />
-
-
+  <link id="theme-style" rel="stylesheet" href="css/light.css" />
 </head>
 <body>
 
-  <!-- Top Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
-    <a class="navbar-brand fw-bold fs-4" href="#">Luca DiGrigoli</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navLinks">
-      <ul class="navbar-nav me-3">
-        <li class="nav-item"><a class="nav-link" href="https://linktr.ee/lucadigrigoli" target="_blank">Linktree</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://github.com/Luc1113" target="_blank">GitHub</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://www.youtube.com/@lucadigrigoli7513" target="_blank">YouTube</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank">LinkedIn</a></li>
-      </ul>
-      <button id="theme-toggle" class="btn btn-outline-dark btn-sm">Toggle Dark Mode</button>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+  <a class="navbar-brand fw-bold fs-4" href="#">Luca DiGrigoli</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navLinks">
+    <ul class="navbar-nav mb-2 mb-lg-0">
+      <li class="nav-item"><a class="nav-link" href="https://linktr.ee/lucadigrigoli" target="_blank">Linktree</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://github.com/Luc1113" target="_blank">GitHub</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://www.youtube.com/@lucadigrigoli7513" target="_blank">YouTube</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank">LinkedIn</a></li>
+      <li class="nav-item d-lg-none mt-2">
+        <button id="theme-toggle-mobile" class="btn btn-outline-dark btn-sm w-100">Toggle Dark Mode</button>
+      </li>
+    </ul>
+    <button id="theme-toggle" class="btn btn-outline-dark btn-sm d-none d-lg-block ms-3">Toggle Dark Mode</button>
+  </div>
+</nav>
+
+<!-- Landing Video Hero -->
+<header class="landing-hero">
+  <video autoplay muted loop playsinline id="landVid">
+    <source src="images/IMG_9332.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay d-flex flex-column justify-content-center align-items-center text-center">
+    <h1 class="display-3 fw-bold text-light">Luca DiGrigoli</h1>
+    <p class="lead text-light">Artist. Engineer. Creator.</p>
+  </div>
+</header>
+
+
+
+<!-- Cards -->
+
+<main class="container my-5">
+  <div class="row g-4">
+    <!-- Pretend -->
+    <div class="col-md-6">
+      <div class="card card-pretend p-3 h-100 hover-bg-pretend">
+        <div class="row g-0 align-items-center">
+          <div class="col-4">
+            <img src="images/pretend.png" class="img-fluid rounded" alt="Pretend" />
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Pretend</h5>
+              <p class="card-text">pretend out now, a new song about betrayal and closure you'll never get. <a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" target="_blank">Listen here</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <header class="text-center py-5">
-    <h1 class="display-3 fw-bold">Luca DiGrigoli</h1>
-    <p class="lead">Artist. Engineer. Creator.</p>
-  </header>
-
-  <!-- Cards -->
-  <main class="container my-5">
-    <div class="row g-4">
-      <!-- 521 -->
-      <div class="col-md-6">
-        <div class="card card-521 p-3 h-100 hover-bg-521">
-          <div class="row g-0 align-items-center">
-            <div class="col-4"><img src="images/521cover.jpg" class="img-fluid rounded" alt="521" /></div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title">521</h5>
-                <p class="card-text">
-                  Debut studio album featuring “Lose Your Mind” and “Apologize.”
-                  <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank">Listen here</a>.
-                </p>
-              </div>
+    <!-- 521 -->
+    <div class="col-md-6">
+      <div class="card card-521 p-3 h-100 hover-bg-521">
+        <div class="row g-0 align-items-center">
+          <div class="col-4"><img src="images/521cover.jpg" class="img-fluid rounded" alt="521" /></div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">521</h5>
+              <p class="card-text">Debut studio album featuring “Lose Your Mind” and “Apologize.” <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank">Listen here</a>.</p>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Valerie -->
-      <div class="col-md-6">
-        <div class="card card-valerie p-3 h-100 hover-bg-valerie">
-          <div class="row g-0 align-items-center">
-            <div class="col-4"><img src="images/valerie.jpeg" class="img-fluid rounded" alt="Valerie" /></div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title">Valerie</h5>
-                <p class="card-text">
-                  Dedicated to that special someone you’re still finding.
-                  <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank">Stream here</a>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Treblemakers -->
-      <div class="col-md-6">
-        <div class="card card-trebz p-3 h-100 hover-bg-trebz">
-          <div class="row g-0 align-items-center">
-            <div class="col-4"><img src="images/trebz1.jpg" class="img-fluid rounded" alt="Treblemakers" /></div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title">Treblemakers</h5>
-                <p class="card-text">
-                  Binghamton University’s alt-rock a cappella group.
-                  <a href="https://www.instagram.com/binghamtontreblemakers/" target="_blank">See more</a>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Binghamton -->
-      <div class="col-md-6">
-        <div class="card card-bing p-3 h-100 hover-bg-bing">
-          <div class="row g-0 align-items-center">
-            <div class="col-4"><img src="images/binghamtonLogo.png" class="img-fluid rounded" alt="Binghamton University" /></div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title">Binghamton University</h5>
-                <p class="card-text">
-                  CS Graduate, 2025. Systems, security, creative code.
-                  <a href="https://www.binghamton.edu/" target="_blank">Visit site</a>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Jesters -->
-      <div class="col-md-6">
-        <div class="card card-jesters p-3 h-100 hover-bg-jesters">
-          <div class="row g-0 align-items-center">
-            <div class="col-4"><img src="images/jesters.jpeg" class="img-fluid rounded" alt="Jesters" /></div>
-            <div class="col-8">
-              <div class="card-body">
-                <h5 class="card-title">Jesters</h5>
-                <p class="card-text">
-                  Long Island-based pop-rock band formed with close friends.
-                  <a href="https://jestersband.com" target="_blank">Visit website</a>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </main>
-  
-  <!-- Why This Site -->
-  <section class="text-center my-5 px-3">
-    <h3 class="mb-3">Why This Site?</h3>
-    <p>This site is a reflection of both my creative and professional sides, meant to evolve as I do. Stay tuned for more. Thanks for stopping by!</p>
-  </section>
 
-  <!-- Social Icons -->
-  <section class="text-center mb-5">
-    <h3 class="mb-3">Follow Me</h3>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/luca.digrigoli/" target="_blank"><i class="bi bi-instagram"></i></a>
-      <a href="https://www.tiktok.com/@luca_digrigoli" target="_blank"><i class="bi bi-tiktok"></i></a>
-      <a href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank"><i class="bi bi-linkedin"></i></a>
+    <!-- Valerie -->
+    <div class="col-md-6">
+      <div class="card card-valerie p-3 h-100 hover-bg-valerie">
+        <div class="row g-0 align-items-center">
+          <div class="col-4"><img src="images/valerie.jpeg" class="img-fluid rounded" alt="Valerie" /></div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Valerie</h5>
+              <p class="card-text">Dedicated to that special someone you’re still finding. <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank">Stream here</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <footer class="text-center py-4 text-muted">
-    &copy; Luca DiGrigoli, 2020–2025. All rights reserved.
-  </footer>
+    <!-- Treblemakers -->
+    <div class="col-md-6">
+      <div class="card card-trebz p-3 h-100 hover-bg-trebz">
+        <div class="row g-0 align-items-center">
+          <div class="col-4"><img src="images/trebz1.jpg" class="img-fluid rounded" alt="Treblemakers" /></div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Treblemakers</h5>
+              <p class="card-text">Binghamton University’s alt-rock a cappella group. <a href="https://www.instagram.com/binghamtontreblemakers/" target="_blank">See more</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Theme Toggle + Background Hover Script -->
-  <script>
-    const themeToggle = document.getElementById("theme-toggle");
-    const themeLink = document.getElementById("theme-style");
+    <!-- Binghamton -->
+    <div class="col-md-6">
+      <div class="card card-bing p-3 h-100 hover-bg-bing">
+        <div class="row g-0 align-items-center">
+          <div class="col-4"><img src="images/binghamtonLogo.png" class="img-fluid rounded" alt="Binghamton University" /></div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Binghamton University</h5>
+              <p class="card-text">CS Graduate, 2025. Systems, security, creative code. <a href="https://www.binghamton.edu/" target="_blank">Visit site</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    function setTheme(mode) {
-      themeLink.href = mode === 'dark' ? 'css/dark.css' : 'css/light.css';
-      localStorage.setItem('theme', mode);
-    }
+    <!-- Jesters -->
+    <div class="col-md-6">
+      <div class="card card-jesters p-3 h-100 hover-bg-jesters">
+        <div class="row g-0 align-items-center">
+          <div class="col-4"><img src="images/jesters.jpeg" class="img-fluid rounded" alt="Jesters" /></div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Jesters</h5>
+              <p class="card-text">Long Island-based pop-rock band formed with close friends. <a href="https://jestersband.com" target="_blank">Visit website</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    themeToggle.addEventListener("click", () => {
-      const current = themeLink.href.includes("dark.css") ? "dark" : "light";
-      setTheme(current === "dark" ? "light" : "dark");
+  </div> <!-- END .row -->
+</main>
+
+<!-- Why Section -->
+<section class="text-center my-5 px-3">
+  <h3 class="mb-3">Why This Site?</h3>
+  <p>This site is a reflection of both my creative and professional sides, meant to evolve as I do. Thanks for stopping by!</p>
+</section>
+
+<!-- Social Icons -->
+<section class="text-center mb-5">
+  <h3 class="mb-3">Follow Me</h3>
+  <div class="social-icons d-flex justify-content-center gap-4">
+    <a href="https://www.instagram.com/luca.digrigoli/" target="_blank"><i class="bi bi-instagram"></i></a>
+    <a href="https://github.com/Luc1113" target="_blank"><i class="bi bi-github"></i></a>
+    <a href="https://www.tiktok.com/@luca_digrigoli" target="_blank"><i class="bi bi-tiktok"></i></a>
+    <a href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank"><i class="bi bi-linkedin"></i></a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-4 text-muted">
+  &copy; Luca DiGrigoli, 2020–2025. All rights reserved.
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const themeToggleDesktop = document.getElementById("theme-toggle");
+  const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+  const themeLink = document.getElementById("theme-style");
+
+  function setTheme(mode) {
+    themeLink.href = mode === 'dark' ? 'css/dark.css' : 'css/light.css';
+    localStorage.setItem('theme', mode);
+  }
+
+  const toggleTheme = () => {
+    const current = themeLink.href.includes("dark.css") ? "dark" : "light";
+    setTheme(current === "dark" ? "light" : "dark");
+  };
+
+  themeToggleDesktop.addEventListener("click", toggleTheme);
+  themeToggleMobile.addEventListener("click", toggleTheme);
+
+  setTheme(localStorage.getItem("theme") || "light");
+
+  const body = document.body;
+  const bgMap = {
+    "hover-bg-521": "bg-521",
+    "hover-bg-valerie": "bg-valerie",
+    "hover-bg-trebz": "bg-trebz",
+    "hover-bg-bing": "bg-bing",
+    "hover-bg-jesters": "bg-jesters",
+    "hover-bg-pretend": "bg-pretend"
+  };
+
+  Object.keys(bgMap).forEach(cls => {
+    document.querySelectorAll(`.${cls}`).forEach(card => {
+      card.addEventListener("mouseenter", () => body.classList.add(bgMap[cls]));
+      card.addEventListener("mouseleave", () => body.classList.remove(bgMap[cls]));
     });
-
-    const saved = localStorage.getItem("theme") || "light";
-    setTheme(saved);
-
-    const body = document.body;
-    const bgMap = {
-      "hover-bg-521": "bg-521",
-      "hover-bg-valerie": "bg-valerie",
-      "hover-bg-trebz": "bg-trebz",
-      "hover-bg-bing": "bg-bing",
-      "hover-bg-jesters": "bg-jesters"
-    };
-
-    Object.keys(bgMap).forEach(cls => {
-      document.querySelectorAll(`.${cls}`).forEach(card => {
-        card.addEventListener("mouseenter", () => {
-          body.classList.add(bgMap[cls]);
-        });
-        card.addEventListener("mouseleave", () => {
-          body.classList.remove(bgMap[cls]);
-        });
-      });
-    });
-  </script>
-
-  <style>
-    /* Make social icons much bigger */
-    .social-icons i {
-      font-size: 3rem;      /* Increase this value for even larger icons */
-      margin: 0 1rem;
-      vertical-align: middle;
-      transition: color 0.2s;
-    }
-  </style>
+  });
+</script>
 
 </body>
 </html>

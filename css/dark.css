@@ -15,3 +15,26 @@ body {
 .bg-trebz { background-color: #d3d1ff !important; }
 .bg-bing { background-color: #005A43 !important; color: white !important; }
 .bg-jesters { background-color: #88c7dd !important; }
+.bg-pretend { background-color: #ffc789 !important; }
+
+/* Make navbar dark gray in dark mode */
+.navbar {
+  background-color: #343a40 !important; /* Bootstrap dark gray */
+  color: #fff !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-toggler {
+  color: #fff !important;
+}
+
+.navbar .btn-outline-dark {
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+.navbar .btn-outline-dark:hover {
+  background-color: #fff !important;
+  color: #212529 !important;
+}

@@ -14,6 +14,7 @@ body {
 .bg-trebz { background-color: #d3d1ff !important; }
 .bg-bing { background-color: #005A43 !important; color: white !important; }
 .bg-jesters { background-color: #88c7dd !important; }
+.bg-pretend { background-color: #ffc789 !important; }
 
 /* Make navbar dark, text white, and sticky in light mode */
 .navbar {
@@ -37,3 +38,10 @@ body {
   color: #212529 !important;
 }
 
+.bg-pretend {
+  background-color: #f2c2b3 !important; /* soft warm background */
+}
+
+.card-pretend {
+  border-left: 5px solid #b06d57; /* emotional, reddish tone */
+}
