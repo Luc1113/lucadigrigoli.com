@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
   margin: 0;
   overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 nav {
@@ -48,12 +50,479 @@ section {
   scroll-snap-align: start;
   min-width: 100vw;
   height: 100vh;
-  padding: 80px 40px 20px 40px;
+  padding: 80px 40px 0 40px;
   box-sizing: border-box;
   background: #f4f4f4;
   border-right: 1px solid #ddd;
+  position: relative;
 }
 
 section:nth-child(even) {
   background: #e0e0e0;
+}
+
+/* Hero Section Styles */
+#home {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 40px;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeInUp 1s ease-out;
+  position: relative;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #fff, #87CEEB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+/* Minecraft-style experimental splash */
+.experimental-splash {
+  position: absolute;
+  top: -20px;
+  right: -60px;
+  background: #FFD700;
+  color: #8B4513 !important;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: rotate(15deg);
+  border: 2px solid #FFA500;
+  box-shadow: 
+    0 0 0 2px #FFD700,
+    3px 3px 0 0 #B8860B,
+    3px 3px 0 2px #8B4513;
+  animation: bounce 2s ease-in-out infinite;
+  z-index: 10;
+  font-family: 'Inter', sans-serif;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #8B4513 !important;
+  background-clip: initial !important;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: rotate(15deg) translateY(0);
+  }
+  40% {
+    transform: rotate(15deg) translateY(-8px);
+  }
+  60% {
+    transform: rotate(15deg) translateY(-4px);
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0 0 40px 0;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0 0 50px 0;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(45deg, #87CEEB, #4682B4);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(135, 206, 235, 0.3);
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(135, 206, 235, 0.4);
+}
+
+/* Floating particles animation */
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(135, 206, 235, 0.3);
+  border-radius: 50%;
+  animation: float-particles 15s infinite linear;
+}
+
+.particle:nth-child(1) {
+  width: 4px;
+  height: 4px;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  left: 20%;
+  animation-delay: -3s;
+}
+
+.particle:nth-child(3) {
+  width: 3px;
+  height: 3px;
+  left: 30%;
+  animation-delay: -6s;
+}
+
+.particle:nth-child(4) {
+  width: 5px;
+  height: 5px;
+  left: 50%;
+  animation-delay: -9s;
+}
+
+.particle:nth-child(5) {
+  width: 4px;
+  height: 4px;
+  left: 70%;
+  animation-delay: -12s;
+}
+
+.particle:nth-child(6) {
+  width: 7px;
+  height: 7px;
+  left: 80%;
+  animation-delay: -2s;
+}
+
+@keyframes float-particles {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Education section with sky background */
+#education {
+  background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 50%, #87CEEB 100%);
+  padding-bottom: 0;
+}
+
+/* Simplified floating clouds */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+  opacity: 0.7;
+  animation: float 15s infinite linear;
+}
+
+.cloud:before,
+.cloud:after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+}
+
+.cloud1 {
+  width: 60px;
+  height: 30px;
+  top: 30%;
+  left: -80px;
+  animation-delay: 0s;
+}
+
+.cloud1:before {
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  left: 10px;
+}
+
+.cloud1:after {
+  width: 40px;
+  height: 20px;
+  top: -8px;
+  right: 10px;
+}
+
+.cloud2 {
+  width: 50px;
+  height: 25px;
+  top: 45%;
+  left: -70px;
+  animation-delay: -8s;
+}
+
+.cloud2:before {
+  width: 25px;
+  height: 25px;
+  top: -12px;
+  left: 8px;
+}
+
+.cloud2:after {
+  width: 35px;
+  height: 18px;
+  top: -6px;
+  right: 8px;
+}
+
+.cloud3 {
+  width: 70px;
+  height: 35px;
+  top: 60%;
+  left: -90px;
+  animation-delay: -4s;
+}
+
+.cloud3:before {
+  width: 35px;
+  height: 35px;
+  top: -18px;
+  left: 12px;
+}
+
+.cloud3:after {
+  width: 50px;
+  height: 25px;
+  top: -10px;
+  right: 12px;
+}
+
+@keyframes float {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 120px)); }
+}
+
+/* Simplified tower container */
+.tower-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: sway 6s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  50% { transform: translateX(-50%) rotate(0.3deg); }
+}
+
+/* Tower top decoration */
+.tower-top {
+  width: 100px;
+  height: 30px;
+  background: linear-gradient(180deg, #2F4F2F 0%, #1F3F1F 100%);
+  border: 2px solid #1F3F1F;
+  border-radius: 3px 3px 0 0;
+  position: relative;
+}
+
+.tower-top::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #2F4F2F;
+}
+
+/* Simple tower frame */
+.tower-frame {
+  width: 80px;
+  height: 200px;
+  background: linear-gradient(180deg, #2F4F2F 0%, #228B22 100%);
+  border: 2px solid #1F3F1F;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* Simple grid pattern */
+.grid-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+      linear-gradient(to right, #1F3F1F 1px, transparent 1px),
+      linear-gradient(to bottom, #1F3F1F 1px, transparent 1px);
+  background-size: 20px 25px;
+  opacity: 0.5;
+}
+
+/* Clock container */
+.clock-container {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+}
+
+/* Clock face */
+.clock-face {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #F5F5F5 0%, #E0E0E0 100%);
+  border: 3px solid #333;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Clock numbers */
+.clock-number {
+  position: absolute;
+  font-size: 8px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  width: 12px;
+  margin-left: -6px;
+  margin-top: -4px;
+}
+
+.number-12 { top: 6px; left: 50%; }
+.number-3 { top: 50%; right: 6px; margin-top: -4px; margin-left: 0; margin-right: -6px; }
+.number-6 { bottom: 6px; left: 50%; margin-top: 0; margin-bottom: -4px; }
+.number-9 { top: 50%; left: 6px; margin-top: -4px; margin-left: -6px; }
+
+/* Clock hands */
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  background: #333;
+  border-radius: 1px;
+}
+
+.hour-hand {
+  width: 2px;
+  height: 12px;
+  margin-left: -1px;
+  z-index: 3;
+}
+
+.minute-hand {
+  width: 1px;
+  height: 16px;
+  margin-left: -0.5px;
+  z-index: 2;
+}
+
+.second-hand {
+  width: 1px;
+  height: 18px;
+  margin-left: -0.5px;
+  background: #FF0000;
+  z-index: 4;
+}
+
+/* Clock center dot */
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+/* Simple brick base */
+.brick-base {
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(45deg, #8B4513 25%, #A0522D 25%, #A0522D 50%, #8B4513 50%);
+  background-size: 10px 10px;
+  border: 2px solid #654321;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  margin-top: -5px;
+}
+
+/* Responsive scaling */
+@media (max-width: 600px) {
+  .tower-container {
+    transform: translateX(-50%) scale(0.8);
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+  }
+  
+  .hero-cta {
+    padding: 12px 30px;
+    font-size: 0.9rem;
+  }
 }
