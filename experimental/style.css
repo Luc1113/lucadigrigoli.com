@@ -172,6 +172,7 @@ section:nth-child(even) {
   height: 100%;
   overflow: hidden;
   z-index: 1;
+  pointer-events: none;
 }
 
 .particle {
