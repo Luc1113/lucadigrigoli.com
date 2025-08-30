@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "firefox", // No debugging
+            "request": "launch",
+            "name": "Launch Firefox without Debugging",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable": "/Applications/Firefox.app/Contents/MacOS/firefox" // Path to Firefox
+        }
+    ]
+}
