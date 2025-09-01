@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luca DiGrigoli - Artist • Engineer • Creator</title>
+    <title>Luca DiGrigoli - Artist • Developer • Creator</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
         
@@ -44,6 +44,7 @@
         
         .header {
             text-align: center;
+            margin-top: 80px; /* Add space to push the title down */
             margin-bottom: 60px;
             position: relative;
         }
@@ -297,6 +298,7 @@
             white-space: nowrap;
             animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
             display: inline-block;
+            max-width: fit-content; /* Ensure the width matches the text content */
         }
         
         @keyframes typing {
@@ -313,13 +315,14 @@
             background: #8B4513;
             color: white;
             padding: 12px 0;
-            margin-bottom: 40px;
             overflow: hidden;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
             border-top: 3px solid #A0522D;
             border-bottom: 3px solid #A0522D;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
         }
         
         .news-scroll {
@@ -559,6 +562,51 @@
         @media (max-width: 1100px) {
             .side-polaroids { display: none; }
         }
+
+        /* Jesters card with background video */
+        .jesters-card {
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          padding: 20px;
+          min-height: 180px;
+        }
+        
+        .jesters-card:hover {
+          box-shadow: 0 14px 32px rgba(139, 69, 19, 0.25);
+          border-color: #8B4513;
+        }
+
+        /* Background video */
+        .jesters-bg-video {
+          position: absolute;
+          top: 0;
+          left: 0%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.25;
+          z-index: 1;
+          transition: opacity 0.3s ease;
+        }
+
+        .jesters-card:hover .jesters-bg-video {
+          opacity: 0.45;
+        }
+
+        /* Content overlay */
+        .jesters-content {
+          position: relative;
+          z-index: 2;
+          background: rgba(245, 243, 232, 0.85);
+          padding: 15px;
+          border-radius: 4px;
+          backdrop-filter: blur(1px);
+        }
+
+        .jesters-card:hover .jesters-content {
+          background: rgba(245, 243, 232, 0.9);
+        }
     </style>
 </head>
 <body class="retro-cursor">
@@ -591,7 +639,7 @@
         
         <header class="header">
             <h1 class="site-title glitch" data-text="Luca DiGrigoli">Luca DiGrigoli</h1>
-            <p class="subtitle typing-animation">artist • engineer • creator</p>
+            <p class="subtitle typing-animation">artist • developer • creator </p>
             <div class="animated-bar"></div>
         </header>
         
@@ -609,10 +657,10 @@
             
             <div class="project-grid">
                 <div class="project-card">
-                    <h3 class="project-title">debut studio album</h3>
+                    <h3 class="project-title">521 - debut studio album</h3>
                     <p class="project-subtitle">featuring "lose your mind" and "apologize"</p>
                     <p class="project-description">
-                        my first full-length release exploring themes of growth, loss, and self-discovery through soundscapes.
+                        my first full-length release exploring themes of growth, loss, and self-discovery through differing soundscapes.
                         <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank" style="color:#8B4513;text-decoration:underline;">listen to 521</a>
                     </p>
                     <div style="margin-top: 15px;">
@@ -643,13 +691,24 @@
         <div class="section">
             <h2 class="section-title">other musical endeavors</h2>
         
-                <div class="project-card">
-                    <h3 class="project-title">Jesters</h3>
-                    <p class="project-subtitle">Long Island, NY</p>
-                    <p class="project-description">
-                        local band creating original pop-rock music, performing at venues across long island and building a community of music lovers.
-                        <br><a href="https://jestersband.com" target="_blank" style="color:#8B4513;text-decoration:underline;">visit site</a>
-                    </p>
+                <div class="project-card jesters-card" id="jesters">
+                  <div class="jesters-top">
+                    <div>
+                      <h3 class="project-title">Jesters</h3>
+                      <p class="project-subtitle">Long Island, NY</p>
+                    </div>
+                  </div>
+                
+                  <p class="project-description" style="margin-top:8px; position: relative; z-index: 2;">
+                    Local band creating original pop-rock music, performing at venues across Long Island and building a community of music lovers.
+                    <br><a href="https://jestersband.com" target="_blank" style="color:#8B4513;text-decoration:underline;">Visit site</a>
+                  </p>
+                
+                  <!-- Background video -->
+                  <video class="jesters-bg-video" muted loop autoplay playsinline>
+                    <source src="videos/jesters-teaser.mp4" type="video/mp4">
+                    Sorry—your browser doesn’t support embedded videos.
+                  </video>
                 </div>
             </div>
         </div>
@@ -676,7 +735,7 @@
                 <h3 class="project-title">Mindscapes</h3>
                 <p class="project-subtitle">A mindfulness and productivity app</p>
                 <p class="project-description">
-                    Mindscapes is an app designed to help users achieve progress and focus through pomodoro timing, and daily mood/habit tracking.
+                    Mindscapes is an iOS app designed to help users achieve progress and focus through pomodoro timing, and daily mood/habit tracking.
                     <br><a href="https://github.com/Luc1113/mindscapes" target="_blank" style="color:#8B4513;text-decoration:underline;">view on GitHub</a>
                 </p>
                 <div style="margin-top: 15px;">
@@ -750,6 +809,49 @@
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+    <script>
+      (function () {
+        const card = document.getElementById('jesters');
+        const vid  = document.getElementById('jestersVideo');
+    
+        if (!card || !vid) return;
+    
+        // hover play/pause (desktop)
+        card.addEventListener('mouseenter', () => {
+          // ensure it tries to play only when visible
+          vid.currentTime = vid.currentTime || 0;
+          vid.play().catch(() => {/* autoplay can be picky; it's muted so usually fine */});
+        });
+        card.addEventListener('mouseleave', () => {
+          vid.pause();
+        });
+    
+        // tap-to-toggle (mobile)
+        let expanded = false;
+        card.addEventListener('click', () => {
+          // heuristic: toggle max-height manually on tap devices
+          if (matchMedia('(hover: none)').matches) {
+            expanded = !expanded;
+            card.style.maxHeight = expanded ? '480px' : '150px';
+            if (expanded) {
+              vid.play().catch(()=>{});
+            } else {
+              vid.pause();
+            }
+          }
+        }, {passive: true});
+      })();
+    </script>
             });
         }, observerOptions);
         
