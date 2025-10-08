@@ -818,50 +818,38 @@
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
-    </script>
     <script>
-      (function () {
-        const card = document.getElementById('jesters');
-        const vid  = document.getElementById('jestersVideo');
-    
-        if (!card || !vid) return;
-    
-        // hover play/pause (desktop)
-        card.addEventListener('mouseenter', () => {
-          // ensure it tries to play only when visible
-          vid.currentTime = vid.currentTime || 0;
-          vid.play().catch(() => {/* autoplay can be picky; it's muted so usually fine */});
-        });
-        card.addEventListener('mouseleave', () => {
-          vid.pause();
-        });
-    
-        // tap-to-toggle (mobile)
-        let expanded = false;
-        card.addEventListener('click', () => {
-          // heuristic: toggle max-height manually on tap devices
-          if (matchMedia('(hover: none)').matches) {
-            expanded = !expanded;
-            card.style.maxHeight = expanded ? '480px' : '150px';
-            if (expanded) {
-              vid.play().catch(()=>{});
-            } else {
-              vid.pause();
-            }
-          }
-        }, {passive: true});
-      })();
-    </script>
+        // Parallax + observer code here...
+
+        // Jesters video hover/play logic
+        (function () {
+            const card = document.getElementById('jesters');
+            const vid  = document.getElementById('jestersVideo'); // also give your video an id="jestersVideo"
+
+            if (!card || !vid) return;
+
+            card.addEventListener('mouseenter', () => {
+                vid.currentTime = vid.currentTime || 0;
+                vid.play().catch(() => {});
             });
-        }, observerOptions);
-        
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-        
+            card.addEventListener('mouseleave', () => {
+                vid.pause();
+            });
+
+            let expanded = false;
+            card.addEventListener('click', () => {
+                if (matchMedia('(hover: none)').matches) {
+                    expanded = !expanded;
+                    card.style.maxHeight = expanded ? '480px' : '150px';
+                    if (expanded) {
+                        vid.play().catch(()=>{});
+                    } else {
+                        vid.pause();
+                    }
+                }
+            }, {passive: true});
+        })();
+
         // Random glitch effect on title
         setInterval(() => {
             const title = document.querySelector('.glitch');
