@@ -23,7 +23,7 @@
             top: 0;
             width: 100%;
             background: #fff;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 5%;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
@@ -58,17 +58,25 @@
             color: #d4534f;
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: #2c2c2c;
+            cursor: pointer;
+        }
+
         .hero {
             position: relative;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23d4534f" width="1200" height="800"/><circle cx="600" cy="400" r="300" fill="%23c4423e" opacity="0.3"/></svg>');
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url("mariophotos/Mario's Pizza 6.png");
             background-size: cover;
             background-position: center;
-            overflow: hidden;
         }
 
         .hero-content {
@@ -78,16 +86,16 @@
         }
 
         .logo {
-            font-size: 6rem;
+            font-size: 5rem;
             font-weight: 300;
             margin-bottom: 1rem;
             color: #fff;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             text-transform: uppercase;
         }
 
         .tagline {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 3rem;
             color: #fff;
             font-weight: 300;
@@ -167,7 +175,6 @@
         .carousel-slide {
             min-width: 100%;
             height: 500px;
-            position: relative;
         }
 
         .carousel-slide img {
@@ -195,13 +202,8 @@
             color: #d4534f;
         }
 
-        .carousel-btn.prev {
-            left: 20px;
-        }
-
-        .carousel-btn.next {
-            right: 20px;
-        }
+        .carousel-btn.prev { left: 20px; }
+        .carousel-btn.next { right: 20px; }
 
         .carousel-indicators {
             display: flex;
@@ -219,13 +221,7 @@
             transition: background 0.3s ease;
         }
 
-        .indicator.active {
-            background: #d4534f;
-        }
-
-        .contact-section {
-            background: #fff;
-        }
+        .indicator.active { background: #d4534f; }
 
         .contact-info {
             max-width: 600px;
@@ -261,24 +257,44 @@
             text-transform: uppercase;
         }
 
-        @media (max-width: 768px) {
+        /* --- Mobile --- */
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: #fff;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
             .logo {
                 font-size: 3rem;
                 letter-spacing: 4px;
             }
-            
+
             .tagline {
                 font-size: 1rem;
             }
-            
-            .nav-links {
-                gap: 1.5rem;
-            }
-            
-            .nav-links a {
-                font-size: 0.85rem;
-            }
-            
+
             .section-title {
                 font-size: 2rem;
             }
@@ -288,7 +304,7 @@
             }
 
             .carousel-slide {
-                height: 300px;
+                height: 250px;
             }
 
             .carousel-btn {
@@ -301,12 +317,13 @@
 <body>
     <nav>
         <div class="nav-logo">MARIO'S</div>
-        <ul class="nav-links">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="nav-links" id="navLinks">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="https://mariospizzaoceanside.avcoindustries.com/order-now" target="_blank" style="color: #d4534f; font-weight: bold;">ORDER NOW</a></li>
+            <li><a href="https://mariospizzaoceanside.avcoindustries.com/order-now" target="_blank" style="color: #d4534f; font-weight: bold;">Order Now</a></li>
         </ul>
     </nav>
 
@@ -328,34 +345,30 @@
     </section>
 
     <section id="gallery" class="gallery-section">
-        <h2 class="section-title">Photos
-        </h2>
+        <h2 class="section-title">Photos</h2>
         <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-            </div>
+            <div class="carousel-track" id="carouselTrack"></div>
             <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
             <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
         </div>
         <div class="carousel-indicators" id="indicators"></div>
     </section>
 
-    <section id="contact" class="contact-section">
+    <section id="contact">
         <h2 class="section-title">Visit Us</h2>
         <div class="contact-info">
             <div class="contact-item">
                 <strong>Address</strong>
-                2822 Brower Ave<br>
-                Oceanside, NY 11572
+                2822 Brower Ave<br>Oceanside, NY 11572
             </div>
             <div class="contact-item">
-                <strong>Phone</strong>
-                (516) 536-5460
+                <strong>Phone</strong>(516) 536-5460
             </div>
             <div class="contact-item">
                 <strong>Hours</strong>
-                Mon-Thu: 11am - 10pm<br>
-                Fri-Sat: 11am - 11pm<br>
-                Sunday: 12pm - 9pm
+                Mon–Thu: 11am–10pm<br>
+                Fri–Sat: 11am–11pm<br>
+                Sun: 12pm–9pm
             </div>
         </div>
     </section>
@@ -365,22 +378,22 @@
     </footer>
 
     <script>
+        // --- Navbar toggle ---
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // --- Carousel setup ---
         let currentSlide = 0;
         let totalSlides = 0;
 
-        // Load images from mariophotos folder
         const imageNames = [
-            'Mario\'s Pizza 1.png',
-            'Mario\'s Pizza 2.png',
-            'Mario\'s Pizza 3.png',
-            'Mario\'s Pizza 4.png',
-            'Mario\'s Pizza 5.png',
-            'Mario\'s Pizza 6.png',
-            'Mario\'s Pizza 7.png',
-            'Mario\'s Pizza 8.png',
-            'Mario\'s Pizza 9.png',
-            'Mario\'s Pizza 10.png',
-            'Mario\'s Pizza 11.png'
+            "Mario's Pizza 1.png","Mario's Pizza 2.png","Mario's Pizza 3.png",
+            "Mario's Pizza 4.png","Mario's Pizza 5.png","Mario's Pizza 6.png",
+            "Mario's Pizza 7.png","Mario's Pizza 8.png","Mario's Pizza 9.png",
+            "Mario's Pizza 10.png","Mario's Pizza 11.png"
         ];
 
         function loadCarousel() {
@@ -388,13 +401,11 @@
             const indicators = document.getElementById('indicators');
             
             imageNames.forEach((image, index) => {
-                // Create slide
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.innerHTML = `<img src="mariophotos/${image}" alt="Mario's Pizza ${index + 1}" loading="lazy">`;
                 track.appendChild(slide);
 
-                // Create indicator
                 const indicator = document.createElement('div');
                 indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
                 indicator.onclick = () => goToSlide(index);
@@ -405,14 +416,7 @@
         }
 
         function moveSlide(direction) {
-            currentSlide += direction;
-            
-            if (currentSlide >= totalSlides) {
-                currentSlide = 0;
-            } else if (currentSlide < 0) {
-                currentSlide = totalSlides - 1;
-            }
-            
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
             updateCarousel();
         }
 
@@ -424,25 +428,13 @@
         function updateCarousel() {
             const track = document.getElementById('carouselTrack');
             const indicators = document.querySelectorAll('.indicator');
-            
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentSlide);
-            });
+            indicators.forEach((ind, i) => ind.classList.toggle('active', i === currentSlide));
         }
 
-        // Auto-advance carousel
-        function autoAdvance() {
-            moveSlide(1);
-        }
-
-        // Initialize carousel when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadCarousel();
-            
-            // Auto-advance every 5 seconds
-            setInterval(autoAdvance, 5000);
+            setInterval(() => moveSlide(1), 5000);
         });
     </script>
 </body>
