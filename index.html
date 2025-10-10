@@ -3,445 +3,863 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mario's Pizza - Oceanside's Finest</title>
+    <title>Luca DiGrigoli - Artist • Developer • Creator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #fff;
-            color: #2c2c2c;
-            overflow-x: hidden;
+            font-family: 'Times New Roman', serif;
+            background: #f5f3e8;
+            color: #2a2a2a;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #f9f7f0 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #f0ede0 0%, transparent 50%);
         }
-
-        nav {
+        
+        .grain-overlay {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: #fff;
-            padding: 1.5rem 5%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .nav-logo {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #2c2c2c;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #2c2c2c;
-            text-decoration: none;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #d4534f;
-        }
-
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23d4534f" width="1200" height="800"/><circle cx="600" cy="400" r="300" fill="%23c4423e" opacity="0.3"/></svg>');
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            padding: 2rem;
-        }
-
-        .logo {
-            font-size: 6rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            color: #fff;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 3rem;
-            color: #fff;
-            font-weight: 300;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 2px solid #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: #fff;
-            color: #d4534f;
-        }
-
-        section {
-            padding: 120px 5%;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: #2c2c2c;
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .about-section {
-            background: #fafafa;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 2;
-            color: #5a5a5a;
-            font-weight: 300;
-            text-align: center;
-        }
-
-        .about-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .gallery-section {
-            background: #fff;
-        }
-
-        .carousel-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            height: 500px;
-            position: relative;
-        }
-
-        .carousel-slide img {
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1000;
         }
-
-        .carousel-btn {
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-top: 80px; /* Add space to push the title down */
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .site-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #8B4513;
+            text-shadow: 2px 2px 0px #d4c4a0;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            display: block;
+            width: 100%;
+        }
+        
+        .subtitle {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            text-transform: lowercase;
+            display: block;
+            width: 100%;
+        }
+        
+        .animated-bar {
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #8B4513 0%, 
+                #CD853F 25%, 
+                #DEB887 50%, 
+                #CD853F 75%, 
+                #8B4513 100%);
+            margin: 20px auto;
+            width: 200px;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(1.1); }
+        }
+        
+        .section {
+            background: rgba(255,255,255,0.6);
+            border: 2px solid #d4c4a0;
+            margin-bottom: 20px;
+            padding: 30px;
+            box-shadow: 
+                0 0 0 1px rgba(139, 69, 19, 0.1),
+                0 8px 20px rgba(139, 69, 19, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            padding: 15px 20px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #2c2c2c;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #8B4513 50%, transparent 100%);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: lowercase;
+            position: relative;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .project-card {
+            background: rgba(245, 243, 232, 0.8);
+            border: 1px solid #d4c4a0;
+            padding: 20px;
             transition: all 0.3s ease;
-            z-index: 10;
+            position: relative;
+            cursor: pointer;
         }
-
-        .carousel-btn:hover {
-            background: #fff;
-            color: #d4534f;
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
+            border-color: #8B4513;
         }
-
-        .carousel-btn.prev {
-            left: 20px;
+        
+        .project-title {
+            font-size: 1.3rem;
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
-
-        .carousel-btn.next {
-            right: 20px;
+        
+        .project-subtitle {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
         }
-
-        .carousel-indicators {
+        
+        .project-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #444;
+        }
+        
+        .music-player {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 0;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .music-player::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+        }
+        
+        .music-player h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .music-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .music-link {
+            color: #f5f3e8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .music-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .retro-badge {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            padding: 4px 12px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.8rem;
+            margin: 5px 5px 5px 0;
+            transform: rotate(-1deg);
+            box-shadow: 2px 2px 0px #5d2f0a;
+        }
+        
+        .retro-badge:nth-child(even) {
+            transform: rotate(1deg);
+            background: #A0522D;
+        }
+        
+        .vintage-divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .vintage-divider::before {
+            content: '';
+            position: absolute;
+            top: 48%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #8B4513 50%, transparent 100%);
+        }
+        
+        .vintage-divider span {
+            background: #f5f3e8;
+            padding: 0 20px;
+            color: #8B4513;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .contact-section {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: rgba(139, 69, 19, 0.05);
+            border: 2px dashed #d4c4a0;
+        }
+        
+        .contact-links {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 2rem;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
         }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            cursor: pointer;
-            transition: background 0.3s ease;
+        
+        .contact-link {
+            color: #8B4513;
+            text-decoration: none;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
         }
-
-        .indicator.active {
-            background: #d4534f;
+        
+        .contact-link:hover {
+            border-color: #8B4513;
+            background: rgba(139, 69, 19, 0.1);
+            transform: scale(1.05);
         }
-
-        .contact-section {
-            background: #fff;
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #8B4513;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+            display: inline-block;
+            max-width: fit-content; /* Ensure the width matches the text content */
         }
-
-        .contact-info {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
         }
-
-        .contact-item {
-            margin: 3rem 0;
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #8B4513; }
+        }
+        
+        .news-banner {
+            background: #8B4513;
+            color: white;
+            padding: 12px 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-top: 3px solid #A0522D;
+            border-bottom: 3px solid #A0522D;
+        }
+        
+        .news-scroll {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll-left 25s linear infinite;
+            font-family: 'Courier Prime', monospace;
             font-size: 1rem;
-            color: #5a5a5a;
-            font-weight: 300;
-            line-height: 1.8;
+            font-weight: 400;
         }
-
-        .contact-item strong {
-            color: #2c2c2c;
-            display: block;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
+        
+        .news-item {
+            padding-right: 100px;
+            display: inline-block;
         }
-
-        footer {
-            background: #2c2c2c;
-            text-align: center;
-            padding: 3rem;
-            color: #999;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        
+        .news-item::before {
+            content: "★ ";
+            color: #f5f3e8;
+            margin-right: 5px;
         }
-
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .polaroid {
+            background: white;
+            padding: 15px 15px 45px 15px;
+            transform: rotate(-2deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin: 20px auto;
+            width: fit-content;
+            position: relative;
+        }
+        
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .polaroid img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            filter: sepia(20%) contrast(1.1) saturate(0.9);
+        }
+        
+        .retro-cursor {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%238B4513' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22L12 18.77L5.82 22L7 14.14L2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E"), auto;
+        }
+        
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff6b6b;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #4ecdc4;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translateX(0); }
+            15%, 49% { transform: translateX(-2px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translateX(0); }
+            21%, 62% { transform: translateX(2px); }
+        }
+        
         @media (max-width: 768px) {
-            .logo {
-                font-size: 3rem;
-                letter-spacing: 4px;
+            .site-title {
+                font-size: 2.5rem;
             }
             
-            .tagline {
-                font-size: 1rem;
+            .project-grid {
+                grid-template-columns: 1fr;
             }
             
-            .nav-links {
-                gap: 1.5rem;
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
             }
-            
-            .nav-links a {
-                font-size: 0.85rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
+        }
+        
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .retro-button {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-family: 'Courier Prime', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+        }
+        
+        .retro-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(139, 69, 19, 0.4);
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8B4513, transparent);
+            animation: scan 4s linear infinite;
+            top: 0;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
 
-            section {
-                padding: 80px 5%;
-            }
+        /* Side polaroid stacks */
+        .side-polaroids {
+            position: absolute;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            z-index: 1; /* Ensures images are above the background but below main content */
+            pointer-events: none;
+        }
+        .side-polaroids.left { left: -30px; }
+        .side-polaroids.right { right: -30px; }
+        
+        .side-polaroids .polaroid {
+            width: 180px; /* Slightly larger */
+            padding: 15px 15px 45px 15px;
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+            border: 1px solid #e1dccf;
+            pointer-events: auto;
+            transition: transform .35s ease, box-shadow .35s ease;
+            cursor: pointer;
+        }
+        .side-polaroids .polaroid img {
+            width: 100%;
+            height: 140px; /* Adjusted for larger size */
+            object-fit: cover;
+            filter: sepia(18%) contrast(1.05) saturate(.95);
+        }
+        .side-polaroids .polaroid span {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: .8rem; /* Slightly larger text */
+            color: #8B4513;
+            letter-spacing: .5px;
+        }
+        .side-polaroids.left .polaroid:nth-child(1) { transform: translateY(0); }
+        .side-polaroids.left .polaroid:nth-child(2) { transform: translateY(150px); }
+        .side-polaroids.left .polaroid:nth-child(3) { transform: translateY(300px); }
+        .side-polaroids.left .polaroid:nth-child(4) { transform: translateY(450px); }
+        
+        .side-polaroids.right .polaroid:nth-child(1) { transform: translateY(0); }
+        .side-polaroids.right .polaroid:nth-child(2) { transform: translateY(150px); }
+        .side-polaroids.right .polaroid:nth-child(3) { transform: translateY(300px); }
+        .side-polaroids.right .polaroid:nth-child(4) { transform: translateY(450px); }
+        
+        .side-polaroids .polaroid:hover {
+            transform: scale(1.1); /* Slightly larger on hover */
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .side-polaroids .polaroid img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            filter: sepia(18%) contrast(1.05) saturate(.95);
+        }
+        .side-polaroids .polaroid span {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: .7rem;
+            color: #8B4513;
+            letter-spacing: .5px;
+        }
+        /* Diagonal / staggered transforms */
+        .side-polaroids.left .polaroid:nth-child(1) { transform: rotate(-8deg) translateX(10px); }
+        .side-polaroids.left .polaroid:nth-child(2) { transform: rotate(6deg) translateX(0); }
+        .side-polaroids.left .polaroid:nth-child(3) { transform: rotate(-4deg) translateX(14px); }
+        .side-polaroids.left .polaroid:nth-child(4) { transform: rotate(7deg) translateX(-4px); }
 
-            .carousel-slide {
-                height: 300px;
-            }
+        .side-polaroids.right .polaroid:nth-child(1) { transform: rotate(7deg) translateX(-10px); }
+        .side-polaroids.right .polaroid:nth-child(2) { transform: rotate(-5deg) translateX(-2px); }
+        .side-polaroids.right .polaroid:nth-child(3) { transform: rotate(9deg) translateX(-16px); }
+        .side-polaroids.right .polaroid:nth-child(4) { transform: rotate(-6deg) translateX(-4px); }
 
-            .carousel-btn {
-                padding: 10px 15px;
-                font-size: 1.2rem;
-            }
+        .side-polaroids .polaroid:hover {
+            transform: scale(1.05) rotate(0deg) translateX(0) !important;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+            z-index: 60;
+        }
+
+        @media (max-width: 1100px) {
+            .side-polaroids { display: none; }
+        }
+
+        /* Jesters card with background video */
+        .jesters-card {
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          padding: 20px;
+          min-height: 180px;
+        }
+        
+        .jesters-card:hover {
+          box-shadow: 0 14px 32px rgba(139, 69, 19, 0.25);
+          border-color: #8B4513;
+        }
+
+        /* Background video */
+        .jesters-bg-video {
+          position: absolute;
+          top: 0;
+          left: 0%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.25;
+          z-index: 1;
+          transition: opacity 0.3s ease;
+        }
+
+        .jesters-card:hover .jesters-bg-video {
+          opacity: 0.45;
+        }
+
+        /* Content overlay */
+        .jesters-content {
+          position: relative;
+          z-index: 2;
+          background: rgba(245, 243, 232, 0.85);
+          padding: 15px;
+          border-radius: 4px;
+          backdrop-filter: blur(1px);
+        }
+
+        .jesters-card:hover .jesters-content {
+          background: rgba(245, 243, 232, 0.9);
         }
     </style>
 </head>
-<body>
-    <nav>
-        <div class="nav-logo">MARIO'S</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+<body class="retro-cursor">
+    <div class="grain-overlay"></div>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="logo">Mario's Pizza</h1>
-            <p class="tagline">Oceanside's Finest Since 1985</p>
-            <a href="#about" class="cta-button">Learn More</a>
-        </div>
-    </section>
-
-    <section id="about" class="about-section">
-        <h2 class="section-title">Our Story</h2>
-        <div class="about-content">
-            <p>Since 1985, Mario's Pizza has been serving authentic, handcrafted pizzas to the Oceanside community. What started as a small family kitchen has grown into a beloved local landmark.</p>
-            <p>We use only the finest ingredients: imported Italian tomatoes, fresh mozzarella made daily, and our secret family recipe dough that's been passed down through three generations. Every pizza is made with love and baked to perfection in our traditional brick oven.</p>
-            <p>Come taste the difference that passion and tradition make!</p>
-        </div>
-    </section>
-
-    <section id="gallery" class="gallery-section">
-        <h2 class="section-title">Gallery</h2>
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-            </div>
-            <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
-            <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
-        </div>
-        <div class="carousel-indicators" id="indicators"></div>
-    </section>
-
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Visit Us</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <strong>Address</strong>
-                2822 Brower Ave<br>
-                Oceanside, NY 11572
-            </div>
-            <div class="contact-item">
-                <strong>Phone</strong>
-                (516) 536-5460
-            </div>
-            <div class="contact-item">
-                <strong>Hours</strong>
-                Mon-Thu: 11am - 10pm<br>
-                Fri-Sat: 11am - 11pm<br>
-                Sunday: 12pm - 9pm
+    <!-- Decorative side polaroids -->
+    <div class="side-polaroids left">
+        <div class="polaroid"><img src="images/pretend.png" alt="pretend"><span>pretend</span></div>
+        <div class="polaroid"><img src="images/521cover.jpg" alt="521 album"><span>521 album</span></div>
+        <div class="polaroid"><img src="images/valerie.jpeg" alt="valerie single"><span>valerie</span></div>
+        <div class="polaroid"><img src="images/coreSpooky2021.png" alt="friends!"><span>friends!</span></div>
+    </div>
+    <div class="side-polaroids right">
+        <div class="polaroid"><img src="images/binghamtonLogo.png" alt="bing :)"><span>bing :)</span></div>
+        <div class="polaroid"><img src="images/jesters.jpeg" alt="jesters"><span>jesters</span></div>
+        <div class="polaroid"><img src="images/headshot.jpeg" alt="me!"><span>me!</span></div>
+        <div class="polaroid"><img src="images/yuletide.jpeg" alt="my christmas album"><span>my christmas album<span></div>
+    </div>
+    
+    <div class="container">
+        <div class="news-banner">
+            <div class="news-scroll">
+                <span class="news-itsm">Welcome to the newly redesigned lucadigrigoli.com! </span>
+                <span class="news-item">NEW SINGLE "pretend" out now - streaming everywhere you consume sound waves! </span>
+                <span class="news-item">second studio album (and merch) coming soon! </span>
+                <span class="news-item">test message (surely nobody sees this, right?) </span>
+                <span class="news-item">SECRET MESSAGE WOAH </span>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Mario's Pizza Oceanside. All rights reserved.</p>
-    </footer>
-
+        
+        <header class="header">
+            <h1 class="site-title glitch" data-text="Luca DiGrigoli">Luca DiGrigoli</h1>
+            <p class="subtitle typing-animation">artist • developer • creator </p>
+            <div class="animated-bar"></div>
+        </header>
+        
+        <div class="section retro-cursor">
+            <div class="scan-line"></div>
+            <h2 class="section-title">latest music releases</h2>
+            
+            <div class="music-player">
+                <h3><span class="blink">♪</span> pretend out now</h3>
+                <p style="margin-bottom: 15px; font-style: italic;">a new song about betrayal and closure you'll never get</p>
+                <div class="music-links">
+                    <a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" class="music-link">listen here</a>
+                </div>
+            </div>
+            
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3 class="project-title">521 - debut studio album</h3>
+                    <p class="project-subtitle">featuring "lose your mind" and "apologize"</p>
+                    <p class="project-description">
+                        my first full-length release exploring themes of growth, loss, and self-discovery through differing soundscapes.
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank" style="color:#8B4513;text-decoration:underline;">listen to 521</a>
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="retro-badge">singer/songwriter</span>
+                        <span class="retro-badge">indie</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="project-title">valerie</h3>
+                    <p class="project-subtitle">dedicated to finding connection</p>
+                    <p class="project-description">
+                        an intimate song about relationships, vulnerability, and the ongoing search for Valerie, whoever it may be...
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank" style="color:#8B4513;text-decoration:underline;">stream "valerie"</a>
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="retro-badge">acoustic</span>
+                        <span class="retro-badge">pop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vintage-divider">
+            <span>~ creative projects ~</span>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">other musical endeavors</h2>
+        
+                <div class="project-card jesters-card" id="jesters">
+                  <div class="jesters-top">
+                    <div>
+                      <h3 class="project-title">Jesters</h3>
+                      <p class="project-subtitle">Long Island, NY</p>
+                    </div>
+                  </div>
+                
+                  <p class="project-description" style="margin-top:8px; position: relative; z-index: 2;">
+                    Local band creating original pop-rock music, performing at venues across Long Island and building a community of music lovers.
+                    <br><a href="https://jestersband.com" target="_blank" style="color:#8B4513;text-decoration:underline;">Visit site</a>
+                  </p>
+                
+                  <!-- Background video -->
+                  <video class="jesters-bg-video" muted loop autoplay playsinline>
+                    <source src="videos/jesters-teaser.mp4" type="video/mp4">
+                    Sorry—your browser doesn’t support embedded videos.
+                  </video>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vintage-divider">
+            <span>~ technical work ~</span>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">{computer science & code}</h2>
+            
+            <div class="project-card" style="max-width: none;">
+                <h3 class="project-title">computer science graduate</h3>
+                <p class="project-subtitle">binghamton university, class of 2025</p>
+                <p class="project-description">specializing in systems programming, cybersecurity, and creative coding. passionate about building tools that bridge the gap between technical functionality and artistic expression.</p>
+                <div style="margin-top: 15px;">
+                    <span class="retro-badge">systems</span>
+                    <span class="retro-badge">security</span>
+                    <span class="retro-badge">creative code</span>
+                </div>
+            </div>
+        
+            <div class="project-card" style="max-width: none;">
+                <h3 class="project-title">Mindscapes</h3>
+                <p class="project-subtitle">A mindfulness and productivity app</p>
+                <p class="project-description">
+                    Mindscapes is an iOS app designed to help users achieve progress and focus through pomodoro timing, and daily mood/habit tracking.
+                    <br><a href="https://github.com/Luc1113/mindscapes" target="_blank" style="color:#8B4513;text-decoration:underline;">view on GitHub</a>
+                </p>
+                <div style="margin-top: 15px;">
+                    <span class="retro-badge">mindfulness</span>
+                    <span class="retro-badge">productivity</span>
+                    <span class="retro-badge">mobile app</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vintage-divider">
+            <span>~ about this space ~</span>
+        </div>
+        
+        <div class="section" style="text-align: center;">
+            <p style="font-size: 1.1rem; line-height: 1.7; color: #555; max-width: 600px; margin: 0 auto;">
+                this site is a reflection of both my creative and professional sides, meant to evolve as i do. 
+                it's where music meets code, and where i document the ongoing journey of creating meaningful work.
+            </p>
+            
+            <div style="margin-top: 30px;">
+                <button class="retro-button" onclick="showMessage()">thanks for stopping by!</button>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <h2 style="color: #8B4513; margin-bottom: 20px; font-size: 1.8rem;">get in touch</h2>
+            <p style="color: #666; margin-bottom: 20px;">let's collaborate, chat about music, or discuss interesting projects</p>
+            
+            <div class="contact-links">
+                <a href="https://linktr.ee/lucadigrigoli" class="contact-link" target="_blank">linktree</a>
+                <a href="https://github.com/Luc1113" class="contact-link" target="_blank">github</a>
+                <a href="https://www.youtube.com/@lucadigrigoli7513" class="contact-link" target="_blank">youtube</a>
+                <a href="https://www.linkedin.com/in/lucadigrigoli/" class="contact-link" target="_blank">linkedin</a>
+                <a href="https://www.instagram.com/luca.digrigoli/" class="contact-link" target="_blank">instagram</a>
+                <a href="https://www.tiktok.com/@luca_digrigoli" class="contact-link" target="_blank">tiktok</a>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        let currentSlide = 0;
-        let totalSlides = 0;
-
-        // Load images from mariophotos folder
-        const imageNames = [
-            'buffaloCxn.png',
-            'chickenroll.png',
-            'garlicbread.png',
-            'IMG_0006.jpeg',
-            'other roll.png',
-            'otherpeperoni.png',
-            'pepSlice.png',
-            'pestoslcie.png',
-            'pinwheels.png',
-            'roll3.png',
-            'slice2.png'
-        ];
-
-        function loadCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const indicators = document.getElementById('indicators');
-            
-            imageNames.forEach((image, index) => {
-                // Create slide
-                const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                slide.innerHTML = `<img src="mariophotos/${image}" alt="Mario's Pizza ${index + 1}" loading="lazy">`;
-                track.appendChild(slide);
-
-                // Create indicator
-                const indicator = document.createElement('div');
-                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-                indicator.onclick = () => goToSlide(index);
-                indicators.appendChild(indicator);
-            });
-
-            totalSlides = imageNames.length;
+        function showMessage() {
+            const messages = [
+                "keep creating ✨",
+                "stay curious 🎵",
+                "art + code = magic",
+                "see you around the internet!",
+                "thanks for exploring!"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
         }
-
-        function moveSlide(direction) {
-            currentSlide += direction;
-            
-            if (currentSlide >= totalSlides) {
-                currentSlide = 0;
-            } else if (currentSlide < 0) {
-                currentSlide = totalSlides - 1;
-            }
-            
-            updateCarousel();
-        }
-
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const indicators = document.querySelectorAll('.indicator');
-            
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        // Auto-advance carousel
-        function autoAdvance() {
-            moveSlide(1);
-        }
-
-        // Initialize carousel when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCarousel();
-            
-            // Auto-advance every 5 seconds
-            setInterval(autoAdvance, 5000);
+        
+        // Add subtle parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.header');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
         });
+        
+        // Animate project cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    <script>
+        // Parallax + observer code here...
+
+        // Jesters video hover/play logic
+        (function () {
+            const card = document.getElementById('jesters');
+            const vid  = document.getElementById('jestersVideo'); // also give your video an id="jestersVideo"
+
+            if (!card || !vid) return;
+
+            card.addEventListener('mouseenter', () => {
+                vid.currentTime = vid.currentTime || 0;
+                vid.play().catch(() => {});
+            });
+            card.addEventListener('mouseleave', () => {
+                vid.pause();
+            });
+
+            let expanded = false;
+            card.addEventListener('click', () => {
+                if (matchMedia('(hover: none)').matches) {
+                    expanded = !expanded;
+                    card.style.maxHeight = expanded ? '480px' : '150px';
+                    if (expanded) {
+                        vid.play().catch(()=>{});
+                    } else {
+                        vid.pause();
+                    }
+                }
+            }, {passive: true});
+        })();
+
+        // Random glitch effect on title
+        setInterval(() => {
+            const title = document.querySelector('.glitch');
+            if (Math.random() < 0.1) {
+                title.style.animation = 'none';
+                setTimeout(() => {
+                    title.style.animation = '';
+                }, 100);
+            }
+        }, 3000);
     </script>
 </body>
 </html>
