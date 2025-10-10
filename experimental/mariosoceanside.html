@@ -12,10 +12,50 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: #0a0a0a;
-            color: #fff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #fff;
+            color: #2c2c2c;
             overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .nav-logo {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #2c2c2c;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4534f;
         }
 
         .hero {
@@ -24,188 +64,157 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23d4534f" width="1200" height="800"/><circle cx="600" cy="400" r="300" fill="%23c4423e" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            from { transform: translateY(0); }
-            to { transform: translateY(-100px); }
         }
 
         .hero-content {
             text-align: center;
             z-index: 2;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding: 2rem;
         }
 
         .logo {
-            font-size: 5rem;
-            font-weight: bold;
+            font-size: 6rem;
+            font-weight: 300;
             margin-bottom: 1rem;
-            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
+            color: #fff;
+            letter-spacing: 8px;
+            text-transform: uppercase;
         }
 
         .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 18px 45px;
-            background: #fff;
-            color: #c41e3a;
+            padding: 15px 40px;
+            background: transparent;
+            color: #fff;
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 2px solid #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
-        }
-
-        .nav-logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #c41e3a;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 1.1rem;
-        }
-
-        .nav-links a:hover {
-            color: #c41e3a;
+            background: #fff;
+            color: #d4534f;
         }
 
         section {
-            padding: 100px 5%;
-            min-height: 50vh;
+            padding: 120px 5%;
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 3rem;
-            color: #c41e3a;
+            margin-bottom: 4rem;
+            color: #2c2c2c;
+            font-weight: 300;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            letter-spacing: 3px;
         }
 
         .about-section {
-            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-            text-align: center;
+            background: #fafafa;
         }
 
         .about-content {
             max-width: 800px;
             margin: 0 auto;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #ddd;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #5a5a5a;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
         }
 
         .contact-section {
-            background: #0a0a0a;
-            text-align: center;
+            background: #fff;
         }
 
         .contact-info {
             max-width: 600px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .contact-item {
-            margin: 2rem 0;
-            font-size: 1.3rem;
+            margin: 3rem 0;
+            font-size: 1rem;
+            color: #5a5a5a;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .contact-item strong {
-            color: #c41e3a;
+            color: #2c2c2c;
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
         }
 
         footer {
-            background: #000;
+            background: #2c2c2c;
             text-align: center;
-            padding: 2rem;
-            color: #888;
+            padding: 3rem;
+            color: #999;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         @media (max-width: 768px) {
             .logo {
                 font-size: 3rem;
+                letter-spacing: 4px;
+            }
+            
+            .tagline {
+                font-size: 1rem;
             }
             
             .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+                gap: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.85rem;
             }
             
             .section-title {
                 font-size: 2rem;
+            }
+
+            section {
+                padding: 80px 5%;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-logo">Mario's</div>
+        <div class="nav-logo">MARIO'S</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -225,9 +234,7 @@
         <h2 class="section-title">Our Story</h2>
         <div class="about-content">
             <p>Since 1985, Mario's Pizza has been serving authentic, handcrafted pizzas to the Oceanside community. What started as a small family kitchen has grown into a beloved local landmark.</p>
-            <br>
             <p>We use only the finest ingredients: imported Italian tomatoes, fresh mozzarella made daily, and our secret family recipe dough that's been passed down through three generations. Every pizza is made with love and baked to perfection in our traditional brick oven.</p>
-            <br>
             <p>Come taste the difference that passion and tradition make!</p>
         </div>
     </section>
@@ -236,16 +243,16 @@
         <h2 class="section-title">Visit Us</h2>
         <div class="contact-info">
             <div class="contact-item">
-                <strong>📍 Address</strong>
+                <strong>Address</strong>
                 2822 Brower Ave<br>
                 Oceanside, NY 11572
             </div>
             <div class="contact-item">
-                <strong>📞 Phone</strong>
+                <strong>Phone</strong>
                 (516) 536-5460
             </div>
             <div class="contact-item">
-                <strong>🕐 Hours</strong>
+                <strong>Hours</strong>
                 Mon-Thu: 11am - 10pm<br>
                 Fri-Sat: 11am - 11pm<br>
                 Sunday: 12pm - 9pm
