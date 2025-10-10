@@ -146,6 +146,83 @@
             margin-bottom: 1.5rem;
         }
 
+        .gallery-section {
+            background: #fff;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #2c2c2c;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: #fff;
+            color: #d4534f;
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #d4534f;
+        }
+
         .contact-section {
             background: #fff;
         }
@@ -209,6 +286,15 @@
             section {
                 padding: 80px 5%;
             }
+
+            .carousel-slide {
+                height: 300px;
+            }
+
+            .carousel-btn {
+                padding: 10px 15px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -218,6 +304,7 @@
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -237,6 +324,18 @@
             <p>We use only the finest ingredients: imported Italian tomatoes, fresh mozzarella made daily, and our secret family recipe dough that's been passed down through three generations. Every pizza is made with love and baked to perfection in our traditional brick oven.</p>
             <p>Come taste the difference that passion and tradition make!</p>
         </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <h2 class="section-title">Our Pizzas</h2>
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Images will be loaded dynamically -->
+            </div>
+            <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
+            <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
+        </div>
+        <div class="carousel-indicators" id="indicators"></div>
     </section>
 
     <section id="contact" class="contact-section">
@@ -263,5 +362,82 @@
     <footer>
         <p>&copy; 2025 Mario's Pizza Oceanside. All rights reserved.</p>
     </footer>
+
+    <script>
+        let currentSlide = 0;
+        let totalSlides = 0;
+
+        // Load images from mariophotos folder
+        const imageNames = [
+            'pizza1.jpg',
+            'pizza2.jpg', 
+            'pizza3.jpg',
+            'restaurant1.jpg',
+            'restaurant2.jpg',
+            'chef.jpg'
+        ];
+
+        function loadCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const indicators = document.getElementById('indicators');
+            
+            imageNames.forEach((image, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = `<img src="mariophotos/${image}" alt="Mario's Pizza ${index + 1}" loading="lazy">`;
+                track.appendChild(slide);
+
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => goToSlide(index);
+                indicators.appendChild(indicator);
+            });
+
+            totalSlides = imageNames.length;
+        }
+
+        function moveSlide(direction) {
+            currentSlide += direction;
+            
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
+            
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-advance carousel
+        function autoAdvance() {
+            moveSlide(1);
+        }
+
+        // Initialize carousel when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCarousel();
+            
+            // Auto-advance every 5 seconds
+            setInterval(autoAdvance, 5000);
+        });
+    </script>
 </body>
 </html>
