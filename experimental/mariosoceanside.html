@@ -1,597 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mario's Pizza - Oceanside's Finest</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mario's Pizza - Oceanside's Finest</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #fff;
-            color: #2c2c2c;
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #FAF9F6; /* Warm White */
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.98);
-            padding: 1rem 5%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(250, 249, 246, 0.98);
+      padding: 1rem 5%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-        .nav-logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #2c2c2c;
-            letter-spacing: 1px;
-        }
+    .nav-logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #8E5A2D; /* Rustic Brown */
+      letter-spacing: 1px;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
 
-        .nav-links a {
-            color: #2c2c2c;
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
+    .nav-links a {
+      color: #2c2c2c;
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
 
-        .nav-links a:hover {
-            color: #d4534f;
-        }
+    .nav-links a:hover {
+      color: #C0392B; /* Tomato Red */
+    }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            background: none;
-            border: none;
-            color: #2c2c2c;
-            cursor: pointer;
-        }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #2c2c2c;
+      cursor: pointer;
+    }
 
-        .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-                        url("mariophotos/Mario's Pizza 6.png");
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
-        }
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+          rgba(0, 0, 60, 0.35), 
+          rgba(0, 0, 40, 0.45)
+        ),
+        url("mariophotos/Mario's Pizza 6.png");
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.35) 100%);
+    }
 
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            padding: 2rem;
-            max-width: 700px;
-        }
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      padding: 2rem;
+      max-width: 700px;
+    }
 
-        .logo {
-            font-size: 6rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #fff;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.6);
-            animation: fadeInDown 1s ease;
-        }
+    .logo {
+      font-size: 6rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #FAF9F6;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 12px rgba(0,0,0,0.6);
+      animation: fadeInDown 1s ease;
+    }
 
-        .tagline {
-            font-size: 1.4rem;
-            margin-bottom: 3rem;
-            color: #fff;
-            font-weight: 400;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease 0.2s backwards;
-        }
+    .personality-tagline {
+      font-size: 1.3rem;
+      color: #F1C40F; /* Parmesan Yellow */
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      animation: fadeInUp 1s ease 0.1s backwards;
+    }
 
-        .cta-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            align-items: center;
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
+    .tagline {
+      font-size: 1.4rem;
+      margin-bottom: 3rem;
+      color: #FAF9F6;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease 0.2s backwards;
+    }
 
-        .cta-button {
-            display: inline-block;
-            padding: 20px 60px;
-            background: #d4534f;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(212, 83, 79, 0.4);
-            border-radius: 50px;
-            position: relative;
-            overflow: hidden;
-        }
+    .cta-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      animation: fadeInUp 1s ease 0.4s backwards;
+    }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
+    .cta-button {
+      display: inline-block;
+      padding: 20px 60px;
+      background: #C0392B; /* Tomato Red */
+      color: #FAF9F6;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+      border-radius: 50px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .cta-button:hover::before {
-            left: 100%;
-        }
+    .cta-button:hover {
+      background: #A93226;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(192, 57, 43, 0.5);
+    }
 
-        .cta-button:hover {
-            background: #c13d39;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(212, 83, 79, 0.5);
-        }
+    .trust-badges {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
 
-        .cta-secondary {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-            padding: 16px 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 12px 25px;
+      border-radius: 30px;
+      color: #FAF9F6;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
 
-        .cta-secondary:hover {
-            background: #fff;
-            color: #d4534f;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255,255,255,0.3);
-        }
+    section {
+      padding: 120px 5%;
+    }
 
-        .trust-badges {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-        }
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 4rem;
+      color: #8E5A2D;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
 
-        .badge {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            padding: 12px 25px;
-            border-radius: 30px;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 2;
+      color: #5a5a5a;
+      font-weight: 300;
+      text-align: center;
+    }
 
-        section {
-            padding: 120px 5%;
-        }
+    /* Map Section */
+    .map-section iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
 
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: #2c2c2c;
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
+    .map-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 14px 40px;
+      background: #27AE60; /* Basil Green */
+      color: #FAF9F6;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(39,174,96,0.4);
+      transition: all 0.3s ease;
+    }
 
-        .about-section {
-            background: #fafafa;
-        }
+    .map-btn:hover {
+      background: #2ecc71;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(46,204,113,0.5);
+    }
 
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 2;
-            color: #5a5a5a;
-            font-weight: 300;
-            text-align: center;
-        }
+    footer {
+      background: #8E5A2D;
+      text-align: center;
+      padding: 3rem;
+      color: #FAF9F6;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-        .about-content p {
-            margin-bottom: 1.5rem;
-        }
+    /* Sticky Button */
+    .sticky-order {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #C0392B;
+      color: #FAF9F6;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      padding: 18px 40px;
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(192,57,43,0.5);
+      text-decoration: none;
+      z-index: 2000;
+      transition: all 0.3s ease, opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-        .gallery-section {
-            background: #fff;
-        }
+    .sticky-order.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-        .carousel-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+    .sticky-order:hover {
+      background: #F1C40F;
+      color: #2c2c2c;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(241,196,15,0.4);
+    }
 
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
+    @media (max-width: 600px) {
+      .sticky-order {
+        bottom: 15px;
+        right: 15px;
+        font-size: 0.9rem;
+        padding: 15px 25px;
+      }
+    }
 
-        .carousel-slide {
-            min-width: 100%;
-            height: 500px;
-        }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: none;
-            padding: 15px 20px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #2c2c2c;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .carousel-btn:hover {
-            background: #fff;
-            color: #d4534f;
-        }
-
-        .carousel-btn.prev { left: 20px; }
-        .carousel-btn.next { right: 20px; }
-
-        .carousel-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 2rem;
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .indicator.active { background: #d4534f; }
-
-        .contact-info {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-item {
-            margin: 3rem 0;
-            font-size: 1rem;
-            color: #5a5a5a;
-            font-weight: 300;
-            line-height: 1.8;
-        }
-
-        .contact-item strong {
-            color: #2c2c2c;
-            display: block;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        footer {
-            background: #2c2c2c;
-            text-align: center;
-            padding: 3rem;
-            color: #999;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- Mobile --- */
-        @media (max-width: 900px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: #fff;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                transition: right 0.3s ease;
-                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links a {
-                font-size: 1rem;
-            }
-
-            .hero {
-                min-height: 100vh;
-                height: auto;
-            }
-
-            .logo {
-                font-size: 3.5rem;
-                letter-spacing: 4px;
-            }
-
-            .tagline {
-                font-size: 1rem;
-                letter-spacing: 2px;
-                margin-bottom: 2rem;
-            }
-
-            .cta-button {
-                padding: 18px 45px;
-                font-size: 1rem;
-                letter-spacing: 2px;
-                width: 90%;
-                max-width: 350px;
-            }
-
-            .cta-secondary {
-                padding: 14px 40px;
-                width: 90%;
-                max-width: 350px;
-            }
-
-            .trust-badges {
-                margin-top: 2rem;
-                gap: 1rem;
-            }
-
-            .badge {
-                font-size: 0.75rem;
-                padding: 10px 20px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 80px 5%;
-            }
-
-            .carousel-slide {
-                height: 250px;
-            }
-
-            .carousel-btn {
-                padding: 10px 15px;
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 2.5rem;
-            }
-
-            .tagline {
-                font-size: 0.85rem;
-            }
-
-            .cta-button {
-                padding: 16px 35px;
-                font-size: 0.9rem;
-            }
-
-            .trust-badges {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-logo">MARIO'S</div>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <div class="nav-logo">MARIO'S</div>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="logo">MARIO'S</h1>
-            <p class="tagline">Authentic Italian Since 1985</p>
-            <div class="cta-container">
-                <a href="https://mariospizzaoceanside.avcoindustries.com/order-now" target="_blank" class="cta-button">Order Online</a>
-            </div>
-            <div class="trust-badges">
-                <div class="badge">Family Owned</div>
-                <div class="badge">Fresh Daily</div>
-                <div class="badge">Brick Oven</div>
-            </div>
-        </div>
-    </section>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="logo">MARIO'S</h1>
+      <p class="personality-tagline">Oceanside’s Favorite Slice</p>
+      <p class="tagline">Authentic Italian Since 1985</p>
+      <div class="cta-container">
+        <a href="https://mariospizzaoceanside.avcoindustries.com/order-now" target="_blank" class="cta-button">Order Online</a>
+      </div>
+      <div class="trust-badges">
+        <div class="badge">Family Owned</div>
+        <div class="badge">Fresh Daily</div>
+        <div class="badge">Brick Oven</div>
+      </div>
+    </div>
+  </section>
 
-    <section id="about" class="about-section">
-        <h2 class="section-title">Our Story</h2>
-        <div class="about-content">
-            <p>We are a family-owned pizzeria, servicing Oceanside, Baldwin, East Rockaway and Rockville Centre for over 43 years!</p>
-        </div>
-    </section>
+  <section id="about">
+    <h2 class="section-title">Our Story</h2>
+    <div class="about-content">
+      <p>We are a family-owned pizzeria serving Oceanside, Baldwin, East Rockaway, and Rockville Centre for over 43 years!</p>
+    </div>
+  </section>
 
-    <section id="gallery" class="gallery-section">
-        <h2 class="section-title">Photos</h2>
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack"></div>
-            <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
-            <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
-        </div>
-        <div class="carousel-indicators" id="indicators"></div>
-    </section>
+  <section id="contact">
+    <h2 class="section-title">Visit Us</h2>
+    <div class="about-content">
+      <p><strong>Address:</strong> 2822 Brower Ave, Oceanside, NY 11572</p>
+      <p><strong>Phone:</strong> (516) 536-5460</p>
+      <p><strong>Hours:</strong><br>
+        Mon–Thu: 11am–10pm<br>
+        Fri–Sat: 11am–11pm<br>
+        Sun: 12pm–9pm
+      </p>
+    </div>
+  </section>
 
-    <section id="contact">
-        <h2 class="section-title">Visit Us</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <strong>Address</strong>
-                2822 Brower Ave<br>Oceanside, NY 11572
-            </div>
-            <div class="contact-item">
-                <strong>Phone</strong>(516) 536-5460
-            </div>
-            <div class="contact-item">
-                <strong>Hours</strong>
-                Mon–Thu: 11am–10pm<br>
-                Fri–Sat: 11am–11pm<br>
-                Sun: 12pm–9pm
-            </div>
-        </div>
-    </section>
+  <section class="map-section">
+    <h2 class="section-title">Get Directions</h2>
+    <div class="about-content">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6819498027134!2d-73.64024082350296!3d40.6352991714081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c264a83f4e0c47%3A0x2b6ccf71df3b9c9c!2sMario%E2%80%99s%20Pizza%20Oceanside!5e0!3m2!1sen!2sus!4v1697035690198!5m2!1sen!2sus"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a href="https://www.google.com/maps/place/2822+Brower+Ave,+Oceanside,+NY+11572" target="_blank" class="map-btn">Get Directions</a>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 Mario's Pizza Oceanside. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2025 Mario's Pizza Oceanside. All rights reserved.</p>
+  </footer>
 
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+  <!-- Sticky order button -->
+  <a href="https://mariospizzaoceanside.avcoindustries.com/order-now"
+     target="_blank"
+     class="sticky-order"
+     id="stickyOrderBtn">Order Online</a>
 
-        let currentSlide = 0;
-        let totalSlides = 0;
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const stickyBtn = document.getElementById('stickyOrderBtn');
 
-        const imageNames = [
-            "Mario's Pizza 1.png","Mario's Pizza 2.png","Mario's Pizza 3.png",
-            "Mario's Pizza 4.png","Mario's Pizza 5.png","Mario's Pizza 6.png",
-            "Mario's Pizza 7.png","Mario's Pizza 8.png","Mario's Pizza 9.png",
-            "Mario's Pizza 10.png","Mario's Pizza 11.png"
-        ];
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-        function loadCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const indicators = document.getElementById('indicators');
-            
-            imageNames.forEach((image, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                slide.innerHTML = `<img src="mariophotos/${image}" alt="Mario's Pizza ${index + 1}" loading="lazy">`;
-                track.appendChild(slide);
-
-                const indicator = document.createElement('div');
-                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-                indicator.onclick = () => goToSlide(index);
-                indicators.appendChild(indicator);
-            });
-
-            totalSlides = imageNames.length;
-        }
-
-        function moveSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const indicators = document.querySelectorAll('.indicator');
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            indicators.forEach((ind, i) => ind.classList.toggle('active', i === currentSlide));
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCarousel();
-            setInterval(() => moveSlide(1), 5000);
-        });
-    </script>
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        stickyBtn.classList.add('visible');
+      } else {
+        stickyBtn.classList.remove('visible');
+      }
+    });
+  </script>
 </body>
 </html>
