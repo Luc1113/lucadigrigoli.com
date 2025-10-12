@@ -1,320 +1,257 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEIC to JPG Converter</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
-    <style>
-        body {
-            font-family: Arial;
-            background: #ddd;
-            padding: 10px;
-        }
+import React, { useState, useRef } from 'react';
+import { Upload, Download, X, FileImage } from 'lucide-react';
 
-        .container {
-            background: #fff;
-            border: 1px solid #000;
-            padding: 15px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
+export default function HeicConverter() {
+  const [files, setFiles] = useState([]);
+  const [converting, setConverting] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const fileInputRef = useRef(null);
 
-        h1 {
-            color: #000;
-            margin-bottom: 5px;
-            font-size: 20px;
-        }
+  const handleFileSelect = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    const heicFiles = selectedFiles.filter(f => 
+      f.name.toLowerCase().endsWith('.heic') || 
+      f.name.toLowerCase().endsWith('.heif')
+    );
+    
+    setFiles(prev => [...prev, ...heicFiles.map(f => ({
+      file: f,
+      name: f.name,
+      status: 'pending',
+      converted: null
+    }))]);
+  };
 
-        .subtitle {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 12px;
-        }
+  const removeFile = (index) => {
+    setFiles(prev => prev.filter((_, i) => i !== index));
+  };
 
-        .upload-area {
-            border: 1px solid #000;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            background: #eee;
-        }
-
-        .upload-area:hover {
-            background: #e0e0e0;
-        }
-
-        .upload-area.dragover {
-            background: #ccc;
-        }
-
-        .upload-text {
-            color: #000;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .upload-hint {
-            color: #666;
-            font-size: 11px;
-            margin-top: 5px;
-        }
-
-        #fileInput {
-            display: none;
-        }
-
-        .file-list {
-            margin-top: 15px;
-        }
-
-        .file-item {
-            background: #f5f5f5;
-            border: 1px solid #999;
-            padding: 8px;
-            margin-bottom: 5px;
-        }
-
-        .file-name {
-            font-weight: bold;
-            color: #000;
-            font-size: 13px;
-        }
-
-        .file-status {
-            font-size: 11px;
-            color: #666;
-            margin-top: 2px;
-        }
-
-        .file-status.converting {
-            color: #00f;
-        }
-
-        .file-status.done {
-            color: #0a0;
-        }
-
-        .file-status.error {
-            color: #f00;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background: #fff;
-            margin-top: 5px;
-            border: 1px solid #000;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #00f;
-            width: 0%;
-        }
-
-        .btn {
-            background: #ddd;
-            color: #000;
-            border: 1px solid #000;
-            padding: 6px 15px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 3px;
-        }
-
-        .btn:hover {
-            background: #ccc;
-        }
-
-        .stats {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #000;
-            font-size: 12px;
-        }
-
-        .stat-item {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .stat-value {
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>HEIC to JPG Converter</h1>
-        <p class="subtitle">Convert your HEIC images to JPG format instantly</p>
-
-        <div class="upload-area" id="uploadArea">
-            <div class="upload-text">Drop HEIC files here or click to browse</div>
-            <div class="upload-hint">Support for multiple files</div>
-        </div>
-
-        <input type="file" id="fileInput" accept=".heic,.HEIC" multiple>
-
-        <div id="fileList" class="file-list"></div>
-
-        <button class="btn" id="downloadAllBtn" style="display: none;">Download All as ZIP</button>
-
-        <div class="stats" id="stats" style="display: none;">
-            <div class="stat-item">
-                <div class="stat-value" id="totalFiles">0</div>
-                <div class="stat-label">Total Files</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="convertedFiles">0</div>
-                <div class="stat-label">Converted</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="failedFiles">0</div>
-                <div class="stat-label">Failed</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const fileList = document.getElementById('fileList');
-        const stats = document.getElementById('stats');
-        const downloadAllBtn = document.getElementById('downloadAllBtn');
-
-        let convertedBlobs = [];
-        let totalCount = 0;
-        let convertedCount = 0;
-        let failedCount = 0;
-
-        uploadArea.addEventListener('click', () => fileInput.click());
-
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            handleFiles(e.dataTransfer.files);
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
-
-        function handleFiles(files) {
-            convertedBlobs = [];
-            convertedCount = 0;
-            failedCount = 0;
-            totalCount = files.length;
+  const convertHeicToJpg = async (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      
+      reader.onload = async (e) => {
+        try {
+          const arrayBuffer = e.target.result;
+          const blob = new Blob([arrayBuffer]);
+          
+          // Create an image element to decode
+          const img = document.createElement('img');
+          const url = URL.createObjectURL(blob);
+          
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
             
-            fileList.innerHTML = '';
-            stats.style.display = 'flex';
-            downloadAllBtn.style.display = 'none';
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
             
-            updateStats();
-
-            Array.from(files).forEach(file => {
-                if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
-                    convertFile(file);
-                }
-            });
-        }
-
-        async function convertFile(file) {
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
-            fileItem.innerHTML = `
-                <div class="file-info">
-                    <div class="file-name">${file.name}</div>
-                    <div class="file-status converting">Converting...</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-            `;
-            fileList.appendChild(fileItem);
-
-            const progressFill = fileItem.querySelector('.progress-fill');
-            const statusEl = fileItem.querySelector('.file-status');
-
-            try {
-                progressFill.style.width = '30%';
-                
-                const jpegBlob = await heic2any({
-                    blob: file,
-                    toType: 'image/jpeg',
-                    quality: 0.9
-                });
-
-                progressFill.style.width = '100%';
-                statusEl.textContent = 'Converted ✓';
-                statusEl.className = 'file-status done';
-
-                const jpegFile = new File(
-                    [jpegBlob], 
-                    file.name.replace(/\.heic$/i, '.jpg'),
-                    { type: 'image/jpeg' }
-                );
-
-                convertedBlobs.push(jpegFile);
-                convertedCount++;
-
-                const downloadBtn = document.createElement('button');
-                downloadBtn.textContent = 'Download';
-                downloadBtn.className = 'btn';
-                downloadBtn.style.margin = '0';
-                downloadBtn.style.padding = '8px 20px';
-                downloadBtn.style.fontSize = '14px';
-                downloadBtn.onclick = () => downloadSingle(jpegFile);
-                fileItem.appendChild(downloadBtn);
-
-            } catch (error) {
-                progressFill.style.width = '100%';
-                progressFill.style.background = '#ef4444';
-                statusEl.textContent = 'Failed ✗';
-                statusEl.className = 'file-status error';
-                failedCount++;
-            }
-
-            updateStats();
-            
-            if (convertedCount + failedCount === totalCount && convertedBlobs.length > 0) {
-                downloadAllBtn.style.display = 'block';
-            }
-        }
-
-        function downloadSingle(file) {
-            const url = URL.createObjectURL(file);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = file.name;
-            a.click();
+            canvas.toBlob((blob) => {
+              URL.revokeObjectURL(url);
+              resolve(blob);
+            }, 'image/jpeg', 0.95);
+          };
+          
+          img.onerror = () => {
             URL.revokeObjectURL(url);
+            reject(new Error('Failed to load HEIC image'));
+          };
+          
+          img.src = url;
+        } catch (error) {
+          reject(error);
         }
+      };
+      
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsArrayBuffer(file);
+    });
+  };
 
-        function updateStats() {
-            document.getElementById('totalFiles').textContent = totalCount;
-            document.getElementById('convertedFiles').textContent = convertedCount;
-            document.getElementById('failedFiles').textContent = failedCount;
-        }
+  const convertAll = async () => {
+    setConverting(true);
+    setProgress(0);
 
-        downloadAllBtn.addEventListener('click', async () => {
-            if (convertedBlobs.length === 1) {
-                downloadSingle(convertedBlobs[0]);
-            } else {
-                for (const file of convertedBlobs) {
-                    downloadSingle(file);
-                    await new Promise(resolve => setTimeout(resolve, 100));
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].status === 'converted') continue;
+
+      try {
+        setFiles(prev => prev.map((f, idx) => 
+          idx === i ? { ...f, status: 'converting' } : f
+        ));
+
+        const jpgBlob = await convertHeicToJpg(files[i].file);
+        
+        setFiles(prev => prev.map((f, idx) => 
+          idx === i ? { 
+            ...f, 
+            status: 'converted', 
+            converted: jpgBlob 
+          } : f
+        ));
+      } catch (error) {
+        setFiles(prev => prev.map((f, idx) => 
+          idx === i ? { ...f, status: 'error' } : f
+        ));
+      }
+
+      setProgress(((i + 1) / files.length) * 100);
+    }
+
+    setConverting(false);
+  };
+
+  const downloadFile = (file) => {
+    if (!file.converted) return;
+    
+    const url = URL.createObjectURL(file.converted);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name.replace(/\.(heic|heif)$/i, '.jpg');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadAll = () => {
+    files.forEach(file => {
+      if (file.status === 'converted') {
+        setTimeout(() => downloadFile(file), 100);
+      }
+    });
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'pending': return 'text-gray-500';
+      case 'converting': return 'text-blue-500';
+      case 'converted': return 'text-green-500';
+      case 'error': return 'text-red-500';
+      default: return 'text-gray-500';
+    }
+  };
+
+  const getStatusText = (status) => {
+    switch (status) {
+      case 'pending': return 'Pending';
+      case 'converting': return 'Converting...';
+      case 'converted': return 'Complete';
+      case 'error': return 'Failed';
+      default: return 'Unknown';
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
+              <FileImage className="w-8 h-8 text-indigo-600" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">HEIC to JPG Converter</h1>
+            <p className="text-gray-600">Convert your HEIC images to JPG format locally in your browser</p>
+          </div>
+
+          <div 
+            className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-indigo-400 transition-colors cursor-pointer mb-6"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600 mb-2">Click to upload or drag and drop</p>
+            <p className="text-sm text-gray-500">HEIC and HEIF files supported</p>
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept=".heic,.heif"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+          </div>
+
+          {files.length > 0 && (
+            <>
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    Files ({files.length})
+                  </h2>
+                  <div className="space-x-2">
+                    <button
+                      onClick={convertAll}
+                      disabled={converting || files.every(f => f.status === 'converted')}
+                      className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {converting ? 'Converting...' : 'Convert All'}
+                    </button>
+                    {files.some(f => f.status === 'converted') && (
+                      <button
+                        onClick={downloadAll}
+                        className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                      >
+                        Download All
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {converting && (
+                  <div className="mb-4">
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2 max-h-96 overflow-y-auto">
+                  {files.map((file, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+                    >
+                      <div className="flex items-center space-x-3 flex-1 min-w-0">
+                        <FileImage className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 truncate">{file.name}</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <span className={`text-sm font-medium ${getStatusColor(file.status)}`}>
+                          {getStatusText(file.status)}
+                        </span>
+                        {file.status === 'converted' && (
+                          <button
+                            onClick={() => downloadFile(file)}
+                            className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                          >
+                            <Download className="w-4 h-4" />
+                          </button>
+                        )}
+                        <button
+                          onClick={() => removeFile(index)}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-500 text-center">
+              All conversions happen locally in your browser. Your files never leave your device.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
