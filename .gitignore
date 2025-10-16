@@ -1,7 +1,3 @@
-# Pizza folder contents
-pizza/
-!pizza/.gitkeep
-
 # Password files
 .htpasswd
 .htaccess
