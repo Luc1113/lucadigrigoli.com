@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #121212;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #000;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 32px;
+            color: #1db954;
+        }
+
+        .playlist-section {
+            margin-top: 24px;
+        }
+
+        .playlist-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #b3b3b3;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .playlist-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        .playlist-item:hover {
+            background: #282828;
+        }
+
+        .playlist-item.active {
+            background: #282828;
+        }
+
+        .playlist-item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .delete-playlist-btn {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            cursor: pointer;
+            padding: 4px 8px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .playlist-item:hover .delete-playlist-btn {
+            opacity: 1;
+        }
+
+        .delete-playlist-btn:hover {
+            color: #ff4444;
+        }
+
+        .create-playlist-btn {
+            background: none;
+            border: 1px solid #404040;
+            color: #b3b3b3;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        .create-playlist-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .playlist-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1db954, #1ed760);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .main-content {
+            flex: 1;
+            background: linear-gradient(180deg, #282828 0%, #121212 100%);
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .tracks-list {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .track {
+            display: grid;
+            grid-template-columns: 50px 1fr 200px 80px;
+            gap: 16px;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-items: center;
+        }
+
+        .track:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .track.playing {
+            background: rgba(29, 185, 84, 0.2);
+        }
+
+        .track-number {
+            text-align: center;
+            color: #b3b3b3;
+        }
+
+        .track.playing .track-number::before {
+            content: '▶';
+            color: #1db954;
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-title {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .track-artist {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+
+        .track-duration {
+            color: #b3b3b3;
+            text-align: right;
+        }
+
+        .now-playing-bar {
+            background: #181818;
+            border-top: 1px solid #282828;
+            padding: 16px 24px;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .current-track {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .current-track-image {
+            width: 56px;
+            height: 56px;
+            background: #282828;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .current-track-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .current-track-info p {
+            font-size: 12px;
+            color: #b3b3b3;
+        }
+
+        .player-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 8px;
+            transition: color 0.2s;
+        }
+
+        .control-btn:hover {
+            color: #fff;
+        }
+
+        .control-btn.play-pause {
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #b3b3b3;
+            min-width: 40px;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 4px;
+            background: #4d4d4d;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1db954;
+            border-radius: 2px;
+            transition: width 0.1s;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            background: #4d4d4d;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .volume-fill {
+            height: 100%;
+            background: #1db954;
+            border-radius: 2px;
+        }
+
+        .add-track-btn {
+            background: #1db954;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .add-track-btn:hover {
+            background: #1ed760;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #282828;
+            padding: 32px;
+            border-radius: 8px;
+            width: 500px;
+            max-width: 90%;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #121212;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #1db954;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">♫ Music Player</div>
+            
+            <div class="playlist-section">
+                <div class="playlist-title">Your Library</div>
+                <div id="playlistsList"></div>
+                <button class="create-playlist-btn" onclick="openCreatePlaylistModal()">+ Create Playlist</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1 id="playlistName">Select a Playlist</h1>
+                <p style="color: #b3b3b3;" id="playlistDescription">Choose a playlist from the sidebar</p>
+            </div>
+
+            <button class="add-track-btn" onclick="openModal()" id="addTrackBtn" style="display: none;">+ Add Track</button>
+
+            <div class="tracks-list" id="tracksList"></div>
+        </main>
+    </div>
+
+    <div class="now-playing-bar">
+        <div class="current-track">
+            <div class="current-track-image" id="currentImage">🎵</div>
+            <div class="current-track-info">
+                <h4 id="currentTitle">No track playing</h4>
+                <p id="currentArtist">Select a track to play</p>
+            </div>
+        </div>
+
+        <div class="player-controls">
+            <div class="control-buttons">
+                <button class="control-btn" onclick="previousTrack()">⏮</button>
+                <button class="control-btn play-pause" onclick="togglePlayPause()" id="playPauseBtn">▶</button>
+                <button class="control-btn" onclick="nextTrack()">⏭</button>
+            </div>
+            <div class="progress-bar">
+                <span class="time" id="currentTime">0:00</span>
+                <div class="progress-track" onclick="seekTo(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="time" id="duration">0:00</span>
+            </div>
+        </div>
+
+        <div class="volume-control">
+            <span class="control-btn">🔊</span>
+            <div class="volume-slider" onclick="setVolume(event)">
+                <div class="volume-fill" id="volumeFill" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addTrackModal">
+        <div class="modal-content">
+            <h2>Add New Track</h2>
+            <div class="form-group">
+                <label>YouTube URL</label>
+                <input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+            <div class="form-group">
+                <label>Track Title</label>
+                <input type="text" id="trackTitle" placeholder="Song Name">
+            </div>
+            <div class="form-group">
+                <label>Artist</label>
+                <input type="text" id="trackArtist" placeholder="Artist Name">
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn-primary" onclick="addTrack()">Add Track</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="createPlaylistModal">
+        <div class="modal-content">
+            <h2>Create Playlist</h2>
+            <div class="form-group">
+                <label>Playlist Name</label>
+                <input type="text" id="playlistName" placeholder="My Awesome Playlist">
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-secondary" onclick="closeCreatePlaylistModal()">Cancel</button>
+                <button class="btn-primary" onclick="createPlaylist()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="player"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        let currentTrackIndex = -1;
+        let isPlaying = false;
+        let playlists = {};
+        let currentPlaylistId = null;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                playerVars: {
+                    'playsinline': 1,
+                    'autoplay': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            console.log('Player ready');
+            loadPlaylists();
+            updateProgress();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                updatePlayButton();
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                isPlaying = false;
+                updatePlayButton();
+            } else if (event.data === YT.PlayerState.ENDED) {
+                nextTrack();
+            }
+        }
+
+        function loadPlaylists() {
+            const saved = localStorage.getItem('musicPlaylists');
+            if (saved) {
+                playlists = JSON.parse(saved);
+            } else {
+                playlists = {
+                    'default': {
+                        name: 'My Playlist',
+                        tracks: []
+                    }
+                };
+                savePlaylists();
+            }
+            renderPlaylists();
+            if (Object.keys(playlists).length > 0) {
+                switchPlaylist(Object.keys(playlists)[0]);
+            }
+        }
+
+        function savePlaylists() {
+            localStorage.setItem('musicPlaylists', JSON.stringify(playlists));
+        }
+
+        function renderPlaylists() {
+            const playlistsList = document.getElementById('playlistsList');
+            playlistsList.innerHTML = Object.keys(playlists).map(id => `
+                <div class="playlist-item ${id === currentPlaylistId ? 'active' : ''}" onclick="switchPlaylist('${id}')">
+                    <div class="playlist-item-info">
+                        <div class="playlist-icon">🎵</div>
+                        <div>
+                            <div>${playlists[id].name}</div>
+                            <div style="font-size: 12px; color: #b3b3b3;">${playlists[id].tracks.length} tracks</div>
+                        </div>
+                    </div>
+                    <button class="delete-playlist-btn" onclick="event.stopPropagation(); deletePlaylist('${id}')">✕</button>
+                </div>
+            `).join('');
+        }
+
+        function switchPlaylist(playlistId) {
+            currentPlaylistId = playlistId;
+            currentTrackIndex = -1;
+            
+            document.getElementById('playlistName').textContent = playlists[playlistId].name;
+            document.getElementById('playlistDescription').textContent = `${playlists[playlistId].tracks.length} tracks`;
+            document.getElementById('addTrackBtn').style.display = 'block';
+            
+            renderPlaylists();
+            renderTracks();
+        }
+
+        function openCreatePlaylistModal() {
+            document.getElementById('createPlaylistModal').classList.add('active');
+        }
+
+        function closeCreatePlaylistModal() {
+            document.getElementById('createPlaylistModal').classList.remove('active');
+            document.getElementById('playlistName').value = '';
+        }
+
+        function createPlaylist() {
+            const name = document.getElementById('playlistName').value.trim();
+            if (!name) {
+                alert('Please enter a playlist name');
+                return;
+            }
+
+            const id = 'playlist_' + Date.now();
+            playlists[id] = {
+                name: name,
+                tracks: []
+            };
+
+            savePlaylists();
+            renderPlaylists();
+            switchPlaylist(id);
+            closeCreatePlaylistModal();
+        }
+
+        function deletePlaylist(playlistId) {
+            if (Object.keys(playlists).length === 1) {
+                alert('You must have at least one playlist');
+                return;
+            }
+
+            if (confirm('Are you sure you want to delete this playlist?')) {
+                delete playlists[playlistId];
+                savePlaylists();
+                
+                if (playlistId === currentPlaylistId) {
+                    const firstPlaylist = Object.keys(playlists)[0];
+                    switchPlaylist(firstPlaylist);
+                } else {
+                    renderPlaylists();
+                }
+            }
+        }
+
+        function getYouTubeId(url) {
+            const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[7].length === 11) ? match[7] : null;
+        }
+
+        function openModal() {
+            document.getElementById('addTrackModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('addTrackModal').classList.remove('active');
+            document.getElementById('youtubeUrl').value = '';
+            document.getElementById('trackTitle').value = '';
+            document.getElementById('trackArtist').value = '';
+        }
+
+        function addTrack() {
+            if (!currentPlaylistId) {
+                alert('Please select a playlist first');
+                return;
+            }
+
+            const url = document.getElementById('youtubeUrl').value;
+            const title = document.getElementById('trackTitle').value;
+            const artist = document.getElementById('trackArtist').value;
+
+            if (!url || !title || !artist) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const videoId = getYouTubeId(url);
+            if (!videoId) {
+                alert('Invalid YouTube URL');
+                return;
+            }
+
+            playlists[currentPlaylistId].tracks.push({
+                id: videoId,
+                title: title,
+                artist: artist
+            });
+
+            savePlaylists();
+            renderTracks();
+            renderPlaylists();
+            closeModal();
+        }
+
+        function renderTracks() {
+            if (!currentPlaylistId) return;
+
+            const tracks = playlists[currentPlaylistId].tracks;
+            const tracksList = document.getElementById('tracksList');
+            
+            if (tracks.length === 0) {
+                tracksList.innerHTML = '<div style="text-align: center; padding: 48px; color: #b3b3b3;">No tracks yet. Click "+ Add Track" to get started!</div>';
+                return;
+            }
+
+            tracksList.innerHTML = tracks.map((track, index) => `
+                <div class="track ${index === currentTrackIndex ? 'playing' : ''}" onclick="playTrack(${index})">
+                    <div class="track-number">${index === currentTrackIndex ? '' : index + 1}</div>
+                    <div class="track-info">
+                        <div class="track-title">${track.title}</div>
+                        <div class="track-artist">${track.artist}</div>
+                    </div>
+                    <div class="track-artist">${track.artist}</div>
+                    <div class="track-duration">--:--</div>
+                </div>
+            `).join('');
+        }
+
+        function playTrack(index) {
+            if (!currentPlaylistId) return;
+            
+            const tracks = playlists[currentPlaylistId].tracks;
+            if (index < 0 || index >= tracks.length) return;
+            
+            currentTrackIndex = index;
+            const track = tracks[index];
+
+            if (player && player.loadVideoById) {
+                player.loadVideoById({
+                    videoId: track.id,
+                    startSeconds: 0
+                });
+                isPlaying = true;
+                updatePlayButton();
+            }
+
+            document.getElementById('currentTitle').textContent = track.title;
+            document.getElementById('currentArtist').textContent = track.artist;
+            document.getElementById('currentImage').textContent = '🎵';
+
+            renderTracks();
+        }
+
+        function togglePlayPause() {
+            if (!player || currentTrackIndex === -1) {
+                // If no track is playing, play the first track
+                if (currentPlaylistId && playlists[currentPlaylistId].tracks.length > 0) {
+                    playTrack(0);
+                }
+                return;
+            }
+
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+
+        function updatePlayButton() {
+            document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸' : '▶';
+        }
+
+        function nextTrack() {
+            if (!currentPlaylistId) return;
+            const tracks = playlists[currentPlaylistId].tracks;
+            
+            if (currentTrackIndex < tracks.length - 1) {
+                playTrack(currentTrackIndex + 1);
+            } else {
+                // Loop back to first track
+                playTrack(0);
+            }
+        }
+
+        function previousTrack() {
+            if (!currentPlaylistId) return;
+            
+            if (currentTrackIndex > 0) {
+                playTrack(currentTrackIndex - 1);
+            }
+        }
+
+        function seekTo(event) {
+            if (!player || currentTrackIndex === -1) return;
+            
+            const progressBar = event.currentTarget;
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            const duration = player.getDuration();
+            player.seekTo(duration * percent);
+        }
+
+        function setVolume(event) {
+            if (!player) return;
+            
+            const volumeBar = event.currentTarget;
+            const rect = volumeBar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            player.setVolume(percent * 100);
+            document.getElementById('volumeFill').style.width = (percent * 100) + '%';
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateProgress() {
+            if (player && player.getCurrentTime && player.getPlayerState) {
+                try {
+                    const current = player.getCurrentTime();
+                    const duration = player.getDuration();
+                    
+                    if (current && duration && duration > 0) {
+                        const percent = (current / duration) * 100;
+                        document.getElementById('progressFill').style.width = percent + '%';
+                        document.getElementById('currentTime').textContent = formatTime(current);
+                        document.getElementById('duration').textContent = formatTime(duration);
+                    }
+                } catch (e) {
+                    // Player not ready yet
+                }
+            }
+            requestAnimationFrame(updateProgress);
+        }
+
+        // Don't call renderTracks() on initial load since no playlist is selected yet
+    </script>
+</body>
+</html>
