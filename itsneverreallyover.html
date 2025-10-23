@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vestal, NY — incoming...</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+    color: #ddd;
+  }
+
+  body {
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  .clock {
+    font-size: 2.8rem;
+    color: #f33;
+    text-shadow: 0 0 10px #f33;
+    font-family: 'Digital-7 Mono', monospace;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    animation: blink 1.2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 49%, 100% { opacity: 1; }
+    50%, 99% { opacity: 0.3; }
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: lowercase;
+    margin-bottom: 3rem;
+  }
+
+  .tracklist {
+    font-size: 0.9rem;
+    text-align: left;
+    color: #888;
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  .tracklist span {
+    color: #f33;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 15px;
+    font-size: 0.75rem;
+    color: #444;
+  }
+
+  /* optional seven-segment vibe fallback */
+  @font-face {
+    font-family: 'Digital-7 Mono';
+    src: local('Digital-7 Mono'),
+         url('https://fonts.cdnfonts.com/s/15084/Digital7Mono-B1g5.woff') format('woff');
+  }
+</style>
+</head>
+<body>
+  <div class="clock">00:00:00:00</div>
+  <div class="subtitle">countdown coming soon</div>
+
+  <div class="tracklist">
+<span>1.</span> vestal, ny (intro)<br>
+<span>2.</span> through it all<br>
+<span>3.</span> sorry to you<br>
+<span>4.</span> what’s going on?<br>
+<span>5.</span> pretend<br>
+<span>6.</span> alone again<br>
+<span>7.</span> hard truths (interlude)<br>
+<span>8.</span> broken up<br>
+<span>9.</span> anyhow...<br>
+<span>10.</span> kiss and tell<br>
+<span>11.</span> stone cold sober<br>
+<span>12.</span> bonus song #1<br>
+<span>13.</span> bonus song #2
+  </div>
+
+  <footer>...</footer>
+</body>
+</html>
