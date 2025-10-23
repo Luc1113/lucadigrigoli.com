@@ -607,6 +607,58 @@
         .jesters-card:hover .jesters-content {
           background: rgba(245, 243, 232, 0.9);
         }
+
+        /* New "coming soon" section styles */
+        .coming-soon-player {
+            background: linear-gradient(135deg, #2d4a2d 0%, #3a5f3a 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 0;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coming-soon-player::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+        }
+        
+        .coming-soon-player h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .see-more-link {
+            color: #f5f3e8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .see-more-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="retro-cursor">
@@ -647,25 +699,25 @@
             <div class="scan-line"></div>
             <h2 class="section-title">latest music releases</h2>
             
-            <div class="music-player">
-                <h3><span class="blink">♪</span> pretend out now</h3>
-                <p style="margin-bottom: 15px; font-style: italic;">a new song about betrayal and closure you'll never get</p>
-                <div class="music-links">
-                    <a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" class="music-link">listen here</a>
+            <div class="coming-soon-player">
+                <h3><span class="blink">♪</span> it's never really over - coming soon</h3>
+                <p style="margin-bottom: 15px; font-style: italic; position: relative; z-index: 2;">a new song about cycles, growth, and finding peace in the ongoing journey</p>
+                <div style="position: relative; z-index: 2;">
+                    <a href="lucadigrigoli.com/neverreallyover" class="see-more-link">see more</a>
                 </div>
             </div>
             
             <div class="project-grid">
                 <div class="project-card">
-                    <h3 class="project-title">521 - debut studio album</h3>
-                    <p class="project-subtitle">featuring "lose your mind" and "apologize"</p>
+                    <h3 class="project-title">pretend</h3>
+                    <p class="project-subtitle">out now - latest single</p>
                     <p class="project-description">
-                        my first full-length release exploring themes of growth, loss, and self-discovery through differing soundscapes.
-                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank" style="color:#8B4513;text-decoration:underline;">listen to 521</a>
+                        a new song about betrayal and closure you'll never get
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" target="_blank" style="color:#8B4513;text-decoration:underline;">listen here</a>
                     </p>
                     <div style="margin-top: 15px;">
-                        <span class="retro-badge">singer/songwriter</span>
-                        <span class="retro-badge">indie</span>
+                        <span class="retro-badge">latest</span>
+                        <span class="retro-badge">single</span>
                     </div>
                 </div>
                 
@@ -679,6 +731,19 @@
                     <div style="margin-top: 15px;">
                         <span class="retro-badge">acoustic</span>
                         <span class="retro-badge">pop</span>
+                    </div>
+                </div>
+                
+                <div class="project-card" style="grid-column: span 2; max-width: 600px; margin: 0 auto;">
+                    <h3 class="project-title">521 - debut studio album</h3>
+                    <p class="project-subtitle">featuring "lose your mind" and "apologize"</p>
+                    <p class="project-description">
+                        my first full-length release exploring themes of growth, loss, and self-discovery through differing soundscapes.
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank" style="color:#8B4513;text-decoration:underline;">listen to 521</a>
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <span class="retro-badge">singer/songwriter</span>
+                        <span class="retro-badge">indie</span>
                     </div>
                 </div>
             </div>
@@ -707,7 +772,7 @@
                   <!-- Background video -->
                   <video class="jesters-bg-video" muted loop autoplay playsinline>
                     <source src="videos/jesters-teaser.mp4" type="video/mp4">
-                    Sorry—your browser doesn’t support embedded videos.
+                    Sorry—your browser doesn't support embedded videos.
                   </video>
                 </div>
             </div>
