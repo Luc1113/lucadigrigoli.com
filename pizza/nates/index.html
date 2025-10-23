@@ -4,64 +4,698 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nate's Detroit Pizza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e31837;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo span {
+            font-size: 1.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e31837, #ff6b6b);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #e31837;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #e31837, #ff6b6b);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #e31837;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
         .hero {
             width: 100%;
-            height: 500px;
-            background-image: url('https://images.squarespace-cdn.com/content/v1/638d4bce5f72f36d3f2c5f81/4459cd16-88d1-4a7f-9815-6fa3c3fcf4d1/1722794126_c457bc9530.jpeg');
+            height: 600px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                              url('https://images.squarespace-cdn.com/content/v1/638d4bce5f72f36d3f2c5f81/4459cd16-88d1-4a7f-9815-6fa3c3fcf4d1/1722794126_c457bc9530.jpeg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(227, 24, 55, 0.2), rgba(255, 107, 107, 0.2));
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
         .locations {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: -50px auto 60px;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
         .location-card {
-            background: #f5f5f5;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
-        .order-btn {
-            background: #e31837;
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #e31837, #ff6b6b);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .location-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(227, 24, 55, 0.15);
+        }
+
+        .location-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e31837, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
             color: white;
-            padding: 10px 20px;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
+        }
+
+        .location-card h3 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .location-card p {
+            color: #7f8c8d;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, #e31837, #ff6b6b);
+            color: white;
+            padding: 14px 32px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(227, 24, 55, 0.4);
+            background: linear-gradient(135deg, #c41430, #e31837);
+        }
+
+        .order-btn:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f0f0f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #666;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: #e31837;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 35px;
+            font-size: 1.1rem;
+        }
+
+        .modal-locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .modal-location-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+        }
+
+        .modal-location-card:hover {
+            transform: translateY(-5px);
+            border-color: #e31837;
+            box-shadow: 0 10px 30px rgba(227, 24, 55, 0.2);
+        }
+
+        .modal-location-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .modal-location-card h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .modal-location-card p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 400px;
+                background-attachment: scroll;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .locations {
+                margin-top: 20px;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .nav-menu a {
+                display: block;
+                width: 100%;
+            }
+
+            .nav-cta {
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                width: 95%;
+            }
+
+            .modal-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal-locations {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-close {
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hero"></div>
-    <div class="locations">
-        <h2>Our Locations</h2>
-        
-        <div class="location-card">
-            <h3>Atlantic Ave</h3>
-            <p>220 Atlantic Ave, Brooklyn, NY, 11201</p>
-            <a href="https://natesdetroitpizzany-atlantic.avcoindustries.com/order-now"><button class="order-btn">Order Delivery</button></a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span>🍕</span>
+                Nate's Detroit Pizza
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#locations">Locations</a></li>
+                <li><a href="#" class="nav-cta" id="orderNowBtn">Order Now</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-
-        <div class="location-card">
-            <h3>Court St</h3>
-            <p>451 Court St, Brooklyn, NY, 11231</p>
-            <a href="https://natesdetroitpizzany-court.avcoindustries.com/order-now"><button class="order-btn">Order Delivery</button></a>
-        </div>
-
-        <div class="location-card">
-            <h3>5th Ave</h3>
-            <p>86 5th Ave, Brooklyn, NY, 11217</p>
-            <a href="https://natesdetroitpizzany-5th.avcoindustries.com/order-now"><button class="order-btn">Order Delivery</button></a>
+    </nav>
+    
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Nate's Detroit Pizza</h1>
+            <p>Authentic Detroit-Style Pizza in Brooklyn</p>
         </div>
     </div>
+    
+    <div class="locations" id="locations">
+        <div class="section-header">
+            <h2>Visit Us</h2>
+            <p>Three locations serving Brooklyn's finest Detroit-style pizza</p>
+        </div>
+        
+        <div class="locations-grid">
+            <div class="location-card">
+                <div class="location-icon">📍</div>
+                <h3>Atlantic Ave</h3>
+                <p>220 Atlantic Ave<br>Brooklyn, NY 11201</p>
+                <a href="https://natesdetroitpizzany-atlantic.avcoindustries.com/order-now" class="order-btn">Order Delivery</a>
+            </div>
+            
+            <div class="location-card">
+                <div class="location-icon">📍</div>
+                <h3>Court St</h3>
+                <p>451 Court St<br>Brooklyn, NY 11231</p>
+                <a href="https://natesdetroitpizzany-court.avcoindustries.com/order-now" class="order-btn">Order Delivery</a>
+            </div>
+            
+            <div class="location-card">
+                <div class="location-icon">📍</div>
+                <h3>5th Ave</h3>
+                <p>86 5th Ave<br>Brooklyn, NY 11217</p>
+                <a href="https://natesdetroitpizzany-5th.avcoindustries.com/order-now" class="order-btn">Order Delivery</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Nate's Detroit Pizza. All rights reserved.</p>
+    </footer>
+
+    <!-- Order Location Modal -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2>Choose Your Location</h2>
+            <p class="modal-subtitle">Select a location to place your order</p>
+            
+            <div class="modal-locations">
+                <a href="https://natesdetroitpizzany-atlantic.avcoindustries.com/order-now" class="modal-location-card">
+                    <div class="modal-location-icon">📍</div>
+                    <h3>Atlantic Ave</h3>
+                    <p>220 Atlantic Ave<br>Brooklyn, NY 11201</p>
+                </a>
+                
+                <a href="https://natesdetroitpizzany-court.avcoindustries.com/order-now" class="modal-location-card">
+                    <div class="modal-location-icon">📍</div>
+                    <h3>Court St</h3>
+                    <p>451 Court St<br>Brooklyn, NY 11231</p>
+                </a>
+                
+                <a href="https://natesdetroitpizzany-5th.avcoindustries.com/order-now" class="modal-location-card">
+                    <div class="modal-location-icon">📍</div>
+                    <h3>5th Ave</h3>
+                    <p>86 5th Ave<br>Brooklyn, NY 11217</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Don't close menu if it's the Order Now button
+                if (!link.id || link.id !== 'orderNowBtn') {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Modal functionality
+        const orderModal = document.getElementById('orderModal');
+        const orderNowBtn = document.getElementById('orderNowBtn');
+        const closeModal = document.getElementById('closeModal');
+
+        // Open modal when clicking Order Now
+        orderNowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            orderModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            navMenu.classList.remove('active'); // Close mobile menu if open
+        });
+
+        // Close modal when clicking the X button
+        closeModal.addEventListener('click', () => {
+            orderModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close modal when clicking outside the modal content
+        orderModal.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && orderModal.classList.contains('active')) {
+                orderModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
