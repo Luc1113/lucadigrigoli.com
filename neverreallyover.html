@@ -39,25 +39,29 @@
     min-height: 100vh;
     font-family: 'Courier New', monospace;
     overflow-x: hidden;
+    text-align: center;
+    padding: 20px;
   }
 
   .countdown-display {
     font-family: 'Digital-7 Mono', monospace;
-    font-size: 5rem;
+    font-size: clamp(2rem, 10vw, 5rem);
     color: #ff8c00;
     background: #000;
-    padding: 20px 40px;
-    border: 3px solid #222;
+    padding: 15px 25px;
+    border: 2px solid #222;
     border-radius: 10px;
     text-shadow: 
       0 0 12px #ff8c00,
       0 0 24px #ff8c00,
       0 0 36px #ff8c00;
-    letter-spacing: 8px;
+    letter-spacing: 6px;
     animation: blink 1.8s infinite;
     box-shadow:
       inset 0 4px 10px rgba(0, 0, 0, 0.8),
       0 0 25px rgba(255, 140, 0, 0.2);
+    max-width: 100%;
+    word-wrap: break-word;
   }
 
   @keyframes blink {
@@ -66,16 +70,16 @@
   }
 
   .countdown-label {
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 3vw, 1rem);
     color: #ff8c00;
     text-transform: uppercase;
-    margin-top: 12px;
+    margin-top: 10px;
     letter-spacing: 3px;
     text-shadow: 0 0 12px rgba(255, 140, 0, 0.4);
   }
 
   .typing {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 5vw, 2rem);
     color: #ff8c00;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -96,10 +100,10 @@
   }
 
   h2 {
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 4vw, 1.4rem);
     color: #ff8c00;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 2px;
     text-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
   }
@@ -107,23 +111,27 @@
   ul {
     list-style: none;
     padding: 0;
-    width: fit-content;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
   }
 
   li {
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
     color: #f4e5d3;
     padding: 8px 0;
     border-bottom: 1px solid rgba(255, 140, 0, 0.1);
+    flex-wrap: wrap;
   }
 
   li span {
     color: #ff8c00;
     font-weight: bold;
-    width: 25px;
+    width: auto;
   }
 
   a {
@@ -138,15 +146,28 @@
 
   footer {
     margin-top: 3rem;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 3vw, 0.9rem);
     color: #a0522d;
     text-align: center;
+    opacity: 0.8;
   }
 
   /* Digital font */
   @font-face {
     font-family: 'Digital-7 Mono';
     src: url('https://fonts.cdnfonts.com/s/15084/Digital7Mono-B1g5.woff') format('woff');
+  }
+
+  /* Optional: Adjust spacing for small screens */
+  @media (max-width: 600px) {
+    .typing {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+    ul {
+      max-width: 90%;
+    }
   }
 </style>
 </head>
