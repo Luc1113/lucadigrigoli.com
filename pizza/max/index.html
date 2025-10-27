@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max's Pizzeria - Family Owned Long Island Pizzeria Since 1999</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #d4292a 0%, #b71c1c 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://slicelife.imgix.net/6694/photos/original/103571358_10157509987002404_531469518924062052_o.jpg?auto=compress&auto=format');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #d4292a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #2e7d32;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            width: 100%;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #2e7d32;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .highlight-icon {
+            font-size: 1rem;
+            margin-right: 1rem;
+            color: #2e7d32;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+            background: #e8f5e8;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .feature-icon {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #d4292a;
+            font-weight: bold;
+            background: #fff5f5;
+            padding: 1rem;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 4rem 0;
+            background: #f9f9f9;
+        }
+
+        .map-section h2 {
+            font-size: 2.5rem;
+            color: #d4292a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #2e7d32;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            width: 100%;
+        }
+
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        .location-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .address {
+            font-size: 1.4rem;
+            color: #d4292a;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .location-details {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Special Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: #d4292a;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: #264653;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #e9c46a;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2a9d8f;
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">Max's Pizzeria</div>
+                    <div class="tagline">Authentic Family Recipe Since 1999</div>
+                </div>
+                <div class="contact-info">
+                    <p><strong>470 Sheridan Blvd</strong></p>
+                    <p>Inwood, New York 11096</p>
+                    <p><strong>maxslongisland.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Max's Pizzeria</h1>
+            <p>Family-owned Long Island tradition serving authentic Italian pizza and more for over 25 years</p>
+            <a href="#" class="cta-button">Order Now Online</a>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            
+            <section class="section">
+                <h2>Our Story</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Since 1999, Max's Pizzeria has been proudly serving the Inwood community with authentic Italian flavors and genuine family hospitality. Every pizza is crafted with care using time-honored techniques passed down through generations.</p>
+                        
+                        <p>Whether you're craving a classic margherita or exploring our delicious vegetarian and vegan options, we're committed to making every meal memorable.</p>
+                    </div>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-icon">Family</span>
+                            <span><strong>Family Owned & Operated</strong><br>Three generations of authentic recipes</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">Est.</span>
+                            <span><strong>Established 1999</strong><br>Over 25 years serving Long Island</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">Vegan</span>
+                            <span><strong>Vegetarian & Vegan Options</strong><br>Delicious choices for everyone</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">Online</span>
+                            <span><strong>Online Ordering</strong><br>Quick and convenient service</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Visit Us</h2>
+                <div class="location-content">
+                    <div class="address">470 Sheridan Blvd, Inwood, New York 11096</div>
+                    <div class="location-details">
+                        <p>Located in the heart of Inwood, we're easily accessible and offer convenient parking. Our welcoming atmosphere makes it perfect for family dinners, quick lunches, or picking up your online order.</p>
+                    </div>
+                    <a href="#" class="cta-button" style="margin-top: 1rem;">Get Directions</a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <section class="map-section">
+        <div class="container">
+            <h2>Find Us</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2!2d-73.7562!3d40.6223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c26d8b8b8b8b8b%3A0x8b8b8b8b8b8b8b8b!2s470%20Sheridan%20Blvd%2C%20Inwood%2C%20NY%2011096!5e0!3m2!1sen!2sus!4v1234567890"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Max's Pizzeria</h3>
+                    <p>Family-owned since 1999</p>
+                    <p>Authentic Italian cuisine</p>
+                    <p>Vegetarian & Vegan friendly</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Location</h3>
+                    <p>470 Sheridan Blvd</p>
+                    <p>Inwood, New York 11096</p>
+                    <p><strong>maxslongisland.com</strong></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Order Online</h3>
+                    <p>Quick & convenient ordering</p>
+                    <p>Pickup & delivery available</p>
+                    <a href="#" class="cta-button" style="font-size: 1rem; padding: 10px 20px;">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Max's Pizzeria. All rights reserved. | Proudly serving Long Island since 1999</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .feature-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Placeholder order button functionality
+        document.querySelectorAll('.cta-button').forEach(button => {
+            if (button.textContent.includes('Order Now')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Online ordering system coming soon! Please call us to place your order.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
