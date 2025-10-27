@@ -1,85 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Site Navigator - lucadigrigoli.com</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .folder, .file {
-            margin: 10px 0;
-            padding: 5px;
-        }
-        .folder::before {
-            content: "📁";
-            margin-right: 10px;
-        }
-        .file::before {
-            content: "📄";
-            margin-right: 10px;
-        }
-        .indent {
-            margin-left: 30px;
-        }
-        a {
-            text-decoration: none;
-            color: #0066cc;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+ <meta charset="UTF-8">
+ <title>Site Navigator - lucadigrigoli.com</title>
+ <style>
+body {
+ font-family: Arial, sans-serif;
+ max-width: 800px;
+ margin: 20px auto;
+ padding: 20px;
+ }
+.folder, .file {
+ margin: 10px 0;
+ padding: 5px;
+ }
+.folder::before {
+ content: "📁";
+ margin-right: 10px;
+ }
+.file::before {
+ content: "📄";
+ margin-right: 10px;
+ }
+.indent {
+ margin-left: 30px;
+ }
+a {
+ text-decoration: none;
+ color: #0066cc;
+ }
+a:hover {
+ text-decoration: underline;
+ }
+</style>
 </head>
 <body>
-    <h1>lucadigrigoli.com - Site Navigator</h1>
-    
-    <div class="file">
-        <a href="/index.html">Main Page (index.html)</a>
-    </div>
-
-    <div class="folder">
-        <a href="/experimental">experimental</a>
-        <div class="indent">
-            <div class="file">
-                <a href="/experimental/heicconvert.html">heicconvert.html</a>
-            </div>
-            <div class="file">
-                <a href="/experimental/notify.html">notify.html</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="folder">
-        <a href="/pizza">pizza</a>
-        <div class="indent">
-            <div class="folder">
-                <a href="/pizza/marios">marios</a>
-            </div>
-            <div class="folder">
-                <a href="/pizza/nates">nates detroit</a>
-            </div>
-            <div class="folder">
-                <a href="/pizza/build">build</a>
-                <div class="indent">
-                    <div class="file">
-                        <a href="/pizza/build/index.html">index.html</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="folder">
-        <a href="/oldlucadigrigoli.com">oldlucadigrigoli.com</a>
-        <div class="indent">
-            <div class="file">
-                <a href="/oldlucadigrigoli.com/index.html">index.html</a>
-            </div>
-        </div>
-    </div>
+ <h1>lucadigrigoli.com - Site Navigator</h1>
+ 
+ <div class="file">
+ <a href="/index.html">Main Page (index.html)</a>
+ </div>
+ 
+ <div class="file">
+ <a href="/navigate.html">navigate.html</a>
+ </div>
+ 
+ <div class="file">
+ <a href="/neverreallyover.html">neverreallyover.html</a>
+ </div>
+ 
+ <div class="folder">
+ <a href="/experimental">experimental</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/experimental/heicconvert.html">heicconvert.html</a>
+ </div>
+ <div class="file">
+ <a href="/experimental/notify.html">notify.html</a>
+ </div>
+ <div class="file">
+ <a href="/experimental/heic2any.min.js">heic2any.min.js</a>
+ </div>
+ <div class="file">
+ <a href="/experimental/heic2any.js">heic2any.js</a>
+ </div>
+ <div class="file">
+ <a href="/experimental/heic2any.d.ts">heic2any.d.ts</a>
+ </div>
+ </div>
+ </div>
+ 
+ <div class="folder">
+ <a href="/pizza">pizza</a>
+ <div class="indent">
+ <div class="folder">
+ <a href="/pizza/marios">marios</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/pizza/marios/index.html">index.html</a>
+ </div>
+ </div>
+ </div>
+ <div class="folder">
+ <a href="/pizza/max">max</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/pizza/max/index.html">index.html</a>
+ </div>
+ </div>
+ </div>
+ <div class="folder">
+ <a href="/pizza/nates">nates</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/pizza/nates/index.html">index.html</a>
+ </div>
+ </div>
+ </div>
+ <div class="folder">
+ <a href="/pizza/build">build</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/pizza/build/index.html">index.html</a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <div class="folder">
+ <a href="/oldlucadigrigoli.com">oldlucadigrigoli.com</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/oldlucadigrigoli.com/index.html">index.html</a>
+ </div>
+ </div>
+ </div>
+ 
+ <div class="folder">
+ <a href="/photostack">photostack</a>
+ </div>
+ 
+ <div class="folder">
+ <a href="/videos">videos</a>
+ <div class="indent">
+ <div class="file">
+ <a href="/videos/jesters-teaser.mp4">jesters-teaser.mp4</a>
+ </div>
+ </div>
+ </div>
+ 
 </body>
 </html>
