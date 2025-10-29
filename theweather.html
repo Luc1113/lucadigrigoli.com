@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weather - Daily Playlist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .sky-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            transition: background 0.3s ease;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            min-height: 300vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .eye-icon {
+            width: 120px;
+            height: 80px;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .eye-shape {
+            width: 100%;
+            height: 100%;
+            background: rgba(76, 45, 99, 0.6);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(139, 92, 246, 0.4);
+            transition: height 0.3s ease;
+        }
+
+        .pupil {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px rgba(165, 180, 252, 0.5);
+            transition: opacity 0.3s ease;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .season-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .playlist-section {
+            width: 100%;
+            max-width: 800px;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .playlist-description {
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .spotify-embed {
+            width: 100%;
+            max-width: 600px;
+            height: 380px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            margin-bottom: 3rem;
+        }
+
+        .utility-poles {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .pole {
+            position: absolute;
+            bottom: 0;
+            width: 3px;
+            height: 150px;
+            background: #0a0a0f;
+        }
+
+        .pole1 { left: 20%; }
+        .pole2 { left: 50%; }
+        .pole3 { right: 20%; }
+
+        .wire {
+            position: absolute;
+            height: 2px;
+            background: #0a0a0f;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+        }
+
+        .crossbar {
+            position: absolute;
+            top: 20px;
+            left: -15px;
+            width: 33px;
+            height: 3px;
+            background: #0a0a0f;
+        }
+
+        .water-tower {
+            position: fixed;
+            bottom: 60px;
+            right: 10%;
+            width: 60px;
+            height: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .tower-tank {
+            width: 60px;
+            height: 40px;
+            background: #0a0a0f;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .tower-legs {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+        }
+
+        .leg {
+            position: absolute;
+            width: 3px;
+            height: 40px;
+            background: #0a0a0f;
+            bottom: 0;
+        }
+
+        .leg1 { left: 10px; }
+        .leg2 { right: 10px; }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            opacity: 0.6;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 0.3rem;
+            }
+
+            .spotify-embed {
+                height: 352px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sky-container" id="sky"></div>
+
+    <div class="content">
+        <div class="hero-section">
+            <div class="eye-icon">
+                <div class="eye-shape" id="eyeShape">
+                    <div class="pupil" id="pupil"></div>
+                </div>
+            </div>
+            
+            <h1>THE WEATHER</h1>
+            <div class="season-tag">SEASON 1</div>
+            
+            <div class="scroll-indicator">↓ scroll to experience ↓</div>
+        </div>
+
+        <div class="playlist-section">
+            <p class="playlist-description">
+                Every day brings its own atmosphere. This is a sonic landscape that shifts with the changing skies, 
+                updated daily to reflect the mood, the moment, the weather of now.
+            </p>
+
+            <iframe 
+                class="spotify-embed"
+                src="https://open.spotify.com/embed/playlist/2hve908ys49apD8t6YUOK0?utm_source=generator&theme=0" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
+
+            <p class="playlist-description">
+                Like the weather, this playlist is never the same twice. 
+                Return tomorrow for a different forecast.
+            </p>
+        </div>
+
+        <div class="footer">
+            © 2025 Luca Di Grigoli · The Weather · Season 1
+        </div>
+    </div>
+
+    <div class="utility-poles">
+        <div class="pole pole1">
+            <div class="crossbar"></div>
+        </div>
+        <div class="pole pole2">
+            <div class="crossbar"></div>
+        </div>
+        <div class="pole pole3">
+            <div class="crossbar"></div>
+        </div>
+        <div class="wire"></div>
+    </div>
+
+    <div class="water-tower">
+        <div class="tower-tank"></div>
+        <div class="tower-legs">
+            <div class="leg leg1"></div>
+            <div class="leg leg2"></div>
+        </div>
+    </div>
+
+    <script>
+        const sky = document.getElementById('sky');
+        const eyeShape = document.getElementById('eyeShape');
+        const pupil = document.getElementById('pupil');
+        
+        // Color stops for the gradient transition
+        const gradients = [
+            // Deep night
+            'linear-gradient(180deg, #1a1a2e 0%, #2d1b4e 30%, #4a2c5e 60%, #5d3a6f 100%)',
+            // Twilight beginning
+            'linear-gradient(180deg, #2d1b4e 0%, #4a2c5e 20%, #6b4278 40%, #8b5a8e 70%, #a5738f 100%)',
+            // Early sunset
+            'linear-gradient(180deg, #4a2c5e 0%, #6b4278 25%, #8b5a8e 50%, #b8708f 75%, #d4878a 100%)',
+            // Peak sunset
+            'linear-gradient(180deg, #5d3a6f 0%, #8b5a8e 20%, #b8708f 40%, #d4878a 60%, #e89b7f 80%, #f4af73 100%)',
+            // Late sunset glow
+            'linear-gradient(180deg, #6b4278 0%, #a5738f 25%, #d4878a 45%, #e89b7f 65%, #f4af73 85%, #1a1a2e 100%)'
+        ];
+
+        let scrollTimeout;
+        
+        // Initialize eye as closed
+        eyeShape.style.height = '8px';
+        pupil.style.opacity = '0';
+        
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const gradientIndex = Math.min(Math.floor(scrollPercent * gradients.length), gradients.length - 1);
+            
+            // Update sky gradient
+            sky.style.background = gradients[gradientIndex];
+            
+            // Eye opening animation (opens in first 20% of scroll)
+            const eyeOpenPercent = Math.min(scrollPercent * 5, 1); // 0 to 1 over first 20%
+            eyeShape.style.height = `${8 + (72 * eyeOpenPercent)}px`; // 8px to 80px
+            pupil.style.opacity = eyeOpenPercent;
+            
+            // Clear existing timeout
+            clearTimeout(scrollTimeout);
+            
+            // Add smooth transition class
+            sky.style.transition = 'background 0.3s ease';
+            
+            // Remove transition after scrolling stops
+            scrollTimeout = setTimeout(() => {
+                sky.style.transition = 'background 0.6s ease';
+            }, 150);
+        });
+
+        // Initialize with first gradient
+        sky.style.background = gradients[0];
+    </script>
+</body>
+</html>
