@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Weather - Daily Playlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -48,21 +49,21 @@
         }
 
         .eye-icon {
-            width: 120px;
-            height: 80px;
+            width: 180px;
+            height: 60px;
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .eye-shape {
             width: 100%;
             height: 100%;
             background: rgba(76, 45, 99, 0.6);
-            border-radius: 50%;
             position: relative;
             overflow: hidden;
             border: 3px solid rgba(139, 92, 246, 0.4);
             transition: height 0.3s ease;
+            clip-path: ellipse(50% 50% at 50% 50%);
         }
 
         .pupil {
@@ -79,11 +80,22 @@
         }
 
         h1 {
+            font-family: 'Bebas Neue', 'Impact', sans-serif;
             font-size: 4rem;
-            font-weight: 300;
-            letter-spacing: 0.5rem;
-            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.2rem;
+            margin-bottom: 0.5rem;
             text-shadow: 2px 2px 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .quote {
+            font-family: 'Bebas Neue', 'Impact', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.08rem;
+            margin-bottom: 1rem;
+            opacity: 0.85;
+            max-width: 600px;
+            line-height: 1.4;
         }
 
         .season-tag {
@@ -92,7 +104,7 @@
             background: rgba(139, 92, 246, 0.2);
             border: 1px solid rgba(139, 92, 246, 0.4);
             border-radius: 20px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             font-size: 0.9rem;
             letter-spacing: 0.1rem;
         }
@@ -100,7 +112,7 @@
         .playlist-section {
             width: 100%;
             max-width: 800px;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -110,7 +122,7 @@
             text-align: center;
             font-size: 1.1rem;
             line-height: 1.8;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             opacity: 0.9;
             max-width: 600px;
         }
@@ -121,7 +133,7 @@
             height: 380px;
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .utility-poles {
@@ -217,7 +229,7 @@
         .footer {
             width: 100%;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             font-size: 0.9rem;
             opacity: 0.6;
         }
@@ -225,11 +237,21 @@
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
-                letter-spacing: 0.3rem;
+                letter-spacing: 0.15rem;
+            }
+
+            .quote {
+                font-size: 0.95rem;
+                letter-spacing: 0.05rem;
             }
 
             .spotify-embed {
                 height: 352px;
+            }
+
+            .eye-icon {
+                width: 140px;
+                height: 50px;
             }
         }
     </style>
@@ -239,13 +261,16 @@
 
     <div class="content">
         <div class="hero-section">
+            <p class="quote">"The sun has risen. You are awake. This symmetry is not without meaning..."</p>
+            
+            <h1>THE WEATHER</h1>
+            
             <div class="eye-icon">
                 <div class="eye-shape" id="eyeShape">
                     <div class="pupil" id="pupil"></div>
                 </div>
             </div>
             
-            <h1>THE WEATHER</h1>
             <div class="season-tag">SEASON 1</div>
             
             <div class="scroll-indicator">↓ scroll to experience ↓</div>
@@ -258,8 +283,8 @@
             </p>
 
             <iframe 
-                class="spotify-embed"
-                src="https://open.spotify.com/embed/playlist/2hve908ys49apD8t6YUOK0?utm_source=generator&theme=0" 
+                class="""spotify-embed"
+                src="""https://open.spotify.com/embed/playlist/2hve908ys49apD8t6YUOK0?utm_source=generator&theme=0" 
                 frameBorder="0" 
                 allowfullscreen="" 
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
@@ -320,7 +345,7 @@
         let scrollTimeout;
         
         // Initialize eye as closed
-        eyeShape.style.height = '8px';
+        eyeShape.style.height = '5px';
         pupil.style.opacity = '0';
         
         window.addEventListener('scroll', () => {
@@ -332,7 +357,7 @@
             
             // Eye opening animation (opens in first 20% of scroll)
             const eyeOpenPercent = Math.min(scrollPercent * 5, 1); // 0 to 1 over first 20%
-            eyeShape.style.height = `${8 + (72 * eyeOpenPercent)}px`; // 8px to 80px
+            eyeShape.style.height = `${5 + (55 * eyeOpenPercent)}px`; // 5px to 60px
             pupil.style.opacity = eyeOpenPercent;
             
             // Clear existing timeout
