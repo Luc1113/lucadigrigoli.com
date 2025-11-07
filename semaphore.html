@@ -1,1020 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semaphore Radio - Live Now</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-
-        /* Big Noodle Titling Alternative */
-        @font-face {
-            font-family: 'Big Noodle';
-            src: local('Impact'), local('Arial Black'), local('Bebas Neue');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Big Noodle', Impact, 'Arial Black', sans-serif;
-            color: #f0e6ff;
-            overflow-x: hidden;
-            min-height: 100vh;
-            letter-spacing: 2px;
-        }
-
-        .background-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                #2d1b4e 0%,
-                #4a2c6b 20%,
-                #6b3d8f 40%,
-                #8b4f9e 60%,
-                #a0669f 70%,
-                #c77a7a 80%,
-                #e8925f 90%,
-                #ff9d5c 100%
-            );
-            z-index: -2;
-            animation: gradientShift 20s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.85; }
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(2px 2px at 60px 70px, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(1px 1px at 50px 50px, rgba(255, 255, 255, 0.9), transparent),
-                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.7), transparent),
-                radial-gradient(2px 2px at 90px 10px, rgba(255, 255, 255, 0.5), transparent);
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: twinkle 8s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.4; }
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .station-header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo-container {
-            position: relative;
-            padding: 20px;
-        }
-
-        .radio-waves {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            gap: 15px;
-            z-index: -1;
-        }
-
-        .wave {
-            width: 80px;
-            height: 80px;
-            border: 3px solid rgba(255, 157, 92, 0.3);
-            border-radius: 50%;
-            animation: pulse 2s ease-out infinite;
-        }
-
-        .wave:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-
-        .wave:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        .station-name {
-            font-size: 72px;
-            font-weight: 900;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-            text-shadow: 
-                0 0 20px rgba(255, 157, 92, 0.8),
-                0 0 40px rgba(139, 79, 158, 0.6),
-                0 4px 8px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, #ff9d5c 0%, #c77a7a 50%, #8b4f9e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            font-size: 16px;
-            letter-spacing: 4px;
-            opacity: 0.9;
-            font-weight: 300;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .player-card {
-            background: rgba(45, 27, 78, 0.9);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(255, 157, 92, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 157, 92, 0.3);
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .now-playing {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 157, 92, 0.3);
-        }
-
-        .live-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 92, 92, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 92, 92, 0.5);
-        }
-
-        .live-dot {
-            width: 10px;
-            height: 10px;
-            background: #ff5c5c;
-            border-radius: 50%;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .live-text {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .show-title {
-            font-size: 36px;
-            margin-bottom: 10px;
-            letter-spacing: 4px;
-            text-shadow: 0 2px 10px rgba(255, 157, 92, 0.5);
-        }
-
-        .show-description {
-            font-size: 16px;
-            opacity: 0.8;
-            letter-spacing: 2px;
-            font-weight: 300;
-        }
-
-        .player-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .play-button {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff9d5c 0%, #e8925f 100%);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 
-                0 10px 30px rgba(255, 157, 92, 0.4),
-                0 0 20px rgba(255, 157, 92, 0.3);
-            position: relative;
-        }
-
-        .play-button::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff9d5c, #e8925f);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
-            box-shadow: 
-                0 15px 40px rgba(255, 157, 92, 0.6),
-                0 0 30px rgba(255, 157, 92, 0.5);
-        }
-
-        .play-button:hover::before {
-            opacity: 0.5;
-            animation: pulse 1.5s ease-out infinite;
-        }
-
-        .play-button:active {
-            transform: scale(1.05);
-        }
-
-        .play-icon,
-        .pause-icon {
-            width: 32px;
-            height: 32px;
-            color: #2d1b4e;
-            stroke-width: 3;
-        }
-
-        .pause-icon {
-            stroke-width: 2.5;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px 20px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 157, 92, 0.2);
-        }
-
-        .volume-button {
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .volume-button:hover {
-            transform: scale(1.1);
-        }
-
-        .volume-icon,
-        .muted-icon {
-            width: 24px;
-            height: 24px;
-            color: #ff9d5c;
-        }
-
-        .volume-slider {
-            width: 150px;
-            height: 6px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: rgba(255, 157, 92, 0.2);
-            border-radius: 10px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            background: linear-gradient(135deg, #ff9d5c, #e8925f);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(255, 157, 92, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .volume-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 4px 15px rgba(255, 157, 92, 0.7);
-        }
-
-        .volume-slider::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            background: linear-gradient(135deg, #ff9d5c, #e8925f);
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 10px rgba(255, 157, 92, 0.5);
-        }
-
-        .volume-value {
-            font-size: 14px;
-            min-width: 45px;
-            letter-spacing: 1px;
-            opacity: 0.9;
-        }
-
-        .visualizer-container {
-            position: relative;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 157, 92, 0.2);
-        }
-
-        #visualizer {
-            width: 100%;
-            height: 150px;
-            display: block;
-        }
-
-        .visualizer-label {
-            position: absolute;
-            bottom: 10px;
-            right: 15px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            opacity: 0.6;
-        }
-
-        .info-bar {
-            display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 157, 92, 0.3);
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .info-label {
-            font-size: 12px;
-            letter-spacing: 2px;
-            opacity: 0.7;
-        }
-
-        .info-value {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #ff9d5c;
-        }
-
-        .status-value {
-            text-transform: uppercase;
-        }
-
-        .schedule-section {
-            background: rgba(45, 27, 78, 0.9);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(255, 157, 92, 0.2);
-            border: 1px solid rgba(255, 157, 92, 0.3);
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .section-title {
-            font-size: 24px;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #ff9d5c;
-            text-shadow: 0 2px 10px rgba(255, 157, 92, 0.5);
-        }
-
-        .schedule-grid {
-            display: grid;
-            gap: 15px;
-        }
-
-        .schedule-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 157, 92, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .schedule-item:hover {
-            background: rgba(255, 157, 92, 0.1);
-            border-color: rgba(255, 157, 92, 0.5);
-            transform: translateX(5px);
-        }
-
-        .schedule-time {
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #ff9d5c;
-        }
-
-        .schedule-show {
-            font-size: 16px;
-            letter-spacing: 2px;
-        }
-
-        .station-footer {
-            text-align: center;
-            padding: 30px 20px;
-            animation: fadeInUp 1s ease-out 0.9s both;
-        }
-
-        .footer-text {
-            font-size: 14px;
-            letter-spacing: 2px;
-            line-height: 1.8;
-            opacity: 0.8;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .social-link {
-            color: #ff9d5c;
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .social-link::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #ff9d5c;
-            transition: width 0.3s ease;
-        }
-
-        .social-link:hover {
-            text-shadow: 0 0 10px rgba(255, 157, 92, 0.8);
-        }
-
-        .social-link:hover::after {
-            width: 100%;
-        }
-
-        .separator {
-            opacity: 0.5;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .station-name {
-                font-size: 48px;
-                letter-spacing: 4px;
-            }
-            
-            .player-card {
-                padding: 30px 20px;
-            }
-            
-            .player-controls {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .volume-control {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .info-bar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .schedule-item {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-            }
-            
-            .station-name {
-                font-size: 36px;
-            }
-            
-            .show-title {
-                font-size: 24px;
-            }
-            
-            .play-button {
-                width: 70px;
-                height: 70px;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Semaphore Radio — Luca DiGrigoli</title>
+  <style>
+    :root {
+      --bg: #02030a;
+      --card: #0d0f1a;
+      --fg: #f5f5f5;
+      --muted: #9ca3af;
+      --accent: #22c55e;
+      --accent-soft: rgba(34,197,94,0.16);
+      --danger: #ef4444;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(34,197,94,0.08), transparent),
+        radial-gradient(circle at bottom right, rgba(56,189,248,0.06), transparent),
+        var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", -sans-serif;
+    }
+
+    .shell {
+      width: min(780px, 100%);
+      padding: 28px 24px 22px;
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.6);
+      border: 1px solid rgba(148,163,253,0.14);
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .offair {
+      background: rgba(75,85,99,0.22);
+      color: var(--muted);
+      box-shadow: none;
+    }
+
+    .offair .live-dot {
+      background: var(--danger);
+      box-shadow: 0 0 4px var(--danger);
+    }
+
+    h1 {
+      margin: 2px 0 4px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .now {
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    audio {
+      width: 100%;
+      margin: 4px 0 4px;
+      accent-color: var(--accent);
+    }
+
+    .hint {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 10px;
+      color: var(--muted);
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-    <div class="background-gradient"></div>
-    <div class="stars"></div>
-    
-    <div class="container">
-        <header class="station-header">
-            <div class="logo-container">
-                <div class="radio-waves">
-                    <span class="wave"></span>
-                    <span class="wave"></span>
-                    <span class="wave"></span>
-                </div>
-                <h1 class="station-name">SEMAPHORE</h1>
-                <p class="tagline">BROADCASTING FROM THE VOID</p>
-            </div>
-        </header>
-
-        <div class="player-card">
-            <div class="now-playing">
-                <div class="live-indicator">
-                    <span class="live-dot"></span>
-                    <span class="live-text">LIVE</span>
-                </div>
-                <h2 class="show-title" id="show-title">Late Night Transmissions</h2>
-                <p class="show-description" id="show-description">Your regularly scheduled programming</p>
-            </div>
-
-            <div class="player-controls">
-                <button class="play-button" id="play-button" aria-label="Play/Pause">
-                    <svg class="play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    <svg class="pause-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="6" y="4" width="4" height="16"></rect>
-                        <rect x="14" y="4" width="4" height="16"></rect>
-                    </svg>
-                </button>
-
-                <div class="volume-control">
-                    <button class="volume-button" id="volume-button" aria-label="Mute/Unmute">
-                        <svg class="volume-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-                        </svg>
-                        <svg class="muted-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                            <line x1="23" y1="9" x2="17" y2="15"></line>
-                            <line x1="17" y1="9" x2="23" y2="15"></line>
-                        </svg>
-                    </button>
-                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="75">
-                    <span class="volume-value" id="volume-value">75%</span>
-                </div>
-            </div>
-
-            <div class="visualizer-container">
-                <canvas id="visualizer" width="800" height="150"></canvas>
-                <div class="visualizer-label">SIGNAL STRENGTH</div>
-            </div>
-
-            <div class="info-bar">
-                <div class="info-item">
-                    <span class="info-label">LISTENERS</span>
-                    <span class="info-value" id="listener-count">—</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">BITRATE</span>
-                    <span class="info-value">128 KBPS</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">STATUS</span>
-                    <span class="info-value status-value" id="status">STANDBY</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="schedule-section">
-            <h3 class="section-title">TRANSMISSION SCHEDULE</h3>
-            <div class="schedule-grid">
-                <div class="schedule-item">
-                    <span class="schedule-time">MON-FRI 8PM</span>
-                    <span class="schedule-show">The Evening Signal</span>
-                </div>
-                <div class="schedule-item">
-                    <span class="schedule-time">SAT 10PM</span>
-                    <span class="schedule-show">Midnight Frequencies</span>
-                </div>
-                <div class="schedule-item">
-                    <span class="schedule-time">SUN 9PM</span>
-                    <span class="schedule-show">Desert Oracle Hour</span>
-                </div>
-            </div>
-        </div>
-
-        <footer class="station-footer">
-            <p class="footer-text">
-                Remember: The radio listens too.<br>
-                Broadcasting from somewhere between here and there.
-            </p>
-            <div class="social-links">
-                <a href="#" class="social-link">ARCHIVE</a>
-                <span class="separator">•</span>
-                <a href="#" class="social-link">CONTACT</a>
-                <span class="separator">•</span>
-                <a href="#" class="social-link">SUPPORT</a>
-            </div>
-        </footer>
+  <div class="shell">
+    <div class="topline">
+      <div class="logo">Semaphore Radio</div>
+      <div id="livePill" class="live-pill offair">
+        <span class="live-dot"></span>
+        <span id="liveText">OFF AIR</span>
+      </div>
     </div>
 
-    <script>
-        class SemaphorePlayer {
-            constructor() {
-                this.audio = null;
-                this.audioContext = null;
-                this.analyser = null;
-                this.isPlaying = false;
-                this.volume = 0.75;
-                this.isMuted = false;
-                
-                // Stream URL - Update this to your Icecast stream
-                this.streamUrl = 'http://localhost:8000/stream';
-                
-                this.init();
-            }
+    <h1>Live from Luca's Desk</h1>
+    <p class="subtitle">
+      Occasional transmissions of music, thoughts, and whatever else escapes the filter.
+    </p>
 
-            init() {
-                this.audio = new Audio();
-                this.audio.crossOrigin = 'anonymous';
-                this.audio.volume = this.volume;
-                
-                this.setupEventListeners();
-                this.startVisualizer();
-                this.checkStreamStatus();
-                setInterval(() => this.checkStreamStatus(), 30000);
-                this.updateListenerCount();
-                setInterval(() => this.updateListenerCount(), 10000);
-            }
+    <div class="now" id="nowMeta">Status: checking stream…</div>
 
-            setupEventListeners() {
-                const playButton = document.getElementById('play-button');
-                playButton.addEventListener('click', () => this.togglePlay());
-                
-                const volumeButton = document.getElementById('volume-button');
-                const volumeSlider = document.getElementById('volume-slider');
-                
-                volumeButton.addEventListener('click', () => this.toggleMute());
-                volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value / 100));
-                
-                this.audio.addEventListener('play', () => this.onPlay());
-                this.audio.addEventListener('pause', () => this.onPause());
-                this.audio.addEventListener('error', (e) => this.onError(e));
-                this.audio.addEventListener('loadstart', () => this.onLoadStart());
-                this.audio.addEventListener('canplay', () => this.onCanPlay());
-            }
+    <audio id="player" controls preload="none">
+      <source src="https://radio.lucadigrigoli.com/semaphore" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div class="hint">If it doesn’t start, hit play. If it’s silent, Luca might be thinking.</div>
 
-            async togglePlay() {
-                if (this.isPlaying) {
-                    this.audio.pause();
-                } else {
-                    try {
-                        if (!this.audioContext) {
-                            this.initAudioContext();
-                        }
-                        
-                        this.audio.src = this.streamUrl;
-                        await this.audio.play();
-                    } catch (error) {
-                        console.error('Error playing audio:', error);
-                        this.showError('Could not connect to stream. Please try again.');
-                    }
-                }
-            }
+    <div class="footer">
+      <div id="listenerInfo">Listeners: —</div>
+      <div><a href="/">← Back to lucadigrigoli.com</a></div>
+    </div>
+  </div>
 
-            initAudioContext() {
-                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                this.analyser = this.audioContext.createAnalyser();
-                this.analyser.fftSize = 256;
-                this.analyser.smoothingTimeConstant = 0.8;
-                
-                const source = this.audioContext.createMediaElementSource(this.audio);
-                source.connect(this.analyser);
-                this.analyser.connect(this.audioContext.destination);
-            }
+  <script>
+    const STATUS_URL = "https://radio.lucadigrigoli.com/status-json.xsl";
+    const livePill = document.getElementById("livePill");
+    const liveText = document.getElementById("liveText");
+    const nowMeta = document.getElementById("nowMeta");
+    const listenerInfo = document.getElementById("listenerInfo");
 
-            onPlay() {
-                this.isPlaying = true;
-                document.querySelector('.play-icon').classList.add('hidden');
-                document.querySelector('.pause-icon').classList.remove('hidden');
-                document.getElementById('status').textContent = 'PLAYING';
-            }
+    async function checkStatus() {
+      try {
+        const res = await fetch(STATUS_URL, { cache: "no-store" });
+        const data = await res.json();
 
-            onPause() {
-                this.isPlaying = false;
-                document.querySelector('.play-icon').classList.remove('hidden');
-                document.querySelector('.pause-icon').classList.add('hidden');
-                document.getElementById('status').textContent = 'STANDBY';
-            }
-
-            onError(error) {
-                console.error('Audio error:', error);
-                this.isPlaying = false;
-                this.showError('Stream connection lost. Retrying...');
-                
-                setTimeout(() => {
-                    if (!this.isPlaying) {
-                        console.log('Attempting to reconnect...');
-                    }
-                }, 3000);
-            }
-
-            onLoadStart() {
-                document.getElementById('status').textContent = 'CONNECTING';
-            }
-
-            onCanPlay() {
-                document.getElementById('status').textContent = 'PLAYING';
-            }
-
-            setVolume(value) {
-                this.volume = value;
-                this.audio.volume = this.isMuted ? 0 : value;
-                document.getElementById('volume-value').textContent = `${Math.round(value * 100)}%`;
-                document.getElementById('volume-slider').value = value * 100;
-            }
-
-            toggleMute() {
-                this.isMuted = !this.isMuted;
-                this.audio.volume = this.isMuted ? 0 : this.volume;
-                
-                const volumeIcon = document.querySelector('.volume-icon');
-                const mutedIcon = document.querySelector('.muted-icon');
-                
-                if (this.isMuted) {
-                    volumeIcon.classList.add('hidden');
-                    mutedIcon.classList.remove('hidden');
-                } else {
-                    volumeIcon.classList.remove('hidden');
-                    mutedIcon.classList.add('hidden');
-                }
-            }
-
-            startVisualizer() {
-                const canvas = document.getElementById('visualizer');
-                const ctx = canvas.getContext('2d');
-                
-                const draw = () => {
-                    requestAnimationFrame(draw);
-                    
-                    const width = canvas.width;
-                    const height = canvas.height;
-                    
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-                    ctx.fillRect(0, 0, width, height);
-                    
-                    if (!this.analyser || !this.isPlaying) {
-                        this.drawIdleState(ctx, width, height);
-                        return;
-                    }
-                    
-                    const bufferLength = this.analyser.frequencyBinCount;
-                    const dataArray = new Uint8Array(bufferLength);
-                    this.analyser.getByteFrequencyData(dataArray);
-                    
-                    const barWidth = (width / bufferLength) * 2.5;
-                    let x = 0;
-                    
-                    for (let i = 0; i < bufferLength; i++) {
-                        const barHeight = (dataArray[i] / 255) * height * 0.8;
-                        
-                        const gradient = ctx.createLinearGradient(0, height, 0, height - barHeight);
-                        
-                        if (barHeight > height * 0.7) {
-                            gradient.addColorStop(0, '#ff9d5c');
-                            gradient.addColorStop(0.5, '#e8925f');
-                            gradient.addColorStop(1, '#ff5c5c');
-                        } else if (barHeight > height * 0.4) {
-                            gradient.addColorStop(0, '#8b4f9e');
-                            gradient.addColorStop(1, '#ff9d5c');
-                        } else {
-                            gradient.addColorStop(0, '#4a2c6b');
-                            gradient.addColorStop(1, '#8b4f9e');
-                        }
-                        
-                        ctx.fillStyle = gradient;
-                        ctx.fillRect(x, height - barHeight, barWidth - 2, barHeight);
-                        
-                        x += barWidth;
-                    }
-                    
-                    ctx.shadowBlur = 20;
-                    ctx.shadowColor = 'rgba(255, 157, 92, 0.5)';
-                };
-                
-                draw();
-            }
-
-            drawIdleState(ctx, width, height) {
-                const time = Date.now() / 1000;
-                const barCount = 80;
-                const barWidth = width / barCount;
-                
-                for (let i = 0; i < barCount; i++) {
-                    const normalizedPosition = i / barCount;
-                    const barHeight = (Math.sin(time * 2 + normalizedPosition * Math.PI * 4) * 0.5 + 0.5) * height * 0.3;
-                    
-                    const gradient = ctx.createLinearGradient(0, height, 0, height - barHeight);
-                    gradient.addColorStop(0, 'rgba(74, 44, 107, 0.5)');
-                    gradient.addColorStop(1, 'rgba(139, 79, 158, 0.5)');
-                    
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(i * barWidth, height - barHeight, barWidth - 2, barHeight);
-                }
-            }
-
-            async checkStreamStatus() {
-                try {
-                    const response = await fetch(`${this.streamUrl.replace('/stream', '/status-json.xsl')}`, {
-                        mode: 'cors'
-                    });
-                    
-                    if (response.ok) {
-                        console.log('Stream is available');
-                    }
-                } catch (error) {
-                    console.log('Could not check stream status:', error.message);
-                }
-            }
-
-            updateListenerCount() {
-                const count = Math.floor(Math.random() * 50) + 10;
-                document.getElementById('listener-count').textContent = count;
-            }
-
-            showError(message) {
-                const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: rgba(255, 92, 92, 0.9);
-                    color: white;
-                    padding: 15px 20px;
-                    border-radius: 10px;
-                    font-size: 14px;
-                    letter-spacing: 1px;
-                    z-index: 1000;
-                    animation: slideIn 0.3s ease-out;
-                `;
-                errorDiv.textContent = message;
-                document.body.appendChild(errorDiv);
-                
-                setTimeout(() => {
-                    errorDiv.style.animation = 'slideOut 0.3s ease-out';
-                    setTimeout(() => errorDiv.remove(), 300);
-                }, 5000);
-            }
+        let src = data?.icestats?.source || null;
+        if (!src) {
+          // no active sources
+          setOffAir();
+          return;
         }
 
-        let player;
-        window.addEventListener('DOMContentLoaded', () => {
-            player = new SemaphorePlayer();
-        });
+        // source can be object or array
+        if (Array.isArray(src)) {
+          src = src.find(s => s.listenurl && s.listenurl.includes("/semaphore")) || src[0];
+        }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && e.target === document.body) {
-                e.preventDefault();
-                player.togglePlay();
-            }
-            
-            if (e.code === 'KeyM') {
-                player.toggleMute();
-            }
-            
-            if (e.code === 'ArrowUp') {
-                e.preventDefault();
-                const newVolume = Math.min(player.volume + 0.1, 1);
-                player.setVolume(newVolume);
-            }
-            
-            if (e.code === 'ArrowDown') {
-                e.preventDefault();
-                const newVolume = Math.max(player.volume - 0.1, 0);
-                player.setVolume(newVolume);
-            }
-        });
-    </script>
+        const isSemaphore = src?.listenurl?.includes("/semaphore");
+        if (!isSemaphore) {
+          setOffAir();
+          return;
+        }
+
+        // We’re live on /semaphore
+        setLive(src);
+      } catch (e) {
+        // On error, don't freak out; just show unknown.
+        nowMeta.textContent = "Status: unable to reach radio backend.";
+        livePill.classList.add("offair");
+        liveText.textContent = "OFF AIR";
+      }
+    }
+
+    function setLive(src) {
+      livePill.classList.remove("offair");
+      liveText.textContent = "LIVE";
+      nowMeta.textContent =
+        "On air" +
+        (src?.server_name ? ` — ${src.server_name}` : "") +
+        (src?.server_description ? ` • ${src.server_description}` : "");
+      const listeners = src.listeners ?? src.listener_peak ?? 0;
+      listenerInfo.textContent = "Listeners: " + listeners;
+    }
+
+    function setOffAir() {
+      livePill.classList.add("offair");
+      liveText.textContent = "OFF AIR";
+      nowMeta.textContent = "Not currently broadcasting.";
+      listenerInfo.textContent = "Listeners: 0";
+    }
+
+    checkStatus();
+    setInterval(checkStatus, 8000);
+  </script>
 </body>
 </html>
