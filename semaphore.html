@@ -313,8 +313,8 @@
           
           <button id="liveBtn" class="live-btn hidden">◉ LIVE</button>
         </div>
-
-        <div class="hint">Hit play to tune in. The stream is live radio.</div>
+        
+        <div class="hint">Hit play to tune in. The stream is live—no rewinding, just pure radio.</div>
       </div>
 
       <audio id="player" preload="none">
@@ -340,9 +340,6 @@
     const liveBtn = document.getElementById("liveBtn");
 
     let isPlaying = false;
-    let audioContext = null;
-    let analyser = null;
-    let dataArray = null;
 
     // FDM Network Background
     const canvas = document.getElementById("fdmCanvas");
@@ -432,16 +429,16 @@
     vizCanvas.height = vizCanvas.offsetHeight * 2;
     vizCtx.scale(2, 2);
 
-    function setupAudioContext() {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = audioContext.createAnalyser();
-        analyser.fftSize = 128;
-        const source = audioContext.createMediaElementSource(player);
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
-        dataArray = new Uint8Array(analyser.frequencyBinCount);
-      }
+    // Decorative visualizer (no audio analysis due to CORS)
+    let vizBars = [];
+    const numBars = 64;
+    
+    for (let i = 0; i < numBars; i++) {
+      vizBars.push({
+        height: Math.random(),
+        speed: 0.02 + Math.random() * 0.03,
+        phase: Math.random() * Math.PI * 2
+      });
     }
 
     function drawVisualizer() {
@@ -451,22 +448,22 @@
       vizCtx.fillStyle = 'rgba(10, 1, 24, 0.4)';
       vizCtx.fillRect(0, 0, width, height);
 
-      if (analyser && isPlaying) {
-        analyser.getByteFrequencyData(dataArray);
-        
-        const barWidth = width / dataArray.length;
+      if (isPlaying) {
+        const barWidth = width / numBars;
         const gradient = vizCtx.createLinearGradient(0, height, 0, 0);
         gradient.addColorStop(0, '#9d4edd');
         gradient.addColorStop(1, '#c77dff');
 
-        for (let i = 0; i < dataArray.length; i++) {
-          const barHeight = (dataArray[i] / 255) * height * 0.8;
+        vizBars.forEach((bar, i) => {
+          bar.phase += bar.speed;
+          const normalized = (Math.sin(bar.phase) + 1) / 2;
+          const barHeight = normalized * height * 0.7;
           const x = i * barWidth;
           const y = height - barHeight;
 
           vizCtx.fillStyle = gradient;
           vizCtx.fillRect(x, y, barWidth - 2, barHeight);
-        }
+        });
       } else {
         // Idle state - draw flat line
         vizCtx.strokeStyle = 'rgba(157, 78, 221, 0.3)';
@@ -485,7 +482,6 @@
     // Audio Controls
     playBtn.addEventListener("click", () => {
       if (!isPlaying) {
-        setupAudioContext();
         player.play();
         playBtn.textContent = "⏸";
         isPlaying = true;
