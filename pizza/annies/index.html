@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Annie's Pizzeria | Medford, MA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPpDI0c5kS1C1j8QKq2aP5QDRyJVYbijx57wiVdc+oZqXW52xG4rL+ug=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    :root {
+      --primary-color: #c62828;
+      --primary-dark: #8e0000;
+      --accent-color: #ffb300;
+      --bg-light: #fff9f2;
+      --text-dark: #1f1f1f;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-dark);
+      background-color: #ffffff;
+    }
+
+    /* Navbar */
+    .navbar {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      background-color: #ffffff;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReRG-MtgE-oYjdMgIXjqE_NCmAcNZrHKe-RA&s");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      filter: brightness(0.55);
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255, 179, 0, 0.4), transparent 60%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      max-width: 550px;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-badge i {
+      color: var(--accent-color);
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border: none;
+      border-radius: 999px;
+      padding: 0.75rem 1.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary-custom:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    }
+
+    .btn-outline-custom {
+      border-radius: 999px;
+      padding: 0.75rem 1.4rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .btn-outline-custom:hover {
+      background-color: #ffffff;
+      color: var(--primary-dark);
+    }
+
+    .hero-meta {
+      margin-top: 1.75rem;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .hero-meta strong {
+      color: var(--accent-color);
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .section-header h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-top: 0.4rem;
+    }
+
+    .section-header p {
+      max-width: 600px;
+      margin: 0.75rem auto 0;
+      color: #666666;
+      font-size: 0.95rem;
+    }
+
+    .bg-soft {
+      background-color: var(--bg-light);
+    }
+
+    /* Cuisine cards */
+    .cuisine-card {
+      background-color: #ffffff;
+      border-radius: 1.2rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cuisine-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .cuisine-body {
+      padding: 1.25rem 1.4rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .cuisine-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .cuisine-body h4 {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .cuisine-body p {
+      font-size: 0.9rem;
+      color: #555555;
+      flex: 1;
+    }
+
+    .cuisine-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .cuisine-footer span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Instagram grid */
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .insta-grid-item {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .insta-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .insta-grid-item::after {
+      content: "\f16d";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      bottom: 0.6rem;
+      right: 0.8rem;
+      font-size: 1.1rem;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .insta-grid-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .insta-cta {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    /* About */
+    .about-img {
+      border-radius: 1.4rem;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Contact / map */
+    .contact-card {
+      background-color: #ffffff;
+      border-radius: 1.4rem;
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      height: 100%;
+    }
+
+    .contact-card h4 {
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-list li i {
+      margin-top: 0.15rem;
+      color: var(--primary-color);
+    }
+
+    .map-wrapper {
+      border-radius: 1.4rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    iframe {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero {
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        Annie's Pizzeria
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#menu">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#instagram">Instagram</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge mb-3">
+          <i class="fa-solid fa-pizza-slice"></i>
+          <span>Medford, Massachusetts</span>
+        </div>
+        <h1 class="hero-title">Annie's Pizzeria</h1>
+        <p class="hero-subtitle">
+          Classic neighborhood pizza in Medford, serving slices and pies with the kind of
+          crust that makes you think about it for the rest of the week.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#menu" class="btn btn-primary-custom">
+            View Menu
+          </a>
+          <a
+            href="https://www.instagram.com/anniespizzeria_"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline-custom d-inline-flex align-items-center gap-2"
+          >
+            <i class="fa-brands fa-instagram"></i>
+            Follow on Instagram
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <p class="mb-1 mt-3">
+            <strong>Visit us:</strong> 213 Middlesex Ave, Medford, Massachusetts 02155
+          </p>
+          <p class="mb-0">
+            Grab a slice, share a pie, and bring your people.
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Featured Cuisines / Menu -->
+  <section id="menu" class="bg-soft">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Featured Cuisines</h2>
+        <h3>Pizza, Pasta & More</h3>
+        <p>
+          From crispy New York–style pies to hearty baked dishes and fresh salads,
+          there’s something on the table for everyone.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+          <div class="cuisine-card">
+            <img src="img/1.png" alt="Pizza at Annie's Pizzeria" />
+            <div class="cuisine-body">
+              <div class="cuisine-label">Classics</div>
+              <h4>Signature Pizzas</h4>
+              <p>
+                Cheese, pepperoni, and specialty pies built on a crisp, foldable crust
+                with just the right amount of char.
+              </p>
+              <div class="cuisine-footer">
+                <span><i class="fa-solid fa-pizza-slice"></i> Whole pies & slices</span>
+                <span>Fresh dough daily</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-4">
+          <div class="cuisine-card">
+            <img src="img/2.png" alt="Pasta at Annie's Pizzeria" />
+            <div class="cuisine-body">
+              <div class="cuisine-label">Comfort</div>
+              <h4>Pasta & Baked Dishes</h4>
+              <p>
+                Hearty baked ziti, lasagna, and pasta plates layered with cheese, sauce,
+                and serious comfort.
+              </p>
+              <div class="cuisine-footer">
+                <span><i class="fa-solid fa-bowl-food"></i> Generous portions</span>
+                <span>Perfect for sharing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-4">
+          <div class="cuisine-card">
+            <img src="img/3.png" alt="Salads and sides at Annie's Pizzeria" />
+            <div class="cuisine-body">
+              <div class="cuisine-label">Fresh</div>
+              <h4>Salads & Sides</h4>
+              <p>
+                Round out your meal with crisp salads, garlic knots, and appetizers
+                that disappear the second they hit the table.
+              </p>
+              <div class="cuisine-footer">
+                <span><i class="fa-solid fa-leaf"></i> Lighter options</span>
+                <span>Great add-ons</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optional note for online ordering / phone number if you add later -->
+      <!--
+      <div class="text-center mt-4">
+        <p class="mb-1">Call us to place your order:</p>
+        <a href="tel:XXXXXXXXXX" class="fw-semibold"> (XXX) XXX-XXXX </a>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <div class="about-img">
+            <!-- Reuse one of your local images if you want; update src as needed -->
+            <img src="img/4.png" alt="Inside Annie's Pizzeria" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="section-header text-start mb-3">
+            <h2>Our Story</h2>
+            <h3>Neighborhood Spot, Big Flavor</h3>
+          </div>
+          <p>
+            Annie's Pizzeria is the kind of place you grow up with. The place you hit
+            after a long day, post-game, or on the nights you just can’t be bothered to
+            cook. Simple ingredients, good dough, hot ovens, and people who care about
+            getting your order right.
+          </p>
+          <p>
+            Stop in for a quick slice at the counter or take a pie home to the couch.
+            Either way, we’re proud to be part of your regular rotation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram -->
+  <section id="instagram" class="bg-soft">
+    <div class="container">
+      <div class="section-header">
+        <h2>We Are On Instagram</h2>
+        <h3>Follow Us!/h3>
+        <p>
+          See the latest pies coming out of the oven, daily specials, and behind-the-scenes
+          moments from the shop.
+        </p>
+      </div>
+
+      <a
+        href="https://www.instagram.com/anniespizzeria_"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-decoration-none text-reset"
+      >
+        <div class="insta-grid">
+          <!-- Use as many as you have: img/5.png, img/6.png, etc. -->
+          <div class="insta-grid-item">
+            <img src="img/5.png" alt="Annie's Pizzeria Instagram 1" />
+          </div>
+          <div class="insta-grid-item">
+            <img src="img/6.png" alt="Annie's Pizzeria Instagram 2" />
+          </div>
+          <div class="insta-grid-item">
+            <img src="img/3.png" alt="Annie's Pizzeria Instagram 3" />
+          </div>
+          <div class="insta-grid-item">
+            <img src="img/2.png" alt="Annie's Pizzeria Instagram 4" />
+          </div>
+          <div class="insta-grid-item">
+            <img src="img/4.png" alt="Annie's Pizzeria Instagram 5" />
+          </div>
+        </div>
+      </a>
+
+      <div class="insta-cta">
+        <a
+          href="https://www.instagram.com/anniespizzeria_"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary-custom mt-3 d-inline-flex align-items-center gap-2"
+        >
+          <i class="fa-brands fa-instagram"></i>
+          @anniespizzeria_
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Map -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Visit Us</h2>
+        <h3>Find Annie's Pizzeria</h3>
+        <p>
+          Swing by the shop, grab a slice, and say hi. We’re right in Medford and ready
+          when you are.
+        </p>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-5">
+          <div class="contact-card">
+            <h4>Location</h4>
+            <ul class="contact-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>
+                  213 Middlesex Ave<br />
+                  Medford, Massachusetts 02155
+                </span>
+              </li>
+              <!-- Add phone / hours when you have them -->
+              <!--
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span>(XXX) XXX-XXXX</span>
+              </li>
+              -->
+            </ul>
+
+            <h4>Stay Connected</h4>
+            <ul class="contact-list">
+              <li>
+                <i class="fa-brands fa-instagram"></i>
+                <a
+                  href="https://www.instagram.com/anniespizzeria_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @anniespizzeria_
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="map-wrapper">
+            <iframe
+              src="https://www.google.com/maps?q=213+Middlesex+Ave,+Medford,+Massachusetts+02155&output=embed"
+              width="100%"
+              height="400"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span>© <span id="year"></span> Annie's Pizzeria. All rights reserved.</span>
+      <span>213 Middlesex Ave, Medford, MA 02155</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
