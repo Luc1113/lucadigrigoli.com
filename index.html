@@ -19,7 +19,7 @@
             color: #2a2a2a;
             line-height: 1.6;
             background-image: 
-                radial-gradient(circle at 25% 25%, s#f9f7f0 0%, transparent 50%),
+                radial-gradient(circle at 25% 25%, #f9f7f0 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, #f0ede0 0%, transparent 50%);
         }
         
@@ -44,7 +44,7 @@
         
         .header {
             text-align: center;
-            margin-top: 80px; /* Add space to push the title down */
+            margin-top: 80px;
             margin-bottom: 60px;
             position: relative;
         }
@@ -298,7 +298,7 @@
             white-space: nowrap;
             animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
             display: inline-block;
-            max-width: fit-content; /* Ensure the width matches the text content */
+            max-width: fit-content;
         }
         
         @keyframes typing {
@@ -425,6 +425,11 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .container {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
         }
         
         .blink {
@@ -469,98 +474,200 @@
             100% { top: 100%; opacity: 0; }
         }
 
-        /* Side polaroid stacks */
-        .side-polaroids {
-            position: absolute;
-            top: 100px;
+        /* Photo collage - side positioning */
+        .photo-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 0;
+            padding: 20px;
+            background: transparent;
+            border: none;
+            position: fixed;
+            left: 0;
+            right: auto;
+            top: 80px;
+            width: 100px;
+            height: calc(100vh - 80px);
+            pointer-events: auto;
+            z-index: 5;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .photo-collage::after {
+            content: '';
+            position: fixed;
+            right: 0;
+            left: auto;
+            top: 80px;
+            width: 100px;
+            height: calc(100vh - 80px);
+            pointer-events: auto;
+            z-index: 5;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        .collage-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: rotate(-1deg);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+            border: 1px solid rgba(212, 196, 160, 0.6);
+            width: 40px;
+            height: 40px;
+        }
+        
+        .collage-item:nth-child(even) {
+            transform: rotate(1deg);
+        }
+        
+        .collage-item:nth-child(3n) {
+            transform: rotate(-2deg);
+        }
+        
+        .collage-item:nth-child(4n) {
+            transform: rotate(2deg);
+        }
+        
+        .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(15%) contrast(1.1) saturate(0.95);
+            transition: all 0.3s ease;
+        }
+        
+        .collage-item:hover {
+            transform: scale(2.5) rotate(0deg) !important;
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+            z-index: 20;
+            filter: brightness(1.1);
+        }
+        
+        .collage-item:hover img {
+            filter: sepia(10%) contrast(1.2) saturate(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .photo-collage {
+                width: 100%;
+                height: auto;
+                position: static;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                margin: 40px 0;
+            }
+            
+            .collage-item {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        
+        /* Side column styling for left sidebar */
+        .left-sidebar {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            width: 150px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 5;
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            z-index: 1; /* Ensures images are above the background but below main content */
-            pointer-events: none;
+            gap: 12px;
+            padding: 20px;
+            background: transparent;
         }
-        .side-polaroids.left { left: -30px; }
-        .side-polaroids.right { right: -30px; }
-        
-        .side-polaroids .polaroid {
-            width: 180px; /* Slightly larger */
-            padding: 15px 15px 45px 15px;
-            background: #fff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            position: relative;
-            border: 1px solid #e1dccf;
-            pointer-events: auto;
-            transition: transform .35s ease, box-shadow .35s ease;
+
+        .right-sidebar {
+            position: fixed;
+            right: 0;
+            top: 80px;
+            width: 150px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 20px;
+            background: transparent;
+        }
+
+        .sidebar-image {
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
             cursor: pointer;
+            transition: all 0.3s ease;
+            transform: rotate(-1deg);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+            border: 1px solid rgba(212, 196, 160, 0.6);
         }
-        .side-polaroids .polaroid img {
+
+        .sidebar-image:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .sidebar-image:nth-child(3n) {
+            transform: rotate(-2deg);
+        }
+
+        .sidebar-image:nth-child(4n) {
+            transform: rotate(2deg);
+        }
+
+        .sidebar-image img {
             width: 100%;
-            height: 140px; /* Adjusted for larger size */
+            height: 100%;
             object-fit: cover;
-            filter: sepia(18%) contrast(1.05) saturate(.95);
-        }
-        .side-polaroids .polaroid span {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Courier Prime', monospace;
-            font-size: .8rem; /* Slightly larger text */
-            color: #8B4513;
-            letter-spacing: .5px;
-        }
-        .side-polaroids.left .polaroid:nth-child(1) { transform: translateY(0); }
-        .side-polaroids.left .polaroid:nth-child(2) { transform: translateY(150px); }
-        .side-polaroids.left .polaroid:nth-child(3) { transform: translateY(300px); }
-        .side-polaroids.left .polaroid:nth-child(4) { transform: translateY(450px); }
-        
-        .side-polaroids.right .polaroid:nth-child(1) { transform: translateY(0); }
-        .side-polaroids.right .polaroid:nth-child(2) { transform: translateY(150px); }
-        .side-polaroids.right .polaroid:nth-child(3) { transform: translateY(300px); }
-        .side-polaroids.right .polaroid:nth-child(4) { transform: translateY(450px); }
-        
-        .side-polaroids .polaroid:hover {
-            transform: scale(1.1); /* Slightly larger on hover */
-            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
-            z-index: 10;
-        }
-        .side-polaroids .polaroid img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            filter: sepia(18%) contrast(1.05) saturate(.95);
-        }
-        .side-polaroids .polaroid span {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Courier Prime', monospace;
-            font-size: .7rem;
-            color: #8B4513;
-            letter-spacing: .5px;
-        }
-        /* Diagonal / staggered transforms */
-        .side-polaroids.left .polaroid:nth-child(1) { transform: rotate(-8deg) translateX(10px); }
-        .side-polaroids.left .polaroid:nth-child(2) { transform: rotate(6deg) translateX(0); }
-        .side-polaroids.left .polaroid:nth-child(3) { transform: rotate(-4deg) translateX(14px); }
-        .side-polaroids.left .polaroid:nth-child(4) { transform: rotate(7deg) translateX(-4px); }
-
-        .side-polaroids.right .polaroid:nth-child(1) { transform: rotate(7deg) translateX(-10px); }
-        .side-polaroids.right .polaroid:nth-child(2) { transform: rotate(-5deg) translateX(-2px); }
-        .side-polaroids.right .polaroid:nth-child(3) { transform: rotate(9deg) translateX(-16px); }
-        .side-polaroids.right .polaroid:nth-child(4) { transform: rotate(-6deg) translateX(-4px); }
-
-        .side-polaroids .polaroid:hover {
-            transform: scale(1.05) rotate(0deg) translateX(0) !important;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.28);
-            z-index: 60;
+            filter: sepia(15%) contrast(1.1) saturate(0.95);
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 1100px) {
-            .side-polaroids { display: none; }
+        .sidebar-image:hover {
+            transform: scale(2.5) rotate(0deg) !important;
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+            z-index: 20;
+        }
+
+        .sidebar-image:hover img {
+            filter: sepia(10%) contrast(1.2) saturate(1.1);
+        }
+
+        @media (max-width: 1024px) {
+            .left-sidebar,
+            .right-sidebar {
+                width: 120px;
+            }
+
+            .sidebar-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left-sidebar,
+            .right-sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                overflow: visible;
+                margin: 40px 0;
+            }
+
+            .sidebar-image {
+                width: 100px;
+                height: 100px;
+            }
         }
 
         /* Jesters card with background video */
@@ -663,19 +770,27 @@
 </head>
 <body class="retro-cursor">
     <div class="grain-overlay"></div>
-
-    <!-- Decorative side polaroids -->
-    <div class="side-polaroids left">
-        <div class="polaroid"><img src="images/pretend.png" alt="pretend"><span>pretend</span></div>
-        <div class="polaroid"><img src="images/521cover.jpg" alt="521 album"><span>521 album</span></div>
-        <div class="polaroid"><img src="images/valerie.jpeg" alt="valerie single"><span>valerie</span></div>
-        <div class="polaroid"><img src="images/coreSpooky2021.png" alt="friends!"><span>friends!</span></div>
+    
+    <!-- Left sidebar images -->
+    <div class="left-sidebar">
+        <div class="sidebar-image"><img src="images/521cover.jpg" alt="521 album"></div>
+        <div class="sidebar-image"><img src="images/pretend.png" alt="pretend"></div>
+        <div class="sidebar-image"><img src="images/headshot.jpeg" alt="me"></div>
+        <div class="sidebar-image"><img src="images/valerie.jpeg" alt="valerie"></div>
+        <div class="sidebar-image"><img src="images/yuletide.jpeg" alt="bing"></div>
+        <div class="sidebar-image"><img src="images/binghamtonLogo.png" alt="christmas album"></div>
+        <div class="sidebar-image"><img src="images/gordon.png" alt="gordon"></div>
     </div>
-    <div class="side-polaroids right">
-        <div class="polaroid"><img src="images/binghamtonLogo.png" alt="bing :)"><span>bing :)</span></div>
-        <div class="polaroid"><img src="images/jesters.jpeg" alt="jesters"><span>jesters</span></div>
-        <div class="polaroid"><img src="images/headshot.jpeg" alt="me!"><span>me!</span></div>
-        <div class="polaroid"><img src="images/yuletide.jpeg" alt="my christmas album"><span>my christmas album<span></div>
+
+    <!-- Right sidebar images -->
+    <div class="right-sidebar">
+        <div class="sidebar-image"><img src="images/bridge.png" alt="bridge"></div>
+        <div class="sidebar-image"><img src="images/gang.png" alt="gang"></div>
+        <div class="sidebar-image"><img src="images/records.png" alt="records"></div>
+        <div class="sidebar-image"><img src="images/station.png" alt="station"></div>
+        <div class="sidebar-image"><img src="images/thecup.png" alt="thecup"></div>
+        <div class="sidebar-image"><img src="images/train.png" alt="train"></div>
+        <div class="sidebar-image"><img src="images/aura.png" alt="aura"></div>
     </div>
     
     <div class="container">
@@ -695,13 +810,17 @@
             <div class="animated-bar"></div>
         </header>
         
+        <h2 class = "section-title">
+            Here's what's going on lately!
+        </h2>
+        
         <div class="section retro-cursor">
             <div class="scan-line"></div>
             <h2 class="section-title">latest music releases</h2>
             
             <div class="coming-soon-player">
                 <h3><span class="blink">♪</span> it's never really over - coming soon</h3>
-                <p style="margin-bottom: 15px; font-style: italic; position: relative; z-index: 2;">a new song about cycles, growth, and finding peace in the ongoing journey</p>
+                <p style="margin-bottom: 15px; font-style: italic; position: relative; z-index: 2;">a new album about cycles, growth, and finding peace in the ongoing journey</p>
                 <div style="position: relative; z-index: 2;">
                     <a href="/neverreallyover" class="see-more-link">see more</a>
                 </div>
@@ -887,7 +1006,7 @@
         // Jesters video hover/play logic
         (function () {
             const card = document.getElementById('jesters');
-            const vid  = document.getElementById('jestersVideo'); // also give your video an id="jestersVideo"
+            const vid  = document.querySelector('.jesters-bg-video');
 
             if (!card || !vid) return;
 
