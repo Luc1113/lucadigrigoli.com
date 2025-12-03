@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logo AR Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- MindAR (bundles Three.js) -->
+  <script src="https://unpkg.com/mind-ar@1.2.3/dist/mindar-image-three.prod.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #000;
+    }
+
+    #ar-container {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 14px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 14px;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">Point your camera at the logo…</div>
+  <div id="ar-container"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // MindAR setup: this is where you tell it what image (logo) to track
+      const mindarThree = new window.MINDAR.IMAGE.MindARThree({
+        container: document.querySelector("#ar-container"),
+        imageTargetSrc: "./logo.mind",   // <-- compiled target from your logo
+      });
+
+      const { renderer, scene, camera } = mindarThree;
+
+      // Simple lighting for the 3D object
+      const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+      scene.add(light);
+
+      // Anchor at index 0 (first image in logo.mind)
+      const anchor = mindarThree.addAnchor(0);
+
+      // Create a 3D cube that will sit "above" the logo
+      const geometry = new THREE.BoxGeometry(0.4, 0.4, 0.4); // units are in marker-space meters
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x00ffc8,
+        metalness: 0.4,
+        roughness: 0.3,
+      });
+
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.set(0, 0.25, 0); // raise it a bit above the marker plane
+      anchor.group.add(cube);
+
+      // Start AR session (this will request camera permissions)
+      await mindarThree.start();
+
+      // Render loop with rotation
+      renderer.setAnimationLoop(() => {
+        cube.rotation.y += 0.03;
+        cube.rotation.x += 0.015;
+        renderer.render(scene, camera);
+      });
+    });
+  </script>
+</body>
+</html>
