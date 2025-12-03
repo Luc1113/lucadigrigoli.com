@@ -55,48 +55,64 @@
   <script type="module">
     import * as THREE from "three";
     import { MindARThree } from "mindar-image-three";
-
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+  
     const start = async () => {
       const mindarThree = new MindARThree({
         container: document.querySelector("#ar-container"),
-        imageTargetSrc: "./logo.mind" // <-- your compiled logo target
+        imageTargetSrc: "./logo.mind" // your image target definition
       });
-
+  
       const { renderer, scene, camera } = mindarThree;
-
+  
       // Lighting
       const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
       scene.add(hemiLight);
-
-      // Anchor on first target in logo.mind
+  
+      // Anchor on first target
       const anchor = mindarThree.addAnchor(0);
-
-      // 3D cube "above" the marker
-      const geometry = new THREE.BoxGeometry(0.4, 0.4, 0.4);
-      const material = new THREE.MeshStandardMaterial({
-        color: 0x00ffc8,
-        metalness: 0.5,
-        roughness: 0.3
-      });
-      const cube = new THREE.Mesh(geometry, material);
-      cube.position.set(0, 0.25, 0);
-      anchor.group.add(cube);
-
-      // Start AR (this will trigger camera permission)
+  
+      // Load 3D model: logo.glb
+      const loader = new GLTFLoader();
+      let logoModel = null;
+  
+      loader.load(
+        "./logo.glb", // <-- your 3D model file
+        (gltf) => {
+          logoModel = gltf.scene;
+  
+          // Tweak these to taste
+          logoModel.scale.set(0.3, 0.3, 0.3);     // make it fit the marker
+          logoModel.position.set(0, 0.25, 0);     // float a bit above the logo
+          logoModel.rotation.x = Math.PI / 2;     // optional: orient if needed
+  
+          anchor.group.add(logoModel);
+        },
+        undefined,
+        (error) => {
+          console.error("Error loading logo.glb:", error);
+          document.getElementById("overlay").textContent = "Failed to load model :(";
+        }
+      );
+  
+      // Start AR (triggers camera)
       await mindarThree.start();
-
+  
       // Render loop
       renderer.setAnimationLoop(() => {
-        cube.rotation.y += 0.03;
-        cube.rotation.x += 0.015;
+        if (logoModel) {
+          // Spin the model
+          logoModel.rotation.z += 0.02; // or .y depending on orientation
+        }
         renderer.render(scene, camera);
       });
     };
-
+  
     start().catch(err => {
       console.error("MindAR init failed:", err);
       document.getElementById("overlay").textContent = "Error starting AR (check console)";
     });
   </script>
+  
 </body>
 </html>
