@@ -3,6 +3,6 @@
 // NEVER commit config.js to git!
 
 const SPOTIFY_CONFIG = {
-    CLIENT_ID: '713c0927a0fd4effa8514e8798e52844',
+    CLIENT_ID: '46041d0a84004440aeda81ada4b05e8b',
     REDIRECT_URI: window.location.origin + window.location.pathname
 };
