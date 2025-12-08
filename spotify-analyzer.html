@@ -939,7 +939,7 @@
                 Quick Connect with Spotify
             </div>
             <div class="spotify-connect-description">
-                Connect once, then filter by time range in your results
+                See your top artists and tracks (rankings only - Spotify API doesn't provide play counts)
             </div>
             <div class="time-range-buttons">
                 <button class="time-range-btn" onclick="connectSpotify()">
@@ -947,7 +947,8 @@
                 </button>
             </div>
             <div class="spotify-note">
-                Note: Spotify API provides limited data. For complete history, upload your full data export above.
+                <strong>⚠️ Important:</strong> Spotify API gives limited data (top 50 items, no actual play counts).
+                <br>For your <strong>complete listening history with real stats</strong>, use the "Upload Spotify Data Files" option above!
             </div>
         </div>
 
@@ -1377,27 +1378,31 @@
         }
 
         function convertSpotifyData(artistsData, tracksData, timeRange) {
-            // This is a simplified conversion since Spotify API doesn't provide play counts
-            // We'll use popularity and ranking as proxies
+            // Spotify API provides rankings and popularity, but not play counts
+            // We'll display the actual ranking and popularity data instead of fake numbers
             
             allData = [];
             artistStats = {};
             trackStats = {};
             
-            // Process artists
+            // Process artists - use actual rank as the key metric
             artistsData.items.forEach((artist, index) => {
                 artistStats[artist.name] = {
-                    plays: Math.floor(artist.popularity * (50 - index) / 10),
-                    time: 0,
+                    rank: index + 1,  // Actual Spotify ranking (1-50)
+                    popularity: artist.popularity,  // Spotify's 0-100 popularity score
+                    plays: index + 1,  // Use rank as display value (lower is better)
+                    time: 0,  // We don't have real time data
                     firstListen: new Date().toISOString(),
                     lastListen: new Date().toISOString(),
                     tracks: new Set(),
                     albums: new Set(),
-                    playHistory: []
+                    playHistory: [],
+                    genres: artist.genres || [],
+                    imageUrl: artist.images?.[0]?.url || null
                 };
             });
             
-            // Process tracks
+            // Process tracks - use actual rank as the key metric
             tracksData.items.forEach((track, index) => {
                 const artist = track.artists[0].name;
                 const key = `${track.name}|||${artist}`;
@@ -1405,16 +1410,20 @@
                 trackStats[key] = {
                     track: track.name,
                     artist: artist,
-                    plays: Math.floor(track.popularity * (50 - index) / 10),
-                    time: track.duration_ms * Math.floor(track.popularity / 10),
+                    rank: index + 1,  // Actual Spotify ranking (1-50)
+                    popularity: track.popularity,  // Spotify's 0-100 popularity score
+                    plays: index + 1,  // Use rank as display value (lower is better)
+                    time: 0,  // We don't have real time data
+                    duration: track.duration_ms,
                     firstListen: new Date().toISOString(),
                     lastListen: new Date().toISOString(),
-                    playHistory: []
+                    playHistory: [],
+                    previewUrl: track.preview_url || null,
+                    albumName: track.album?.name || null
                 };
                 
                 if (artistStats[artist]) {
                     artistStats[artist].tracks.add(track.name);
-                    artistStats[artist].time += track.duration_ms * Math.floor(track.popularity / 10);
                 }
             });
             
@@ -1424,8 +1433,20 @@
                 'long_term': 'Past Year'
             };
             
-            document.getElementById('fileInfo').textContent = `✅ Loaded data from Spotify API (${timeRangeLabels[timeRange] || timeRange})`;
+            document.getElementById('fileInfo').innerHTML = `
+                <div style="background: rgba(30, 215, 96, 0.2); border: 2px solid #1db954; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+                    <strong>🎵 Spotify Rankings Data (${timeRangeLabels[timeRange] || timeRange})</strong><br>
+                    Showing your top 50 most-played artists and tracks based on Spotify's calculations.<br>
+                    Rankings shown are from Spotify's algorithm - lower rank number = more plays.
+                </div>
+            `;
             document.getElementById('results').classList.remove('hidden');
+            
+            // Update stat displays to show counts instead of fake numbers
+            document.getElementById('totalPlays').textContent = 'Top 50';
+            document.getElementById('totalTime').textContent = '—';
+            document.getElementById('uniqueArtists').textContent = artistsData.items.length;
+            document.getElementById('uniqueTracks').textContent = tracksData.items.length;
             
             // Show time range selector
             showSpotifyTimeRangeSelector();
@@ -2240,8 +2261,11 @@
         function displayTopArtists(artists) {
             const list = document.getElementById('topArtistsList');
             list.innerHTML = artists.map(([artist, stats], index) => {
-                const hours = Math.floor(stats.time / 3600000);
-                const minutes = Math.floor((stats.time % 3600000) / 60000);
+                // Check if this is Spotify API data (has rank) or real data (has plays)
+                const isSpotifyAPI = stats.rank !== undefined;
+                const displayValue = isSpotifyAPI ? `Rank #${stats.rank}` : `${stats.plays.toLocaleString()} plays`;
+                const timeDisplay = isSpotifyAPI ? '—' : `${Math.floor(stats.time / 3600000)}h ${Math.floor((stats.time % 3600000) / 60000)}m`;
+                
                 return `
                     <li class="top-item">
                         <div class="rank">#${index + 1}</div>
@@ -2249,10 +2273,10 @@
                             <div class="item-name">
                                 <span class="artist-link" onclick="searchArtist('${artist.replace(/'/g, "\\'")}')">${artist}</span>
                             </div>
-                            <div class="item-detail">${stats.plays.toLocaleString()} plays</div>
+                            <div class="item-detail">${displayValue}</div>
                         </div>
                         <div class="item-stat">
-                            <div>${hours}h ${minutes}m</div>
+                            <div>${timeDisplay}</div>
                             <button class="exclude-btn" onclick="excludeArtist('${artist.replace(/'/g, "\\'")}')">Exclude</button>
                         </div>
                     </li>
@@ -2263,8 +2287,11 @@
         function displayTopTracks(tracks) {
             const list = document.getElementById('topTracksList');
             list.innerHTML = tracks.map((track, index) => {
-                const hours = Math.floor(track.time / 3600000);
-                const minutes = Math.floor((track.time % 3600000) / 60000);
+                // Check if this is Spotify API data (has rank) or real data (has plays)
+                const isSpotifyAPI = track.rank !== undefined;
+                const playDisplay = isSpotifyAPI ? `Rank #${track.rank}` : `${track.plays} plays`;
+                const timeDisplay = isSpotifyAPI ? '—' : `${Math.floor(track.time / 3600000)}h ${Math.floor((track.time % 3600000) / 60000)}m`;
+                
                 return `
                     <li class="top-item">
                         <div class="rank">#${index + 1}</div>
@@ -2275,7 +2302,7 @@
                             </div>
                         </div>
                         <div class="item-stat">
-                            <div>${track.plays} plays • ${hours}h ${minutes}m</div>
+                            <div>${playDisplay}${isSpotifyAPI ? '' : ' • ' + timeDisplay}</div>
                             <button class="exclude-btn" onclick="excludeArtist('${track.artist.replace(/'/g, "\\'")}')">Exclude Artist</button>
                         </div>
                     </li>
