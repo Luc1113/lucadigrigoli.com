@@ -939,12 +939,12 @@
                 Quick Connect with Spotify
             </div>
             <div class="spotify-connect-description">
-                Get instant insights from your recent listening history
+                Connect once, then filter by time range in your results
             </div>
             <div class="time-range-buttons">
-                <button class="time-range-btn" onclick="connectSpotify('short_term')">Past Month</button>
-                <button class="time-range-btn" onclick="connectSpotify('medium_term')">Past 6 Months</button>
-                <button class="time-range-btn" onclick="connectSpotify('long_term')">Past Year</button>
+                <button class="time-range-btn" onclick="connectSpotify()">
+                    🎧 Connect with Spotify
+                </button>
             </div>
             <div class="spotify-note">
                 Note: Spotify API provides limited data. For complete history, upload your full data export above.
@@ -1139,9 +1139,20 @@
     </div>
 
     <!-- Load Spotify Config (optional - for API features) -->
-    <script src="config.js" onerror="console.log('No config.js found - Spotify API features disabled')"></script>
+    <script src="config.js" onerror="console.log('No config.js found - using hardcoded config')"></script>
 
     <script>
+        // Hardcoded config for GitHub Pages/Squarespace deployment
+        // (config.js file is for local development only)
+        if (typeof SPOTIFY_CONFIG === 'undefined') {
+            const SPOTIFY_CONFIG = {
+                CLIENT_ID: '713c0927a0fd4effa8514e8798e52844',
+                REDIRECT_URI: window.location.origin + window.location.pathname
+            };
+            // Make it global
+            window.SPOTIFY_CONFIG = SPOTIFY_CONFIG;
+        }
+
         // Check if config is loaded and show Spotify connect section
         if (typeof SPOTIFY_CONFIG !== 'undefined' && 
             SPOTIFY_CONFIG.CLIENT_ID && 
@@ -1187,12 +1198,15 @@
                 return;
             }
             
+            // Store the time range in localStorage so we can use it after redirect
+            localStorage.setItem('spotify_time_range', timeRange || 'long_term');
+            
             const authUrl = `https://accounts.spotify.com/authorize?` +
                 `client_id=${SPOTIFY_CLIENT_ID}&` +
                 `response_type=token&` +
                 `redirect_uri=${encodeURIComponent(REDIRECT_URI)}&` +
-                `scope=${encodeURIComponent(SCOPES)}&` +
-                `state=${timeRange}`;
+                `scope=${encodeURIComponent('user-top-read user-read-recently-played')}&` +
+                `state=${timeRange || 'long_term'}`;
             
             window.location.href = authUrl;
         }
@@ -1202,13 +1216,25 @@
             const hash = window.location.hash.substring(1);
             const params = new URLSearchParams(hash);
             const accessToken = params.get('access_token');
-            const timeRange = params.get('state');
             
             if (accessToken) {
-                fetchSpotifyData(accessToken, timeRange);
+                // Store the access token
+                localStorage.setItem('spotify_access_token', accessToken);
+                
                 // Clean up URL
                 history.replaceState(null, null, window.location.pathname);
+                
+                // Fetch data with stored or default time range
+                const timeRange = localStorage.getItem('spotify_time_range') || 'long_term';
+                fetchSpotifyData(accessToken, timeRange);
             }
+        }
+        
+        // Check if we have a stored access token (user already logged in)
+        const storedToken = localStorage.getItem('spotify_access_token');
+        if (storedToken && !window.location.hash) {
+            // Add time range selector to UI
+            showSpotifyTimeRangeSelector();
         }
 
         async function fetchSpotifyData(accessToken, timeRange) {
@@ -1279,8 +1305,17 @@
                 }
             });
             
-            document.getElementById('fileInfo').textContent = `✅ Loaded data from Spotify API (${timeRange})`;
+            const timeRangeLabels = {
+                'short_term': 'Past Month',
+                'medium_term': 'Past 6 Months', 
+                'long_term': 'Past Year'
+            };
+            
+            document.getElementById('fileInfo').textContent = `✅ Loaded data from Spotify API (${timeRangeLabels[timeRange] || timeRange})`;
             document.getElementById('results').classList.remove('hidden');
+            
+            // Show time range selector
+            showSpotifyTimeRangeSelector();
             
             updateAllDisplays();
         }
@@ -1715,6 +1750,34 @@
             this.quadraticCurveTo(x, y, x + radius, y);
             this.closePath();
         };
+
+        function showSpotifyTimeRangeSelector() {
+            // Add time range filter buttons to the results section
+            const resultsDiv = document.getElementById('results');
+            if (resultsDiv && !document.getElementById('spotifyTimeRangeFilter')) {
+                const filterDiv = document.createElement('div');
+                filterDiv.id = 'spotifyTimeRangeFilter';
+                filterDiv.className = 'controls-bar';
+                filterDiv.style.cssText = 'justify-content: center; margin-bottom: 30px; background: rgba(30, 215, 96, 0.1); padding: 20px; border-radius: 15px;';
+                filterDiv.innerHTML = `
+                    <div style="width: 100%; text-align: center; margin-bottom: 15px; color: #1db954; font-weight: 600;">
+                        📊 Spotify Data Time Range
+                    </div>
+                    <button class="time-range-btn" onclick="reloadSpotifyData('short_term')" style="margin: 5px;">Past Month</button>
+                    <button class="time-range-btn" onclick="reloadSpotifyData('medium_term')" style="margin: 5px;">Past 6 Months</button>
+                    <button class="time-range-btn" onclick="reloadSpotifyData('long_term')" style="margin: 5px;">Past Year</button>
+                `;
+                resultsDiv.insertBefore(filterDiv, resultsDiv.firstChild);
+            }
+        }
+        
+        function reloadSpotifyData(timeRange) {
+            const accessToken = localStorage.getItem('spotify_access_token');
+            if (accessToken) {
+                localStorage.setItem('spotify_time_range', timeRange);
+                fetchSpotifyData(accessToken, timeRange);
+            }
+        }
 
         function searchArtist(artistName) {
             showTab('search');
