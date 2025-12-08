@@ -1543,9 +1543,10 @@
         }
 
         function drawTopArtistCard(ctx) {
-            if (topArtistsRanked.length === 0) return;
+            const filteredArtists = getSortedArtists();
+            if (filteredArtists.length === 0) return;
             
-            const [artistName, stats] = topArtistsRanked[0];
+            const [artistName, stats] = filteredArtists[0];
             const hours = Math.floor(stats.time / 3600000);
             const minutes = Math.floor((stats.time % 3600000) / 60000);
             
@@ -1612,7 +1613,6 @@
             ctx.textAlign = 'center';
             ctx.fillText('lucadigrigoli.com/spotify-analyzer', 540, 1820);
         }
-
         function drawTopArtistsListCard(ctx) {
             // Title
             ctx.font = 'bold 100px -apple-system, sans-serif';
@@ -1624,8 +1624,10 @@
             ctx.fillText('My Top 5', 540, 180);
             ctx.fillText('Artists', 540, 300);
             
-            // Artists list
+            // Artists list - use filtered artists excluding any excluded ones
+            const filteredArtists = getSortedArtists();
             let yPos = 450;
+            filteredArtists.slice(0, 5).forEach(([artistName, stats], index) => {
             topArtistsRanked.slice(0, 5).forEach(([artistName, stats], index) => {
                 // Background box
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
