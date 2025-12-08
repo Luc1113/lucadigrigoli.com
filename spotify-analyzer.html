@@ -1226,10 +1226,6 @@
             localStorage.removeItem('spotify_access_token');
             localStorage.removeItem('spotify_user_id');
             
-            // DEBUG: Show what redirect URI is being used
-            console.log('Redirect URI:', REDIRECT_URI);
-            alert('DEBUG: Redirect URI is: ' + REDIRECT_URI + '\n\nMake sure this EXACT URL is in your Spotify Dashboard!');
-            
             // Generate PKCE code verifier and challenge
             const codeVerifier = generateCodeVerifier();
             const codeChallenge = await generateCodeChallenge(codeVerifier);
@@ -1437,16 +1433,20 @@
                 <div style="background: rgba(30, 215, 96, 0.2); border: 2px solid #1db954; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
                     <strong>🎵 Spotify Rankings Data (${timeRangeLabels[timeRange] || timeRange})</strong><br>
                     Showing your top 50 most-played artists and tracks based on Spotify's calculations.<br>
-                    Rankings shown are from Spotify's algorithm - lower rank number = more plays.
+                    Ranked from most played (#1) to least played (#50).
                 </div>
             `;
             document.getElementById('results').classList.remove('hidden');
             
-            // Update stat displays to show counts instead of fake numbers
-            document.getElementById('totalPlays').textContent = 'Top 50';
-            document.getElementById('totalTime').textContent = '—';
-            document.getElementById('uniqueArtists').textContent = artistsData.items.length;
-            document.getElementById('uniqueTracks').textContent = tracksData.items.length;
+            // Hide the stats grid for Spotify API data (it's misleading)
+            const statsGrid = document.querySelector('.stats-grid');
+            if (statsGrid) {
+                statsGrid.style.display = 'none';
+            }
+            
+            // Set default sort to plays-asc (which shows rank #1 first)
+            document.getElementById('artistSort').value = 'plays-asc';
+            document.getElementById('trackSort').value = 'plays-asc';
             
             // Show time range selector
             showSpotifyTimeRangeSelector();
@@ -1485,6 +1485,12 @@
         function processData() {
             document.getElementById('fileInfo').textContent = `✅ Loaded ${allData.length.toLocaleString()} streams`;
             document.getElementById('results').classList.remove('hidden');
+
+            // Show the stats grid for real data
+            const statsGrid = document.querySelector('.stats-grid');
+            if (statsGrid) {
+                statsGrid.style.display = 'grid';
+            }
 
             // Calculate basic stats
             const totalPlays = allData.length;
