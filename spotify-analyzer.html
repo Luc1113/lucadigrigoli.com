@@ -919,8 +919,25 @@
             <a href="#how-to" class="help-link">📖 How do I request my Spotify data?</a>
         </header>
 
-        <div class="spotify-connect-section">
-            <div class="spotify-connect-title">🎧 Quick Connect with Spotify</div>
+        <div class="upload-section">
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="upload-btn">
+                    📁 Upload Spotify Data Files
+                </label>
+                <input type="file" id="fileInput" accept=".json" multiple>
+            </div>
+            <div class="file-info" id="fileInfo"></div>
+        </div>
+
+        <div class="divider">— OR —</div>
+
+        <div class="spotify-connect-section" id="spotifyConnectSection" style="display: none;">
+            <div class="spotify-connect-title">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="#1ed760" style="vertical-align: middle; margin-right: 10px;">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                </svg>
+                Quick Connect with Spotify
+            </div>
             <div class="spotify-connect-description">
                 Get instant insights from your recent listening history
             </div>
@@ -930,20 +947,8 @@
                 <button class="time-range-btn" onclick="connectSpotify('long_term')">Past Year</button>
             </div>
             <div class="spotify-note">
-                Note: Spotify API provides limited data. For complete history, upload your full data export below.
+                Note: Spotify API provides limited data. For complete history, upload your full data export above.
             </div>
-        </div>
-
-        <div class="divider">— OR —</div>
-
-        <div class="upload-section">
-            <div class="file-input-wrapper">
-                <label for="fileInput" class="upload-btn">
-                    📁 Upload Spotify Data Files
-                </label>
-                <input type="file" id="fileInput" accept=".json" multiple>
-            </div>
-            <div class="file-info" id="fileInfo"></div>
         </div>
 
         <div id="how-to" class="info-section">
@@ -1133,7 +1138,17 @@
         </div>
     </div>
 
+    <!-- Load Spotify Config (optional - for API features) -->
+    <script src="config.js" onerror="console.log('No config.js found - Spotify API features disabled')"></script>
+
     <script>
+        // Check if config is loaded and show Spotify connect section
+        if (typeof SPOTIFY_CONFIG !== 'undefined' && 
+            SPOTIFY_CONFIG.CLIENT_ID && 
+            SPOTIFY_CONFIG.CLIENT_ID !== 'YOUR_CLIENT_ID_HERE') {
+            document.getElementById('spotifyConnectSection').style.display = 'block';
+        }
+
         let allData = [];
         let artistStats = {};
         let trackStats = {};
@@ -1152,22 +1167,26 @@
         let discoveriesDisplayed = 50;
 
         // Spotify API Configuration
-        const SPOTIFY_CLIENT_ID = 'YOUR_CLIENT_ID_HERE'; // You'll need to replace this
-        const REDIRECT_URI = window.location.origin + window.location.pathname;
+        // These will be loaded from config.js (not committed to git)
+        const SPOTIFY_CLIENT_ID = typeof SPOTIFY_CONFIG !== 'undefined' ? SPOTIFY_CONFIG.CLIENT_ID : null;
+        const REDIRECT_URI = typeof SPOTIFY_CONFIG !== 'undefined' ? SPOTIFY_CONFIG.REDIRECT_URI : window.location.origin + window.location.pathname;
         const SCOPES = 'user-top-read user-read-recently-played';
 
         document.getElementById('fileInput').addEventListener('change', handleFileUpload);
 
         function connectSpotify(timeRange) {
-            alert('To enable Spotify API connection:\n\n' +
-                  '1. Create a Spotify Developer App at developer.spotify.com\n' +
-                  '2. Get your Client ID\n' +
-                  '3. Add ' + REDIRECT_URI + ' to your Redirect URIs\n' +
-                  '4. Replace YOUR_CLIENT_ID_HERE in the code with your actual Client ID\n\n' +
-                  'For now, please use the file upload method to analyze your complete listening history.');
+            if (!SPOTIFY_CLIENT_ID || SPOTIFY_CLIENT_ID === 'YOUR_CLIENT_ID_HERE') {
+                alert('Spotify API is not configured!\n\n' +
+                      'To enable Spotify connection:\n\n' +
+                      '1. Create a Spotify Developer App at developer.spotify.com/dashboard\n' +
+                      '2. Get your Client ID from the app settings\n' +
+                      '3. Add this URL as a Redirect URI: ' + REDIRECT_URI + '\n' +
+                      '4. Copy config.example.js to config.js\n' +
+                      '5. Replace YOUR_CLIENT_ID_HERE with your actual Client ID\n\n' +
+                      'For now, please use the file upload method to analyze your complete listening history.');
+                return;
+            }
             
-            // Uncomment this when you have your Spotify credentials:
-            /*
             const authUrl = `https://accounts.spotify.com/authorize?` +
                 `client_id=${SPOTIFY_CLIENT_ID}&` +
                 `response_type=token&` +
@@ -1176,7 +1195,6 @@
                 `state=${timeRange}`;
             
             window.location.href = authUrl;
-            */
         }
 
         // Handle Spotify OAuth callback
@@ -1543,10 +1561,9 @@
         }
 
         function drawTopArtistCard(ctx) {
-            const filteredArtists = getSortedArtists();
-            if (filteredArtists.length === 0) return;
+            if (topArtistsRanked.length === 0) return;
             
-            const [artistName, stats] = filteredArtists[0];
+            const [artistName, stats] = topArtistsRanked[0];
             const hours = Math.floor(stats.time / 3600000);
             const minutes = Math.floor((stats.time % 3600000) / 60000);
             
@@ -1613,6 +1630,7 @@
             ctx.textAlign = 'center';
             ctx.fillText('lucadigrigoli.com/spotify-analyzer', 540, 1820);
         }
+
         function drawTopArtistsListCard(ctx) {
             // Title
             ctx.font = 'bold 100px -apple-system, sans-serif';
@@ -1624,10 +1642,9 @@
             ctx.fillText('My Top 5', 540, 180);
             ctx.fillText('Artists', 540, 300);
             
-            // Artists list - use filtered artists excluding any excluded ones
-            const filteredArtists = getSortedArtists();
+            // Artists list
             let yPos = 450;
-            filteredArtists.slice(0, 5).forEach(([artistName, stats], index) => {
+            topArtistsRanked.slice(0, 5).forEach(([artistName, stats], index) => {
                 // Background box
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
                 ctx.beginPath();
@@ -1685,22 +1702,20 @@
         }
 
         // Helper function for rounded rectangles
-        // Helper function for rounded rectangles
-        if (!CanvasRenderingContext2D.prototype.roundRect) {
-            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
-                this.beginPath();
-                this.moveTo(x + radius, y);
-                this.lineTo(x + width - radius, y);
-                this.quadraticCurveTo(x + width, y, x + width, y + radius);
-                this.lineTo(x + width, y + height - radius);
-                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-                this.lineTo(x + radius, y + height);
-                this.quadraticCurveTo(x, y + height, x, y + height - radius);
-                this.lineTo(x, y + radius);
-                this.quadraticCurveTo(x, y, x + radius, y);
-                this.closePath();
-            };
-        }
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+            this.beginPath();
+            this.moveTo(x + radius, y);
+            this.lineTo(x + width - radius, y);
+            this.quadraticCurveTo(x + width, y, x + width, y + radius);
+            this.lineTo(x + width, y + height - radius);
+            this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            this.lineTo(x + radius, y + height);
+            this.quadraticCurveTo(x, y + height, x, y + height - radius);
+            this.lineTo(x, y + radius);
+            this.quadraticCurveTo(x, y, x + radius, y);
+            this.closePath();
+        };
+
         function searchArtist(artistName) {
             showTab('search');
             const searchInput = document.getElementById('searchInput');
