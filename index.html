@@ -40,8 +40,14 @@
             margin: 0 auto;
             padding: 40px 20px;
             position: relative;
-            margin-left: 170px;
-            margin-right: 170px;
+        }
+        
+        /* Add margins on large screens to avoid sidebars */
+        @media (min-width: 1400px) {
+            .container {
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
         
         .header {
@@ -259,6 +265,7 @@
             color: #8B4513;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
+            position: relative;
         }
         
         .contact-section {
@@ -322,7 +329,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 1001;
             border-top: 3px solid #A0522D;
             border-bottom: 3px solid #A0522D;
         }
@@ -412,40 +419,6 @@
         @keyframes glitch-2 {
             0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translateX(0); }
             21%, 62% { transform: translateX(2px); }
-        @media (max-width: 1200px) {
-            .container {
-                margin-left: 140px;
-                margin-right: 140px;
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .container {
-                margin-left: 140px;
-                margin-right: 140px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .site-title {
-                font-size: 2.5rem;
-            }
-            
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .container {
-                margin-left: 20px;
-                margin-right: 20px;
-            }
-        }
-            }
         }
         
         .blink {
@@ -490,105 +463,12 @@
             100% { top: 100%; opacity: 0; }
         }
 
-        /* Photo collage - side positioning */
-        .photo-collage {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin: 0;
-            padding: 20px;
-            background: transparent;
-            border: none;
-            position: fixed;
-            left: 0;
-            right: auto;
-            top: 80px;
-            width: 100px;
-            height: calc(100vh - 80px);
-            pointer-events: auto;
-            z-index: 5;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .photo-collage::after {
-            content: '';
-            position: fixed;
-            right: 0;
-            left: auto;
-            top: 80px;
-            width: 100px;
-            height: calc(100vh - 80px);
-            pointer-events: auto;
-            z-index: 5;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        
-        .collage-item {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            transform: rotate(-1deg);
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
-            border: 1px solid rgba(212, 196, 160, 0.6);
-            width: 40px;
-            height: 40px;
-        }
-        
-        .collage-item:nth-child(even) {
-            transform: rotate(1deg);
-        }
-        
-        .collage-item:nth-child(3n) {
-            transform: rotate(-2deg);
-        }
-        
-        .collage-item:nth-child(4n) {
-            transform: rotate(2deg);
-        }
-        
-        .collage-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: sepia(15%) contrast(1.1) saturate(0.95);
-            transition: all 0.3s ease;
-        }
-        
-        .collage-item:hover {
-            transform: scale(2.5) rotate(0deg) !important;
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
-            z-index: 20;
-            filter: brightness(1.1);
-        }
-        
-        .collage-item:hover img {
-            filter: sepia(10%) contrast(1.2) saturate(1.1);
-        }
-        
-        @media (max-width: 768px) {
-            .photo-collage {
-                width: 100%;
-                height: auto;
-                position: static;
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                margin: 40px 0;
-            }
-            
-            .collage-item {
-                width: 100px;
-                height: 100px;
-            }
-        }
-        
         /* Side column styling for left sidebar */
         .left-sidebar {
             position: fixed;
-            left: 0;
-            top: 80px;
-            width: 150px;
+            left: 20px;
+            top: 60px;
+            width: 110px;
             height: calc(100vh - 80px);
             overflow-y: auto;
             overflow-x: hidden;
@@ -596,15 +476,15 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            padding: 20px;
+            padding: 10px 0;
             background: transparent;
         }
 
         .right-sidebar {
             position: fixed;
-            right: 0;
-            top: 80px;
-            width: 150px;
+            right: 20px;
+            top: 60px;
+            width: 110px;
             height: calc(100vh - 80px);
             overflow-y: auto;
             overflow-x: hidden;
@@ -612,7 +492,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            padding: 20px;
+            padding: 10px 0;
             background: transparent;
         }
 
@@ -657,32 +537,30 @@
             filter: sepia(10%) contrast(1.2) saturate(1.1);
         }
 
-        @media (max-width: 1024px) {
+        /* Hide sidebars on smaller screens */
+        @media (max-width: 1300px) {
             .left-sidebar,
             .right-sidebar {
-                width: 120px;
-            }
-
-            .sidebar-image {
-                width: 100px;
-                height: 100px;
+                display: none;
             }
         }
 
         @media (max-width: 768px) {
-            .left-sidebar,
-            .right-sidebar {
-                position: static;
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                overflow: visible;
-                margin: 40px 0;
+            .site-title {
+                font-size: 2.5rem;
             }
-
-            .sidebar-image {
-                width: 100px;
-                height: 100px;
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 40px 15px;
             }
         }
 
@@ -787,6 +665,17 @@
 <body class="retro-cursor">
     <div class="grain-overlay"></div>
     
+    <!-- News banner at the top -->
+    <div class="news-banner">
+        <div class="news-scroll">
+            <span class="news-item">Welcome to the newly redesigned lucadigrigoli.com! </span>
+            <span class="news-item">NEW SINGLE "pretend" out now - streaming everywhere you consume sound waves! </span>
+            <span class="news-item">it's never really over with you, isn't it? </span>
+            <span class="news-item">test message (surely nobody sees this, right?) </span>
+            <span class="news-item">SECRET MESSAGE WOAH </span>
+        </div>
+    </div>
+    
     <!-- Left sidebar images -->
     <div class="left-sidebar">
         <div class="sidebar-image"><img src="images/521cover.jpg" alt="521 album"></div>
@@ -810,23 +699,13 @@
     </div>
     
     <div class="container">
-        <div class="news-banner">
-            <div class="news-scroll">
-                <span class="news-itsm">Welcome to the newly redesigned lucadigrigoli.com! </span>
-                <span class="news-item">NEW SINGLE "pretend" out now - streaming everywhere you consume sound waves! </span>
-                <span class="news-item">it's never really over with you, isn't it? </span>
-                <span class="news-item">test message (surely nobody sees this, right?) </span>
-                <span class="news-item">SECRET MESSAGE WOAH </span>
-            </div>
-        </div>
-        
         <header class="header">
             <h1 class="site-title glitch" data-text="Luca DiGrigoli">Luca DiGrigoli</h1>
             <p class="subtitle typing-animation">artist • developer • creator </p>
             <div class="animated-bar"></div>
         </header>
         
-        <h2 class = "section-title">
+        <h2 class="section-title">
             Here's what's going on lately!
         </h2>
         
@@ -891,25 +770,24 @@
         <div class="section">
             <h2 class="section-title">other musical endeavors</h2>
         
-                <div class="project-card jesters-card" id="jesters">
-                  <div class="jesters-top">
+            <div class="project-card jesters-card" id="jesters">
+                <div class="jesters-top">
                     <div>
-                      <h3 class="project-title">Jesters</h3>
-                      <p class="project-subtitle">Long Island, NY</p>
+                        <h3 class="project-title">Jesters</h3>
+                        <p class="project-subtitle">Long Island, NY</p>
                     </div>
-                  </div>
+                </div>
                 
-                  <p class="project-description" style="margin-top:8px; position: relative; z-index: 2;">
+                <p class="project-description" style="margin-top:8px; position: relative; z-index: 2;">
                     Local band creating original pop-rock music, performing at venues across Long Island and building a community of music lovers.
                     <br><a href="https://jestersband.com" target="_blank" style="color:#8B4513;text-decoration:underline;">Visit site</a>
-                  </p>
+                </p>
                 
-                  <!-- Background video -->
-                  <video class="jesters-bg-video" muted loop autoplay playsinline>
+                <!-- Background video -->
+                <video class="jesters-bg-video" muted loop autoplay playsinline>
                     <source src="videos/jesters-teaser.mp4" type="video/mp4">
                     Sorry—your browser doesn't support embedded videos.
-                  </video>
-                </div>
+                </video>
             </div>
         </div>
         
