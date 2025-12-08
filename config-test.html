@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Config Test</title>
+</head>
+<body>
+    <h1>Config Loading Test</h1>
+    <div id="result">Loading...</div>
+
+    <script src="config.js"></script>
+    <script>
+        const resultDiv = document.getElementById('result');
+        
+        if (typeof SPOTIFY_CONFIG !== 'undefined') {
+            resultDiv.innerHTML = `
+                <h2 style="color: green;">✅ Config Loaded Successfully!</h2>
+                <p>Client ID: ${SPOTIFY_CONFIG.CLIENT_ID}</p>
+                <p>Redirect URI: ${SPOTIFY_CONFIG.REDIRECT_URI}</p>
+            `;
+        } else {
+            resultDiv.innerHTML = `
+                <h2 style="color: red;">❌ Config Not Loaded</h2>
+                <p>Possible issues:</p>
+                <ul>
+                    <li>config.js doesn't exist in this folder</li>
+                    <li>You're opening file:// instead of http://</li>
+                    <li>config.js has a syntax error</li>
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>
