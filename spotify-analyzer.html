@@ -1147,7 +1147,8 @@
         if (typeof SPOTIFY_CONFIG === 'undefined') {
             const SPOTIFY_CONFIG = {
                 CLIENT_ID: '713c0927a0fd4effa8514e8798e52844',
-                REDIRECT_URI: window.location.origin + window.location.pathname
+                // Use specific redirect URI so it works on all devices
+                REDIRECT_URI: 'https://lucadigrigoli.com/spotify-analyzer.html'
             };
             // Make it global
             window.SPOTIFY_CONFIG = SPOTIFY_CONFIG;
