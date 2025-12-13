@@ -2,111 +2,166 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Site Navigator - lucadigrigoli.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>site map / lucadigrigoli.com</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Century Schoolbook', serif;
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fafafa;
+            color: #222;
+            line-height: 1.7;
         }
-        .folder, .file {
-            margin: 10px 0;
-            padding: 5px;
+        
+        h1 {
+            font-size: 1.4em;
+            font-weight: normal;
+            margin-bottom: 8px;
+            color: #111;
         }
-        .folder::before {
-            content: "📁";
-            margin-right: 10px;
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
         }
-        .file::before {
-            content: "📄";
-            margin-right: 10px;
+        
+        .section {
+            margin-bottom: 35px;
         }
-        .indent {
-            margin-left: 30px;
+        
+        .section-title {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
         }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #999;
+        }
+        
         a {
-            text-decoration: none;
             color: #0066cc;
+            text-decoration: none;
         }
+        
         a:hover {
             text-decoration: underline;
+        }
+        
+        .note {
+            color: #666;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+        
+        .tree-view {
+            background: #f5f5f5;
+            padding: 20px;
+            border-left: 2px solid #ccc;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        
+        .tree-view pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            li {
+                padding-left: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>lucadigrigoli.com - Site Navigator</h1>
+    <h1>/ site navigation</h1>
+    <p class="subtitle">quick links to everything on lucadigrigoli.com</p>
     
-    <div class="file">
-        <a href="/index.html">Main Page (index.html)</a>
+    <div class="section">
+        <div class="section-title">music stuff</div>
+        <ul>
+            <li><a href="/neverreallyover.html">never really over</a> <span class="note">latest single</span></li>
+            <li><a href="/spotify-analyzer.html">spotify analyzer</a> <span class="note">see your listening stats</span></li>
+        </ul>
     </div>
     
-    <div class="file">
-        <a href="/navigate.html">navigate.html</a>
+    <div class="section">
+        <div class="section-title">restaurant sites</div>
+        <ul>
+            <li><a href="/pizza/marios/index.html">mario's pizza</a></li>
+            <li><a href="/pizza/max/index.html">max's pizzeria</a></li>
+            <li><a href="/pizza/giannas kitchen/index.html">gianna's kitchen</a></li>
+            <li><a href="/pizza/annies/index.html">annie's</a></li>
+            <li><a href="/pizza/basil/index.html">basil</a></li>
+            <li><a href="/pizza/nates/index.html">nate's</a></li>
+            <li><a href="/pizza/build/index.html">restaurant builder</a> <span class="note">template tool</span></li>
+        </ul>
     </div>
     
-    <div class="file">
-        <a href="/neverreallyover.html">neverreallyover.html</a>
+    <div class="section">
+        <div class="section-title">experimental / tools</div>
+        <ul>
+            <li><a href="/experimental/ar/index.html">ar experience</a></li>
+            <li><a href="/experimental/heicconvert.html">heic converter</a> <span class="note">convert iphone photos</span></li>
+            <li><a href="/semaphore.html">semaphore</a></li>
+        </ul>
     </div>
     
-    <div class="folder">
-        <a href="/experimental">experimental</a>
-        <div class="indent">
-            <div class="file">
-                <a href="/experimental/heicconvert.html">heicconvert.html</a>
-            </div>
-            <div class="file">
-                <a href="/experimental/notify.html">notify.html</a>
-            </div>
-        </div>
+    <div class="section">
+        <div class="section-title">other pages</div>
+        <ul>
+            <li><a href="/index.html">home</a></li>
+            <li><a href="/oldlucadigrigoli.com/index.html">old site version</a> <span class="note">archive</span></li>
+        </ul>
     </div>
     
-    <div class="folder">
-        <a href="/pizza">pizza</a>
-        <div class="indent">
-            <div class="folder">
-                <a href="/pizza/marios">marios</a>
-                <div class="indent">
-                    <div class="file">
-                        <a href="/pizza/marios/index.html">index.html</a>
-                    </div>
-                </div>
-            </div>
-            <div class="folder">
-                <a href="/pizza/max">max</a>
-                <div class="indent">
-                    <div class="file">
-                        <a href="/pizza/max/index.html">index.html</a>
-                    </div>
-                </div>
-            </div>
-            <div class="folder">
-                <a href="/pizza/nates">nates</a>
-                <div class="indent">
-                    <div class="file">
-                        <a href="/pizza/nates/index.html">index.html</a>
-                    </div>
-                </div>
-            </div>
-            <div class="folder">
-                <a href="/pizza/build">build</a>
-                <div class="indent">
-                    <div class="file">
-                        <a href="/pizza/build/index.html">index.html</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="tree-view">
+        <pre>full file tree:
+
+.
+├── <a href="/">index.html</a>
+├── <a href="/neverreallyover.html">neverreallyover.html</a>
+├── <a href="/spotify-analyzer.html">spotify-analyzer.html</a>
+├── <a href="/semaphore.html">semaphore.html</a>
+├── experimental/
+│   ├── ar/
+│   │   └── <a href="/experimental/ar/index.html">index.html</a>
+│   └── <a href="/experimental/heicconvert.html">heicconvert.html</a>
+├── pizza/
+│   ├── <a href="/pizza/marios/index.html">marios/</a>
+│   ├── <a href="/pizza/max/index.html">max/</a>
+│   ├── <a href="/pizza/giannas kitchen/index.html">giannas kitchen/</a>
+│   ├── <a href="/pizza/annies/index.html">annies/</a>
+│   ├── <a href="/pizza/basil/index.html">basil/</a>
+│   ├── <a href="/pizza/nates/index.html">nates/</a>
+│   └── <a href="/pizza/build/index.html">build/</a>
+└── oldlucadigrigoli.com/
+    └── <a href="/oldlucadigrigoli.com/index.html">index.html</a></pre>
     </div>
-    
-    <div class="folder">
-        <a href="/oldlucadigrigoli.com">oldlucadigrigoli.com</a>
-        <div class="indent">
-            <div class="file">
-                <a href="/oldlucadigrigoli.com/index.html">index.html</a>
-            </div>
-        </div>
-    </div>
-    
 </body>
 </html>
