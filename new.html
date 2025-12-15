@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technicolor Daydream (feat. Jesters) - Luca DiGrigoli</title>
+    <meta name="description" content="Pre-save Technicolor Daydream (feat. Jesters) by Luca DiGrigoli on Spotify">
+    <meta property="og:title" content="Technicolor Daydream (feat. Jesters) - Luca DiGrigoli">
+    <meta property="og:description" content="Pre-save now on Spotify - Available December 26, 2025">
+    <meta property="og:image" content="https://distrokid.imgix.net/http%3A%2F%2Fgather.fandalism.com%2F3266466--A3312D0F-2261-4347-891730E8B788A4F9--0--10745236--TechnicolorDaydream.png?fm=jpg&q=75&w=800">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #080808;
+            --text-primary: #e8e8e8;
+            --text-dim: #666;
+            --bulb-color: #ffaa44;
+            --spotify-green: #1DB954;
+            --spotify-green-hover: #1ed760;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient room darkness with light cone from bulb */
+        .room-ambient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse 80% 50% at 12% 8%, rgba(255, 170, 68, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 80% at 85% 85%, rgba(100, 150, 255, 0.04) 0%, transparent 40%),
+                linear-gradient(to bottom, #0a0a0a, #050505);
+            pointer-events: none;
+            z-index: 0;
+            animation: ambient-flicker 4s infinite;
+        }
+
+        /* Film grain */
+        .grain {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            animation: grain-shift 0.5s steps(1) infinite;
+        }
+
+        @keyframes grain-shift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-2%, -2%); }
+            50% { transform: translate(2%, 2%); }
+            75% { transform: translate(-1%, 1%); }
+        }
+
+        /* ============================================
+           REALISTIC LIGHTBULB
+           ============================================ */
+        .lightbulb-fixture {
+            position: fixed;
+            top: 0;
+            left: 12%;
+            z-index: 5;
+            filter: drop-shadow(0 0 30px rgba(255, 170, 68, 0.3));
+        }
+
+        /* Ceiling mount */
+        .ceiling-mount {
+            width: 50px;
+            height: 20px;
+            background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+            margin: 0 auto;
+            border-radius: 0 0 8px 8px;
+            position: relative;
+            box-shadow: 
+                inset 0 -3px 6px rgba(0,0,0,0.5),
+                0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Wire/cord */
+        .wire {
+            width: 3px;
+            height: 100px;
+            background: linear-gradient(90deg, #1a1a1a, #2a2a2a, #1a1a1a);
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 1px 0 2px rgba(0,0,0,0.5);
+        }
+
+        /* Socket */
+        .socket {
+            width: 28px;
+            height: 35px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .socket-cap {
+            width: 28px;
+            height: 12px;
+            background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+            border-radius: 4px 4px 0 0;
+            box-shadow: 
+                inset 0 2px 3px rgba(255,255,255,0.05),
+                inset 0 -2px 4px rgba(0,0,0,0.5);
+        }
+
+        .socket-threads {
+            width: 26px;
+            height: 20px;
+            margin: 0 auto;
+            background: repeating-linear-gradient(
+                to bottom,
+                #3d3d3d 0px,
+                #2a2a2a 2px,
+                #1f1f1f 4px
+            );
+            border-radius: 2px;
+            box-shadow: 
+                inset 2px 0 3px rgba(0,0,0,0.4),
+                inset -2px 0 3px rgba(0,0,0,0.4);
+        }
+
+        /* Glass bulb */
+        .bulb-glass {
+            width: 70px;
+            height: 85px;
+            margin: -5px auto 0;
+            position: relative;
+            animation: bulb-flicker 6s infinite;
+        }
+
+        .bulb-outer {
+            width: 70px;
+            height: 85px;
+            background: radial-gradient(ellipse 70% 60% at 35% 30%, 
+                rgba(255, 240, 200, 0.25) 0%,
+                rgba(255, 200, 120, 0.15) 30%,
+                rgba(255, 170, 68, 0.08) 60%,
+                transparent 100%);
+            border: 1px solid rgba(255, 200, 150, 0.1);
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            box-shadow:
+                inset 0 0 30px rgba(255, 180, 100, 0.2),
+                inset -10px -10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Filament */
+        .filament {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px;
+            height: 30px;
+        }
+
+        .filament-wire {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                #ff6600,
+                #ffaa00,
+                #ffcc66,
+                #ffaa00,
+                #ff6600);
+            border-radius: 1px;
+            box-shadow: 
+                0 0 8px #ffaa44,
+                0 0 15px #ff8822,
+                0 0 25px rgba(255, 136, 34, 0.6),
+                0 0 40px rgba(255, 136, 34, 0.4);
+            animation: filament-glow 6s infinite;
+        }
+
+        .filament-wire:nth-child(1) {
+            height: 28px;
+            left: 6px;
+            top: 1px;
+            transform: skewX(-8deg);
+        }
+
+        .filament-wire:nth-child(2) {
+            height: 28px;
+            right: 6px;
+            top: 1px;
+            transform: skewX(8deg);
+        }
+
+        .filament-wire:nth-child(3) {
+            height: 18px;
+            left: 50%;
+            top: 6px;
+            transform: translateX(-50%);
+        }
+
+        /* Coiled part at top of filament */
+        .filament-coil {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 8px;
+            border: 2px solid transparent;
+            border-top-color: #ffcc66;
+            border-radius: 50%;
+            box-shadow: 
+                0 -2px 6px #ffaa44,
+                0 -2px 12px rgba(255, 136, 34, 0.8);
+            animation: filament-glow 6s infinite;
+        }
+
+        /* Glass reflection */
+        .bulb-reflection {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 20px;
+            height: 35px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%,
+                transparent 100%);
+            border-radius: 50%;
+            transform: rotate(-20deg);
+        }
+
+        /* Light rays emanating from bulb */
+        .light-rays {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            pointer-events: none;
+            animation: rays-flicker 6s infinite;
+        }
+
+        .light-rays::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center,
+                rgba(255, 170, 68, 0.15) 0%,
+                rgba(255, 170, 68, 0.05) 30%,
+                transparent 60%);
+        }
+
+        /* ============================================
+           REALISTIC CRT TV
+           ============================================ */
+        .crt-tv {
+            position: fixed;
+            bottom: 4%;
+            right: 6%;
+            z-index: 3;
+            transform: perspective(800px) rotateY(-8deg) rotateX(2deg);
+        }
+
+        .tv-body {
+            width: 320px;
+            height: 280px;
+            background: linear-gradient(145deg, #3a3632, #28251f, #1f1c18);
+            border-radius: 20px 20px 15px 15px;
+            padding: 20px;
+            position: relative;
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.05),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.5),
+                0 30px 60px rgba(0, 0, 0, 0.8),
+                0 10px 30px rgba(0, 0, 0, 0.6),
+                0 0 80px rgba(80, 120, 200, 0.08);
+        }
+
+        /* TV brand label */
+        .tv-brand {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            color: #555;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Screen bezel */
+        .screen-bezel {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, #1a1816, #0f0e0c);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow:
+                inset 0 2px 8px rgba(0, 0, 0, 0.8),
+                inset 0 0 2px rgba(255, 255, 255, 0.05);
+        }
+
+        /* CRT Screen */
+        .crt-screen {
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow:
+                inset 0 0 50px rgba(0, 0, 0, 0.9),
+                inset 0 0 10px rgba(100, 150, 255, 0.05);
+        }
+
+        /* Curved glass effect */
+        .crt-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse 120% 120% at 50% 50%,
+                transparent 0%,
+                transparent 60%,
+                rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Screen reflection/glare */
+        .screen-glare {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 40%;
+            height: 30%;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.03) 0%,
+                transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 11;
+        }
+
+        /* Rainbow color bars */
+        .color-bars {
+            display: flex;
+            width: 100%;
+            height: 75%;
+            position: relative;
+        }
+
+        .color-bars::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.03) 0px,
+                    rgba(0, 0, 0, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            animation: scanlines 10s linear infinite;
+        }
+
+        .bar {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg,
+                rgba(0, 0, 0, 0.1) 0%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        .bar:nth-child(1) { background: linear-gradient(to bottom, #c8c8c8, #a0a0a0); }
+        .bar:nth-child(2) { background: linear-gradient(to bottom, #c8c800, #a0a000); }
+        .bar:nth-child(3) { background: linear-gradient(to bottom, #00c8c8, #00a0a0); }
+        .bar:nth-child(4) { background: linear-gradient(to bottom, #00c800, #00a000); }
+        .bar:nth-child(5) { background: linear-gradient(to bottom, #c800c8, #a000a0); }
+        .bar:nth-child(6) { background: linear-gradient(to bottom, #c80000, #a00000); }
+        .bar:nth-child(7) { background: linear-gradient(to bottom, #0000c8, #0000a0); }
+
+        /* Bottom black and color reference bars */
+        .bottom-bars {
+            height: 25%;
+            display: flex;
+        }
+
+        .bottom-bars .segment {
+            flex: 1;
+        }
+
+        .bottom-bars .segment:nth-child(1) { background: #0000a0; }
+        .bottom-bars .segment:nth-child(2) { background: #000000; }
+        .bottom-bars .segment:nth-child(3) { background: #a000a0; }
+        .bottom-bars .segment:nth-child(4) { background: #000000; }
+        .bottom-bars .segment:nth-child(5) { background: #00a0a0; }
+        .bottom-bars .segment:nth-child(6) { background: #000000; }
+        .bottom-bars .segment:nth-child(7) { background: #c8c8c8; }
+
+        /* Scanline moving down effect */
+        .scanline-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.03);
+            animation: scanline-move 8s linear infinite;
+            z-index: 5;
+        }
+
+        /* VHS tracking noise */
+        .tracking-noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 50%,
+                rgba(0, 0, 0, 0.02) 50%,
+                rgba(0, 0, 0, 0.02) 100%
+            );
+            background-size: 100% 4px;
+            animation: tracking 0.2s steps(4) infinite;
+            pointer-events: none;
+            z-index: 6;
+            opacity: 0.5;
+        }
+
+        /* TV Controls */
+        .tv-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            margin-top: 12px;
+            padding-right: 10px;
+        }
+
+        .knob {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(145deg, #4a4640, #2a2824);
+            border-radius: 50%;
+            box-shadow:
+                inset 0 2px 3px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+                0 2px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .knob::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background: #666;
+            border-radius: 1px;
+        }
+
+        .power-led {
+            width: 8px;
+            height: 8px;
+            background: #22cc44;
+            border-radius: 50%;
+            box-shadow:
+                0 0 6px #22cc44,
+                0 0 12px rgba(34, 204, 68, 0.5);
+            animation: led-pulse 2s ease-in-out infinite;
+        }
+
+        /* Speaker grille */
+        .speaker-grille {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            width: 50px;
+            height: 35px;
+            background: repeating-linear-gradient(
+                90deg,
+                #1a1816 0px,
+                #1a1816 2px,
+                #28251f 2px,
+                #28251f 4px
+            );
+            border-radius: 3px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* CRT glow on surroundings */
+        .crt-glow {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 500px;
+            height: 400px;
+            background: radial-gradient(ellipse at 70% 70%,
+                rgba(100, 150, 200, 0.06) 0%,
+                transparent 60%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .album-container {
+            text-align: center;
+            max-width: 420px;
+        }
+
+        .album-art {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 35px;
+            position: relative;
+        }
+
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .album-art:hover img {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 
+                0 35px 100px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 80px rgba(255, 170, 68, 0.08);
+        }
+
+        .track-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .artist-name {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .featuring {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            opacity: 0.6;
+            margin-bottom: 30px;
+        }
+
+        /* Countdown */
+        .countdown-container {
+            margin-bottom: 35px;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-unit {
+            text-align: center;
+        }
+
+        .countdown-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 0 30px rgba(255, 170, 68, 0.3);
+        }
+
+        .countdown-unit-label {
+            font-size: 0.55rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        .countdown-separator {
+            font-size: 2rem;
+            color: var(--text-dim);
+            opacity: 0.3;
+            line-height: 1;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        /* Spotify button */
+        .presave-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--spotify-green);
+            color: #000;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 25px rgba(29, 185, 84, 0.35),
+                0 0 0 0 rgba(29, 185, 84, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presave-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .presave-btn:hover {
+            background: var(--spotify-green-hover);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 35px rgba(29, 185, 84, 0.45),
+                0 0 0 0 rgba(29, 185, 84, 0.4);
+        }
+
+        .presave-btn:hover::before {
+            left: 100%;
+        }
+
+        .presave-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .spotify-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .footer a {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes bulb-flicker {
+            0%, 100% { opacity: 1; }
+            4% { opacity: 0.92; }
+            8% { opacity: 1; }
+            12% { opacity: 0.95; }
+            16% { opacity: 1; }
+            47% { opacity: 1; }
+            48% { opacity: 0.75; }
+            49% { opacity: 0.85; }
+            50% { opacity: 1; }
+            72% { opacity: 1; }
+            73% { opacity: 0.9; }
+            74% { opacity: 0.97; }
+            75% { opacity: 1; }
+        }
+
+        @keyframes filament-glow {
+            0%, 100% { 
+                filter: brightness(1);
+                box-shadow: 0 0 8px #ffaa44, 0 0 15px #ff8822, 0 0 25px rgba(255, 136, 34, 0.6);
+            }
+            4% { 
+                filter: brightness(0.85);
+                box-shadow: 0 0 5px #ffaa44, 0 0 10px #ff8822, 0 0 18px rgba(255, 136, 34, 0.4);
+            }
+            8% { filter: brightness(1); }
+            48% { 
+                filter: brightness(0.7);
+                box-shadow: 0 0 4px #ffaa44, 0 0 8px #ff8822, 0 0 12px rgba(255, 136, 34, 0.3);
+            }
+            50% { filter: brightness(1); }
+            73% { filter: brightness(0.88); }
+            75% { filter: brightness(1); }
+        }
+
+        @keyframes rays-flicker {
+            0%, 100% { opacity: 1; }
+            4% { opacity: 0.7; }
+            8% { opacity: 1; }
+            48% { opacity: 0.5; }
+            50% { opacity: 1; }
+            73% { opacity: 0.75; }
+            75% { opacity: 1; }
+        }
+
+        @keyframes ambient-flicker {
+            0%, 100% { opacity: 1; }
+            4% { opacity: 0.85; }
+            8% { opacity: 1; }
+            48% { opacity: 0.6; }
+            50% { opacity: 1; }
+            73% { opacity: 0.8; }
+            75% { opacity: 1; }
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        @keyframes scanline-move {
+            0% { top: -3px; }
+            100% { top: 100%; }
+        }
+
+        @keyframes tracking {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 16px; }
+        }
+
+        @keyframes led-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .crt-tv {
+                transform: perspective(800px) rotateY(-5deg) scale(0.8);
+                right: 2%;
+                bottom: 2%;
+            }
+
+            .lightbulb-fixture {
+                transform: scale(0.85);
+                left: 8%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .crt-tv {
+                transform: scale(0.6);
+                right: -5%;
+                bottom: 0;
+                opacity: 0.5;
+            }
+
+            .lightbulb-fixture {
+                transform: scale(0.7);
+                left: 5%;
+            }
+
+            .album-art {
+                width: 240px;
+                height: 240px;
+            }
+
+            .track-title {
+                font-size: 1.8rem;
+            }
+
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .crt-tv {
+                display: none;
+            }
+
+            .crt-glow {
+                display: none;
+            }
+
+            .lightbulb-fixture {
+                left: 50%;
+                transform: translateX(-50%) scale(0.6);
+            }
+
+            .room-ambient {
+                background: 
+                    radial-gradient(ellipse 100% 40% at 50% 5%, rgba(255, 170, 68, 0.1) 0%, transparent 50%),
+                    linear-gradient(to bottom, #0a0a0a, #050505);
+            }
+
+            .album-art {
+                width: 200px;
+                height: 200px;
+            }
+
+            .track-title {
+                font-size: 1.5rem;
+            }
+
+            .countdown {
+                gap: 12px;
+            }
+
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+
+            .presave-btn {
+                padding: 14px 28px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+    <div class="room-ambient"></div>
+
+    <!-- Lightbulb -->
+    <div class="lightbulb-fixture">
+        <div class="ceiling-mount"></div>
+        <div class="wire"></div>
+        <div class="socket">
+            <div class="socket-cap"></div>
+            <div class="socket-threads"></div>
+        </div>
+        <div class="bulb-glass">
+            <div class="light-rays"></div>
+            <div class="bulb-outer">
+                <div class="filament">
+                    <div class="filament-wire"></div>
+                    <div class="filament-wire"></div>
+                    <div class="filament-wire"></div>
+                    <div class="filament-coil"></div>
+                </div>
+                <div class="bulb-reflection"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRT Television -->
+    <div class="crt-glow"></div>
+    <div class="crt-tv">
+        <div class="tv-body">
+            <div class="screen-bezel">
+                <div class="crt-screen">
+                    <div class="screen-glare"></div>
+                    <div class="color-bars">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="bottom-bars">
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                        <div class="segment"></div>
+                    </div>
+                    <div class="scanline-bar"></div>
+                    <div class="tracking-noise"></div>
+                </div>
+            </div>
+            <div class="tv-controls">
+                <div class="speaker-grille"></div>
+                <div class="knob"></div>
+                <div class="knob"></div>
+                <div class="power-led"></div>
+            </div>
+            <div class="tv-brand">TRINITRON</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="album-container">
+            <div class="album-art">
+                <img src="https://distrokid.imgix.net/http%3A%2F%2Fgather.fandalism.com%2F3266466--A3312D0F-2261-4347-891730E8B788A4F9--0--10745236--TechnicolorDaydream.png?fm=jpg&q=75&w=800&s=97bd6ae6da1be90b25b875739c2e250a" alt="Technicolor Daydream Album Art">
+            </div>
+
+            <h1 class="track-title">Technicolor Daydream</h1>
+            <p class="artist-name">Luca DiGrigoli</p>
+            <p class="featuring">feat. Jesters</p>
+
+            <div class="countdown-container">
+                <p class="countdown-label">Available in</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-unit">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-unit-label">Days</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-unit-label">Hours</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-unit-label">Min</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-unit-label">Sec</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://distrokid.com/hyperfollow/lucadigrigoli/technicolor-daydream-feat-jesters" class="presave-btn" target="_blank" rel="noopener">
+                <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                </svg>
+                Pre-Save on Spotify
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <a href="https://lucadigrigoli.com">lucadigrigoli.com</a>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const releaseDate = new Date('December 26, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = releaseDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="font-size: 1.2rem; color: var(--spotify-green);">OUT NOW!</p>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update immediately and then every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
