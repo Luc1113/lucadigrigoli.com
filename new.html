@@ -990,28 +990,65 @@
 
         @media (max-width: 768px) {
             .crt-tv {
-                transform: scale(0.6);
-                right: -5%;
-                bottom: 0;
-                opacity: 0.5;
+                transform: scale(0.55);
+                right: -8%;
+                bottom: -2%;
+                opacity: 0.4;
             }
 
             .lightbulb-fixture {
-                transform: scale(0.7);
-                left: 5%;
+                transform: scale(0.65);
+                left: 3%;
             }
 
             .album-art {
-                width: 240px;
-                height: 240px;
+                width: 220px;
+                height: 220px;
             }
 
             .track-title {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
             }
 
             .countdown-value {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .countdown-separator {
+                font-size: 1.5rem;
+            }
+
+            .presave-btn {
+                padding: 14px 28px;
+                font-size: 0.8rem;
+            }
+
+            .share-btn {
+                padding: 12px 24px;
+                font-size: 0.7rem;
+            }
+
+            .story-modal-content {
+                padding: 20px;
+                margin: 10px;
+                max-width: 100%;
+            }
+
+            .story-preview-container {
+                max-width: 220px;
+            }
+
+            .modal-title {
+                font-size: 0.75rem;
+            }
+
+            .download-btn {
+                padding: 12px 20px;
+                font-size: 0.7rem;
             }
         }
 
@@ -1026,35 +1063,184 @@
 
             .lightbulb-fixture {
                 left: 50%;
-                transform: translateX(-50%) scale(0.6);
+                transform: translateX(-50%) scale(0.5);
             }
 
             .room-ambient {
                 background: 
-                    radial-gradient(ellipse 100% 40% at 50% 5%, rgba(255, 170, 68, 0.1) 0%, transparent 50%),
+                    radial-gradient(ellipse 100% 40% at 50% 5%, rgba(255, 170, 68, 0.12) 0%, transparent 50%),
                     linear-gradient(to bottom, #0a0a0a, #050505);
             }
 
+            .main-content {
+                padding: 30px 15px;
+                min-height: calc(100vh - 60px);
+                justify-content: flex-start;
+                padding-top: 140px;
+            }
+
+            .album-container {
+                width: 100%;
+            }
+
             .album-art {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
+                margin-bottom: 25px;
             }
 
             .track-title {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+                padding: 0 10px;
+            }
+
+            .artist-name {
+                font-size: 0.8rem;
+            }
+
+            .featuring {
+                font-size: 0.7rem;
+                margin-bottom: 20px;
+            }
+
+            .countdown-container {
+                margin-bottom: 25px;
+            }
+
+            .countdown-label {
+                font-size: 0.6rem;
+                margin-bottom: 12px;
             }
 
             .countdown {
-                gap: 12px;
+                gap: 8px;
             }
 
             .countdown-value {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+            }
+
+            .countdown-unit-label {
+                font-size: 0.5rem;
+                margin-top: 4px;
+            }
+
+            .countdown-separator {
+                font-size: 1.2rem;
             }
 
             .presave-btn {
-                padding: 14px 28px;
-                font-size: 0.8rem;
+                padding: 14px 24px;
+                font-size: 0.75rem;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .spotify-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .share-btn {
+                padding: 12px 20px;
+                font-size: 0.65rem;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                margin-top: 12px;
+            }
+
+            .share-icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .footer {
+                bottom: 15px;
+            }
+
+            .footer a {
+                font-size: 0.6rem;
+            }
+
+            /* Mobile modal */
+            .story-modal {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 60px;
+                overflow-y: auto;
+            }
+
+            .story-modal-content {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+
+            .modal-close {
+                top: 10px;
+                right: 15px;
+                font-size: 24px;
+            }
+
+            .modal-title {
+                font-size: 0.7rem;
+                margin-bottom: 20px;
+            }
+
+            .story-preview-container {
+                max-width: 180px;
+                margin-bottom: 20px;
+            }
+
+            .download-btn {
+                padding: 14px 20px;
+                font-size: 0.7rem;
+                width: 100%;
+            }
+
+            .modal-hint {
+                font-size: 0.65rem;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .main-content {
+                padding-top: 120px;
+            }
+
+            .album-art {
+                width: 160px;
+                height: 160px;
+            }
+
+            .track-title {
+                font-size: 1.25rem;
+            }
+
+            .countdown-value {
+                font-size: 1.1rem;
+            }
+
+            .countdown-separator {
+                font-size: 1rem;
+            }
+
+            .presave-btn,
+            .share-btn {
+                max-width: 260px;
+            }
+        }
+
+        /* Fix for iOS safe areas */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .footer {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .main-content {
+                padding-bottom: calc(60px + env(safe-area-inset-bottom));
             }
         }
     </style>
@@ -1185,16 +1371,16 @@
                         <canvas id="storyCanvas" width="1080" height="1920"></canvas>
                     </div>
                     <div class="modal-actions">
-                        <button class="download-btn" onclick="downloadStory()">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                        <button class="download-btn" id="shareButton" onclick="shareToInstagram()">
+                            <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                                <polyline points="16 6 12 2 8 6"></polyline>
+                                <line x1="12" y1="2" x2="12" y2="15"></line>
                             </svg>
-                            Download Story
+                            <span class="btn-text">Share to Instagram</span>
                         </button>
                     </div>
-                    <p class="modal-hint">Save and share to your Instagram Story!</p>
+                    <p class="modal-hint" id="modalHint">Tap to share directly to your Instagram Story!</p>
                 </div>
             </div>
         </div>
@@ -1231,12 +1417,42 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
+        // Detect mobile device
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Check if Web Share API is available with file support
+        function canShareFiles() {
+            return navigator.canShare && navigator.share;
+        }
+
+        // Update button text based on device
+        function updateShareButton() {
+            const btnText = document.querySelector('#shareButton .btn-text');
+            const btnIcon = document.querySelector('#shareButton .btn-icon');
+            const hint = document.getElementById('modalHint');
+            
+            if (isMobile() && canShareFiles()) {
+                btnText.textContent = 'Share to Instagram';
+                hint.textContent = 'Tap to share directly to your Instagram Story!';
+                // Share icon
+                btnIcon.innerHTML = '<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line>';
+            } else {
+                btnText.textContent = 'Download Story';
+                hint.textContent = 'Save the image and share to your Instagram Story!';
+                // Download icon
+                btnIcon.innerHTML = '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>';
+            }
+        }
+
         // Story Modal Functions
         function openStoryModal() {
             const modal = document.getElementById('storyModal');
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             generateStoryCard();
+            updateShareButton();
         }
 
         function closeStoryModal() {
@@ -1386,7 +1602,37 @@
             ctx.closePath();
         }
 
-        // Download Story
+        // Share to Instagram (uses Web Share API on mobile, falls back to download)
+        async function shareToInstagram() {
+            const canvas = document.getElementById('storyCanvas');
+            
+            try {
+                // Convert canvas to blob
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                const file = new File([blob], 'technicolor-daydream-story.png', { type: 'image/png' });
+                
+                // Check if we can use Web Share API with files
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        files: [file],
+                        title: 'Technicolor Daydream - Pre-save now!',
+                        text: 'Pre-save my new single "Technicolor Daydream" on Spotify! 🎵'
+                    });
+                    closeStoryModal();
+                } else {
+                    // Fallback to download
+                    downloadStory();
+                }
+            } catch (err) {
+                // User cancelled or error occurred
+                if (err.name !== 'AbortError') {
+                    console.log('Share failed, falling back to download');
+                    downloadStory();
+                }
+            }
+        }
+
+        // Download Story (fallback for desktop)
         function downloadStory() {
             const canvas = document.getElementById('storyCanvas');
             const link = document.createElement('a');
