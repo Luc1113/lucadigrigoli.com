@@ -720,6 +720,152 @@
             height: 24px;
         }
 
+        /* Share Button */
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .share-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Story Modal */
+        .story-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .story-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .story-modal-content {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 25px;
+        }
+
+        .story-preview-container {
+            width: 100%;
+            max-width: 270px;
+            margin: 0 auto 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .story-preview-container canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(220, 39, 67, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(220, 39, 67, 0.4);
+        }
+
+        .modal-hint {
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            opacity: 0.6;
+        }
+
         /* Footer */
         .footer {
             position: fixed;
@@ -1020,6 +1166,37 @@
                 </svg>
                 Pre-Save on Spotify
             </a>
+
+            <button class="share-btn" onclick="openStoryModal()">
+                <svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Share to Story
+            </button>
+
+            <!-- Story Modal -->
+            <div class="story-modal" id="storyModal">
+                <div class="story-modal-content">
+                    <button class="modal-close" onclick="closeStoryModal()">×</button>
+                    <h3 class="modal-title">Your Instagram Story</h3>
+                    <div class="story-preview-container">
+                        <canvas id="storyCanvas" width="1080" height="1920"></canvas>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="download-btn" onclick="downloadStory()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download Story
+                        </button>
+                    </div>
+                    <p class="modal-hint">Save and share to your Instagram Story!</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -1053,6 +1230,170 @@
         // Update immediately and then every second
         updateCountdown();
         setInterval(updateCountdown, 1000);
+
+        // Story Modal Functions
+        function openStoryModal() {
+            const modal = document.getElementById('storyModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            generateStoryCard();
+        }
+
+        function closeStoryModal() {
+            const modal = document.getElementById('storyModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on background click
+        document.getElementById('storyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStoryModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeStoryModal();
+            }
+        });
+
+        // Generate Story Card
+        function generateStoryCard() {
+            const canvas = document.getElementById('storyCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = 1080;
+            const height = 1920;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+
+            // Background gradient (dark moody)
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+            bgGradient.addColorStop(0, '#0a0a0a');
+            bgGradient.addColorStop(0.5, '#111111');
+            bgGradient.addColorStop(1, '#080808');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Add subtle warm glow from top left (like the lightbulb)
+            const glowGradient = ctx.createRadialGradient(150, 200, 0, 150, 200, 600);
+            glowGradient.addColorStop(0, 'rgba(255, 170, 68, 0.15)');
+            glowGradient.addColorStop(0.5, 'rgba(255, 170, 68, 0.05)');
+            glowGradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = glowGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Add cool glow from bottom right (like CRT)
+            const crtGlow = ctx.createRadialGradient(width - 200, height - 300, 0, width - 200, height - 300, 500);
+            crtGlow.addColorStop(0, 'rgba(100, 150, 255, 0.08)');
+            crtGlow.addColorStop(1, 'transparent');
+            ctx.fillStyle = crtGlow;
+            ctx.fillRect(0, 0, width, height);
+
+            // Load album art
+            const albumImg = new Image();
+            albumImg.crossOrigin = 'anonymous';
+            albumImg.onload = function() {
+                // Album art with shadow
+                const artSize = 650;
+                const artX = (width - artSize) / 2;
+                const artY = 480;
+
+                // Shadow
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+                ctx.shadowBlur = 80;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 30;
+
+                // Draw album art with rounded corners
+                ctx.save();
+                roundRect(ctx, artX, artY, artSize, artSize, 16);
+                ctx.clip();
+                ctx.drawImage(albumImg, artX, artY, artSize, artSize);
+                ctx.restore();
+
+                // Reset shadow
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+                // "NEW MUSIC" label at top
+                ctx.font = '700 32px "Space Mono", monospace';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.textAlign = 'center';
+                ctx.letterSpacing = '8px';
+                ctx.fillText('NEW MUSIC', width / 2, 200);
+
+                // Track title
+                ctx.font = '300 72px "Crimson Pro", Georgia, serif';
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.fillText('Technicolor', width / 2, artY + artSize + 120);
+                ctx.fillText('Daydream', width / 2, artY + artSize + 200);
+
+                // Artist name
+                ctx.font = '400 36px "Space Mono", monospace';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.fillText('LUCA DIGRIGOLI', width / 2, artY + artSize + 290);
+
+                // Featuring
+                ctx.font = '400 28px "Space Mono", monospace';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.fillText('feat. Jesters', width / 2, artY + artSize + 340);
+
+                // Release date box
+                const boxWidth = 420;
+                const boxHeight = 80;
+                const boxX = (width - boxWidth) / 2;
+                const boxY = artY + artSize + 400;
+
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+                roundRect(ctx, boxX, boxY, boxWidth, boxHeight, 40);
+                ctx.fill();
+
+                ctx.font = '700 28px "Space Mono", monospace';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText('DEC 26, 2025', width / 2, boxY + 52);
+
+                // Pre-save CTA
+                ctx.font = '400 26px "Space Mono", monospace';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fillText('PRE-SAVE NOW ON SPOTIFY', width / 2, height - 180);
+
+                // Swipe up hint
+                ctx.font = '400 24px "Space Mono", monospace';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.fillText('↑ LINK IN BIO', width / 2, height - 100);
+            };
+            albumImg.src = 'https://distrokid.imgix.net/http%3A%2F%2Fgather.fandalism.com%2F3266466--A3312D0F-2261-4347-891730E8B788A4F9--0--10745236--TechnicolorDaydream.png?fm=jpg&q=75&w=800&s=97bd6ae6da1be90b25b875739c2e250a';
+        }
+
+        // Helper function for rounded rectangles
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        // Download Story
+        function downloadStory() {
+            const canvas = document.getElementById('storyCanvas');
+            const link = document.createElement('a');
+            link.download = 'technicolor-daydream-story.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
     </script>
 </body>
 </html>
