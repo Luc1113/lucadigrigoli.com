@@ -661,6 +661,346 @@
             transform: translateY(-2px);
         }
 
+        /* ============================================
+           TECHNICOLOR DAYDREAM RELEASE CARD
+           ============================================ */
+        .release-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            margin: 20px 0;
+            min-height: 320px;
+            border: 3px solid #333;
+            box-shadow: 
+                0 0 0 2px #1a1a1a,
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* CRT TV Background */
+        .release-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            z-index: 0;
+        }
+
+        /* Color bars background */
+        .color-bars-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .color-bars-bg .bar {
+            flex: 1;
+        }
+
+        .color-bars-bg .bar:nth-child(1) { background: linear-gradient(to bottom, #c8c8c8, #808080); }
+        .color-bars-bg .bar:nth-child(2) { background: linear-gradient(to bottom, #c8c800, #808000); }
+        .color-bars-bg .bar:nth-child(3) { background: linear-gradient(to bottom, #00c8c8, #008080); }
+        .color-bars-bg .bar:nth-child(4) { background: linear-gradient(to bottom, #00c800, #008000); }
+        .color-bars-bg .bar:nth-child(5) { background: linear-gradient(to bottom, #c800c8, #800080); }
+        .color-bars-bg .bar:nth-child(6) { background: linear-gradient(to bottom, #c80000, #800000); }
+        .color-bars-bg .bar:nth-child(7) { background: linear-gradient(to bottom, #0000c8, #000080); }
+
+        /* CRT Scanlines */
+        .crt-scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Moving scanline */
+        .crt-scanline-move {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            animation: crt-scan 6s linear infinite;
+            z-index: 3;
+        }
+
+        @keyframes crt-scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* CRT Flicker */
+        .crt-flicker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: transparent;
+            animation: crt-flicker-anim 0.1s infinite;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        @keyframes crt-flicker-anim {
+            0% { opacity: 0.97; }
+            50% { opacity: 1; }
+            100% { opacity: 0.98; }
+        }
+
+        /* Card Content */
+        .release-card-content {
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .release-artwork {
+            width: 140px;
+            height: 140px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.5),
+                0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .release-artwork img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .release-info {
+            flex: 1;
+            color: #fff;
+        }
+
+        .release-badge {
+            display: inline-block;
+            background: #1DB954;
+            color: #000;
+            padding: 4px 12px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(29, 185, 84, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(29, 185, 84, 0.8); }
+        }
+
+        .release-title {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .release-artist {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .release-featuring {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 18px;
+        }
+
+        /* Streaming Buttons */
+        .release-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .stream-btn-mini {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            transition: all 0.3s ease;
+        }
+
+        .stream-btn-mini svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .stream-btn-mini.spotify {
+            background: #1DB954;
+            color: #000;
+        }
+
+        .stream-btn-mini.spotify:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.4);
+        }
+
+        .stream-btn-mini.apple {
+            background: linear-gradient(135deg, #fc3c44, #fa233b);
+            color: #fff;
+        }
+
+        .stream-btn-mini.apple:hover {
+            background: linear-gradient(135deg, #ff5a5f, #fc3c44);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(252, 60, 68, 0.4);
+        }
+
+        .stream-btn-mini.youtube {
+            background: #FF0000;
+            color: #fff;
+        }
+
+        .stream-btn-mini.youtube:hover {
+            background: #ff3333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .stream-btn-mini.bandcamp {
+            background: #1da0c3;
+            color: #fff;
+        }
+
+        .stream-btn-mini.bandcamp:hover {
+            background: #29b8db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 160, 195, 0.4);
+        }
+
+        /* Glitch effect for the card */
+        .release-card.glitching {
+            animation: card-glitch 0.3s ease;
+        }
+
+        .release-card.glitching .release-card-content {
+            animation: content-glitch 0.3s ease;
+        }
+
+        @keyframes card-glitch {
+            0%, 100% { 
+                transform: translate(0); 
+                filter: none;
+            }
+            20% { 
+                transform: translate(-3px, 2px); 
+                filter: hue-rotate(90deg);
+            }
+            40% { 
+                transform: translate(3px, -2px); 
+                filter: hue-rotate(-90deg) saturate(2);
+            }
+            60% { 
+                transform: translate(-2px, -1px); 
+                filter: hue-rotate(45deg);
+            }
+            80% { 
+                transform: translate(2px, 1px); 
+                filter: saturate(1.5);
+            }
+        }
+
+        @keyframes content-glitch {
+            0%, 100% { opacity: 1; }
+            10% { opacity: 0.8; }
+            20% { opacity: 1; }
+            30% { opacity: 0.9; }
+            40% { opacity: 1; }
+            50% { opacity: 0.85; }
+            60% { opacity: 1; }
+        }
+
+        /* VHS noise overlay during glitch */
+        .release-card.glitching::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 2px
+            );
+            animation: vhs-noise 0.1s steps(3) infinite;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        @keyframes vhs-noise {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 10px; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .release-card-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+            }
+
+            .release-artwork {
+                width: 120px;
+                height: 120px;
+            }
+
+            .release-title {
+                font-size: 1.4rem;
+            }
+
+            .release-buttons {
+                justify-content: center;
+            }
+        }
+
         .bandcamp-card {
             background: linear-gradient(135deg, #2d5a9e 0%, #3a7bc8 100%);
             color: white;
@@ -744,7 +1084,7 @@
     <div class="news-banner">
         <div class="news-scroll">
             <span class="news-item">Welcome to the newly redesigned lucadigrigoli.com! </span>
-            <span class="news-item">NEW SINGLE "pretend" out now - streaming everywhere you consume sound waves! </span>
+            <span class="news-item">NEW SINGLE "Technicolor Daydream" feat. Jesters OUT NOW! </span>
             <span class="news-item">it's never really over with you, isn't it? </span>
             <span class="news-item">test message (surely nobody sees this, right?) </span>
             <span class="news-item">SECRET MESSAGE WOAH </span>
@@ -788,13 +1128,58 @@
             <div class="scan-line"></div>
             <h2 class="section-title">latest music releases</h2>
             
-            <div class="bandcamp-card">
-                <div class="bandcamp-card-content">
-                    <h3>♪ I recently set up on Bandcamp!</h3>
-                    <p>Follow me there—it supports me a ton!</p>
-                    <a href="https://lucadigrigoli.bandcamp.com" target="_blank">visit bandcamp</a>
-                    <div class="bandcamp-iframe-wrapper">
-                        <iframe scrolling="no" style="border: 0;width: 100%;height: 50px;" src="https://bandcamp.com/band_follow_button_deluxe/3555710096"></iframe>
+            <!-- Technicolor Daydream Release Card with CRT TV Background -->
+            <div class="release-card" id="releaseCard">
+                <div class="release-card-bg"></div>
+                <div class="color-bars-bg">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="crt-scanlines"></div>
+                <div class="crt-scanline-move"></div>
+                <div class="crt-flicker"></div>
+                
+                <div class="release-card-content">
+                    <div class="release-artwork">
+                        <img src="https://distrokid.imgix.net/http%3A%2F%2Fgather.fandalism.com%2F3266466--A3312D0F-2261-4347-891730E8B788A4F9--0--10745236--TechnicolorDaydream.png?fm=jpg&q=75&w=400" alt="Technicolor Daydream">
+                    </div>
+                    <div class="release-info">
+                        <span class="release-badge">🎵 Out Now</span>
+                        <h3 class="release-title">Technicolor Daydream</h3>
+                        <p class="release-artist">Luca DiGrigoli</p>
+                        <p class="release-featuring">feat. Jesters</p>
+                        
+                        <div class="release-buttons">
+                            <a href="https://open.spotify.com/album/6oLRTkuyDXza5g3NWodXE5?si=KAFniuGFTomWYrRGb7uUEQ" class="stream-btn-mini spotify" target="_blank">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                                </svg>
+                                Spotify
+                            </a>
+                            <a href="https://music.apple.com/us/album/technicolor-daydream-feat-jesters-single/1862170698" class="stream-btn-mini apple" target="_blank">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                </svg>
+                                Apple
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=a-VMN06lGOs&list=RDa-VMN06lGOs&start_radio=1" class="stream-btn-mini youtube" target="_blank">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                                YouTube
+                            </a>
+                            <a href="https://lucadigrigoli.bandcamp.com/track/technicolor-daydream" class="stream-btn-mini bandcamp" target="_blank">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/>
+                                </svg>
+                                Bandcamp
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1022,6 +1407,34 @@
                 }, 100);
             }
         }, 3000);
+
+        // Technicolor Daydream card glitch effect
+        (function() {
+            const releaseCard = document.getElementById('releaseCard');
+            if (!releaseCard) return;
+
+            function triggerGlitch() {
+                releaseCard.classList.add('glitching');
+                setTimeout(() => {
+                    releaseCard.classList.remove('glitching');
+                }, 300);
+            }
+
+            // Random glitch every 3-6 seconds
+            function scheduleGlitch() {
+                const delay = 3000 + Math.random() * 6000;
+                setTimeout(() => {
+                    triggerGlitch();
+                    scheduleGlitch();
+                }, delay);
+            }
+
+            // Start the glitch cycle
+            scheduleGlitch();
+
+            // Also glitch on hover
+            releaseCard.addEventListener('mouseenter', triggerGlitch);
+        })();
     </script>
 </body>
 </html>
