@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technicolor Daydream (feat. Jesters) - Luca DiGrigoli</title>
-    <meta name="description" content="Pre-save Technicolor Daydream (feat. Jesters) by Luca DiGrigoli on Spotify">
+    <meta name="description" content="Listen to Technicolor Daydream (feat. Jesters) by Luca DiGrigoli on all platforms">
     <meta property="og:title" content="Technicolor Daydream (feat. Jesters) - Luca DiGrigoli">
-    <meta property="og:description" content="Pre-save now on Spotify - Available December 26, 2025">
+    <meta property="og:description" content="Out now on all platforms!">
     <meta property="og:image" content="https://distrokid.imgix.net/http%3A%2F%2Fgather.fandalism.com%2F3266466--A3312D0F-2261-4347-891730E8B788A4F9--0--10745236--TechnicolorDaydream.png?fm=jpg&q=75&w=800">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +25,12 @@
             --bulb-color: #ffaa44;
             --spotify-green: #1DB954;
             --spotify-green-hover: #1ed760;
+            --apple-pink: #fc3c44;
+            --apple-pink-hover: #ff5a5f;
+            --youtube-red: #FF0000;
+            --youtube-red-hover: #ff3333;
+            --bandcamp-teal: #1da0c3;
+            --bandcamp-teal-hover: #29b8db;
         }
 
         body {
@@ -617,107 +623,131 @@
             margin-bottom: 30px;
         }
 
-        /* Countdown */
-        .countdown-container {
-            margin-bottom: 35px;
-        }
-
-        .countdown-label {
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .countdown-unit {
-            text-align: center;
-        }
-
-        .countdown-value {
-            font-size: 2.2rem;
+        /* Out Now Badge */
+        .out-now-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--spotify-green), #1ed760);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.7rem;
             font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1;
-            font-variant-numeric: tabular-nums;
-            text-shadow: 0 0 30px rgba(255, 170, 68, 0.3);
-        }
-
-        .countdown-unit-label {
-            font-size: 0.55rem;
-            color: var(--text-dim);
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-top: 6px;
+            margin-bottom: 30px;
+            animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        .countdown-separator {
-            font-size: 2rem;
-            color: var(--text-dim);
-            opacity: 0.3;
-            line-height: 1;
-            animation: blink 1s ease-in-out infinite;
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(29, 185, 84, 0.6);
+            }
         }
 
-        /* Spotify button */
-        .presave-btn {
+        /* Streaming Buttons */
+        .streaming-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stream-btn {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: var(--spotify-green);
-            color: #000;
-            padding: 16px 36px;
+            padding: 14px 28px;
             border-radius: 50px;
             font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             text-decoration: none;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 
-                0 4px 25px rgba(29, 185, 84, 0.35),
-                0 0 0 0 rgba(29, 185, 84, 0.4);
             position: relative;
             overflow: hidden;
+            justify-content: center;
         }
 
-        .presave-btn::before {
+        .stream-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s ease;
         }
 
-        .presave-btn:hover {
-            background: var(--spotify-green-hover);
-            transform: translateY(-3px);
-            box-shadow: 
-                0 8px 35px rgba(29, 185, 84, 0.45),
-                0 0 0 0 rgba(29, 185, 84, 0.4);
-        }
-
-        .presave-btn:hover::before {
+        .stream-btn:hover::before {
             left: 100%;
         }
 
-        .presave-btn:active {
+        .stream-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .stream-btn:active {
             transform: translateY(-1px);
         }
 
-        .spotify-icon {
-            width: 24px;
-            height: 24px;
+        .stream-btn svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        /* Spotify Button */
+        .stream-btn.spotify {
+            background: var(--spotify-green);
+            color: #000;
+            box-shadow: 0 4px 25px rgba(29, 185, 84, 0.35);
+        }
+
+        .stream-btn.spotify:hover {
+            background: var(--spotify-green-hover);
+            box-shadow: 0 8px 35px rgba(29, 185, 84, 0.45);
+        }
+
+        /* Apple Music Button */
+        .stream-btn.apple {
+            background: linear-gradient(135deg, #fc3c44, #fa233b);
+            color: #fff;
+            box-shadow: 0 4px 25px rgba(252, 60, 68, 0.35);
+        }
+
+        .stream-btn.apple:hover {
+            background: linear-gradient(135deg, #ff5a5f, #fc3c44);
+            box-shadow: 0 8px 35px rgba(252, 60, 68, 0.45);
+        }
+
+        /* YouTube Button */
+        .stream-btn.youtube {
+            background: #FF0000;
+            color: #fff;
+            box-shadow: 0 4px 25px rgba(255, 0, 0, 0.35);
+        }
+
+        .stream-btn.youtube:hover {
+            background: #ff3333;
+            box-shadow: 0 8px 35px rgba(255, 0, 0, 0.45);
+        }
+
+        /* Bandcamp Button */
+        .stream-btn.bandcamp {
+            background: #1da0c3;
+            color: #fff;
+            box-shadow: 0 4px 25px rgba(29, 160, 195, 0.35);
+        }
+
+        .stream-btn.bandcamp:hover {
+            background: #29b8db;
+            box-shadow: 0 8px 35px rgba(29, 160, 195, 0.45);
         }
 
         /* Share Button */
@@ -1010,21 +1040,9 @@
                 font-size: 1.7rem;
             }
 
-            .countdown-value {
-                font-size: 1.6rem;
-            }
-
-            .countdown {
-                gap: 15px;
-            }
-
-            .countdown-separator {
-                font-size: 1.5rem;
-            }
-
-            .presave-btn {
-                padding: 14px 28px;
-                font-size: 0.8rem;
+            .stream-btn {
+                padding: 12px 24px;
+                font-size: 0.75rem;
             }
 
             .share-btn {
@@ -1103,51 +1121,30 @@
                 margin-bottom: 20px;
             }
 
-            .countdown-container {
-                margin-bottom: 25px;
-            }
-
-            .countdown-label {
+            .out-now-badge {
                 font-size: 0.6rem;
-                margin-bottom: 12px;
+                padding: 6px 16px;
+                margin-bottom: 20px;
             }
 
-            .countdown {
-                gap: 8px;
+            .streaming-buttons {
+                gap: 10px;
+                margin-bottom: 15px;
             }
 
-            .countdown-value {
-                font-size: 1.3rem;
+            .stream-btn {
+                padding: 12px 20px;
+                font-size: 0.7rem;
             }
 
-            .countdown-unit-label {
-                font-size: 0.5rem;
-                margin-top: 4px;
-            }
-
-            .countdown-separator {
-                font-size: 1.2rem;
-            }
-
-            .presave-btn {
-                padding: 14px 24px;
-                font-size: 0.75rem;
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
-            }
-
-            .spotify-icon {
-                width: 20px;
-                height: 20px;
+            .stream-btn svg {
+                width: 18px;
+                height: 18px;
             }
 
             .share-btn {
                 padding: 12px 20px;
                 font-size: 0.65rem;
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
                 margin-top: 12px;
             }
 
@@ -1219,17 +1216,9 @@
                 font-size: 1.25rem;
             }
 
-            .countdown-value {
-                font-size: 1.1rem;
-            }
-
-            .countdown-separator {
-                font-size: 1rem;
-            }
-
-            .presave-btn,
-            .share-btn {
-                max-width: 260px;
+            .stream-btn {
+                padding: 10px 16px;
+                font-size: 0.65rem;
             }
         }
 
@@ -1321,37 +1310,41 @@
             <p class="artist-name">Luca DiGrigoli</p>
             <p class="featuring">feat. Jesters</p>
 
-            <div class="countdown-container">
-                <p class="countdown-label">Available in</p>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="days">00</div>
-                        <div class="countdown-unit-label">Days</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="hours">00</div>
-                        <div class="countdown-unit-label">Hours</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="minutes">00</div>
-                        <div class="countdown-unit-label">Min</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-value" id="seconds">00</div>
-                        <div class="countdown-unit-label">Sec</div>
-                    </div>
-                </div>
-            </div>
+            <div class="out-now-badge">🎵 Out Now</div>
 
-            <a href="https://distrokid.com/hyperfollow/lucadigrigoli/technicolor-daydream-feat-jesters" class="presave-btn" target="_blank" rel="noopener">
-                <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                </svg>
-                Pre-Save on Spotify
-            </a>
+            <div class="streaming-buttons">
+                <!-- Spotify -->
+                <a href="https://open.spotify.com/album/6oLRTkuyDXza5g3NWodXE5?si=KAFniuGFTomWYrRGb7uUEQ" class="stream-btn spotify" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                    Play on Spotify
+                </a>
+
+                <!-- Apple Music -->
+                <a href="https://music.apple.com/us/album/technicolor-daydream-feat-jesters-single/1862170698" class="stream-btn apple" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.994 6.124c0-.738-.065-1.47-.24-2.19-.317-1.318-1.062-2.31-2.18-3.043C20.504.334 19.34.067 18.13.003 17.803 0 17.48 0 17.154 0H6.847c-.326 0-.652 0-.978.003-1.21.064-2.374.331-3.444.888-1.118.733-1.863 1.725-2.18 3.043-.175.72-.24 1.452-.24 2.19v11.752c0 .738.065 1.47.24 2.19.317 1.318 1.062 2.31 2.18 3.043 1.07.557 2.234.824 3.444.888.326.003.652.003.978.003h10.307c.326 0 .652 0 .978-.003 1.21-.064 2.374-.331 3.444-.888 1.118-.733 1.863-1.725 2.18-3.043.175-.72.24-1.452.24-2.19V6.124zm-6.465 9.463c0 .573-.09 1.117-.27 1.628-.178.511-.463.946-.855 1.307-.392.361-.878.631-1.458.81-.58.18-1.252.27-2.016.27-.764 0-1.436-.09-2.016-.27-.58-.179-1.066-.449-1.458-.81-.392-.361-.677-.796-.855-1.307-.18-.511-.27-1.055-.27-1.628V8.414c0-.029.01-.054.029-.074.019-.02.044-.03.074-.03h1.335c.029 0 .054.01.074.03.02.02.03.045.03.074v7.02c0 .365.05.691.148.979.099.287.248.531.449.73.201.2.453.352.757.457.304.105.67.158 1.097.158.427 0 .793-.053 1.097-.158.304-.105.556-.257.757-.457.201-.199.35-.443.449-.73.099-.288.148-.614.148-.979v-7.02c0-.029.01-.054.03-.074.019-.02.044-.03.074-.03h1.335c.029 0 .054.01.074.03.019.02.029.045.029.074v7.173z"/>
+                    </svg>
+                    Listen on Apple Music
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/watch?v=a-VMN06lGOs&list=RDa-VMN06lGOs&start_radio=1" class="stream-btn youtube" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    Watch on YouTube
+                </a>
+
+                <!-- Bandcamp -->
+                <a href="https://lucadigrigoli.bandcamp.com/track/technicolor-daydream" class="stream-btn bandcamp" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/>
+                    </svg>
+                    Buy on Bandcamp
+                </a>
+            </div>
 
             <button class="share-btn" onclick="openStoryModal()">
                 <svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1391,32 +1384,6 @@
     </footer>
 
     <script>
-        // Countdown Timer
-        function updateCountdown() {
-            const releaseDate = new Date('December 26, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = releaseDate - now;
-
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<p style="font-size: 1.2rem; color: var(--spotify-green);">OUT NOW!</p>';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-
-        // Update immediately and then every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
         // Detect mobile device
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1536,12 +1503,12 @@
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
 
-                // "NEW MUSIC" label at top
+                // "OUT NOW" label at top
                 ctx.font = '700 32px "Space Mono", monospace';
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.fillStyle = '#1DB954';
                 ctx.textAlign = 'center';
                 ctx.letterSpacing = '8px';
-                ctx.fillText('NEW MUSIC', width / 2, 200);
+                ctx.fillText('🎵 OUT NOW', width / 2, 200);
 
                 // Track title
                 ctx.font = '300 72px "Crimson Pro", Georgia, serif';
@@ -1560,8 +1527,8 @@
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
                 ctx.fillText('feat. Jesters', width / 2, artY + artSize + 340);
 
-                // Release date box
-                const boxWidth = 420;
+                // Streaming platforms box
+                const boxWidth = 500;
                 const boxHeight = 80;
                 const boxX = (width - boxWidth) / 2;
                 const boxY = artY + artSize + 400;
@@ -1570,14 +1537,14 @@
                 roundRect(ctx, boxX, boxY, boxWidth, boxHeight, 40);
                 ctx.fill();
 
-                ctx.font = '700 28px "Space Mono", monospace';
+                ctx.font = '700 26px "Space Mono", monospace';
                 ctx.fillStyle = '#ffffff';
-                ctx.fillText('DEC 26, 2025', width / 2, boxY + 52);
+                ctx.fillText('STREAM EVERYWHERE', width / 2, boxY + 52);
 
-                // Pre-save CTA
+                // Listen CTA
                 ctx.font = '400 26px "Space Mono", monospace';
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                ctx.fillText('PRE-SAVE NOW ON SPOTIFY', width / 2, height - 180);
+                ctx.fillText('SPOTIFY • APPLE MUSIC • YOUTUBE', width / 2, height - 180);
 
                 // Swipe up hint
                 ctx.font = '400 24px "Space Mono", monospace';
@@ -1615,8 +1582,8 @@
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         files: [file],
-                        title: 'Technicolor Daydream - Pre-save now!',
-                        text: 'Pre-save my new single "Technicolor Daydream" on Spotify! 🎵'
+                        title: 'Technicolor Daydream - Out Now!',
+                        text: 'Listen to my new single "Technicolor Daydream" on all platforms! 🎵'
                     });
                     closeStoryModal();
                 } else {
