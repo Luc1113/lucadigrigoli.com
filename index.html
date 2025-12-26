@@ -1146,7 +1146,7 @@
                 
                 <div class="release-card-content">
                     <div class="release-artwork">
-                        <img src="https://distrokid.imgix.net/http%3A%2F%2Fgather.fandalism.com%2F3266466--A3312D0F-2261-4347-891730E8B788A4F9--0--10745236--TechnicolorDaydream.png?fm=jpg&q=75&w=400" alt="Technicolor Daydream">
+                        <img src="images/technicolor.png" alt="Technicolor Daydream">
                     </div>
                     <div class="release-info">
                         <span class="release-badge">🎵 Out Now</span>
@@ -1432,8 +1432,12 @@
             // Start the glitch cycle
             scheduleGlitch();
 
-            // Also glitch on hover
-            releaseCard.addEventListener('mouseenter', triggerGlitch);
+            // Also glitch on hover with 25% chance
+            releaseCard.addEventListener('mouseenter', () => {
+                if (Math.random() < 0.25) {
+                    triggerGlitch();
+                }
+            });
         })();
     </script>
 </body>
