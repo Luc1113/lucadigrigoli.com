@@ -17,6 +17,11 @@
             box-sizing: border-box;
         }
         
+        /* Smooth scrolling optimization */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Times New Roman', serif;
             background: #f5f3e8;
@@ -25,31 +30,18 @@
             background-image: 
                 radial-gradient(circle at 25% 25%, #f9f7f0 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, #f0ede0 0%, transparent 50%);
+            background-attachment: fixed;
         }
         
-        /* Simplified grain overlay - only applies on hover for better performance */
-        .grain-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            z-index: 1000;
-            transition: opacity 0.3s ease;
-        }
-        
-        body:hover .grain-overlay {
-            opacity: 0.03;
-        }
+        /* REMOVED grain overlay - major performance drain */
         
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
             position: relative;
+            /* CSS containment for better scroll performance */
+            contain: layout style;
         }
         
         @media (min-width: 1400px) {
@@ -64,7 +56,7 @@
             margin-top: 80px;
             margin-bottom: 60px;
             position: relative;
-            will-change: transform;
+            /* Removed will-change - causes layer promotion overhead */
         }
         
         .site-title {
@@ -99,6 +91,8 @@
             margin: 20px auto;
             width: 200px;
             animation: shimmer 3s ease-in-out infinite;
+            /* Add will-change only to animated elements */
+            will-change: transform;
         }
         
         @keyframes shimmer {
@@ -116,6 +110,8 @@
                 0 8px 20px rgba(139, 69, 19, 0.15);
             position: relative;
             overflow: hidden;
+            /* CSS containment */
+            contain: layout paint;
         }
         
         .section::before {
@@ -148,13 +144,17 @@
             background: rgba(245, 243, 232, 0.8);
             border: 1px solid #d4c4a0;
             padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
             position: relative;
             cursor: pointer;
+            /* CSS containment */
+            contain: layout style paint;
+            /* Use transform3d for GPU acceleration */
+            transform: translate3d(0, 0, 0);
         }
         
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translate3d(0, -5px, 0);
             box-shadow: 0 10px 25px rgba(139, 69, 19, 0.2);
             border-color: #8B4513;
         }
@@ -188,6 +188,7 @@
             margin: 20px 0;
             position: relative;
             overflow: hidden;
+            contain: layout style paint;
         }
         
         .music-player::before {
@@ -226,7 +227,7 @@
             text-decoration: none;
             padding: 8px 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
         }
@@ -301,7 +302,7 @@
             font-size: 1.1rem;
             padding: 10px 20px;
             border: 2px solid transparent;
-            transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
             position: relative;
         }
         
@@ -342,6 +343,9 @@
             z-index: 1001;
             border-top: 3px solid #A0522D;
             border-bottom: 3px solid #A0522D;
+            /* Optimize fixed positioning */
+            will-change: scroll-position;
+            backface-visibility: hidden;
         }
         
         .news-scroll {
@@ -351,6 +355,7 @@
             font-family: 'Courier Prime', monospace;
             font-size: 1rem;
             font-weight: 400;
+            will-change: transform;
         }
         
         .news-item {
@@ -397,7 +402,7 @@
             padding: 12px 24px;
             font-family: 'Courier Prime', monospace;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
@@ -416,15 +421,16 @@
             background: linear-gradient(90deg, transparent, #8B4513, transparent);
             animation: scan 4s linear infinite;
             top: 0;
-            will-change: top, opacity;
+            will-change: transform;
+            /* Use transform instead of top for better performance */
         }
         
         @keyframes scan {
-            0% { top: 0; opacity: 1; }
-            100% { top: 100%; opacity: 0; }
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(calc(100vh)); opacity: 0; }
         }
 
-        /* Side column styling */
+        /* Side column styling - optimized */
         .left-sidebar {
             position: fixed;
             left: 20px;
@@ -439,6 +445,9 @@
             gap: 12px;
             padding: 10px 0;
             background: transparent;
+            /* Optimize scrolling */
+            -webkit-overflow-scrolling: touch;
+            will-change: scroll-position;
         }
 
         .right-sidebar {
@@ -455,6 +464,8 @@
             gap: 12px;
             padding: 10px 0;
             background: transparent;
+            -webkit-overflow-scrolling: touch;
+            will-change: scroll-position;
         }
 
         .sidebar-image {
@@ -462,22 +473,25 @@
             aspect-ratio: 1;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             transform: rotate(-1deg);
             box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
             border: 1px solid rgba(212, 196, 160, 0.6);
+            contain: layout style paint;
+            /* Use transform3d for GPU acceleration */
+            transform: translate3d(0, 0, 0) rotate(-1deg);
         }
 
         .sidebar-image:nth-child(even) {
-            transform: rotate(1deg);
+            transform: translate3d(0, 0, 0) rotate(1deg);
         }
 
         .sidebar-image:nth-child(3n) {
-            transform: rotate(-2deg);
+            transform: translate3d(0, 0, 0) rotate(-2deg);
         }
 
         .sidebar-image:nth-child(4n) {
-            transform: rotate(2deg);
+            transform: translate3d(0, 0, 0) rotate(2deg);
         }
 
         .sidebar-image img {
@@ -485,11 +499,11 @@
             height: 100%;
             object-fit: cover;
             filter: sepia(15%) contrast(1.1) saturate(0.95);
-            transition: filter 0.3s ease;
+            transition: filter 0.2s ease;
         }
 
         .sidebar-image:hover {
-            transform: scale(2.5) rotate(0deg) !important;
+            transform: translate3d(0, 0, 0) scale(2.5) rotate(0deg) !important;
             box-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
             z-index: 20;
         }
@@ -547,7 +561,7 @@
             object-fit: cover;
             opacity: 0.25;
             z-index: 1;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .jesters-card:hover .jesters-bg-video {
@@ -576,6 +590,7 @@
             margin: 20px 0;
             position: relative;
             overflow: hidden;
+            contain: layout style paint;
         }
         
         .coming-soon-player::before {
@@ -606,7 +621,7 @@
             text-decoration: none;
             padding: 8px 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
             display: inline-block;
@@ -619,7 +634,7 @@
             transform: translateY(-2px);
         }
 
-        /* Technicolor Daydream Release Card */
+        /* Technicolor Daydream Release Card - optimized */
         .release-card {
             position: relative;
             overflow: hidden;
@@ -631,6 +646,7 @@
                 0 0 0 2px #1a1a1a,
                 0 15px 40px rgba(0, 0, 0, 0.4),
                 inset 0 0 60px rgba(0, 0, 0, 0.3);
+            contain: layout style paint;
         }
 
         .release-card-bg {
@@ -692,15 +708,13 @@
             background: rgba(255, 255, 255, 0.05);
             animation: crt-scan 6s linear infinite;
             z-index: 3;
-            will-change: top;
+            will-change: transform;
         }
 
         @keyframes crt-scan {
-            0% { top: 0; }
-            100% { top: 100%; }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(calc(100vh)); }
         }
-
-        /* Removed crt-flicker for performance - it ran every 0.1s */
 
         .release-card-content {
             position: relative;
@@ -795,7 +809,7 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.03em;
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .stream-btn-mini svg {
@@ -847,7 +861,7 @@
             box-shadow: 0 4px 15px rgba(29, 160, 195, 0.4);
         }
 
-        /* Glitch effect - only on interaction */
+        /* Optimized glitch effect - only on interaction */
         .release-card.glitching {
             animation: card-glitch 0.3s ease;
         }
@@ -858,23 +872,23 @@
 
         @keyframes card-glitch {
             0%, 100% { 
-                transform: translate(0); 
+                transform: translate3d(0, 0, 0); 
                 filter: none;
             }
             20% { 
-                transform: translate(-3px, 2px); 
+                transform: translate3d(-3px, 2px, 0); 
                 filter: hue-rotate(90deg);
             }
             40% { 
-                transform: translate(3px, -2px); 
+                transform: translate3d(3px, -2px, 0); 
                 filter: hue-rotate(-90deg) saturate(2);
             }
             60% { 
-                transform: translate(-2px, -1px); 
+                transform: translate3d(-2px, -1px, 0); 
                 filter: hue-rotate(45deg);
             }
             80% { 
-                transform: translate(2px, 1px); 
+                transform: translate3d(2px, 1px, 0); 
                 filter: saturate(1.5);
             }
         }
@@ -942,6 +956,7 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            contain: layout style paint;
         }
 
         .bandcamp-card::before {
@@ -991,7 +1006,7 @@
             text-decoration: none;
             padding: 8px 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
             display: inline-block;
@@ -1008,43 +1023,13 @@
             z-index: 2;
         }
         
-        /* Glitch effect - simplified to only run on hover */
+        /* Simplified glitch effect - only on hover, no pseudo-elements during scroll */
         .glitch {
             position: relative;
             display: inline-block;
         }
         
-        .glitch:hover::before,
-        .glitch:hover::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .glitch:hover::before {
-            animation: glitch-1 0.5s infinite;
-            color: #ff6b6b;
-            z-index: -1;
-        }
-        
-        .glitch:hover::after {
-            animation: glitch-2 0.5s infinite;
-            color: #4ecdc4;
-            z-index: -2;
-        }
-        
-        @keyframes glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translateX(0); }
-            15%, 49% { transform: translateX(-2px); }
-        }
-        
-        @keyframes glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translateX(0); }
-            21%, 62% { transform: translateX(2px); }
-        }
+        /* REMOVED hover glitch pseudo-elements for better scroll performance */
         
         .blink {
             animation: blink 1.5s infinite;
@@ -1057,8 +1042,6 @@
     </style>
 </head>
 <body>
-    <div class="grain-overlay"></div>
-    
     <!-- News banner -->
     <div class="news-banner">
         <div class="news-scroll">
@@ -1304,43 +1287,30 @@
     </div>
     
     <script>
-        // Defer non-critical JS
-        document.addEventListener('DOMContentLoaded', function() {
+        // Optimized JavaScript for smooth scrolling
+        (function() {
+            'use strict';
             
             function showMessage() {
                 const messages = [
-                    "keep creating ✨",
-                    "stay curious 🎵",
-                    "art + code = magic",
-                    "see you around the internet!",
-                    "thanks for exploring!"
+                    "later!",
+                    "see you around!",
+                    "thanks for being here!",
+                    "secret button :p"
                 ];
                 const randomMessage = messages[Math.floor(Math.random() * messages.length)];
                 alert(randomMessage);
             }
             
-            // Expose to global scope for onclick
             window.showMessage = showMessage;
             
-            // Throttled parallax with requestAnimationFrame
-            const parallax = document.querySelector('.header');
-            let ticking = false;
+            // REMOVED parallax effect - major cause of scroll jank
+            // The fixed background gradient is sufficient
             
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    requestAnimationFrame(function() {
-                        const scrolled = window.pageYOffset;
-                        parallax.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
-            
-            // Intersection Observer for project cards (unchanged but optimized)
+            // Optimized Intersection Observer with larger threshold
             const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.05, // Trigger earlier
+                rootMargin: '50px' // Preload slightly before visible
             };
             
             const observer = new IntersectionObserver(function(entries) {
@@ -1348,54 +1318,72 @@
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target); // Stop observing once visible
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
+            // Apply fade-in to project cards
             document.querySelectorAll('.project-card').forEach(function(card) {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                 observer.observe(card);
             });
 
             // Jesters video - only load/play on interaction
-            (function() {
-                const card = document.getElementById('jesters');
-                const vid = document.querySelector('.jesters-bg-video');
+            const jestersCard = document.getElementById('jesters');
+            const jestersVid = document.querySelector('.jesters-bg-video');
 
-                if (!card || !vid) return;
-
-                card.addEventListener('mouseenter', function() {
-                    vid.play().catch(function() {});
+            if (jestersCard && jestersVid) {
+                let isPlaying = false;
+                
+                jestersCard.addEventListener('mouseenter', function() {
+                    if (!isPlaying) {
+                        jestersVid.play().catch(function() {});
+                        isPlaying = true;
+                    }
                 });
                 
-                card.addEventListener('mouseleave', function() {
-                    vid.pause();
+                jestersCard.addEventListener('mouseleave', function() {
+                    jestersVid.pause();
+                    isPlaying = false;
                 });
 
-                // Touch device support
+                // Touch support
                 let expanded = false;
-                card.addEventListener('click', function() {
-                    if (matchMedia('(hover: none)').matches) {
+                jestersCard.addEventListener('click', function() {
+                    if (window.matchMedia('(hover: none)').matches) {
                         expanded = !expanded;
-                        card.style.maxHeight = expanded ? '480px' : '150px';
+                        jestersCard.style.maxHeight = expanded ? '480px' : '150px';
                         if (expanded) {
-                            vid.play().catch(function() {});
+                            jestersVid.play().catch(function() {});
+                            isPlaying = true;
                         } else {
-                            vid.pause();
+                            jestersVid.pause();
+                            isPlaying = false;
                         }
                     }
                 }, { passive: true });
-            })();
+            }
 
-            // Technicolor card glitch - use requestIdleCallback for non-critical animation
-            (function() {
-                const releaseCard = document.getElementById('releaseCard');
-                if (!releaseCard) return;
-
+            // Optimized glitch effect - less frequent, only when visible
+            const releaseCard = document.getElementById('releaseCard');
+            if (releaseCard) {
+                let isVisible = false;
+                
+                // Track visibility
+                const visibilityObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        isVisible = entry.isIntersecting;
+                    });
+                }, { threshold: 0.1 });
+                
+                visibilityObserver.observe(releaseCard);
+                
                 function triggerGlitch() {
+                    if (!isVisible || document.hidden) return;
+                    
                     releaseCard.classList.add('glitching');
                     setTimeout(function() {
                         releaseCard.classList.remove('glitching');
@@ -1403,31 +1391,31 @@
                 }
 
                 function scheduleGlitch() {
-                    const delay = 5000 + Math.random() * 8000; // Slower interval: 5-13 seconds
+                    const delay = 8000 + Math.random() * 12000; // 8-20 seconds
                     setTimeout(function() {
-                        // Only glitch if page is visible
-                        if (!document.hidden) {
-                            if ('requestIdleCallback' in window) {
-                                requestIdleCallback(triggerGlitch);
-                            } else {
+                        if (typeof requestIdleCallback !== 'undefined') {
+                            requestIdleCallback(function() {
                                 triggerGlitch();
-                            }
+                                scheduleGlitch();
+                            });
+                        } else {
+                            triggerGlitch();
+                            scheduleGlitch();
                         }
-                        scheduleGlitch();
                     }, delay);
                 }
 
                 scheduleGlitch();
 
-                // Glitch on hover with 25% chance
+                // Reduced hover glitch probability
                 releaseCard.addEventListener('mouseenter', function() {
-                    if (Math.random() < 0.25) {
+                    if (Math.random() < 0.15) { // 15% chance instead of 25%
                         triggerGlitch();
                     }
                 });
-            })();
+            }
             
-        });
+        })();
     </script>
 </body>
 </html>
