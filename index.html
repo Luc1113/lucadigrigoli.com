@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luca DiGrigoli - Artist • Developer • Creator</title>
+    
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -23,6 +27,7 @@
                 radial-gradient(circle at 75% 75%, #f0ede0 0%, transparent 50%);
         }
         
+        /* Simplified grain overlay - only applies on hover for better performance */
         .grain-overlay {
             position: fixed;
             top: 0;
@@ -30,9 +35,14 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            opacity: 0.03;
+            opacity: 0;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+        
+        body:hover .grain-overlay {
+            opacity: 0.03;
         }
         
         .container {
@@ -42,7 +52,6 @@
             position: relative;
         }
         
-        /* Add margins on large screens to avoid sidebars */
         @media (min-width: 1400px) {
             .container {
                 margin-left: auto;
@@ -55,6 +64,7 @@
             margin-top: 80px;
             margin-bottom: 60px;
             position: relative;
+            will-change: transform;
         }
         
         .site-title {
@@ -138,7 +148,7 @@
             background: rgba(245, 243, 232, 0.8);
             border: 1px solid #d4c4a0;
             padding: 20px;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
             cursor: pointer;
         }
@@ -216,7 +226,7 @@
             text-decoration: none;
             padding: 8px 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
         }
@@ -291,7 +301,7 @@
             font-size: 1.1rem;
             padding: 10px 20px;
             border: 2px solid transparent;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
             position: relative;
         }
         
@@ -380,56 +390,6 @@
             filter: sepia(20%) contrast(1.1) saturate(0.9);
         }
         
-        .retro-cursor {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%238B4513' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22L12 18.77L5.82 22L7 14.14L2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E"), auto;
-        }
-        
-        .glitch {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .glitch::before {
-            animation: glitch-1 0.5s infinite;
-            color: #ff6b6b;
-            z-index: -1;
-        }
-        
-        .glitch::after {
-            animation: glitch-2 0.5s infinite;
-            color: #4ecdc4;
-            z-index: -2;
-        }
-        
-        @keyframes glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translateX(0); }
-            15%, 49% { transform: translateX(-2px); }
-        }
-        
-        @keyframes glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translateX(0); }
-            21%, 62% { transform: translateX(2px); }
-        }
-        
-        .blink {
-            animation: blink 1.5s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
         .retro-button {
             background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
             color: white;
@@ -437,7 +397,7 @@
             padding: 12px 24px;
             font-family: 'Courier Prime', monospace;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.9rem;
@@ -456,6 +416,7 @@
             background: linear-gradient(90deg, transparent, #8B4513, transparent);
             animation: scan 4s linear infinite;
             top: 0;
+            will-change: top, opacity;
         }
         
         @keyframes scan {
@@ -463,7 +424,7 @@
             100% { top: 100%; opacity: 0; }
         }
 
-        /* Side column styling for left sidebar */
+        /* Side column styling */
         .left-sidebar {
             position: fixed;
             left: 20px;
@@ -501,7 +462,7 @@
             aspect-ratio: 1;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             transform: rotate(-1deg);
             box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
             border: 1px solid rgba(212, 196, 160, 0.6);
@@ -524,7 +485,7 @@
             height: 100%;
             object-fit: cover;
             filter: sepia(15%) contrast(1.1) saturate(0.95);
-            transition: all 0.3s ease;
+            transition: filter 0.3s ease;
         }
 
         .sidebar-image:hover {
@@ -537,7 +498,6 @@
             filter: sepia(10%) contrast(1.2) saturate(1.1);
         }
 
-        /* Hide sidebars on smaller screens */
         @media (max-width: 1300px) {
             .left-sidebar,
             .right-sidebar {
@@ -564,52 +524,50 @@
             }
         }
 
-        /* Jesters card with background video */
+        /* Jesters card */
         .jesters-card {
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-          padding: 20px;
-          min-height: 180px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 20px;
+            min-height: 180px;
         }
         
         .jesters-card:hover {
-          box-shadow: 0 14px 32px rgba(139, 69, 19, 0.25);
-          border-color: #8B4513;
+            box-shadow: 0 14px 32px rgba(139, 69, 19, 0.25);
+            border-color: #8B4513;
         }
 
-        /* Background video */
         .jesters-bg-video {
-          position: absolute;
-          top: 0;
-          left: 0%;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          opacity: 0.25;
-          z-index: 1;
-          transition: opacity 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            transition: opacity 0.3s ease;
         }
 
         .jesters-card:hover .jesters-bg-video {
-          opacity: 0.45;
+            opacity: 0.45;
         }
 
-        /* Content overlay */
         .jesters-content {
-          position: relative;
-          z-index: 2;
-          background: rgba(245, 243, 232, 0.85);
-          padding: 15px;
-          border-radius: 4px;
-          backdrop-filter: blur(1px);
+            position: relative;
+            z-index: 2;
+            background: rgba(245, 243, 232, 0.85);
+            padding: 15px;
+            border-radius: 4px;
+            backdrop-filter: blur(1px);
         }
 
         .jesters-card:hover .jesters-content {
-          background: rgba(245, 243, 232, 0.9);
+            background: rgba(245, 243, 232, 0.9);
         }
 
-        /* New "coming soon" section styles */
+        /* Coming soon section */
         .coming-soon-player {
             background: linear-gradient(135deg, #2d4a2d 0%, #3a5f3a 100%);
             color: white;
@@ -648,7 +606,7 @@
             text-decoration: none;
             padding: 8px 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
             display: inline-block;
@@ -661,9 +619,7 @@
             transform: translateY(-2px);
         }
 
-        /* ============================================
-           TECHNICOLOR DAYDREAM RELEASE CARD
-           ============================================ */
+        /* Technicolor Daydream Release Card */
         .release-card {
             position: relative;
             overflow: hidden;
@@ -677,7 +633,6 @@
                 inset 0 0 60px rgba(0, 0, 0, 0.3);
         }
 
-        /* CRT TV Background */
         .release-card-bg {
             position: absolute;
             top: 0;
@@ -688,7 +643,6 @@
             z-index: 0;
         }
 
-        /* Color bars background */
         .color-bars-bg {
             position: absolute;
             top: 0;
@@ -712,7 +666,6 @@
         .color-bars-bg .bar:nth-child(6) { background: linear-gradient(to bottom, #c80000, #800000); }
         .color-bars-bg .bar:nth-child(7) { background: linear-gradient(to bottom, #0000c8, #000080); }
 
-        /* CRT Scanlines */
         .crt-scanlines {
             position: absolute;
             top: 0;
@@ -730,7 +683,6 @@
             z-index: 2;
         }
 
-        /* Moving scanline */
         .crt-scanline-move {
             position: absolute;
             top: 0;
@@ -740,6 +692,7 @@
             background: rgba(255, 255, 255, 0.05);
             animation: crt-scan 6s linear infinite;
             z-index: 3;
+            will-change: top;
         }
 
         @keyframes crt-scan {
@@ -747,26 +700,8 @@
             100% { top: 100%; }
         }
 
-        /* CRT Flicker */
-        .crt-flicker {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: transparent;
-            animation: crt-flicker-anim 0.1s infinite;
-            pointer-events: none;
-            z-index: 4;
-        }
+        /* Removed crt-flicker for performance - it ran every 0.1s */
 
-        @keyframes crt-flicker-anim {
-            0% { opacity: 0.97; }
-            50% { opacity: 1; }
-            100% { opacity: 0.98; }
-        }
-
-        /* Card Content */
         .release-card-content {
             position: relative;
             z-index: 10;
@@ -842,7 +777,6 @@
             margin-bottom: 18px;
         }
 
-        /* Streaming Buttons */
         .release-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -861,7 +795,7 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 0.03em;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .stream-btn-mini svg {
@@ -913,7 +847,7 @@
             box-shadow: 0 4px 15px rgba(29, 160, 195, 0.4);
         }
 
-        /* Glitch effect for the card */
+        /* Glitch effect - only on interaction */
         .release-card.glitching {
             animation: card-glitch 0.3s ease;
         }
@@ -955,7 +889,6 @@
             60% { opacity: 1; }
         }
 
-        /* VHS noise overlay during glitch */
         .release-card.glitching::after {
             content: '';
             position: absolute;
@@ -979,7 +912,6 @@
             100% { background-position: 0 10px; }
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             .release-card-content {
                 flex-direction: column;
@@ -1059,7 +991,7 @@
             text-decoration: none;
             padding: 8px 16px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             font-family: 'Courier Prime', monospace;
             font-size: 0.9rem;
             display: inline-block;
@@ -1075,12 +1007,59 @@
             position: relative;
             z-index: 2;
         }
+        
+        /* Glitch effect - simplified to only run on hover */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch:hover::before,
+        .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch:hover::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff6b6b;
+            z-index: -1;
+        }
+        
+        .glitch:hover::after {
+            animation: glitch-2 0.5s infinite;
+            color: #4ecdc4;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translateX(0); }
+            15%, 49% { transform: translateX(-2px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translateX(0); }
+            21%, 62% { transform: translateX(2px); }
+        }
+        
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
     </style>
 </head>
-<body class="retro-cursor">
+<body>
     <div class="grain-overlay"></div>
     
-    <!-- News banner at the top -->
+    <!-- News banner -->
     <div class="news-banner">
         <div class="news-scroll">
             <span class="news-item">Welcome to the newly redesigned lucadigrigoli.com! </span>
@@ -1091,26 +1070,26 @@
         </div>
     </div>
     
-    <!-- Left sidebar images -->
+    <!-- Left sidebar images - all lazy loaded with dimensions -->
     <div class="left-sidebar">
-        <div class="sidebar-image"><img src="images/521cover.jpg" alt="521 album"></div>
-        <div class="sidebar-image"><img src="images/pretend.png" alt="pretend"></div>
-        <div class="sidebar-image"><img src="images/headshot.jpeg" alt="me"></div>
-        <div class="sidebar-image"><img src="images/valerie.jpeg" alt="valerie"></div>
-        <div class="sidebar-image"><img src="images/yuletide.jpeg" alt="bing"></div>
-        <div class="sidebar-image"><img src="images/binghamtonLogo.png" alt="christmas album"></div>
-        <div class="sidebar-image"><img src="images/gordon.png" alt="gordon"></div>
+        <div class="sidebar-image"><img src="images/521cover.jpg" alt="521 album" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/pretend.png" alt="pretend" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/headshot.jpeg" alt="me" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/valerie.jpeg" alt="valerie" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/yuletide.jpeg" alt="bing" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/binghamtonLogo.png" alt="christmas album" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/gordon.png" alt="gordon" loading="lazy" width="110" height="110"></div>
     </div>
 
-    <!-- Right sidebar images -->
+    <!-- Right sidebar images - all lazy loaded with dimensions -->
     <div class="right-sidebar">
-        <div class="sidebar-image"><img src="images/bridge.png" alt="bridge"></div>
-        <div class="sidebar-image"><img src="images/gang.png" alt="gang"></div>
-        <div class="sidebar-image"><img src="images/records.png" alt="records"></div>
-        <div class="sidebar-image"><img src="images/station.png" alt="station"></div>
-        <div class="sidebar-image"><img src="images/thecup.png" alt="thecup"></div>
-        <div class="sidebar-image"><img src="images/train.png" alt="train"></div>
-        <div class="sidebar-image"><img src="images/aura.png" alt="aura"></div>
+        <div class="sidebar-image"><img src="images/bridge.png" alt="bridge" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/gang.png" alt="gang" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/records.png" alt="records" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/station.png" alt="station" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/thecup.png" alt="thecup" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/train.png" alt="train" loading="lazy" width="110" height="110"></div>
+        <div class="sidebar-image"><img src="images/aura.png" alt="aura" loading="lazy" width="110" height="110"></div>
     </div>
     
     <div class="container">
@@ -1124,11 +1103,11 @@
             Here's what's going on lately!
         </h2>
         
-        <div class="section retro-cursor">
+        <div class="section">
             <div class="scan-line"></div>
             <h2 class="section-title">latest music releases</h2>
             
-            <!-- Technicolor Daydream Release Card with CRT TV Background -->
+            <!-- Technicolor Daydream Release Card -->
             <div class="release-card" id="releaseCard">
                 <div class="release-card-bg"></div>
                 <div class="color-bars-bg">
@@ -1142,11 +1121,10 @@
                 </div>
                 <div class="crt-scanlines"></div>
                 <div class="crt-scanline-move"></div>
-                <div class="crt-flicker"></div>
                 
                 <div class="release-card-content">
                     <div class="release-artwork">
-                        <img src="images/technicolor.png" alt="Technicolor Daydream">
+                        <img src="images/technicolor.png" alt="Technicolor Daydream" width="140" height="140">
                     </div>
                     <div class="release-info">
                         <span class="release-badge">🎵 Out Now</span>
@@ -1155,26 +1133,26 @@
                         <p class="release-featuring">feat. Jesters</p>
                         
                         <div class="release-buttons">
-                            <a href="https://open.spotify.com/album/6oLRTkuyDXza5g3NWodXE5?si=KAFniuGFTomWYrRGb7uUEQ" class="stream-btn-mini spotify" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
+                            <a href="https://open.spotify.com/album/6oLRTkuyDXza5g3NWodXE5?si=KAFniuGFTomWYrRGb7uUEQ" class="stream-btn-mini spotify" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
                                 </svg>
                                 Spotify
                             </a>
-                            <a href="https://music.apple.com/us/album/technicolor-daydream-feat-jesters-single/1862170698" class="stream-btn-mini apple" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
+                            <a href="https://music.apple.com/us/album/technicolor-daydream-feat-jesters-single/1862170698" class="stream-btn-mini apple" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                                 </svg>
                                 Apple
                             </a>
-                            <a href="https://www.youtube.com/watch?v=a-VMN06lGOs&list=RDa-VMN06lGOs&start_radio=1" class="stream-btn-mini youtube" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
+                            <a href="https://www.youtube.com/watch?v=a-VMN06lGOs&list=RDa-VMN06lGOs&start_radio=1" class="stream-btn-mini youtube" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                                 </svg>
                                 YouTube
                             </a>
-                            <a href="https://lucadigrigoli.bandcamp.com/track/technicolor-daydream" class="stream-btn-mini bandcamp" target="_blank">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
+                            <a href="https://lucadigrigoli.bandcamp.com/track/technicolor-daydream" class="stream-btn-mini bandcamp" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                     <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/>
                                 </svg>
                                 Bandcamp
@@ -1198,7 +1176,7 @@
                     <p class="project-subtitle">out now - latest single</p>
                     <p class="project-description">
                         a new song about betrayal and closure you'll never get
-                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" target="_blank" style="color:#8B4513;text-decoration:underline;">listen here</a>
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" target="_blank" rel="noopener" style="color:#8B4513;text-decoration:underline;">listen here</a>
                     </p>
                     <div style="margin-top: 15px;">
                         <span class="retro-badge">latest</span>
@@ -1211,7 +1189,7 @@
                     <p class="project-subtitle">dedicated to finding connection</p>
                     <p class="project-description">
                         an intimate song about relationships, vulnerability, and the ongoing search for Valerie, whoever it may be...
-                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank" style="color:#8B4513;text-decoration:underline;">stream "valerie"</a>
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" target="_blank" rel="noopener" style="color:#8B4513;text-decoration:underline;">stream "valerie"</a>
                     </p>
                     <div style="margin-top: 15px;">
                         <span class="retro-badge">acoustic</span>
@@ -1224,7 +1202,7 @@
                     <p class="project-subtitle">featuring "lose your mind" and "apologize"</p>
                     <p class="project-description">
                         my first full-length release exploring themes of growth, loss, and self-discovery through differing soundscapes.
-                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank" style="color:#8B4513;text-decoration:underline;">listen to 521</a>
+                        <br><a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" target="_blank" rel="noopener" style="color:#8B4513;text-decoration:underline;">listen to 521</a>
                     </p>
                     <div style="margin-top: 15px;">
                         <span class="retro-badge">singer/songwriter</span>
@@ -1251,11 +1229,11 @@
                 
                 <p class="project-description" style="margin-top:8px; position: relative; z-index: 2;">
                     Local band creating original pop-rock music, performing at venues across Long Island and building a community of music lovers.
-                    <br><a href="https://jestersband.com" target="_blank" style="color:#8B4513;text-decoration:underline;">Visit site</a>
+                    <br><a href="https://jestersband.com" target="_blank" rel="noopener" style="color:#8B4513;text-decoration:underline;">Visit site</a>
                 </p>
                 
-                <!-- Background video -->
-                <video class="jesters-bg-video" muted loop autoplay playsinline>
+                <!-- Video: no autoplay, preload none for performance -->
+                <video class="jesters-bg-video" muted loop playsinline preload="none">
                     <source src="videos/jesters-teaser.mp4" type="video/mp4">
                     Sorry—your browser doesn't support embedded videos.
                 </video>
@@ -1285,7 +1263,7 @@
                 <p class="project-subtitle">A mindfulness and productivity app</p>
                 <p class="project-description">
                     Mindscapes is an iOS app designed to help users achieve progress and focus through pomodoro timing, and daily mood/habit tracking.
-                    <br><a href="https://github.com/Luc1113/mindscapes" target="_blank" style="color:#8B4513;text-decoration:underline;">view on GitHub</a>
+                    <br><a href="https://github.com/Luc1113/mindscapes" target="_blank" rel="noopener" style="color:#8B4513;text-decoration:underline;">view on GitHub</a>
                 </p>
                 <div style="margin-top: 15px;">
                     <span class="retro-badge">mindfulness</span>
@@ -1315,130 +1293,141 @@
             <p style="color: #666; margin-bottom: 20px;">let's collaborate, chat about music, or discuss interesting projects</p>
             
             <div class="contact-links">
-                <a href="https://linktr.ee/lucadigrigoli" class="contact-link" target="_blank">linktree</a>
-                <a href="https://github.com/Luc1113" class="contact-link" target="_blank">github</a>
-                <a href="https://www.youtube.com/@lucadigrigoli7513" class="contact-link" target="_blank">youtube</a>
-                <a href="https://www.linkedin.com/in/lucadigrigoli/" class="contact-link" target="_blank">linkedin</a>
-                <a href="https://www.instagram.com/luca.digrigoli/" class="contact-link" target="_blank">instagram</a>
-                <a href="https://www.tiktok.com/@luca_digrigoli" class="contact-link" target="_blank">tiktok</a>
+                <a href="https://linktr.ee/lucadigrigoli" class="contact-link" target="_blank" rel="noopener">linktree</a>
+                <a href="https://github.com/Luc1113" class="contact-link" target="_blank" rel="noopener">github</a>
+                <a href="https://www.youtube.com/@lucadigrigoli7513" class="contact-link" target="_blank" rel="noopener">youtube</a>
+                <a href="https://www.linkedin.com/in/lucadigrigoli/" class="contact-link" target="_blank" rel="noopener">linkedin</a>
+                <a href="https://www.instagram.com/luca.digrigoli/" class="contact-link" target="_blank" rel="noopener">instagram</a>
+                <a href="https://www.tiktok.com/@luca_digrigoli" class="contact-link" target="_blank" rel="noopener">tiktok</a>
             </div>
         </div>
     </div>
     
     <script>
-        function showMessage() {
-            const messages = [
-                "keep creating ✨",
-                "stay curious 🎵",
-                "art + code = magic",
-                "see you around the internet!",
-                "thanks for exploring!"
-            ];
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            alert(randomMessage);
-        }
-        
-        // Add subtle parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
+        // Defer non-critical JS
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            function showMessage() {
+                const messages = [
+                    "keep creating ✨",
+                    "stay curious 🎵",
+                    "art + code = magic",
+                    "see you around the internet!",
+                    "thanks for exploring!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                alert(randomMessage);
+            }
+            
+            // Expose to global scope for onclick
+            window.showMessage = showMessage;
+            
+            // Throttled parallax with requestAnimationFrame
             const parallax = document.querySelector('.header');
-            const speed = scrolled * 0.5;
-            parallax.style.transform = `translateY(${speed}px)`;
-        });
-        
-        // Animate project cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+            let ticking = false;
+            
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        const scrolled = window.pageYOffset;
+                        parallax.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Jesters video hover/play logic
-        (function () {
-            const card = document.getElementById('jesters');
-            const vid  = document.querySelector('.jesters-bg-video');
-
-            if (!card || !vid) return;
-
-            card.addEventListener('mouseenter', () => {
-                vid.currentTime = vid.currentTime || 0;
-                vid.play().catch(() => {});
-            });
-            card.addEventListener('mouseleave', () => {
-                vid.pause();
-            });
-
-            let expanded = false;
-            card.addEventListener('click', () => {
-                if (matchMedia('(hover: none)').matches) {
-                    expanded = !expanded;
-                    card.style.maxHeight = expanded ? '480px' : '150px';
-                    if (expanded) {
-                        vid.play().catch(()=>{});
-                    } else {
-                        vid.pause();
+            }, { passive: true });
+            
+            // Intersection Observer for project cards (unchanged but optimized)
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target); // Stop observing once visible
                     }
-                }
-            }, {passive: true});
-        })();
+                });
+            }, observerOptions);
 
-        // Random glitch effect on title
-        setInterval(() => {
-            const title = document.querySelector('.glitch');
-            if (Math.random() < 0.1) {
-                title.style.animation = 'none';
-                setTimeout(() => {
-                    title.style.animation = '';
-                }, 100);
-            }
-        }, 3000);
-
-        // Technicolor Daydream card glitch effect
-        (function() {
-            const releaseCard = document.getElementById('releaseCard');
-            if (!releaseCard) return;
-
-            function triggerGlitch() {
-                releaseCard.classList.add('glitching');
-                setTimeout(() => {
-                    releaseCard.classList.remove('glitching');
-                }, 300);
-            }
-
-            // Random glitch every 3-6 seconds
-            function scheduleGlitch() {
-                const delay = 3000 + Math.random() * 6000;
-                setTimeout(() => {
-                    triggerGlitch();
-                    scheduleGlitch();
-                }, delay);
-            }
-
-            // Start the glitch cycle
-            scheduleGlitch();
-
-            // Also glitch on hover with 25% chance
-            releaseCard.addEventListener('mouseenter', () => {
-                if (Math.random() < 0.25) {
-                    triggerGlitch();
-                }
+            document.querySelectorAll('.project-card').forEach(function(card) {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
             });
-        })();
+
+            // Jesters video - only load/play on interaction
+            (function() {
+                const card = document.getElementById('jesters');
+                const vid = document.querySelector('.jesters-bg-video');
+
+                if (!card || !vid) return;
+
+                card.addEventListener('mouseenter', function() {
+                    vid.play().catch(function() {});
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    vid.pause();
+                });
+
+                // Touch device support
+                let expanded = false;
+                card.addEventListener('click', function() {
+                    if (matchMedia('(hover: none)').matches) {
+                        expanded = !expanded;
+                        card.style.maxHeight = expanded ? '480px' : '150px';
+                        if (expanded) {
+                            vid.play().catch(function() {});
+                        } else {
+                            vid.pause();
+                        }
+                    }
+                }, { passive: true });
+            })();
+
+            // Technicolor card glitch - use requestIdleCallback for non-critical animation
+            (function() {
+                const releaseCard = document.getElementById('releaseCard');
+                if (!releaseCard) return;
+
+                function triggerGlitch() {
+                    releaseCard.classList.add('glitching');
+                    setTimeout(function() {
+                        releaseCard.classList.remove('glitching');
+                    }, 300);
+                }
+
+                function scheduleGlitch() {
+                    const delay = 5000 + Math.random() * 8000; // Slower interval: 5-13 seconds
+                    setTimeout(function() {
+                        // Only glitch if page is visible
+                        if (!document.hidden) {
+                            if ('requestIdleCallback' in window) {
+                                requestIdleCallback(triggerGlitch);
+                            } else {
+                                triggerGlitch();
+                            }
+                        }
+                        scheduleGlitch();
+                    }, delay);
+                }
+
+                scheduleGlitch();
+
+                // Glitch on hover with 25% chance
+                releaseCard.addEventListener('mouseenter', function() {
+                    if (Math.random() < 0.25) {
+                        triggerGlitch();
+                    }
+                });
+            })();
+            
+        });
     </script>
 </body>
 </html>
