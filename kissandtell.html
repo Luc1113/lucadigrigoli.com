@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiss and Tell - Receipt</title>
+    <style>
+        @page {
+            size: 80mm auto;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 80mm;
+            margin: 0 auto;
+            padding: 10mm 5mm;
+            font-family: 'Courier New', monospace;
+            background: white;
+            color: black;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+        
+        .receipt {
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 8mm;
+            border-bottom: 2px dashed black;
+            padding-bottom: 5mm;
+        }
+        
+        .store-name {
+            font-size: 16pt;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 3mm;
+        }
+        
+        .tagline {
+            font-size: 9pt;
+            font-style: italic;
+        }
+        
+        .date-time {
+            text-align: center;
+            margin: 5mm 0;
+            font-size: 9pt;
+        }
+        
+        .items {
+            margin: 5mm 0;
+        }
+        
+        .item {
+            margin: 2mm 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9pt;
+        }
+        
+        .item-name {
+            flex: 1;
+            padding-right: 3mm;
+        }
+        
+        .item-price {
+            white-space: nowrap;
+        }
+        
+        .divider {
+            border-top: 1px dashed black;
+            margin: 5mm 0;
+        }
+        
+        .total-section {
+            margin: 5mm 0;
+        }
+        
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10pt;
+            margin: 2mm 0;
+        }
+        
+        .total-line.grand-total {
+            font-weight: bold;
+            font-size: 12pt;
+            margin-top: 3mm;
+            border-top: 2px solid black;
+            padding-top: 3mm;
+        }
+        
+        .signature-section {
+            margin-top: 10mm;
+            padding-top: 5mm;
+            border-top: 2px dashed black;
+        }
+        
+        .signature-line {
+            margin: 8mm 0 3mm 0;
+            border-bottom: 1px solid black;
+            height: 12mm;
+        }
+        
+        .signature-label {
+            font-size: 8pt;
+            text-align: center;
+            margin-top: 2mm;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 8mm;
+            font-size: 8pt;
+            font-style: italic;
+        }
+        
+        @media print {
+            body {
+                background: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <div class="header">
+            <div class="store-name">KISS AND TELL</div>
+            <div class="tagline">1159 Pretend St</div>
+        </div>
+        
+        <div class="date-time">
+            DATE: 02/01/2025
+        </div>
+        
+        <div class="items">
+            <div class="item">
+                <span class="item-name">I thought I had it rough</span>
+                <span class="item-price">$0.85</span>
+            </div>
+            <div class="item">
+                <span class="item-name">I thought I'd make it right</span>
+                <span class="item-price">$0.92</span>
+            </div>
+            <div class="item">
+                <span class="item-name">When the magic was gone</span>
+                <span class="item-price">$0.78</span>
+            </div>
+            <div class="item">
+                <span class="item-name">Did they kiss and tell</span>
+                <span class="item-price">$0.81</span>
+            </div>
+            <div class="item">
+                <span class="item-name">I bet they did</span>
+                <span class="item-price">$0.89</span>
+            </div>
+            <div class="item">
+                <span class="item-name">I haven't heard from you.</span>
+                <span class="item-price">$0.96</span>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="total-section">
+            <div class="total-line">
+                <span>SUBTOTAL:</span>
+                <span>$5.21</span>
+            </div>
+            <div class="total-line">
+                <span>TAX:</span>
+                <span>$0.00</span>
+            </div>
+            <div class="total-line grand-total">
+                <span>TOTAL:</span>
+                <span>$5.21</span>
+            </div>
+        </div>
+        
+        <div class="signature-section">
+            <div class="signature-line"><span style="font-size: 10pt; position: relative; top: 8mm; left: 2mm;">X</span></div>
+            <div class="signature-label">SIGNATURE</div>
+        </div>
+        
+        <div class="footer">
+            Thank you for your purchase<br>
+            Keep the music alive
+        </div>
+    </div>
+</body>
+</html>
