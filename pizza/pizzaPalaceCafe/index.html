@@ -299,8 +299,9 @@
 
         .hero-image-wrapper {
             position: relative;
-            aspect-ratio: 4/5;
+            aspect-ratio: 3/4;
             overflow: hidden;
+            border-radius: 8px;
         }
 
         .hero-image-wrapper img {
@@ -406,6 +407,7 @@
         .about-image-main {
             aspect-ratio: 1;
             overflow: hidden;
+            border-radius: 8px;
         }
 
         .about-image-main img {
@@ -545,18 +547,39 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
+            grid-auto-rows: 200px;
         }
 
         .gallery-item {
-            aspect-ratio: 1;
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            border-radius: 8px;
         }
 
         .gallery-item:nth-child(1) {
             grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        .gallery-item:nth-child(2) {
+            grid-column: span 1;
             grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(3) {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .gallery-item:nth-child(5) {
+            grid-column: span 2;
+            grid-row: span 1;
         }
 
         .gallery-item img {
@@ -928,11 +951,32 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 150px;
             }
 
             .gallery-item:nth-child(1) {
                 grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .gallery-item:nth-child(2) {
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+
+            .gallery-item:nth-child(3) {
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+
+            .gallery-item:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .gallery-item:nth-child(5) {
+                grid-column: span 1;
                 grid-row: span 1;
             }
 
@@ -1022,8 +1066,8 @@
                     <div class="hero-text">
                         <div class="hero-badge">Now Open in Seaford</div>
                         <h1 class="hero-title">
-                            <span>Breakfast to</span>
-                            <span class="outline">Dinner</span>
+                            <span>Pizza &</span>
+                            <span class="outline">Sushi</span>
                             <span>Done Right</span>
                         </h1>
                         <p class="hero-subtitle">Three generations of family recipes, now serving Seaford. Classic NYC pizza meets fresh sushi, all under one roof.</p>
