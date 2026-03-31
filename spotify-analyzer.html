@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Data Analyzer</title>
+    <title>Luca's Spotify Data Analyzer</title>
     <style>
         * {
             margin: 0;
@@ -12,138 +12,123 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e1e1e 100%);
+            font-family: 'Courier New', Courier, monospace;
+            background: #111;
             min-height: 100vh;
             padding: 20px;
-            color: #fff;
+            color: #ccc;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 960px;
             margin: 0 auto;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 40px;
+            text-align: left;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 1.6em;
             font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #1db954, #1ed760);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1db954;
+            letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 1.2em;
-            color: #b3b3b3;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 4px;
         }
 
         .help-link {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 10px;
             color: #1db954;
-            text-decoration: none;
-            font-size: 0.95em;
-            padding: 8px 16px;
-            border: 1px solid rgba(29, 185, 84, 0.3);
-            border-radius: 20px;
-            transition: all 0.3s ease;
+            text-decoration: underline;
+            font-size: 0.8em;
         }
 
         .help-link:hover {
-            background: rgba(29, 185, 84, 0.1);
-            border-color: rgba(29, 185, 84, 0.6);
+            color: #fff;
         }
 
         .upload-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            border: 2px dashed rgba(29, 185, 84, 0.3);
+            background: #1a1a1a;
+            border: 1px dashed #444;
+            padding: 25px;
+            margin-bottom: 20px;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
         .upload-section:hover {
-            border-color: rgba(29, 185, 84, 0.6);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: #666;
         }
 
         .spotify-connect-section {
-            background: rgba(30, 215, 96, 0.1);
-            border: 2px solid rgba(30, 215, 96, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
+            background: #1a1a1a;
+            border: 1px solid #2a5a3a;
+            padding: 20px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
         .spotify-connect-title {
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #1ed760;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1db954;
         }
 
         .spotify-connect-description {
-            color: #b3b3b3;
-            margin-bottom: 20px;
-            font-size: 0.95em;
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 0.8em;
         }
 
         .time-range-buttons {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .time-range-btn {
-            background: linear-gradient(135deg, #1db954, #1ed760);
-            color: white;
-            padding: 12px 30px;
+            background: #1db954;
+            color: #000;
+            padding: 8px 18px;
             border: none;
-            border-radius: 50px;
-            font-size: 1em;
-            font-weight: 600;
+            font-size: 0.85em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         .time-range-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.4);
+            background: #1ed760;
         }
 
         .time-range-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
-            transform: none;
         }
 
         .spotify-note {
-            font-size: 0.85em;
-            color: #888;
+            font-size: 0.75em;
+            color: #666;
             font-style: italic;
         }
 
         .divider {
             text-align: center;
-            color: #666;
-            margin: 30px 0;
-            font-weight: 600;
-            text-transform: uppercase;
+            color: #444;
+            margin: 20px 0;
+            font-size: 0.8em;
             letter-spacing: 2px;
-            font-size: 0.9em;
         }
 
         .file-input-wrapper {
@@ -157,87 +142,73 @@
         }
 
         .upload-btn {
-            background: linear-gradient(135deg, #1db954, #1ed760);
-            color: white;
-            padding: 15px 40px;
+            background: #1db954;
+            color: #000;
+            padding: 10px 24px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
+            font-size: 0.9em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
+            font-family: inherit;
         }
 
         .upload-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.4);
+            background: #1ed760;
         }
 
         .file-info {
-            margin-top: 20px;
+            margin-top: 12px;
             color: #1db954;
-            font-size: 0.95em;
+            font-size: 0.85em;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            margin-bottom: 20px;
+            background: #333;
+            border: 1px solid #333;
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(29, 185, 84, 0.5);
+            background: #1a1a1a;
+            padding: 15px;
         }
 
         .stat-label {
-            font-size: 0.9em;
-            color: #b3b3b3;
-            margin-bottom: 10px;
+            font-size: 0.7em;
+            color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 4px;
         }
 
         .stat-value {
-            font-size: 2em;
+            font-size: 1.4em;
             font-weight: 700;
             color: #1db954;
         }
 
         .section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
         .section-title {
-            font-size: 1.8em;
-            margin-bottom: 20px;
+            font-size: 1.1em;
+            margin-bottom: 15px;
             color: #1db954;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
         }
 
         .controls-bar {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
             align-items: center;
         }
@@ -245,27 +216,22 @@
         .control-group {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
         }
 
         .control-label {
-            font-size: 0.9em;
-            color: #b3b3b3;
+            font-size: 0.8em;
+            color: #666;
         }
 
         select, input[type="text"] {
-            padding: 10px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 0.95em;
+            padding: 6px 10px;
+            background: #222;
+            border: 1px solid #444;
+            color: #ccc;
+            font-size: 0.85em;
+            font-family: inherit;
             outline: none;
-            transition: all 0.3s ease;
-        }
-
-        select:hover, input[type="text"]:hover {
-            background: rgba(255, 255, 255, 0.08);
         }
 
         select:focus, input[type="text"]:focus {
@@ -273,59 +239,50 @@
         }
 
         option {
-            background: #1e1e1e;
-            color: white;
+            background: #222;
+            color: #ccc;
         }
 
         .exclude-btn {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.85em;
+            background: none;
+            color: #e55;
+            border: 1px solid #533;
+            padding: 3px 8px;
+            font-size: 0.75em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         .exclude-btn:hover {
-            background: rgba(239, 68, 68, 0.3);
-            border-color: rgba(239, 68, 68, 0.5);
+            background: #311;
         }
 
         .excluded-tags {
             display: flex;
-            gap: 10px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .excluded-tag {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            color: #ef4444;
+            gap: 6px;
+            background: #311;
+            border: 1px solid #533;
+            padding: 4px 8px;
+            font-size: 0.8em;
+            color: #e55;
         }
 
         .excluded-tag button {
             background: none;
             border: none;
-            color: #ef4444;
+            color: #e55;
             cursor: pointer;
-            font-size: 1.2em;
-            line-height: 1;
+            font-size: 1em;
             padding: 0;
-            margin: 0;
-            transition: all 0.2s ease;
-        }
-
-        .excluded-tag button:hover {
-            transform: scale(1.2);
+            font-family: inherit;
         }
 
         .top-list {
@@ -336,95 +293,81 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
+            padding: 8px 10px;
+            border-bottom: 1px solid #222;
+            font-size: 0.85em;
         }
 
         .top-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateX(5px);
+            background: #222;
         }
 
         .rank {
-            font-size: 1.5em;
+            font-size: 0.9em;
             font-weight: 700;
             color: #1db954;
-            min-width: 40px;
+            min-width: 35px;
         }
 
         .item-info {
             flex: 1;
-            margin: 0 20px;
+            margin: 0 12px;
         }
 
         .item-name {
-            font-size: 1.1em;
             font-weight: 600;
-            margin-bottom: 5px;
+            color: #ddd;
         }
 
         .item-detail {
-            font-size: 0.9em;
-            color: #b3b3b3;
+            font-size: 0.85em;
+            color: #666;
         }
 
         .item-stat {
             text-align: right;
-            color: #1db954;
-            font-weight: 600;
+            color: #888;
+            font-size: 0.85em;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 5px;
+            gap: 4px;
         }
 
         .artist-link {
             color: #1db954;
             cursor: pointer;
-            transition: all 0.2s ease;
             text-decoration: underline;
             text-decoration-color: transparent;
         }
 
         .artist-link:hover {
-            color: #1ed760;
-            text-decoration-color: #1ed760;
+            text-decoration-color: #1db954;
         }
 
         .timeline-item {
-            padding: 15px;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #1db954;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .timeline-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-left-width: 6px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            border-left: 3px solid #1db954;
+            background: #1a1a1a;
+            font-size: 0.85em;
         }
 
         .timeline-date {
-            font-size: 0.9em;
             color: #1db954;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 0.85em;
+            margin-bottom: 2px;
         }
 
         .timeline-artist {
-            font-size: 1.1em;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         .timeline-track {
+            color: #666;
             font-size: 0.9em;
-            color: #b3b3b3;
         }
 
         .chart-container {
@@ -435,9 +378,9 @@
 
         .loading {
             text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
+            padding: 30px;
             color: #1db954;
+            font-size: 0.9em;
         }
 
         .hidden {
@@ -446,30 +389,30 @@
 
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 0;
+            margin-bottom: 15px;
             flex-wrap: wrap;
+            border-bottom: 1px solid #333;
         }
 
         .tab-btn {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #fff;
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #666;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95em;
-            font-weight: 500;
+            font-size: 0.85em;
+            font-family: inherit;
         }
 
         .tab-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #1db954, #1ed760);
-            border-color: #1db954;
+            color: #1db954;
+            border-bottom-color: #1db954;
         }
 
         .tab-content {
@@ -483,150 +426,50 @@
         .load-more-btn {
             display: block;
             width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(29, 185, 84, 0.3);
-            border-radius: 10px;
+            padding: 10px;
+            background: none;
+            border: 1px solid #333;
             color: #1db954;
-            font-size: 1em;
+            font-size: 0.85em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: 12px;
+            font-family: inherit;
         }
 
         .load-more-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(29, 185, 84, 0.6);
-            transform: translateY(-2px);
+            background: #222;
+            border-color: #1db954;
         }
 
         .share-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1em;
+            background: #333;
+            color: #ccc;
+            padding: 8px 16px;
+            border: 1px solid #555;
+            font-size: 0.8em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 5px;
+            margin: 4px 2px;
+            font-family: inherit;
         }
 
         .share-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            background: #444;
         }
 
         /* Story Card Styles */
         .story-card {
             width: 1080px;
             height: 1920px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e1e1e 100%);
+            background: #111;
             position: relative;
             color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             padding: 80px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-
-        .story-header {
-            text-align: center;
-        }
-
-        .story-title {
-            font-size: 120px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #1db954, #1ed760);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 40px;
-        }
-
-        .story-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 60px;
-        }
-
-        .story-stat {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 60px;
-            border: 2px solid rgba(29, 185, 84, 0.3);
-            text-align: center;
-        }
-
-        .story-stat-label {
-            font-size: 48px;
-            color: #b3b3b3;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-        }
-
-        .story-stat-value {
-            font-size: 140px;
-            font-weight: 700;
-            color: #1db954;
-            line-height: 1;
-        }
-
-        .story-list-item {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 50px 60px;
-            margin-bottom: 30px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .story-rank {
-            font-size: 100px;
-            font-weight: 700;
-            color: #1db954;
-            min-width: 140px;
-        }
-
-        .story-item-info {
-            flex: 1;
-        }
-
-        .story-item-name {
-            font-size: 64px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .story-item-detail {
-            font-size: 48px;
-            color: #b3b3b3;
-        }
-
-        .story-footer {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .story-url {
-            font-size: 44px;
-            color: #1db954;
-            font-weight: 600;
         }
 
         /* Modal Styles */
@@ -655,67 +498,60 @@
 
         .modal-close {
             position: absolute;
-            right: 20px;
-            top: 20px;
+            right: 10px;
+            top: 10px;
             color: #fff;
-            font-size: 40px;
+            font-size: 28px;
             font-weight: bold;
             cursor: pointer;
             z-index: 1001;
-            background: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            background: #333;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
+            border: 1px solid #555;
         }
 
         .modal-close:hover {
-            background: rgba(0, 0, 0, 0.8);
+            background: #555;
         }
 
         .modal-actions {
             text-align: center;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            margin-top: 20px;
+            padding: 20px;
+            margin-top: 10px;
         }
 
         .download-btn {
-            background: linear-gradient(135deg, #1db954, #1ed760);
-            color: white;
-            padding: 15px 40px;
+            background: #1db954;
+            color: #000;
+            padding: 10px 24px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
+            font-size: 0.9em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 10px;
+            font-family: inherit;
         }
 
         .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.4);
+            background: #1ed760;
         }
 
         .info-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 25px;
+            margin-bottom: 20px;
         }
 
         .info-title {
-            font-size: 1.8em;
+            font-size: 1.1em;
             color: #1db954;
-            margin-bottom: 20px;
-            font-weight: 600;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .info-steps {
@@ -726,51 +562,44 @@
         .info-step {
             counter-increment: step-counter;
             position: relative;
-            padding-left: 60px;
-            margin-bottom: 25px;
-            font-size: 1.05em;
-            line-height: 1.6;
+            padding-left: 40px;
+            margin-bottom: 14px;
+            font-size: 0.85em;
+            line-height: 1.5;
+            color: #aaa;
         }
 
         .info-step::before {
-            content: counter(step-counter);
+            content: counter(step-counter) ".";
             position: absolute;
             left: 0;
             top: 0;
-            background: linear-gradient(135deg, #1db954, #1ed760);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #1db954;
             font-weight: 700;
-            font-size: 1.2em;
+        }
+
+        .info-step a {
+            color: #1db954;
         }
 
         .info-note {
-            background: rgba(30, 215, 96, 0.1);
-            border-left: 4px solid #1db954;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 0.95em;
-            color: #b3b3b3;
+            background: #1a2a1a;
+            border-left: 3px solid #1db954;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #888;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .top-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 4px;
             }
 
             .item-stat {
@@ -781,10 +610,6 @@
             .controls-bar {
                 flex-direction: column;
                 align-items: stretch;
-            }
-
-            .control-group {
-                width: 100%;
             }
 
             select, input[type="text"] {
@@ -801,27 +626,23 @@
         }
 
         .search-result-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 15px;
+            margin-bottom: 12px;
         }
 
         .search-result-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(29, 185, 84, 0.5);
-            transform: translateY(-3px);
+            border-color: #1db954;
         }
 
         .search-result-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
         }
 
         .search-result-title {
@@ -830,72 +651,72 @@
         }
 
         .search-result-name {
-            font-size: 1.5em;
+            font-size: 1.1em;
             font-weight: 700;
-            margin-bottom: 5px;
-            color: #fff;
+            color: #ddd;
         }
 
         .search-result-type {
-            font-size: 0.9em;
+            font-size: 0.75em;
             color: #1db954;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .search-result-rank {
-            background: linear-gradient(135deg, #1db954, #1ed760);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 1.2em;
+            background: #1db954;
+            color: #000;
+            padding: 4px 10px;
+            font-size: 0.85em;
             font-weight: 700;
             white-space: nowrap;
         }
 
         .search-stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1px;
+            background: #333;
+            border: 1px solid #333;
+            margin-bottom: 12px;
         }
 
         .search-mini-stat {
             text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
+            padding: 10px;
+            background: #1a1a1a;
         }
 
         .search-mini-label {
-            font-size: 0.85em;
-            color: #b3b3b3;
-            margin-bottom: 5px;
+            font-size: 0.7em;
+            color: #666;
+            margin-bottom: 3px;
         }
 
         .search-mini-value {
-            font-size: 1.3em;
+            font-size: 1em;
             font-weight: 700;
             color: #1db954;
         }
 
         .listening-history {
-            margin-top: 20px;
+            margin-top: 12px;
         }
 
         .history-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-bottom: 8px;
             color: #1db954;
         }
 
         .history-item {
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border-left: 3px solid #1db954;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            font-size: 0.9em;
+            padding: 6px 10px;
+            background: #222;
+            border-left: 2px solid #1db954;
+            margin-bottom: 4px;
+            font-size: 0.8em;
+            color: #aaa;
         }
 
         .history-date {
@@ -905,59 +726,55 @@
 
         .no-results {
             text-align: center;
-            padding: 60px 20px;
-            color: #b3b3b3;
-            font-size: 1.1em;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎵 Spotify Data Analyzer</h1>
-            <p class="subtitle">Discover your listening history like never before</p>
-            <a href="#how-to" class="help-link">📖 How do I request my Spotify data?</a>
+            <h1>Luca's Spotify Data Analyzer</h1>
+            <p class="subtitle">:)</p>
+            <a href="#how-to" class="help-link">how do i request my spotify data?</a>
         </header>
 
         <div class="upload-section">
             <div class="file-input-wrapper">
                 <label for="fileInput" class="upload-btn">
-                    📁 Upload Spotify Data Files
+                    Upload Spotify Data Files
                 </label>
                 <input type="file" id="fileInput" accept=".json" multiple>
             </div>
             <div class="file-info" id="fileInfo"></div>
         </div>
 
-        <div class="divider">— OR —</div>
+        <div class="divider">-- OR --</div>
 
         <div class="spotify-connect-section" id="spotifyConnectSection" style="display: none;">
             <div class="spotify-connect-title">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="#1ed760" style="vertical-align: middle; margin-right: 10px;">
-                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                </svg>
-                Quick Connect with Spotify
+                login connect (broken)
             </div>
             <div class="spotify-connect-description">
-                See your top artists and tracks (rankings only - Spotify API doesn't provide play counts)
+                top artists and tracks (rankings only - Spotify API doesn't provide play counts)
             </div>
             <div class="time-range-buttons">
                 <button class="time-range-btn" onclick="connectSpotify()">
-                    🎧 Connect with Spotify
+                    Connect with Spotify
                 </button>
             </div>
             <div class="spotify-note">
-                <strong>⚠️ Important:</strong> Spotify API gives limited data (top 50 items, no actual play counts).
-                <br>For your <strong>complete listening history with real stats</strong>, use the "Upload Spotify Data Files" option above!
+                this lowkey doesn't work rn because spotify's api SUCKS @spotify make ur stuff more dev friendly ty :)
             </div>
         </div>
 
         <div id="how-to" class="info-section">
-            <h2 class="info-title">📖 How to Request Your Spotify Data</h2>
+            <h2 class="info-title">req spotify data tutorial</h2>
             <ol class="info-steps">
                 <li class="info-step">
-                    Go to your <strong>Spotify Account Privacy Settings</strong> at 
-                    <a href="https://www.spotify.com/account/privacy/" target="_blank" style="color: #1db954;">spotify.com/account/privacy</a>
+                    Go to your <strong>Spotify Account Privacy Settings</strong> at
+                    <a href="https://www.spotify.com/account/privacy/" target="_blank">spotify.com/account/privacy</a>
                 </li>
                 <li class="info-step">
                     Scroll down to <strong>"Download your data"</strong> section
@@ -966,31 +783,30 @@
                     Click <strong>"Request"</strong> next to "Extended streaming history"
                 </li>
                 <li class="info-step">
-                    Wait for Spotify to email you (usually takes 5-30 days)
+                    Wait for Spotify to hit up your line
                 </li>
                 <li class="info-step">
-                    Download the ZIP file from the email
+                    Download the ZIP file with a bunch of JSON from the email
                 </li>
                 <li class="info-step">
                     Extract the ZIP and upload the <strong>JSON files</strong> (named like "Streaming_History_Audio_...")
                 </li>
             </ol>
             <div class="info-note">
-                <strong>💡 Tip:</strong> The "Extended streaming history" option gives you your complete listening history, 
-                while the basic option only gives you the past year. Request the extended version for the best results!
+                enjoy my little tool i will work on it again later sometime
             </div>
         </div>
 
         <div id="results" class="hidden">
-            <div class="controls-bar" style="justify-content: center; margin-bottom: 30px;">
+            <div class="controls-bar" style="justify-content: flex-start; margin-bottom: 15px;">
                 <button class="share-btn" onclick="generateStoryCard('overview')">
-                    📸 Share Overview
+                    Share Overview
                 </button>
                 <button class="share-btn" onclick="generateStoryCard('top-artist')">
-                    🎤 Share Top Artist
+                    Share Top Artist
                 </button>
                 <button class="share-btn" onclick="generateStoryCard('top-artists-list')">
-                    🎵 Share Top 5 Artists
+                    Share Top 5 Artists
                 </button>
             </div>
 
@@ -1018,15 +834,15 @@
                 <button class="tab-btn" onclick="showTab('top-tracks')">Top Tracks</button>
                 <button class="tab-btn" onclick="showTab('top-albums')">Top Albums</button>
                 <button class="tab-btn" onclick="showTab('discoveries')">First Listens</button>
-                <button class="tab-btn" onclick="showTab('timeline')">Listening Timeline</button>
-                <button class="tab-btn" onclick="showTab('search')">🔍 Search</button>
+                <button class="tab-btn" onclick="showTab('timeline')">Timeline</button>
+                <button class="tab-btn" onclick="showTab('search')">Search</button>
             </div>
 
             <div id="top-artists" class="section tab-content active">
-                <h2 class="section-title">🎤 Top Artists</h2>
-                
+                <h2 class="section-title">Top Artists</h2>
+
                 <div id="artistExcludedTags" class="excluded-tags"></div>
-                
+
                 <div class="controls-bar">
                     <div class="control-group">
                         <span class="control-label">Sort:</span>
@@ -1038,16 +854,16 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <ul class="top-list" id="topArtistsList"></ul>
                 <button class="load-more-btn" id="loadMoreArtists" onclick="loadMoreArtists()">Load More Artists</button>
             </div>
 
             <div id="top-tracks" class="section tab-content">
-                <h2 class="section-title">🎵 Top Tracks</h2>
-                
+                <h2 class="section-title">Top Tracks</h2>
+
                 <div id="trackExcludedTags" class="excluded-tags"></div>
-                
+
                 <div class="controls-bar">
                     <div class="control-group">
                         <span class="control-label">Sort:</span>
@@ -1059,16 +875,16 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <ul class="top-list" id="topTracksList"></ul>
                 <button class="load-more-btn" id="loadMoreTracks" onclick="loadMoreTracks()">Load More Tracks</button>
             </div>
 
             <div id="top-albums" class="section tab-content">
-                <h2 class="section-title">💿 Top Albums</h2>
-                
+                <h2 class="section-title">Top Albums</h2>
+
                 <div id="albumExcludedTags" class="excluded-tags"></div>
-                
+
                 <div class="controls-bar">
                     <div class="control-group">
                         <span class="control-label">Sort:</span>
@@ -1080,44 +896,43 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <ul class="top-list" id="topAlbumsList"></ul>
                 <button class="load-more-btn" id="loadMoreAlbums" onclick="loadMoreAlbums()">Load More Albums</button>
             </div>
 
             <div id="discoveries" class="section tab-content">
-                <h2 class="section-title">✨ Artist Discovery Timeline</h2>
+                <h2 class="section-title">Artist Discovery Timeline</h2>
                 <div id="discoveryTimeline"></div>
                 <button class="load-more-btn" id="loadMoreDiscoveries" onclick="loadMoreDiscoveries()">Load More Discoveries</button>
             </div>
 
             <div id="timeline" class="section tab-content">
-                <h2 class="section-title">📊 Listening Over Time</h2>
+                <h2 class="section-title">Listening Over Time</h2>
                 <div id="timelineChart"></div>
             </div>
 
             <div id="search" class="section tab-content">
-                <h2 class="section-title">🔍 Search Your Data</h2>
-                
-                <div style="margin-bottom: 30px;">
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        placeholder="Search for artists, tracks, or albums..." 
+                <h2 class="section-title">Search Your Data</h2>
+
+                <div style="margin-bottom: 20px;">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search for artists, tracks, or albums..."
                         style="
                             width: 100%;
-                            padding: 15px 20px;
-                            font-size: 1.1em;
-                            background: rgba(255, 255, 255, 0.05);
-                            border: 2px solid rgba(255, 255, 255, 0.1);
-                            border-radius: 10px;
-                            color: white;
+                            padding: 10px 12px;
+                            font-size: 0.9em;
+                            background: #222;
+                            border: 1px solid #444;
+                            color: #ccc;
+                            font-family: inherit;
                             outline: none;
-                            transition: all 0.3s ease;
                         "
                         oninput="performSearch()"
                         onfocus="this.style.borderColor='#1db954'"
-                        onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'"
+                        onblur="this.style.borderColor='#444'"
                     >
                 </div>
 
@@ -1130,10 +945,10 @@
     <div id="storyModal" class="modal">
         <span class="modal-close" onclick="closeStoryModal()">&times;</span>
         <div class="modal-content">
-            <canvas id="storyCanvas" style="width: 100%; border-radius: 20px;"></canvas>
+            <canvas id="storyCanvas" style="width: 100%;"></canvas>
             <div class="modal-actions">
                 <button class="download-btn" onclick="downloadStoryCard()">
-                    💾 Download Image
+                    Download Image
                 </button>
             </div>
         </div>
@@ -1144,20 +959,16 @@
 
     <script>
         // Hardcoded config for GitHub Pages/Squarespace deployment
-        // (config.js file is for local development only)
         if (typeof SPOTIFY_CONFIG === 'undefined') {
             const SPOTIFY_CONFIG = {
                 CLIENT_ID: '713c0927a0fd4effa8514e8798e52844',
-                // Use specific redirect URI so it works on all devices
                 REDIRECT_URI: 'https://lucadigrigoli.com/spotify-analyzer.html'
             };
-            // Make it global
             window.SPOTIFY_CONFIG = SPOTIFY_CONFIG;
         }
 
-        // Check if config is loaded and show Spotify connect section
-        if (typeof SPOTIFY_CONFIG !== 'undefined' && 
-            SPOTIFY_CONFIG.CLIENT_ID && 
+        if (typeof SPOTIFY_CONFIG !== 'undefined' &&
+            SPOTIFY_CONFIG.CLIENT_ID &&
             SPOTIFY_CONFIG.CLIENT_ID !== 'YOUR_CLIENT_ID_HERE') {
             document.getElementById('spotifyConnectSection').style.display = 'block';
         }
@@ -1194,15 +1005,13 @@
         let searchTimeout = null;
         let excludedArtists = new Set();
         let currentStoryType = '';
-        
+
         // Pagination state
         let artistsDisplayed = 50;
         let tracksDisplayed = 50;
         let albumsDisplayed = 50;
         let discoveriesDisplayed = 50;
 
-        // Spotify API Configuration
-        // These will be loaded from config.js (not committed to git)
         const SPOTIFY_CLIENT_ID = typeof SPOTIFY_CONFIG !== 'undefined' ? SPOTIFY_CONFIG.CLIENT_ID : null;
         const REDIRECT_URI = typeof SPOTIFY_CONFIG !== 'undefined' ? SPOTIFY_CONFIG.REDIRECT_URI : window.location.origin + window.location.pathname;
         const SCOPES = 'user-top-read user-read-recently-played';
@@ -1221,20 +1030,16 @@
                       'For now, please use the file upload method to analyze your complete listening history.');
                 return;
             }
-            
-            // Clear any existing tokens (each user needs their own)
+
             localStorage.removeItem('spotify_access_token');
             localStorage.removeItem('spotify_user_id');
-            
-            // Generate PKCE code verifier and challenge
+
             const codeVerifier = generateCodeVerifier();
             const codeChallenge = await generateCodeChallenge(codeVerifier);
-            
-            // Store for later use
+
             localStorage.setItem('spotify_code_verifier', codeVerifier);
             localStorage.setItem('spotify_time_range', timeRange || 'long_term');
-            
-            // Build authorization URL with PKCE
+
             const authUrl = `https://accounts.spotify.com/authorize?` +
                 `client_id=${SPOTIFY_CLIENT_ID}&` +
                 `response_type=code&` +
@@ -1243,42 +1048,38 @@
                 `code_challenge_method=S256&` +
                 `code_challenge=${codeChallenge}&` +
                 `state=${timeRange || 'long_term'}`;
-            
+
             window.location.href = authUrl;
         }
 
-        // Handle Spotify OAuth callback
         if (window.location.search.includes('code=')) {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
             const error = urlParams.get('error');
-            
+
             if (error) {
                 alert('Spotify authentication error: ' + error);
                 history.replaceState(null, null, window.location.pathname);
             } else if (code) {
-                // Exchange authorization code for access token
                 exchangeCodeForToken(code);
             }
         }
-        
-        // Check if we have a stored access token (user already logged in)
+
         const storedToken = localStorage.getItem('spotify_access_token');
         if (storedToken && !window.location.search.includes('code=')) {
-            // Add time range selector to UI
             showSpotifyTimeRangeSelector();
         }
 
         async function exchangeCodeForToken(code) {
             const codeVerifier = localStorage.getItem('spotify_code_verifier');
-            
+
             if (!codeVerifier) {
                 alert('Error: Code verifier not found. Please try logging in again.');
                 return;
             }
-            
+
             document.getElementById('fileInfo').innerHTML = '<div class="loading">Authenticating with Spotify...</div>';
-            
+
             try {
                 const response = await fetch('https://accounts.spotify.com/api/token', {
                     method: 'POST',
@@ -1299,18 +1100,15 @@
                 }
 
                 const data = await response.json();
-                
-                // Store the access token
+
                 localStorage.setItem('spotify_access_token', data.access_token);
-                localStorage.removeItem('spotify_code_verifier'); // Clean up
-                
-                // Clean up URL
+                localStorage.removeItem('spotify_code_verifier');
+
                 history.replaceState(null, null, window.location.pathname);
-                
-                // Fetch data with stored or default time range
+
                 const timeRange = localStorage.getItem('spotify_time_range') || 'long_term';
                 fetchSpotifyData(data.access_token, timeRange);
-                
+
             } catch (error) {
                 alert('Error authenticating with Spotify: ' + error.message);
                 document.getElementById('fileInfo').textContent = '';
@@ -1321,73 +1119,64 @@
         async function fetchSpotifyData(accessToken, timeRange) {
             try {
                 document.getElementById('fileInfo').innerHTML = '<div class="loading">Loading from Spotify...</div>';
-                
+
                 console.log('Fetching with token:', accessToken.substring(0, 10) + '...');
                 console.log('Time range:', timeRange);
-                
-                // Fetch top artists
+
                 const artistsResponse = await fetch(
                     `https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=50`,
                     { headers: { 'Authorization': `Bearer ${accessToken}` }}
                 );
-                
+
                 console.log('Artists response status:', artistsResponse.status);
-                console.log('Artists response headers:', artistsResponse.headers);
-                
+
                 if (!artistsResponse.ok) {
                     const errorText = await artistsResponse.text();
                     console.error('Artists API error response:', errorText);
                     throw new Error(`Artists API error (${artistsResponse.status}): ${errorText}`);
                 }
-                
+
                 const artistsData = await artistsResponse.json();
                 console.log('Artists data:', artistsData);
-                
-                // Fetch top tracks
+
                 const tracksResponse = await fetch(
                     `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=50`,
                     { headers: { 'Authorization': `Bearer ${accessToken}` }}
                 );
-                
+
                 console.log('Tracks response status:', tracksResponse.status);
-                
+
                 if (!tracksResponse.ok) {
                     const errorText = await tracksResponse.text();
                     console.error('Tracks API error response:', errorText);
                     throw new Error(`Tracks API error (${tracksResponse.status}): ${errorText}`);
                 }
-                
+
                 const tracksData = await tracksResponse.json();
                 console.log('Tracks data:', tracksData);
-                
-                // Convert Spotify API data to our format
+
                 convertSpotifyData(artistsData, tracksData, timeRange);
-                
+
             } catch (error) {
                 console.error('Full error object:', error);
                 alert('Error fetching Spotify data: ' + error.message + '\n\nCheck browser console (F12) for details.');
-                document.getElementById('fileInfo').innerHTML = '<div style="color: #ef4444;">❌ Error loading Spotify data. Try logging in again.</div>';
-                
-                // Clear stored token so user can try again
+                document.getElementById('fileInfo').innerHTML = '<div style="color: #e55;">Error loading Spotify data. Try logging in again.</div>';
+
                 localStorage.removeItem('spotify_access_token');
             }
         }
 
         function convertSpotifyData(artistsData, tracksData, timeRange) {
-            // Spotify API provides rankings and popularity, but not play counts
-            // We'll display the actual ranking and popularity data instead of fake numbers
-            
             allData = [];
             artistStats = {};
             trackStats = {};
-            
-            // Process artists - use actual rank as the key metric
+
             artistsData.items.forEach((artist, index) => {
                 artistStats[artist.name] = {
-                    rank: index + 1,  // Actual Spotify ranking (1-50)
-                    popularity: artist.popularity,  // Spotify's 0-100 popularity score
-                    plays: index + 1,  // Use rank as display value (lower is better)
-                    time: 0,  // We don't have real time data
+                    rank: index + 1,
+                    popularity: artist.popularity,
+                    plays: index + 1,
+                    time: 0,
                     firstListen: new Date().toISOString(),
                     lastListen: new Date().toISOString(),
                     tracks: new Set(),
@@ -1397,19 +1186,18 @@
                     imageUrl: artist.images?.[0]?.url || null
                 };
             });
-            
-            // Process tracks - use actual rank as the key metric
+
             tracksData.items.forEach((track, index) => {
                 const artist = track.artists[0].name;
                 const key = `${track.name}|||${artist}`;
-                
+
                 trackStats[key] = {
                     track: track.name,
                     artist: artist,
-                    rank: index + 1,  // Actual Spotify ranking (1-50)
-                    popularity: track.popularity,  // Spotify's 0-100 popularity score
-                    plays: index + 1,  // Use rank as display value (lower is better)
-                    time: 0,  // We don't have real time data
+                    rank: index + 1,
+                    popularity: track.popularity,
+                    plays: index + 1,
+                    time: 0,
                     duration: track.duration_ms,
                     firstListen: new Date().toISOString(),
                     lastListen: new Date().toISOString(),
@@ -1417,40 +1205,37 @@
                     previewUrl: track.preview_url || null,
                     albumName: track.album?.name || null
                 };
-                
+
                 if (artistStats[artist]) {
                     artistStats[artist].tracks.add(track.name);
                 }
             });
-            
+
             const timeRangeLabels = {
                 'short_term': 'Past Month',
-                'medium_term': 'Past 6 Months', 
+                'medium_term': 'Past 6 Months',
                 'long_term': 'Past Year'
             };
-            
+
             document.getElementById('fileInfo').innerHTML = `
-                <div style="background: rgba(30, 215, 96, 0.2); border: 2px solid #1db954; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
-                    <strong>🎵 Spotify Rankings Data (${timeRangeLabels[timeRange] || timeRange})</strong><br>
-                    Showing your top 50 most-played artists and tracks based on Spotify's calculations.<br>
+                <div style="background: #1a2a1a; border: 1px solid #2a5a3a; padding: 10px; margin-bottom: 15px; font-size: 0.85em;">
+                    <strong>Spotify Rankings Data (${timeRangeLabels[timeRange] || timeRange})</strong><br>
+                    Showing your top 50 most-played artists and tracks based on Spotify's calculations.
                     Ranked from most played (#1) to least played (#50).
                 </div>
             `;
             document.getElementById('results').classList.remove('hidden');
-            
-            // Hide the stats grid for Spotify API data (it's misleading)
+
             const statsGrid = document.querySelector('.stats-grid');
             if (statsGrid) {
                 statsGrid.style.display = 'none';
             }
-            
-            // Set default sort to plays-asc (which shows rank #1 first)
+
             document.getElementById('artistSort').value = 'plays-asc';
             document.getElementById('trackSort').value = 'plays-asc';
-            
-            // Show time range selector
+
             showSpotifyTimeRangeSelector();
-            
+
             updateAllDisplays();
         }
 
@@ -1483,22 +1268,19 @@
         }
 
         function processData() {
-            document.getElementById('fileInfo').textContent = `✅ Loaded ${allData.length.toLocaleString()} streams`;
+            document.getElementById('fileInfo').textContent = `Loaded ${allData.length.toLocaleString()} streams`;
             document.getElementById('results').classList.remove('hidden');
 
-            // Show the stats grid for real data
             const statsGrid = document.querySelector('.stats-grid');
             if (statsGrid) {
                 statsGrid.style.display = 'grid';
             }
 
-            // Calculate basic stats
             const totalPlays = allData.length;
             const totalMs = allData.reduce((sum, item) => sum + (item.ms_played || 0), 0);
             const totalHours = Math.floor(totalMs / 3600000);
             const totalMinutes = Math.floor((totalMs % 3600000) / 60000);
 
-            // Unique artists and tracks
             const uniqueArtists = new Set(allData.map(item => item.master_metadata_album_artist_name).filter(Boolean));
             const uniqueTracks = new Set(allData.map(item => item.master_metadata_track_name).filter(Boolean));
 
@@ -1507,7 +1289,6 @@
             document.getElementById('uniqueArtists').textContent = uniqueArtists.size.toLocaleString();
             document.getElementById('uniqueTracks').textContent = uniqueTracks.size.toLocaleString();
 
-            // Process top artists
             artistStats = {};
             allData.forEach(item => {
                 const artist = item.master_metadata_album_artist_name;
@@ -1550,7 +1331,6 @@
 
             updateArtistsList();
 
-            // Process top tracks
             trackStats = {};
             allData.forEach(item => {
                 const track = item.master_metadata_track_name;
@@ -1588,7 +1368,6 @@
 
             updateTracksList();
 
-            // Process top albums
             albumStats = {};
             allData.forEach(item => {
                 const album = item.master_metadata_album_album_name;
@@ -1625,34 +1404,31 @@
 
             updateAlbumsList();
 
-            // Artist discoveries
             const discoveries = Object.entries(artistStats)
                 .sort((a, b) => new Date(a[1].firstListen) - new Date(b[1].firstListen));
 
             displayDiscoveries(discoveries.slice(0, discoveriesDisplayed));
 
-            // Timeline
             displayTimeline(allData);
         }
 
         function updateAllDisplays() {
             topArtistsRanked = Object.entries(artistStats)
                 .sort((a, b) => b[1].plays - a[1].plays);
-            
+
             topTracksRanked = Object.values(trackStats)
                 .sort((a, b) => b.plays - a.plays);
-            
-            // Update displays
+
             const totalPlays = topArtistsRanked.reduce((sum, [, stats]) => sum + stats.plays, 0);
             const totalTime = topArtistsRanked.reduce((sum, [, stats]) => sum + stats.time, 0);
             const totalHours = Math.floor(totalTime / 3600000);
             const totalMinutes = Math.floor((totalTime % 3600000) / 60000);
-            
+
             document.getElementById('totalPlays').textContent = totalPlays.toLocaleString();
             document.getElementById('totalTime').textContent = `${totalHours}h ${totalMinutes}m`;
             document.getElementById('uniqueArtists').textContent = Object.keys(artistStats).length.toLocaleString();
             document.getElementById('uniqueTracks').textContent = Object.keys(trackStats).length.toLocaleString();
-            
+
             updateArtistsList();
             updateTracksList();
         }
@@ -1661,21 +1437,16 @@
             currentStoryType = type;
             const canvas = document.getElementById('storyCanvas');
             const ctx = canvas.getContext('2d');
-            
-            // Set canvas to Instagram Story dimensions
+
             canvas.width = 1080;
             canvas.height = 1920;
-            
-            // Clear canvas
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Create gradient background
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#1e3a8a');
-            gradient.addColorStop(1, '#1e1e1e');
-            ctx.fillStyle = gradient;
+
+            // Plain dark background
+            ctx.fillStyle = '#111';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             if (type === 'overview') {
                 drawOverviewCard(ctx);
             } else if (type === 'top-artist') {
@@ -1683,53 +1454,44 @@
             } else if (type === 'top-artists-list') {
                 drawTopArtistsListCard(ctx);
             }
-            
-            // Show modal
+
             document.getElementById('storyModal').classList.add('active');
         }
 
         function drawOverviewCard(ctx) {
-            // Title
-            ctx.font = 'bold 100px -apple-system, sans-serif';
-            const gradient = ctx.createLinearGradient(0, 0, 1080, 0);
-            gradient.addColorStop(0, '#1db954');
-            gradient.addColorStop(1, '#1ed760');
-            ctx.fillStyle = gradient;
+            ctx.font = 'bold 100px Courier New, monospace';
+            ctx.fillStyle = '#1db954';
             ctx.textAlign = 'center';
             ctx.fillText('My Spotify', 540, 200);
             ctx.fillText('Wrapped', 540, 320);
-            
-            // Stats
+
             const stats = [
                 { label: 'TOTAL PLAYS', value: document.getElementById('totalPlays').textContent },
                 { label: 'TIME LISTENED', value: document.getElementById('totalTime').textContent },
                 { label: 'UNIQUE ARTISTS', value: document.getElementById('uniqueArtists').textContent }
             ];
-            
+
             let yPos = 500;
             stats.forEach(stat => {
-                // Background box
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-                ctx.beginPath();
-                ctx.roundRect(140, yPos, 800, 200, 40);
-                ctx.fill();
-                
-                // Label
-                ctx.font = '40px -apple-system, sans-serif';
-                ctx.fillStyle = '#b3b3b3';
+                ctx.fillStyle = '#1a1a1a';
+                ctx.fillRect(140, yPos, 800, 200);
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(140, yPos, 800, 200);
+
+                ctx.font = '40px Courier New, monospace';
+                ctx.fillStyle = '#666';
                 ctx.textAlign = 'center';
                 ctx.fillText(stat.label, 540, yPos + 70);
-                
-                // Value
-                ctx.font = 'bold 100px -apple-system, sans-serif';
+
+                ctx.font = 'bold 100px Courier New, monospace';
                 ctx.fillStyle = '#1db954';
                 ctx.fillText(stat.value, 540, yPos + 160);
-                
+
                 yPos += 260;
             });
-            
-            // Footer
-            ctx.font = '40px -apple-system, sans-serif';
+
+            ctx.font = '40px Courier New, monospace';
             ctx.fillStyle = '#1db954';
             ctx.textAlign = 'center';
             ctx.fillText('lucadigrigoli.com/spotify-analyzer', 540, 1820);
@@ -1737,29 +1499,24 @@
 
         function drawTopArtistCard(ctx) {
             if (topArtistsRanked.length === 0) return;
-            
+
             const [artistName, stats] = topArtistsRanked[0];
             const hours = Math.floor(stats.time / 3600000);
             const minutes = Math.floor((stats.time % 3600000) / 60000);
-            
-            // Title
-            ctx.font = 'bold 80px -apple-system, sans-serif';
-            ctx.fillStyle = '#b3b3b3';
+
+            ctx.font = 'bold 80px Courier New, monospace';
+            ctx.fillStyle = '#666';
             ctx.textAlign = 'center';
             ctx.fillText('MY TOP ARTIST', 540, 200);
-            
-            // Artist name (wrap if too long)
-            ctx.font = 'bold 120px -apple-system, sans-serif';
-            const gradient = ctx.createLinearGradient(0, 0, 1080, 0);
-            gradient.addColorStop(0, '#1db954');
-            gradient.addColorStop(1, '#1ed760');
-            ctx.fillStyle = gradient;
-            
+
+            ctx.font = 'bold 120px Courier New, monospace';
+            ctx.fillStyle = '#1db954';
+
             const words = artistName.split(' ');
             let line = '';
             let yPos = 400;
             const maxWidth = 900;
-            
+
             words.forEach((word, index) => {
                 const testLine = line + word + ' ';
                 const metrics = ctx.measureText(testLine);
@@ -1772,73 +1529,65 @@
                 }
             });
             ctx.fillText(line.trim(), 540, yPos);
-            
-            // Stats boxes
+
             const statBoxes = [
                 { label: 'PLAYS', value: stats.plays.toLocaleString() },
                 { label: 'LISTENING TIME', value: `${hours}h ${minutes}m` },
                 { label: 'UNIQUE TRACKS', value: stats.tracks.size.toString() }
             ];
-            
+
             yPos = 750;
             statBoxes.forEach(stat => {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-                ctx.beginPath();
-                ctx.roundRect(140, yPos, 800, 180, 30);
-                ctx.fill();
-                
-                ctx.font = '36px -apple-system, sans-serif';
-                ctx.fillStyle = '#b3b3b3';
+                ctx.fillStyle = '#1a1a1a';
+                ctx.fillRect(140, yPos, 800, 180);
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(140, yPos, 800, 180);
+
+                ctx.font = '36px Courier New, monospace';
+                ctx.fillStyle = '#666';
                 ctx.textAlign = 'center';
                 ctx.fillText(stat.label, 540, yPos + 60);
-                
-                ctx.font = 'bold 80px -apple-system, sans-serif';
+
+                ctx.font = 'bold 80px Courier New, monospace';
                 ctx.fillStyle = '#1db954';
                 ctx.fillText(stat.value, 540, yPos + 140);
-                
+
                 yPos += 240;
             });
-            
-            // Footer
-            ctx.font = '40px -apple-system, sans-serif';
+
+            ctx.font = '40px Courier New, monospace';
             ctx.fillStyle = '#1db954';
             ctx.textAlign = 'center';
             ctx.fillText('lucadigrigoli.com/spotify-analyzer', 540, 1820);
         }
 
         function drawTopArtistsListCard(ctx) {
-            // Title
-            ctx.font = 'bold 100px -apple-system, sans-serif';
-            const gradient = ctx.createLinearGradient(0, 0, 1080, 0);
-            gradient.addColorStop(0, '#1db954');
-            gradient.addColorStop(1, '#1ed760');
-            ctx.fillStyle = gradient;
+            ctx.font = 'bold 100px Courier New, monospace';
+            ctx.fillStyle = '#1db954';
             ctx.textAlign = 'center';
             ctx.fillText('My Top 5', 540, 180);
             ctx.fillText('Artists', 540, 300);
-            
-            // Artists list
+
             let yPos = 450;
             topArtistsRanked.slice(0, 5).forEach(([artistName, stats], index) => {
-                // Background box
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-                ctx.beginPath();
-                ctx.roundRect(80, yPos, 920, 220, 30);
-                ctx.fill();
-                
-                // Rank
-                ctx.font = 'bold 100px -apple-system, sans-serif';
+                ctx.fillStyle = '#1a1a1a';
+                ctx.fillRect(80, yPos, 920, 220);
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(80, yPos, 920, 220);
+
+                ctx.font = 'bold 100px Courier New, monospace';
                 ctx.fillStyle = '#1db954';
                 ctx.textAlign = 'left';
                 ctx.fillText(`#${index + 1}`, 140, yPos + 140);
-                
-                // Artist name (truncate if too long)
-                ctx.font = 'bold 56px -apple-system, sans-serif';
-                ctx.fillStyle = '#ffffff';
+
+                ctx.font = 'bold 56px Courier New, monospace';
+                ctx.fillStyle = '#ccc';
                 const maxWidth = 580;
                 let artistText = artistName;
                 let metrics = ctx.measureText(artistText);
-                
+
                 while (metrics.width > maxWidth && artistText.length > 3) {
                     artistText = artistText.substring(0, artistText.length - 1);
                     metrics = ctx.measureText(artistText + '...');
@@ -1846,19 +1595,17 @@
                 if (metrics.width > maxWidth) {
                     artistText += '...';
                 }
-                
+
                 ctx.fillText(artistText, 300, yPos + 100);
-                
-                // Plays
-                ctx.font = '44px -apple-system, sans-serif';
-                ctx.fillStyle = '#b3b3b3';
+
+                ctx.font = '44px Courier New, monospace';
+                ctx.fillStyle = '#666';
                 ctx.fillText(`${stats.plays.toLocaleString()} plays`, 300, yPos + 160);
-                
+
                 yPos += 260;
             });
-            
-            // Footer
-            ctx.font = '40px -apple-system, sans-serif';
+
+            ctx.font = '40px Courier New, monospace';
             ctx.fillStyle = '#1db954';
             ctx.textAlign = 'center';
             ctx.fillText('lucadigrigoli.com/spotify-analyzer', 540, 1820);
@@ -1876,7 +1623,6 @@
             document.getElementById('storyModal').classList.remove('active');
         }
 
-        // Helper function for rounded rectangles
         CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
             this.beginPath();
             this.moveTo(x + radius, y);
@@ -1892,25 +1638,24 @@
         };
 
         function showSpotifyTimeRangeSelector() {
-            // Add time range filter buttons to the results section
             const resultsDiv = document.getElementById('results');
             if (resultsDiv && !document.getElementById('spotifyTimeRangeFilter')) {
                 const filterDiv = document.createElement('div');
                 filterDiv.id = 'spotifyTimeRangeFilter';
                 filterDiv.className = 'controls-bar';
-                filterDiv.style.cssText = 'justify-content: center; margin-bottom: 30px; background: rgba(30, 215, 96, 0.1); padding: 20px; border-radius: 15px;';
+                filterDiv.style.cssText = 'justify-content: center; margin-bottom: 15px; background: #1a1a1a; padding: 15px; border: 1px solid #333;';
                 filterDiv.innerHTML = `
-                    <div style="width: 100%; text-align: center; margin-bottom: 15px; color: #1db954; font-weight: 600;">
-                        📊 Spotify Data Time Range
+                    <div style="width: 100%; text-align: center; margin-bottom: 10px; color: #1db954; font-weight: 700; font-size: 0.85em;">
+                        Spotify Data Time Range
                     </div>
-                    <button class="time-range-btn" onclick="reloadSpotifyData('short_term')" style="margin: 5px;">Past Month</button>
-                    <button class="time-range-btn" onclick="reloadSpotifyData('medium_term')" style="margin: 5px;">Past 6 Months</button>
-                    <button class="time-range-btn" onclick="reloadSpotifyData('long_term')" style="margin: 5px;">Past Year</button>
+                    <button class="time-range-btn" onclick="reloadSpotifyData('short_term')" style="margin: 3px;">Past Month</button>
+                    <button class="time-range-btn" onclick="reloadSpotifyData('medium_term')" style="margin: 3px;">Past 6 Months</button>
+                    <button class="time-range-btn" onclick="reloadSpotifyData('long_term')" style="margin: 3px;">Past Year</button>
                 `;
                 resultsDiv.insertBefore(filterDiv, resultsDiv.firstChild);
             }
         }
-        
+
         function reloadSpotifyData(timeRange) {
             const accessToken = localStorage.getItem('spotify_access_token');
             if (accessToken) {
@@ -1945,7 +1690,7 @@
             const tags = Array.from(excludedArtists).map(artist => `
                 <div class="excluded-tag">
                     <span>${artist}</span>
-                    <button onclick="removeExcludedArtist('${artist.replace(/'/g, "\\'")}')" title="Remove filter">×</button>
+                    <button onclick="removeExcludedArtist('${artist.replace(/'/g, "\\'")}')" title="Remove filter">x</button>
                 </div>
             `).join('');
 
@@ -1957,7 +1702,7 @@
         function getSortedArtists() {
             const sortValue = document.getElementById('artistSort').value;
             const filtered = topArtistsRanked.filter(([artist]) => !excludedArtists.has(artist));
-            
+
             switch (sortValue) {
                 case 'plays-asc':
                     return filtered.sort((a, b) => a[1].plays - b[1].plays);
@@ -1973,7 +1718,7 @@
         function getSortedTracks() {
             const sortValue = document.getElementById('trackSort').value;
             const filtered = topTracksRanked.filter(track => !excludedArtists.has(track.artist));
-            
+
             switch (sortValue) {
                 case 'plays-asc':
                     return filtered.sort((a, b) => a.plays - b.plays);
@@ -1989,7 +1734,7 @@
         function getSortedAlbums() {
             const sortValue = document.getElementById('albumSort').value;
             const filtered = topAlbumsRanked.filter(album => !excludedArtists.has(album.artist));
-            
+
             switch (sortValue) {
                 case 'plays-asc':
                     return filtered.sort((a, b) => a.plays - b.plays);
@@ -2007,7 +1752,7 @@
             const sorted = getSortedArtists();
             displayTopArtists(sorted.slice(0, artistsDisplayed));
             updateExcludedTags();
-            
+
             const loadMoreBtn = document.getElementById('loadMoreArtists');
             loadMoreBtn.style.display = sorted.length > artistsDisplayed ? 'block' : 'none';
         }
@@ -2017,7 +1762,7 @@
             const sorted = getSortedTracks();
             displayTopTracks(sorted.slice(0, tracksDisplayed));
             updateExcludedTags();
-            
+
             const loadMoreBtn = document.getElementById('loadMoreTracks');
             loadMoreBtn.style.display = sorted.length > tracksDisplayed ? 'block' : 'none';
         }
@@ -2027,7 +1772,7 @@
             const sorted = getSortedAlbums();
             displayTopAlbums(sorted.slice(0, albumsDisplayed));
             updateExcludedTags();
-            
+
             const loadMoreBtn = document.getElementById('loadMoreAlbums');
             loadMoreBtn.style.display = sorted.length > albumsDisplayed ? 'block' : 'none';
         }
@@ -2036,7 +1781,7 @@
             artistsDisplayed += 50;
             const sorted = getSortedArtists();
             displayTopArtists(sorted.slice(0, artistsDisplayed));
-            
+
             const loadMoreBtn = document.getElementById('loadMoreArtists');
             loadMoreBtn.style.display = sorted.length > artistsDisplayed ? 'block' : 'none';
         }
@@ -2045,7 +1790,7 @@
             tracksDisplayed += 50;
             const sorted = getSortedTracks();
             displayTopTracks(sorted.slice(0, tracksDisplayed));
-            
+
             const loadMoreBtn = document.getElementById('loadMoreTracks');
             loadMoreBtn.style.display = sorted.length > tracksDisplayed ? 'block' : 'none';
         }
@@ -2054,7 +1799,7 @@
             albumsDisplayed += 50;
             const sorted = getSortedAlbums();
             displayTopAlbums(sorted.slice(0, albumsDisplayed));
-            
+
             const loadMoreBtn = document.getElementById('loadMoreAlbums');
             loadMoreBtn.style.display = sorted.length > albumsDisplayed ? 'block' : 'none';
         }
@@ -2064,9 +1809,9 @@
             const discoveries = Object.entries(artistStats)
                 .filter(([artist]) => !excludedArtists.has(artist))
                 .sort((a, b) => new Date(a[1].firstListen) - new Date(b[1].firstListen));
-            
+
             displayDiscoveries(discoveries.slice(0, discoveriesDisplayed));
-            
+
             const loadMoreBtn = document.getElementById('loadMoreDiscoveries');
             loadMoreBtn.style.display = discoveries.length > discoveriesDisplayed ? 'block' : 'none';
         }
@@ -2106,7 +1851,7 @@
                 if (results.length < maxResults) {
                     for (const stats of Object.values(trackStats)) {
                         if (results.length >= maxResults) break;
-                        if ((stats.track.toLowerCase().includes(query) || stats.artist.toLowerCase().includes(query)) 
+                        if ((stats.track.toLowerCase().includes(query) || stats.artist.toLowerCase().includes(query))
                             && !excludedArtists.has(stats.artist)) {
                             const rank = topTracksRanked.findIndex(t => t.track === stats.track && t.artist === stats.artist) + 1;
                             results.push({
@@ -2237,7 +1982,7 @@
                             <div class="search-result-name">${name}</div>
                             <div class="search-result-type">${type}</div>
                         </div>
-                        ${rank > 0 ? `<div class="search-result-rank">#${rank} Rank</div>` : ''}
+                        ${rank > 0 ? `<div class="search-result-rank">#${rank}</div>` : ''}
                     </div>
 
                     <div class="search-stats-grid">
@@ -2267,11 +2012,10 @@
         function displayTopArtists(artists) {
             const list = document.getElementById('topArtistsList');
             list.innerHTML = artists.map(([artist, stats], index) => {
-                // Check if this is Spotify API data (has rank) or real data (has plays)
                 const isSpotifyAPI = stats.rank !== undefined;
                 const displayValue = isSpotifyAPI ? `Rank #${stats.rank}` : `${stats.plays.toLocaleString()} plays`;
-                const timeDisplay = isSpotifyAPI ? '—' : `${Math.floor(stats.time / 3600000)}h ${Math.floor((stats.time % 3600000) / 60000)}m`;
-                
+                const timeDisplay = isSpotifyAPI ? '' : `${Math.floor(stats.time / 3600000)}h ${Math.floor((stats.time % 3600000) / 60000)}m`;
+
                 return `
                     <li class="top-item">
                         <div class="rank">#${index + 1}</div>
@@ -2283,7 +2027,7 @@
                         </div>
                         <div class="item-stat">
                             <div>${timeDisplay}</div>
-                            <button class="exclude-btn" onclick="excludeArtist('${artist.replace(/'/g, "\\'")}')">Exclude</button>
+                            <button class="exclude-btn" onclick="excludeArtist('${artist.replace(/'/g, "\\'")}')">exclude</button>
                         </div>
                     </li>
                 `;
@@ -2293,11 +2037,10 @@
         function displayTopTracks(tracks) {
             const list = document.getElementById('topTracksList');
             list.innerHTML = tracks.map((track, index) => {
-                // Check if this is Spotify API data (has rank) or real data (has plays)
                 const isSpotifyAPI = track.rank !== undefined;
                 const playDisplay = isSpotifyAPI ? `Rank #${track.rank}` : `${track.plays} plays`;
-                const timeDisplay = isSpotifyAPI ? '—' : `${Math.floor(track.time / 3600000)}h ${Math.floor((track.time % 3600000) / 60000)}m`;
-                
+                const timeDisplay = isSpotifyAPI ? '' : `${Math.floor(track.time / 3600000)}h ${Math.floor((track.time % 3600000) / 60000)}m`;
+
                 return `
                     <li class="top-item">
                         <div class="rank">#${index + 1}</div>
@@ -2308,8 +2051,8 @@
                             </div>
                         </div>
                         <div class="item-stat">
-                            <div>${playDisplay}${isSpotifyAPI ? '' : ' • ' + timeDisplay}</div>
-                            <button class="exclude-btn" onclick="excludeArtist('${track.artist.replace(/'/g, "\\'")}')">Exclude Artist</button>
+                            <div>${playDisplay}${!isSpotifyAPI && timeDisplay ? ' / ' + timeDisplay : ''}</div>
+                            <button class="exclude-btn" onclick="excludeArtist('${track.artist.replace(/'/g, "\\'")}')">exclude artist</button>
                         </div>
                     </li>
                 `;
@@ -2331,8 +2074,8 @@
                             </div>
                         </div>
                         <div class="item-stat">
-                            <div>${album.plays} plays • ${hours}h ${minutes}m</div>
-                            <button class="exclude-btn" onclick="excludeArtist('${album.artist.replace(/'/g, "\\'")}')">Exclude Artist</button>
+                            <div>${album.plays} plays / ${hours}h ${minutes}m</div>
+                            <button class="exclude-btn" onclick="excludeArtist('${album.artist.replace(/'/g, "\\'")}')">exclude artist</button>
                         </div>
                     </li>
                 `;
@@ -2343,15 +2086,15 @@
             const container = document.getElementById('discoveryTimeline');
             container.innerHTML = discoveries.map(([artist, stats]) => {
                 const date = new Date(stats.firstListen);
-                const formattedDate = date.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit'
                 });
-                
-                const firstTrack = allData.find(item => 
+
+                const firstTrack = allData.find(item =>
                     item.master_metadata_album_artist_name === artist &&
                     item.ts === stats.firstListen
                 );
@@ -2366,7 +2109,7 @@
                     </div>
                 `;
             }).join('');
-            
+
             const loadMoreBtn = document.getElementById('loadMoreDiscoveries');
             const allDiscoveries = Object.entries(artistStats)
                 .filter(([artist]) => !excludedArtists.has(artist))
@@ -2376,20 +2119,20 @@
 
         function displayTimeline(data) {
             const monthlyStats = {};
-            
+
             data.forEach(item => {
                 if (excludedArtists.has(item.master_metadata_album_artist_name)) return;
-                
+
                 const date = new Date(item.ts);
                 const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-                
+
                 if (!monthlyStats[monthKey]) {
                     monthlyStats[monthKey] = {
                         plays: 0,
                         time: 0
                     };
                 }
-                
+
                 monthlyStats[monthKey].plays++;
                 monthlyStats[monthKey].time += item.ms_played || 0;
             });
@@ -2399,33 +2142,31 @@
             const container = document.getElementById('timelineChart');
             container.innerHTML = `
                 <div style="overflow-x: auto;">
-                    <div style="min-width: 600px;">
+                    <div style="min-width: 600px; display: flex; align-items: flex-end; height: 220px; border-bottom: 1px solid #333; padding-bottom: 0;">
                         ${sortedMonths.map(([month, stats]) => {
                             const hours = Math.floor(stats.time / 3600000);
                             const maxPlays = Math.max(...sortedMonths.map(m => m[1].plays));
                             const height = (stats.plays / maxPlays) * 200;
-                            
+
                             return `
-                                <div style="display: inline-block; margin: 0 10px; text-align: center;">
+                                <div style="display: inline-flex; flex-direction: column; align-items: center; margin: 0 4px; flex-shrink: 0;">
                                     <div style="
-                                        width: 40px;
+                                        width: 30px;
                                         height: ${height}px;
-                                        background: linear-gradient(180deg, #1db954, #1ed760);
-                                        border-radius: 5px 5px 0 0;
-                                        margin-bottom: 10px;
-                                        position: relative;
-                                        transition: all 0.3s ease;
-                                    " 
-                                    onmouseover="this.style.opacity='0.7'"
-                                    onmouseout="this.style.opacity='1'"
+                                        background: #1db954;
+                                    "
                                     title="${stats.plays.toLocaleString()} plays, ${hours}h">
-                                    </div>
-                                    <div style="font-size: 0.75em; color: #b3b3b3; transform: rotate(-45deg); transform-origin: center; white-space: nowrap;">
-                                        ${month}
                                     </div>
                                 </div>
                             `;
                         }).join('')}
+                    </div>
+                    <div style="display: flex; margin-top: 4px;">
+                        ${sortedMonths.map(([month]) => `
+                            <div style="width: 38px; flex-shrink: 0; font-size: 0.6em; color: #555; transform: rotate(-45deg); transform-origin: top left; white-space: nowrap; margin-left: 4px;">
+                                ${month}
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
                 <div style="margin-top: 40px;">
@@ -2433,12 +2174,12 @@
                         const date = new Date(month + '-01');
                         const hours = Math.floor(stats.time / 3600000);
                         const minutes = Math.floor((stats.time % 3600000) / 60000);
-                        
+
                         return `
                             <div class="timeline-item">
                                 <div class="timeline-date">${date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</div>
                                 <div class="timeline-track">
-                                    ${stats.plays.toLocaleString()} plays • ${hours}h ${minutes}m listening time
+                                    ${stats.plays.toLocaleString()} plays / ${hours}h ${minutes}m
                                 </div>
                             </div>
                         `;
