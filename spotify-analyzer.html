@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luca's Spotify Data Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
+            background: #111;
             background: #111;
             min-height: 100vh;
             padding: 20px;
@@ -458,13 +459,13 @@
             background: #444;
         }
 
-        /* Story Card Styles */
         .story-card {
             width: 1080px;
             height: 1920px;
             background: #111;
             position: relative;
             color: white;
+            font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
             font-family: 'Courier New', Courier, monospace;
             padding: 80px;
             display: flex;
@@ -795,6 +796,11 @@
             <div class="info-note">
                 enjoy my little tool i will work on it again later sometime
             </div>
+            <div class="info-note">
+                things i know are broken rn:
+                <li>timeline, i highkey forgot what i was going for Here</li>  
+                <li>spotify connect but like highkey try anyways 99% of gamblers quit before they win</li>
+            </div>
         </div>
 
         <div id="results" class="hidden">
@@ -829,12 +835,12 @@
                 </div>
             </div>
 
-            <div class="tabs">
-                <button class="tab-btn active" onclick="showTab('top-artists')">Top Artists</button>
-                <button class="tab-btn" onclick="showTab('top-tracks')">Top Tracks</button>
-                <button class="tab-btn" onclick="showTab('top-albums')">Top Albums</button>
-                <button class="tab-btn" onclick="showTab('discoveries')">First Listens</button>
-                <button class="tab-btn" onclick="showTab('timeline')">Timeline</button>
+                <button class="tab-btn active" onclick="showTab('top-artists', event)">Top Artists</button>
+                <button class="tab-btn" onclick="showTab('top-tracks', event)">Top Tracks</button>
+                <button class="tab-btn" onclick="showTab('top-albums', event)">Top Albums</button>
+                <button class="tab-btn" onclick="showTab('discoveries', event)">First Listens</button>
+                <button class="tab-btn" onclick="showTab('timeline', event)">Timeline</button>
+                <button class="tab-btn" onclick="showTab('search', event)">Search</button>
                 <button class="tab-btn" onclick="showTab('search')">Search</button>
             </div>
 
@@ -1663,8 +1669,8 @@
                 fetchSpotifyData(accessToken, timeRange);
             }
         }
-
         function searchArtist(artistName) {
+            showTab('search', null);
             showTab('search');
             const searchInput = document.getElementById('searchInput');
             searchInput.value = artistName;
@@ -2187,8 +2193,7 @@
                 </div>
             `;
         }
-
-        function showTab(tabName) {
+        function showTab(tabName, event) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
@@ -2199,7 +2204,10 @@
 
             document.getElementById(tabName).classList.add('active');
 
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
         }
     </script>
 </body>
