@@ -11,9 +11,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
-            background: #111;
             background: #111;
             min-height: 100vh;
             padding: 20px;
@@ -97,7 +97,6 @@
             flex-wrap: wrap;
             margin-bottom: 10px;
         }
-
         .time-range-btn {
             background: #1db954;
             color: #000;
@@ -106,7 +105,8 @@
             font-size: 0.85em;
             font-weight: 700;
             cursor: pointer;
-            font-family: inherit;
+            font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
+        }
         }
 
         .time-range-btn:hover {
@@ -141,7 +141,6 @@
         input[type="file"] {
             display: none;
         }
-
         .upload-btn {
             background: #1db954;
             color: #000;
@@ -150,7 +149,8 @@
             font-size: 0.9em;
             font-weight: 700;
             cursor: pointer;
-            font-family: inherit;
+            font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
+        }
         }
 
         .upload-btn:hover {
@@ -224,15 +224,15 @@
             font-size: 0.8em;
             color: #666;
         }
-
         select, input[type="text"] {
             padding: 6px 10px;
             background: #222;
             border: 1px solid #444;
             color: #ccc;
             font-size: 0.85em;
-            font-family: inherit;
+            font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
             outline: none;
+        }
         }
 
         select:focus, input[type="text"]:focus {
@@ -459,13 +459,13 @@
             background: #444;
         }
 
+        /* Story Card Styles */
         .story-card {
             width: 1080px;
             height: 1920px;
             background: #111;
             position: relative;
             color: white;
-            font-family: 'Libre Baskerville', 'Century Schoolbook', Georgia, serif;
             font-family: 'Courier New', Courier, monospace;
             padding: 80px;
             display: flex;
@@ -835,12 +835,12 @@
                 </div>
             </div>
 
-                <button class="tab-btn active" onclick="showTab('top-artists', event)">Top Artists</button>
-                <button class="tab-btn" onclick="showTab('top-tracks', event)">Top Tracks</button>
-                <button class="tab-btn" onclick="showTab('top-albums', event)">Top Albums</button>
-                <button class="tab-btn" onclick="showTab('discoveries', event)">First Listens</button>
-                <button class="tab-btn" onclick="showTab('timeline', event)">Timeline</button>
-                <button class="tab-btn" onclick="showTab('search', event)">Search</button>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('top-artists')">Top Artists</button>
+                <button class="tab-btn" onclick="showTab('top-tracks')">Top Tracks</button>
+                <button class="tab-btn" onclick="showTab('top-albums')">Top Albums</button>
+                <button class="tab-btn" onclick="showTab('discoveries')">First Listens</button>
+                <button class="tab-btn" onclick="showTab('timeline')">Timeline</button>
                 <button class="tab-btn" onclick="showTab('search')">Search</button>
             </div>
 
@@ -1669,8 +1669,8 @@
                 fetchSpotifyData(accessToken, timeRange);
             }
         }
+
         function searchArtist(artistName) {
-            showTab('search', null);
             showTab('search');
             const searchInput = document.getElementById('searchInput');
             searchInput.value = artistName;
@@ -2193,7 +2193,8 @@
                 </div>
             `;
         }
-        function showTab(tabName, event) {
+
+        function showTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
@@ -2204,10 +2205,7 @@
 
             document.getElementById(tabName).classList.add('active');
 
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
-        }
+            event.target.classList.add('active');
         }
     </script>
 </body>
