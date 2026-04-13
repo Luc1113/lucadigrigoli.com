@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +8,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
 
   <style>
     * {
@@ -69,8 +71,13 @@
     }
 
     @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      0% {
+        transform: translateX(100%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     .container {
@@ -114,23 +121,30 @@
       width: 220px;
       margin: 24px auto 0;
       background: linear-gradient(90deg,
-        #8B4513 0%,
-        #CD853F 25%,
-        #DEB887 50%,
-        #CD853F 75%,
-        #8B4513 100%);
+          #8B4513 0%,
+          #CD853F 25%,
+          #DEB887 50%,
+          #CD853F 75%,
+          #8B4513 100%);
       animation: shimmer 3s ease-in-out infinite;
     }
 
     @keyframes shimmer {
-      0%, 100% { transform: scaleX(1); }
-      50% { transform: scaleX(1.08); }
+
+      0%,
+      100% {
+        transform: scaleX(1);
+      }
+
+      50% {
+        transform: scaleX(1.08);
+      }
     }
 
     .panel,
     .entry-panel,
     .footer-card {
-      background: rgba(255,255,255,0.68);
+      background: rgba(255, 255, 255, 0.68);
       border: 2px solid #d4c4a0;
       box-shadow:
         0 0 0 1px rgba(139, 69, 19, 0.08),
@@ -195,7 +209,7 @@
     .tab-button {
       appearance: none;
       border: 1px solid #cbb894;
-      background: rgba(245,243,232,0.95);
+      background: rgba(245, 243, 232, 0.95);
       color: #6a4726;
       padding: 10px 14px;
       cursor: pointer;
@@ -248,10 +262,10 @@
       font-size: 1.04rem;
     }
 
-    .qa-block + .qa-block {
+    .qa-block+.qa-block {
       margin-top: 34px;
       padding-top: 28px;
-      border-top: 1px solid rgba(139,69,19,0.18);
+      border-top: 1px solid rgba(139, 69, 19, 0.18);
     }
 
     .qa-question {
@@ -261,7 +275,7 @@
       margin-bottom: 16px;
     }
 
-    .qa-answer p + p {
+    .qa-answer p+p {
       margin-top: 14px;
     }
 
@@ -274,7 +288,7 @@
     .polaroid {
       background: white;
       padding: 14px 14px 46px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
       transform: rotate(-1.5deg);
       width: min(100%, 540px);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -286,7 +300,7 @@
 
     .polaroid:hover {
       transform: rotate(0deg) translateY(-2px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
     }
 
     .polaroid img {
@@ -353,13 +367,13 @@
       margin-top: 16px;
       text-decoration: none;
       font-family: 'Courier Prime', monospace;
-      border: 1px solid rgba(139,69,19,0.28);
+      border: 1px solid rgba(139, 69, 19, 0.28);
       padding: 9px 14px;
       transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .back-link:hover {
-      background: rgba(139,69,19,0.08);
+      background: rgba(139, 69, 19, 0.08);
       transform: translateY(-2px);
     }
 
@@ -392,11 +406,12 @@
     }
   </style>
 </head>
+
 <body>
   <div class="news-banner">
     <div class="news-scroll">
       <span class="news-item">welcome to the blog</span>
-      <span class="news-item">entry 4 is live</span>
+      <span class="news-item">entry 6 is live</span>
       <span class="news-item">more each Monday</span>
       <span class="news-item">here's what's up</span>
       <span class="news-item">hello!</span>
@@ -421,7 +436,8 @@
         <button class="tab-button" data-tab="entry2">Entry 2 — There's Kinda A Lot Going On</button>
         <button class="tab-button" data-tab="entry3">Entry 3 — The Demos You Weren’t Meant to Hear</button>
         <button class="tab-button" data-tab="entry4">Entry 4 — Perspective and Being Perceived</button>
-        <button class="tab-button active" data-tab="entry5">Entry 5 — Caffine is a Drug Too</button>
+        <button class="tab-button" data-tab="entry5">Entry 5 — Caffine is a Drug Too</button>
+        <button class="tab-button active" data-tab="entry6">Entry 6 — Tootsie Roll</button>
       </div>
       <p class="coming-soon-note">More entries coming soon.</p>
     </section>
@@ -442,7 +458,11 @@
         <div class="qa-block">
           <h3 class="qa-question">Why is the album taking so long? Didn’t you announce this like forever ago</h3>
           <div class="qa-answer">
-            <p>yeah, I did, and I'm sorry it's taking so long! I'm doing a metric ton or two of work on my end to try and learn how to produce myself. Add on top of that the want for everything to be perfect, and you get a lot less done than you'd hope after a recording session. I also had announced the album right before starting my new day job, so my weeks have been a little more than full while I adjust. It's been a ~3 months on the job, so I'm def getting used to it, which means more momentum lately!</p>
+            <p>yeah, I did, and I'm sorry it's taking so long! I'm doing a metric ton or two of work on my end to try
+              and learn how to produce myself. Add on top of that the want for everything to be perfect, and you get a
+              lot less done than you'd hope after a recording session. I also had announced the album right before
+              starting my new day job, so my weeks have been a little more than full while I adjust. It's been a ~3
+              months on the job, so I'm def getting used to it, which means more momentum lately!</p>
           </div>
           <div class="qa-image-wrap">
             <figure class="polaroid">
@@ -457,7 +477,13 @@
           <div class="qa-answer">
             <p>I know.</p>
             <p>
-              It's not my supreme desire to be doing anything other than music, but I do need to be doing something else while I cross my fingers that the music will take. Plus, it's validating to be working in what I went to school for. I do SWE (i.e. 'coding') for a tech startup and web design for a few clients. With that being said, the startup is a team of 4 so things are happening at all hours, even outside of what's supposedly a 9-5. Again, don't love cutting into time/energy that could be used for music, but needed nonetheless. I will find the balance, until I don't have to find the balance, but I'm handling one thing at a time and making no assumptions lol
+              It's not my supreme desire to be doing anything other than music, but I do need to be doing something else
+              while I cross my fingers that the music will take. Plus, it's validating to be working in what I went to
+              school for. I do SWE (i.e. 'coding') for a tech startup and web design for a few clients. With that being
+              said, the startup is a team of 4 so things are happening at all hours, even outside of what's supposedly a
+              9-5. Again, don't love cutting into time/energy that could be used for music, but needed nonetheless. I
+              will find the balance, until I don't have to find the balance, but I'm handling one thing at a time and
+              making no assumptions lol
             </p>
             <p>Plus, I have a private office now, and that's pretty neat...</p>
           </div>
@@ -472,14 +498,19 @@
         <div class="qa-block">
           <h3 class="qa-question">Stop making questions up, do an actual Q&amp;A.</h3>
           <div class="qa-answer">
-            <p>I mean okay, if you insist. Realistically anybody reading this right now probably knows me personally enough that they can access me thru DM or something, but this is fun and so if I get a few Q&amp;A-esque questions I'll roll with them and do this again. <a href="mailto:lucawritesstuff@gmail.com">shoot me an email!</a></p>
+            <p>I mean okay, if you insist. Realistically anybody reading this right now probably knows me personally
+              enough that they can access me thru DM or something, but this is fun and so if I get a few Q&amp;A-esque
+              questions I'll roll with them and do this again. <a href="mailto:lucawritesstuff@gmail.com">shoot me an
+                email!</a></p>
           </div>
         </div>
 
         <div class="qa-block">
           <h3 class="qa-question">What even is this album?</h3>
           <div class="qa-answer">
-            <p>It's about being me in a very strange time to be me. Some are hopeful, others are panicked, it keeps CHANGING! That's the other thing about doing a project that starts to get this long, it keeps changing. I know at some point I have to call it finished and work with what I've got, and I will.</p>
+            <p>It's about being me in a very strange time to be me. Some are hopeful, others are panicked, it keeps
+              CHANGING! That's the other thing about doing a project that starts to get this long, it keeps changing. I
+              know at some point I have to call it finished and work with what I've got, and I will.</p>
           </div>
           <div class="qa-image-wrap">
             <figure class="polaroid">
@@ -494,10 +525,13 @@
           <div class="qa-answer">
             <p>Oh, wow. That's actually huge.</p>
             <p>
-              If that's the case, listen to it when it drops. Please please please send it to a friend. Or just tell me if you heard something you like.
+              If that's the case, listen to it when it drops. Please please please send it to a friend. Or just tell me
+              if you heard something you like.
             </p>
             <p>
-              In the meantime, please do continue to <a href="https://open.spotify.com/artist/5j4Av2n720OdPEhphXKBAG" target="_blank" rel="noopener noreferrer">listen to my stuff</a> that is out. That makes such a big impact
+              In the meantime, please do continue to <a href="https://open.spotify.com/artist/5j4Av2n720OdPEhphXKBAG"
+                target="_blank" rel="noopener noreferrer">listen to my stuff</a> that is out. That makes such a big
+              impact
             </p>
           </div>
         </div>
@@ -520,30 +554,42 @@
         <div class="qa-block">
           <h3 class="qa-question">We're doing this again?! Holy consistency!</h3>
           <div class="qa-answer">
-            <p>Sure, something like that. It's Monday, the weather's nice (joy), and as the title states there's kinda a lot going on. Let's talk about it. But first:</p>
+            <p>Sure, something like that. It's Monday, the weather's nice (joy), and as the title states there's kinda a
+              lot going on. Let's talk about it. But first:</p>
           </div>
         </div>
 
         <div class="qa-block">
           <img src="blogimg/secret.png" alt="secret" class="inline-left-image" loading="lazy">
           <div class="qa-answer">
-            <p>Apparently, my deepest darkest secret is this new album at the rate I'm going. Is that a non-answer? Sure, but I did say I'd never tell, Esmeralda (Shoutout as promised, by the way)! Here's a secret of mine: When I was younger, I used to have an irrational fear of The Incredibles (yes, the Disney one). Have fun with that knowledge.</p>
+            <p>Apparently, my deepest darkest secret is this new album at the rate I'm going. Is that a non-answer?
+              Sure, but I did say I'd never tell, Esmeralda (Shoutout as promised, by the way)! Here's a secret of mine:
+              When I was younger, I used to have an irrational fear of The Incredibles (yes, the Disney one). Have fun
+              with that knowledge.</p>
           </div>
         </div>
 
         <div class="qa-block">
           <img src="blogimg/otherstuff.png" alt="other stuff" class="inline-left-image" loading="lazy">
           <div class="qa-answer">
-            <p>I'll start with some news. Recording has been a bit of a non-process lately, at least on the vocal front. I've been noticing some vocal fatigue when I sit for sessions as of late, and I'm getting it checked by an ENT out on the 25th. I hope to hear that there's no issues going on with my precious vocal folds, but of course if there's something going on I'll need to adjust accordingly.</p>
-            <p>Of course, the weather's changing and anything could affect anything, so more on that as it develops. Best case, I hear that all's fine and I just ease myself back into things.</p>
-            <p>This has been, however, a good time to crank out some instrumental recordings, so momentum isn't at a complete stop! I finally got the electric guitar (and bass, which is just a guitar tuned to drop D) down for "Broken Up" which was nagging at me for a while!</p>
+            <p>I'll start with some news. Recording has been a bit of a non-process lately, at least on the vocal front.
+              I've been noticing some vocal fatigue when I sit for sessions as of late, and I'm getting it checked by an
+              ENT out on the 25th. I hope to hear that there's no issues going on with my precious vocal folds, but of
+              course if there's something going on I'll need to adjust accordingly.</p>
+            <p>Of course, the weather's changing and anything could affect anything, so more on that as it develops.
+              Best case, I hear that all's fine and I just ease myself back into things.</p>
+            <p>This has been, however, a good time to crank out some instrumental recordings, so momentum isn't at a
+              complete stop! I finally got the electric guitar (and bass, which is just a guitar tuned to drop D) down
+              for "Broken Up" which was nagging at me for a while!</p>
           </div>
         </div>
 
         <div class="qa-block">
           <h3 class="qa-question">Anything else new?</h3>
           <div class="qa-answer">
-            <p>I've also been improving my design skills! That's super fun. I'm learning how to design and I started this 100 day UI/UX challenge to force my way into googling a lot of design stuff. I'm nowhere near good at it yet, but this website could eventually get another makeover because of it!</p>
+            <p>I've also been improving my design skills! That's super fun. I'm learning how to design and I started
+              this 100 day UI/UX challenge to force my way into googling a lot of design stuff. I'm nowhere near good at
+              it yet, but this website could eventually get another makeover because of it!</p>
             <p>My day 1 challenge was designing this email sign-up page:</p>
           </div>
           <div class="qa-image-wrap">
@@ -554,43 +600,72 @@
           </div>
           <div class="qa-answer">
             <p>It's not the prettiest thing ever, but hey it's mine and so I love it.</p>
-            <p>While I figure out how to actually implement these designs (and get better at them), if you want to get emails from me <a href="https://forms.gle/r6n7Q9whZ2qKQCEJ7" target="_blank" rel="noopener noreferrer">let me know where to contact you</a>!</p>
+            <p>While I figure out how to actually implement these designs (and get better at them), if you want to get
+              emails from me <a href="https://forms.gle/r6n7Q9whZ2qKQCEJ7" target="_blank" rel="noopener noreferrer">let
+                me know where to contact you</a>!</p>
           </div>
         </div>
 
         <div class="qa-block">
           <h3 class="qa-question">Now something for fun: Horoscopes!</h3>
           <div class="qa-answer">
-            <p>It doesn't get more blatantly "I listen to nightvale" than this. Here are some horoscopes paraphrased by somebody who is absolutely not licensed to read the stars, but will anyways:</p>
-            <p><strong>Aries:</strong> A new business opportunity is on its way, Aries. When it arrives, it will knock exactly three times. Do not answer if you hear four knocks.</p>
-            <p><strong>Taurus:</strong> Have you been running hot lately? When's the last time you took your temperature? Do you even know your baseline? Most people probably don't know that. Don't be most people, Taurus.</p>
-            <p><strong>Gemini:</strong> You woke up today with new powers. That's what this says, it literally doesn't elaborate. Good luck figuring out what those are, Gemini.</p>
-            <p><strong>Cancer:</strong> You should probably work on that second album. I'm not even kidding, the horoscope.com thing I'm reading kinda sounds like this. Maybe I'm just seeing that in this, Cancer. Maybe that's all Horoscopes are.</p>
-            <p><strong>Leo:</strong> <audio controls style="vertical-align: middle; height: 1.4em;"><source src="blogimg/fax.mp3" type="audio/mpeg">your browser does not support audio.</audio></p>
-            <p><strong>Virgo:</strong> Today's probably going to feel like a drive where you pick a direction and just don't stop. Full commit to the bit, Virgo! It'll lead you somewhere!</p>
+            <p>It doesn't get more blatantly "I listen to nightvale" than this. Here are some horoscopes paraphrased by
+              somebody who is absolutely not licensed to read the stars, but will anyways:</p>
+            <p><strong>Aries:</strong> A new business opportunity is on its way, Aries. When it arrives, it will knock
+              exactly three times. Do not answer if you hear four knocks.</p>
+            <p><strong>Taurus:</strong> Have you been running hot lately? When's the last time you took your
+              temperature? Do you even know your baseline? Most people probably don't know that. Don't be most people,
+              Taurus.</p>
+            <p><strong>Gemini:</strong> You woke up today with new powers. That's what this says, it literally doesn't
+              elaborate. Good luck figuring out what those are, Gemini.</p>
+            <p><strong>Cancer:</strong> You should probably work on that second album. I'm not even kidding, the
+              horoscope.com thing I'm reading kinda sounds like this. Maybe I'm just seeing that in this, Cancer. Maybe
+              that's all Horoscopes are.</p>
+            <p><strong>Leo:</strong> <audio controls style="vertical-align: middle; height: 1.4em;">
+                <source src="blogimg/fax.mp3" type="audio/mpeg">your browser does not support audio.
+              </audio></p>
+            <p><strong>Virgo:</strong> Today's probably going to feel like a drive where you pick a direction and just
+              don't stop. Full commit to the bit, Virgo! It'll lead you somewhere!</p>
             <p><strong>Libra:</strong> Your bank is not offering the best APY. You should get on that, Libra.</p>
-            <p><strong>Scorpio:</strong> From our first emerald to our last, Scorpio. From our first emerald to our last. (Can you believe people pay for Netflix?)</p>
-            <p><strong>Sagittarius:</strong> The IRS has been looking at you with interest, Sagittarius. Now I'm not saying that means anything, but crushes work in funny ways. Were they just staring at you? They were totally just staring at you. Congratulations on your newfound love, Sagittarius!</p>
-            <p><strong>Capricorn:</strong> Life is your Smorgasbord, Capricorn. I just learned that word recently and wanted an excuse to use it, so it's yours today, Capricorn.</p>
-            <p><strong>Aquarius:</strong> Did you do something new with your hair, Aquarius? It just looks different than last time. Good different!</p>
-            <p><strong>Pisces:</strong> It's hard to say whether this IRS thing is a love triangle or not, Pisces. It does look like they're shooting looks at Sagittarius lately, but that could mean anything. For all you know they're enemies. Full steam ahead, Pisces.</p>
-            <p>Anyways, that's all for now, <a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank" rel="noopener noreferrer">shoot me anything anytime</a> and I'll probably say something back!</p>
+            <p><strong>Scorpio:</strong> From our first emerald to our last, Scorpio. From our first emerald to our
+              last. (Can you believe people pay for Netflix?)</p>
+            <p><strong>Sagittarius:</strong> The IRS has been looking at you with interest, Sagittarius. Now I'm not
+              saying that means anything, but crushes work in funny ways. Were they just staring at you? They were
+              totally just staring at you. Congratulations on your newfound love, Sagittarius!</p>
+            <p><strong>Capricorn:</strong> Life is your Smorgasbord, Capricorn. I just learned that word recently and
+              wanted an excuse to use it, so it's yours today, Capricorn.</p>
+            <p><strong>Aquarius:</strong> Did you do something new with your hair, Aquarius? It just looks different
+              than last time. Good different!</p>
+            <p><strong>Pisces:</strong> It's hard to say whether this IRS thing is a love triangle or not, Pisces. It
+              does look like they're shooting looks at Sagittarius lately, but that could mean anything. For all you
+              know they're enemies. Full steam ahead, Pisces.</p>
+            <p>Anyways, that's all for now, <a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank"
+                rel="noopener noreferrer">shoot me anything anytime</a> and I'll probably say something back!</p>
           </div>
         </div>
 
         <div class="qa-block">
           <h3 class="qa-question">p.s.</h3>
           <div class="qa-answer">
-            <p>I'm doing this once-a-day-update playlist again, feel free to join me as I curate another 100 days with cool music!</p>
+            <p>I'm doing this once-a-day-update playlist again, feel free to join me as I curate another 100 days with
+              cool music!</p>
           </div>
           <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3qFBUh6tGf294mNmdtEojP?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/3qFBUh6tGf294mNmdtEojP?utm_source=generator" width="100%"
+              height="352" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
           </div>
           <div class="qa-answer" style="margin-top: 18px;">
             <p>here's the first one in case you missed that earlier this year!</p>
           </div>
           <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2hve908ys49apD8t6YUOK0?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/2hve908ys49apD8t6YUOK0?utm_source=generator" width="100%"
+              height="352" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
           </div>
         </div>
       </article>
@@ -599,7 +674,7 @@
     <section id="entry3" class="tab-content">
       <article class="entry-panel">
         <span class="section-label">entry 03</span>
-    
+
         <div class="entry-header">
           <h2 class="entry-title">The Demos You Weren’t Meant to Hear</h2>
           <p class="entry-meta">category: life / music / app updates</p>
@@ -608,82 +683,106 @@
             <em>Despite the horrors, we persist.</em>
           </p>
         </div>
-    
+
         <div class="qa-block">
           <img src="blogimg/Wearecooked.png" alt="cooked" class="inline-left-image" loading="lazy">
           <div class="qa-answer">
-            <p>Happy blog post Monday, for all who celebrate! This time’s a little different, for more reasons than one, but it’s Monday nonetheless.</p>
-    
-            <p>Let’s start with the main news of the week: I was able to get an ENT appointment earlier than the 25th, and it’s a good thing I did… I’ve come to discover that my vocal cords are in fact cooked for the time being. That fatigue I mentioned last week was in fact nodules (aka “nodes”). Put plainly, it sucks, but as the title says, we persist!</p>
-    
-            <p>It was actually funny how casual the dr was about it. I’m more worried about it than he was, which is (probably?) a good sign. Tl;dr: rest my voice as much as possible for the next week or two, and don’t be stupid. I’ll try my best on both of those fronts, more updates on that as it develops!</p>
+            <p>Happy blog post Monday, for all who celebrate! This time’s a little different, for more reasons than one,
+              but it’s Monday nonetheless.</p>
+
+            <p>Let’s start with the main news of the week: I was able to get an ENT appointment earlier than the 25th,
+              and it’s a good thing I did… I’ve come to discover that my vocal cords are in fact cooked for the time
+              being. That fatigue I mentioned last week was in fact nodules (aka “nodes”). Put plainly, it sucks, but as
+              the title says, we persist!</p>
+
+            <p>It was actually funny how casual the dr was about it. I’m more worried about it than he was, which is
+              (probably?) a good sign. Tl;dr: rest my voice as much as possible for the next week or two, and don’t be
+              stupid. I’ll try my best on both of those fronts, more updates on that as it develops!</p>
           </div>
         </div>
-    
+
         <div class="qa-block">
           <h3 class="qa-question">But hey, here’s an upside:</h3>
           <div class="qa-answer">
-            <p>You guys are going to get more music out of me in some form! Because this puts an inevitable stall on album production, I’ve decided I’m going to release some more demos from the 2nd album. Probably just a song or two as the idea is to be out of commission for as little time as possible, as much time as needed.</p>
+            <p>You guys are going to get more music out of me in some form! Because this puts an inevitable stall on
+              album production, I’ve decided I’m going to release some more demos from the 2nd album. Probably just a
+              song or two as the idea is to be out of commission for as little time as possible, as much time as needed.
+            </p>
           </div>
         </div>
-    
+
         <div class="qa-block">
           <h3 class="qa-question">App updates!</h3>
           <div class="qa-answer">
-            <p>Some of you already know about a huge project that I started last year where I rated every single day of 2025 on a spreadsheet that looked like this:</p>
+            <p>Some of you already know about a huge project that I started last year where I rated every single day of
+              2025 on a spreadsheet that looked like this:</p>
           </div>
-    
+
           <div class="qa-image-wrap">
-              <img src="blogimg/spreadsheet.png" alt="spreadsheet" loading="lazy" style="width: 100%; height: auto; display: block;">
+            <img src="blogimg/spreadsheet.png" alt="spreadsheet" loading="lazy"
+              style="width: 100%; height: auto; display: block;">
           </div>
-    
+
           <div class="qa-answer">
-            <p>It was a fun year. That project was so fulfilling, though, that I decided to do it again this year, and make it a little more accessible to my friends and family who were interested in doing the experiment as well!</p>
-    
-            <p>I have a mobile app version of this project in beta now called <strong>Today</strong>, and I plan to fully release it to the iOS app store some time in the coming months!</p>
-    
-            <p>It’s still in active development, so I’m actively taking feedback and ideas in order to make it something you’d actually want to use!</p>
+            <p>It was a fun year. That project was so fulfilling, though, that I decided to do it again this year, and
+              make it a little more accessible to my friends and family who were interested in doing the experiment as
+              well!</p>
+
+            <p>I have a mobile app version of this project in beta now called <strong>Today</strong>, and I plan to
+              fully release it to the iOS app store some time in the coming months!</p>
+
+            <p>It’s still in active development, so I’m actively taking feedback and ideas in order to make it something
+              you’d actually want to use!</p>
           </div>
-    
+
           <div class="qa-image-wrap" style="display: flex; gap: 12px; flex-wrap: wrap;">
             <img src="blogimg/today1.jpg" style="width: 32%; min-width: 150px;">
             <img src="blogimg/today2.jpg" style="width: 32%; min-width: 150px;">
             <img src="blogimg/today3.png" style="width: 32%; min-width: 150px;">
           </div>
-    
+
           <div class="qa-answer" style="margin-top: 18px;">
             <p>
-              You can download the test version 
+              You can download the test version
               <a href="https://testflight.apple.com/join/XvwDKjKx" target="_blank">here!</a>
             </p>
             <p>if you do, you should add me as a friend @luc1113</p>
           </div>
         </div>
-    
+
         <div class="qa-block">
           <h3 class="qa-question">A little short this week,</h3>
           <div class="qa-answer">
-            <p>but that’s okay, there’s a day to start! Hope you all have a nice one ahead. I’ll keep you updated. Do something new, who knows who you’ll meet… :)</p>
-    
+            <p>but that’s okay, there’s a day to start! Hope you all have a nice one ahead. I’ll keep you updated. Do
+              something new, who knows who you’ll meet… :)</p>
+
             <p>As usual, shoot me anything anytime and I'll say hi! Bye for now, here’s some music!!!</p>
           </div>
-    
+
           <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3vevaWYxZXswroEMazhvtF?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/3vevaWYxZXswroEMazhvtF?utm_source=generator" width="100%"
+              height="352" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
           </div>
-    
+
           <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7yGxtTOHnEonmlqk2IOqVK?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/7yGxtTOHnEonmlqk2IOqVK?utm_source=generator" width="100%"
+              height="352" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
           </div>
         </div>
-    
+
       </article>
     </section>
 
     <section id="entry4" class="tab-content">
       <article class="entry-panel">
         <span class="section-label">entry 04</span>
-    
+
         <div class="entry-header">
           <h2 class="entry-title">Perspective and Being Perceived</h2>
           <p class="entry-meta">category: life / yapping</p>
@@ -696,7 +795,9 @@
         <div class="qa-block">
           <h3 class="qa-question">So, what's going on?</h3>
           <div class="qa-answer">
-            <p>Glad you asked. I'm mainly focused lately on resting and trying to get my voice back. Progress on that front is slow, as it seemingly (unfortunately) will be. We're making the most of it! (on that note, there's a surprise at the bottom of this post!)</p>
+            <p>Glad you asked. I'm mainly focused lately on resting and trying to get my voice back. Progress on that
+              front is slow, as it seemingly (unfortunately) will be. We're making the most of it! (on that note,
+              there's a surprise at the bottom of this post!)</p>
           </div>
         </div>
 
@@ -705,12 +806,24 @@
           <div class="qa-answer">
 
             <!--song a day image non polaroid-->
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlE7YkznGcwMwzTEXjZn-SzRh5SMboA2lGQ4TtlngW6QUSSAJArSKVJ9ENkRE9-u4dHkk&s" alt="song a day" style="width: 100%; max-width: 280px; height: auto; display: block; margin: 0 auto 18px;" loading="lazy">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlE7YkznGcwMwzTEXjZn-SzRh5SMboA2lGQ4TtlngW6QUSSAJArSKVJ9ENkRE9-u4dHkk&s"
+              alt="song a day" style="width: 100%; max-width: 280px; height: auto; display: block; margin: 0 auto 18px;"
+              loading="lazy">
 
-            <p>Fair, I'll do that now. That project is so important to me for so many reasons, but mainly because it got me through such a bad time. For a little over 300 days, it sustained me. It was also one of the most perceived projects I've ever worked on, which given how personal it was felt strange for me.</p>
-            <p>I would totally do it again though. Not yet, there's so much to do, but at some point in my life the ritual will start again. Being perceived (on many fronts) is such a strange thing lately. I'm seeing sides of myself I just... didn't know I had? Is it dumb for me to say I guess that doesn't stop happening when you put the guitar down?</p>
-            <p>Writing's been my self-discovery for years now, it's cool to be doing that in more ways than one. Thanks to anybody who looks at my little posts, really. That includes these by the way!!! I have come more and more to the realization that people do in fact read these which is cool. Let me know what you want out of these posts, I'll adapt!</p>
-            <p>I'm doing a recap of my favorite song-a-day moments on my Instagram story daily, check those liner notes out <a href="https://www.instagram.com/lucad.wav/" target="_blank" rel="noopener noreferrer">here</a>!</p>
+            <p>Fair, I'll do that now. That project is so important to me for so many reasons, but mainly because it got
+              me through such a bad time. For a little over 300 days, it sustained me. It was also one of the most
+              perceived projects I've ever worked on, which given how personal it was felt strange for me.</p>
+            <p>I would totally do it again though. Not yet, there's so much to do, but at some point in my life the
+              ritual will start again. Being perceived (on many fronts) is such a strange thing lately. I'm seeing sides
+              of myself I just... didn't know I had? Is it dumb for me to say I guess that doesn't stop happening when
+              you put the guitar down?</p>
+            <p>Writing's been my self-discovery for years now, it's cool to be doing that in more ways than one. Thanks
+              to anybody who looks at my little posts, really. That includes these by the way!!! I have come more and
+              more to the realization that people do in fact read these which is cool. Let me know what you want out of
+              these posts, I'll adapt!</p>
+            <p>I'm doing a recap of my favorite song-a-day moments on my Instagram story daily, check those liner notes
+              out <a href="https://www.instagram.com/lucad.wav/" target="_blank" rel="noopener noreferrer">here</a>!</p>
 
           </div>
         </div>
@@ -719,12 +832,22 @@
           <h3 class="qa-question">I promised a surprise, and I'll deliver.</h3>
           <div class="qa-answer">
             <p>in fact, I have two for you!</p>
-            <p>The first is for my spotify listeners. A little playlist for you guys of the songs I've been listening to voiceless! The first songs I'm gonna sing again, if you will :)</p>
+            <p>The first is for my spotify listeners. A little playlist for you guys of the songs I've been listening to
+              voiceless! The first songs I'm gonna sing again, if you will :)</p>
             <p> </p>
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1UaWMbn68Cyx3vhrodPgoc?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            <p>The second is a cover! Now I know what you're thinking: what? Whether you were thinking that or not, here's a guitar cover of a very special song to me! It's been a while since I've done a cover, so please do go back and make fun of me for how badly recorded the others are after listening to this one!</p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/llm9anQu3Mw?si=4gPV499Bw0UsZWHh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <p>okay so I just double checked and holy shit yeah my last cover before this is 4 years ago now. Nuts.</p>
+            <iframe data-testid="embed-iframe" style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/1UaWMbn68Cyx3vhrodPgoc?utm_source=generator" width="100%"
+              height="352" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+            <p>The second is a cover! Now I know what you're thinking: what? Whether you were thinking that or not,
+              here's a guitar cover of a very special song to me! It's been a while since I've done a cover, so please
+              do go back and make fun of me for how badly recorded the others are after listening to this one!</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/llm9anQu3Mw?si=4gPV499Bw0UsZWHh"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p>okay so I just double checked and holy shit yeah my last cover before this is 4 years ago now. Nuts.</p>
           </div>
         </div>
 
@@ -733,10 +856,15 @@
           <div class="qa-answer">
             <p>That's all for now. I hope you guys have as wonderful of a week as mine's shaping up to be. :)</p>
             <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-              <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3qFBUh6tGf294mNmdtEojP?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/3qFBUh6tGf294mNmdtEojP?utm_source=generator" width="100%"
+                height="352" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
             </div>
             <p></p>
-            <p><a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank" rel="noopener noreferrer">shoot me anything anytime</a>!</p>
+            <p><a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank" rel="noopener noreferrer">shoot me anything
+                anytime</a>!</p>
             <p><i>~Luca</i></p>
           </div>
         </div>
@@ -746,11 +874,10 @@
 
       </article>
     </section>
-
-    <section id="entry5" class="tab-content active">
+    <section id="entry5" class="tab-content">
       <article class="entry-panel">
         <span class="section-label">entry 05</span>
-    
+
         <div class="entry-header">
           <h2 class="entry-title">Caffine is a Drug Too</h2>
           <p class="entry-meta">category: life / yapping</p>
@@ -759,7 +886,8 @@
             I was so out of it I thought this was aesthetic yesterday:
           </p>
           <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-            <img src="blogimg/caffeine.png" alt="caffeine" loading="lazy" style="width: 100%; max-width: 280px; height: auto; display: block; margin: 0 auto;">
+            <img src="blogimg/caffeine.png" alt="caffeine" loading="lazy"
+              style="width: 100%; max-width: 280px; height: auto; display: block; margin: 0 auto;">
             <h4> yeah, we're that cooked.</h4>
           </div>
         </div>
@@ -769,29 +897,42 @@
         <div class="qa-block">
           <h3 class="qa-question">What could have <u>possibly</u> happened.</h3>
           <div class="qa-answer">
-            <p>Since the vocal nodules diagnosis (which I'll update on shortly), I've been keeping away from caffeine intentionally, as it can be a barrier to healing.</p>
-            <p>but like many cold turkey attempts tend to go, I finally caved about two weeks later this Easter Sunday. We were getting lunch, and I'm like <i>fuck it, americano. can't be that bad.</i></p>
-            <p>To be fair to myself, it wasn't! I did okay, until the waiter came back to refill our mugs with coffee. I WAS WEAK!!! I CAVED!!! Probably had about 3 cups of coffee there.</p>
+            <p>Since the vocal nodules diagnosis (which I'll update on shortly), I've been keeping away from caffeine
+              intentionally, as it can be a barrier to healing.</p>
+            <p>but like many cold turkey attempts tend to go, I finally caved about two weeks later this Easter Sunday.
+              We were getting lunch, and I'm like <i>fuck it, americano. can't be that bad.</i></p>
+            <p>To be fair to myself, it wasn't! I did okay, until the waiter came back to refill our mugs with coffee. I
+              WAS WEAK!!! I CAVED!!! Probably had about 3 cups of coffee there.</p>
           </div>
         </div>
 
         <div class="qa-block">
           <h3 class="qa-question">It gets better.</h3>
           <div class="qa-answer">
-            <p>Walking back from Trinity Church (which is gorgeous, by the way, it was awesome getting to pass by the graves of Alexander Hamilton, Eliza, Phillip, and Hercules Mulligan), we passed by yet <i>another </i>coffee place we're friendly with, and they offered us all each something to drink. That's at least an espresso more (I don't know the exact composition of what I drank save for the fact that it was coffee/coffee byproduct).</p>
-            <img src="blogimg/trinity.png" alt="trinity church" loading="lazy" style="width: 100%; max-width: 280px; height: auto; display: block; margin: 0 auto;">
+            <p>Walking back from Trinity Church (which is gorgeous, by the way, it was awesome getting to pass by the
+              graves of Alexander Hamilton, Eliza, Phillip, and Hercules Mulligan), we passed by yet <i>another
+              </i>coffee place we're friendly with, and they offered us all each something to drink. That's at least an
+              espresso more (I don't know the exact composition of what I drank save for the fact that it was
+              coffee/coffee byproduct).</p>
+            <img src="blogimg/trinity.png" alt="trinity church" loading="lazy"
+              style="width: 100%; max-width: 280px; height: auto; display: block; margin: 0 auto;">
           </div>
         </div>
 
         <div class="qa-block">
           <h3 class="qa-question">Then we hit the Home Depot.</h3>
           <div class="qa-answer">
-            <p>And there, I felt like I was being driven by like a MOTOR dude. I paced around this store like it was nobody's business. 4 CUPS of coffee while you're not used to that level of intake is a hell of a drug, in the most literal sense. I suppose I forgot that it could in fact do that. I texted friends, wrote a song in like 5 minutes (not unusual of me, but it's been a minute for sure), and waited for my heart and head to stop going a mile a minute.</p>
-          <figure style="text-align: center; margin: 0 auto; max-width: 280px;">
-            <img src="blogimg/draft.png" alt="song draft" loading="lazy" style="width: 100%; height: auto; display: block;">
-            <figcaption class="polaroid-caption">a peek at what i wrote!</figcaption>
-          </figure>
-          
+            <p>And there, I felt like I was being driven by like a MOTOR dude. I paced around this store like it was
+              nobody's business. 4 CUPS of coffee while you're not used to that level of intake is a hell of a drug, in
+              the most literal sense. I suppose I forgot that it could in fact do that. I texted friends, wrote a song
+              in like 5 minutes (not unusual of me, but it's been a minute for sure), and waited for my heart and head
+              to stop going a mile a minute.</p>
+            <figure style="text-align: center; margin: 0 auto; max-width: 280px;">
+              <img src="blogimg/draft.png" alt="song draft" loading="lazy"
+                style="width: 100%; height: auto; display: block;">
+              <figcaption class="polaroid-caption">a peek at what i wrote!</figcaption>
+            </figure>
+
           </div>
 
         </div>
@@ -799,7 +940,9 @@
         <div class="qa-block">
           <h3 class="qa-question">man the comedown was hard.</h3>
           <div class="qa-answer">
-            <p>It forgot how hard it could hit, it reminded me of the days I'd drink a metric f**kton of Celcius in college. Bad idea, don't do that. But in any case, I read, took a long walk, talked to a few people I appreciate, and called it a night.</p>
+            <p>It forgot how hard it could hit, it reminded me of the days I'd drink a metric f**kton of Celcius in
+              college. Bad idea, don't do that. But in any case, I read, took a long walk, talked to a few people I
+              appreciate, and called it a night.</p>
             <p>moral of the story: don't drink a ton of coffee after not doing that. it is not pleasurable.</p>
             <p>have i learned from this? tbd, i will hopefully probably not do that again lol</p>
           </div>
@@ -808,10 +951,16 @@
         <div class="qa-block">
           <h3 class="qa-question">Last thing!</h3>
           <div class="qa-answer">
-            <p>it wouldn't be a Luca blog post if I didn't mention something I'm working on :) if you like Letterboxd and Goodreads, you'll like <a href="https://wax-six.vercel.app"> Wax!</a> I'm just starting out on the details, but register early and build your shelf! If you're a music lover like me, it's a no brainer.</p>
-            <p>plus, there's totally a leaderboard for most albums rated and a 'FIRST 100' badge you get for joining early, so...</p>
-            <img src="blogimg/wax.png" alt="wax" loading="lazy" style="width: 100%; max-width: 560px; height: auto; display: block; margin: 16px auto;">
-            <p>do pardon my dust as I fix early bugs, and get the thing working! It will have a mobile app soon too, so you don't have to use this pesky web link anymore. Stay tuned as this continues to (literally) develop.</p>
+            <p>it wouldn't be a Luca blog post if I didn't mention something I'm working on :) if you like Letterboxd
+              and Goodreads, you'll like <a href="https://wax-six.vercel.app"> Wax!</a> I'm just starting out on the
+              details, but register early and build your shelf! If you're a music lover like me, it's a no brainer.</p>
+            <p>plus, there's totally a leaderboard for most albums rated and a 'FIRST 100' badge you get for joining
+              early, so...</p>
+            <img src="blogimg/wax.png" alt="wax" loading="lazy"
+              style="width: 100%; max-width: 560px; height: auto; display: block; margin: 16px auto;">
+            <p>do pardon my dust as I fix early bugs, and get the thing working! It will have a mobile app soon too, so
+              you don't have to use this pesky web link anymore. Stay tuned as this continues to (literally) develop.
+            </p>
           </div>
         </div>
 
@@ -820,23 +969,196 @@
           <div class="qa-answer">
             <p>That's all for now. I hope you guys have a wonderful week :)</p>
             <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-              <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7zKBtH0aTWx9wDZuoH7Ndd?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              <iframe data-testid="embed-iframe" style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/7zKBtH0aTWx9wDZuoH7Ndd?utm_source=generator" width="100%"
+                height="352" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
             </div>
             <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
-              <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7ME8mM0mOo9QJudqiYeIN4?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              <iframe data-testid="embed-iframe" style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/7ME8mM0mOo9QJudqiYeIN4?utm_source=generator" width="100%"
+                height="352" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
             </div>
             <p></p>
-            <p><a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank" rel="noopener noreferrer">shoot me anything anytime</a>!</p>
+            <p><a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank" rel="noopener noreferrer">shoot me anything
+                anytime</a>!</p>
             <p><i>~Luca</i></p>
           </div>
         </div>
 
       </article>
     </section>
+    <section id="entry6" class="tab-content active">
+      <article class="entry-panel">
+        <span class="section-label">entry 06</span>
+
+        <div class="entry-header">
+          <h2 class="entry-title">Tootsie Roll</h2>
+          <p class="entry-meta">category: life</p>
+          <p class="entry-meta">date: 13th April 2026, Morning.</p>
+
+          <p style="margin-top:10px;"> <mark><strong>Please note:</strong><i> This week's entry talks in vauge terms of death and the loss of a pet/family member. Please proceed with this in mind should these be topics you are sensitive about. Thanks :)</i></p></mark>
+
+          <p class="entry-intro">We called her our little Russian Lady. We called her the housecat. We called her
+            Kenrith, the Returned King. We called her Tootsie Roll, and still don’t really know where that nickname came
+            from.</p>
+        </div>
+
+
+        <div class="qa-block">
+          <div class="qa-image-wrap" style="display:block; margin-top: 18px;">
+            <img src="blogimg/collar.png" alt="Chloe&#39;s Collar" loading="lazy"
+              style="width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto;">
+            <p class="polaroid-caption">Chloe&#39;s Collar</p>
+          </div>
+        </div>
+
+
+        <div class="qa-block">
+          <h3 class="qa-question">The Coolest Dog There Ever Was</h3>
+          <div class="qa-answer">
+            <p>By any name or length of time, many friends and family were lucky to meet Chloe, the coolest dog to ever
+              exist. I was especially lucky enough to get to grow up alongside her. For almost 16 years we shared a life
+              together, once even squeezed in a tiny basement as our house was renovated. Chloe saw me grow up, graduate
+              high school, and finish college. Whether she knew it or not, she was there for me through all of those
+              moments.</p>
+
+              <p>She started acting lethargic and shaky on the 10th. She's had a few episodes of this before, and we have a medication we'd administer for her specifically in moments like this. In this particular instance, however, her condition only worsened as time went on. She eventually got bad enough that my mother made the call to take her to the emergency vet to ensure nothing urgent was happening. As much as we could have wished for any other news, we were told that she was in acute kidney failure, and that we had a matter of hours, not days at best. I drove over to the emergency vet as soon as I heard the news, and made it over to still see her in time.</p>
+              <img src="blogimg/hospital.png" alt="hospital" loading="lazy" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 12px auto;">
+              <p style="margin-bottom: 10px; text-align: center;"><i>the last living photo I have of Chloe</i></p>
+            <p>I’m sad to share that she died suddenly yesterday, the 12th of April. She died quickly without any pain, and she was beside us as she went. I only hope that her life was as happy and long as we could have possibly made it.</p>
+          </div>
+        </div>
+
+
+        <div class="qa-block">
+          <div class="qa-image-wrap" style="display:block; margin-top: 18px;">
+            <img src="blogimg/chloeBaby.png" alt="Chloe as a baby" loading="lazy"
+              style="width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto;">
+            <p class="polaroid-caption">One apple tall</p>
+          </div>
+        </div>
+
+
+        <div class="qa-block">
+          <h3 class="qa-question">The Returned King</h3>
+          <div class="qa-answer">
+            <p>I&#39;ll miss the way she&#39;d hustle at our dinner table for whatever we were having that day. I&#39;ll
+              miss her bell-ringing skills and hula-hoop antics. I&#39;ll especially miss the way she&#39;d scratch at
+              my door or whine by my bed to sleep alongside me in the morning after leaving my parents&#39; room. She
+              used to tolerate me, but in her later years she became much gentler and kinder towards me.</p>
+            <p>I’m glad I got to pet her for one more living moment yesterday, and that I could hold her for a little
+              while after she was gone. I would wish she could stick around longer, but I wouldn&#39;t ever warrant her
+              suffering just so that I could see her for a bit. Don&#39;t worry, Chlo-ster, we&#39;ll throw you a
+              posthumous sweet 16 on cinco de mayo (which was her birthday, by the way, is that not epic?).</p>
+            <p>Whether you only knew her for a day, or for far longer, please feel free to check out this collection of
+              images I&#39;ve gathered. I&#39;m happy to at least be able to immortalize her here, if nowhere else:</p>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:18px;">
+            <audio controls style="width:100%; max-width:600px;">
+              <source src="wishyouwerehere412.m4a" type="audio/mp4">
+              Your browser does not support the audio element.
+            </audio>
+            <p style="max-width:700px; margin-top:10px;">As tacky as it may be, I have a tradition of playing this song for those I've lost. Here's yesterday's recording.</p>
+          </div>
+        </div>
+
+        <div class="qa-block" id="chloe-gallery-block">
+          <div id="chloe-gallery"
+            style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:18px;"></div>
+        </div>
+
+        <div
+          style="height:2px; background: linear-gradient(90deg, transparent 0%, #8B4513 50%, transparent 100%); margin: 24px 0 24px 0;">
+        </div>
+        <script>
+          (function () {
+            const galleryDir = 'blogimg/chloe/';
+            const galleryEl = document.getElementById('chloe-gallery');
+            const images = [
+              'IMG_0444.jpg',
+              'IMG_0445.jpg',
+              'IMG_0447.jpg',
+              'IMG_0448.jpg',
+              'IMG_0449.jpg',
+              'IMG_0450.jpg',
+              'IMG_0451.jpg',
+              'IMG_0452.jpg',
+              'IMG_0453.jpg',
+              'IMG_0457.jpg',
+              'IMG_0460.jpg',
+              'IMG_0461.jpg',
+              'IMG_0463.jpg',
+              'IMG_0464.jpg',
+              'IMG_0465.jpg',
+              'IMG_1465.JPEG',
+              'IMG_1466.JPEG',
+              'IMG_1467.JPEG',
+              'IMG_5732.JPEG',
+              'chloe1.png',
+              'chloe2.png',
+              'chloe3.png',
+              'chloe4.png',
+              'chloe5.png',
+              'chloe6.png'
+            ];
+
+            if (!images.length) {
+              galleryEl.innerHTML = '<p style="font-family:\'Courier Prime\',monospace;color:#666;font-size:0.9rem;">no images found.</p>';
+              return;
+            }
+
+            images.forEach(function (filename) {
+              const wrapper = document.createElement('figure');
+              wrapper.style.cssText = 'background:white;padding:10px 10px 10px;box-shadow:0 6px 16px rgba(0,0,0,0.13);width:calc(33% - 8px);min-width:160px;flex:1 1 160px;';
+
+              const img = document.createElement('img');
+              img.src = galleryDir + filename;
+              img.alt = filename.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+              img.loading = 'lazy';
+              img.style.cssText = 'width:100%;height:160px;object-fit:cover;display:block;filter:sepia(10%) contrast(1.04);border:1px solid #eee;';
+
+              wrapper.appendChild(img);
+              galleryEl.appendChild(wrapper);
+            });
+          })();
+        </script>
+
+        <div class="qa-block">
+          <h3 class="qa-question">Lastly:</h3>
+          <div class="qa-answer">
+            <p>Thank you (through no choice of your own) for being a part of our family, Chloe. I love you more than any
+              blog post, words, kisses, pets, or really anything could say.</p>
+            <p>I saw a couple of submissions come through to me this week and I promise you we&#39;ll be back to our
+              regularly scheduled whimsy next week! For now, please pet your dogs, hug your partners, and gently ease
+              into what at the very least is looking to be a sunny week. Sending love everyone&#39;s way, catch &#39;ya
+              next Monday :)</p>
+            <p><a href="https://forms.gle/fZLGvbwG81D25Nyb7" target="_blank" rel="noopener noreferrer">shoot me anything
+                anytime</a>!</p>
+            <p><i>~Luca</i></p>
+
+            <div class="qa-image-wrap" style="display: block; margin-top: 18px;">
+              <iframe data-testid="embed-iframe" style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/2QFOmjYKN5A9tPGoQQKspB?utm_source=generator" width="100%"
+                height="352" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
 
     <section class="footer-card">
       <a class="back-link" href="/">← back to main site</a>
     </section>
+
   </main>
 
   <script>
@@ -858,4 +1180,5 @@
     })();
   </script>
 </body>
+
 </html>
