@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Photo Booth</title>
+    <style>
+        body {
+            background: #f5f0e8;
+            font-family: Georgia, "Times New Roman", serif;
+            padding: 20px;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #450b0b;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            margin-bottom: 10px;
+        }
+
+        label.upload-btn, button {
+            background: #450b0b;
+            color: #fff;
+            border: 3px solid #2a0707;
+            padding: 6px 14px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 4px;
+        }
+
+        label.upload-btn:hover, button:hover {
+            background: #6b1010;
+        }
+
+        button.active {
+            background: #6b1010;
+            outline: 2px solid #f5c518;
+        }
+
+        #fileInput { display: none; }
+
+        .strip-wrapper {
+            background: #fff;
+            padding: 10px;
+            border: 4px solid #999;
+            display: inline-flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 250px;
+            align-items: center;
+        }
+
+        .photo-slot {
+            width: 228px;
+            height: 171px;
+            background: #ddd;
+            border: 2px dashed #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .photo-slot img.photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-slot .placeholder {
+            color: #999;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Film grain overlay using SVG feTurbulence */
+        .photo-slot .grain-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.35;
+            mix-blend-mode: multiply;
+        }
+
+        .photo-slot.filter-grain .grain-overlay {
+            display: block;
+        }
+
+        /* B&W filter */
+        .photo-slot.filter-bw img.photo {
+            filter: grayscale(100%);
+        }
+
+        /* Film color grade (sepia/vintage) */
+        .photo-slot.filter-film img.photo {
+            filter: sepia(60%) contrast(1.1) brightness(0.95) saturate(0.8);
+        }
+
+        /* Both at once */
+        .photo-slot.filter-bw.filter-film img.photo {
+            filter: grayscale(100%) sepia(30%) contrast(1.1) brightness(0.95);
+        }
+
+        .strip-label {
+            font-size: 0.7rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: 2px;
+            outline: none;
+            cursor: text;
+        }
+
+        .strip-label:focus {
+            color: #450b0b;
+            border-bottom: 1px dashed #aaa;
+        }
+
+        #hint {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* ---- PRINT: only show the strip ---- */
+        @media print {
+            body > *:not(#print-target) {
+                display: none !important;
+            }
+            #print-target {
+                display: flex !important;
+                justify-content: center;
+            }
+            .strip-wrapper {
+                border: none;
+                margin: 0 auto;
+            }
+            .photo-slot {
+                border: none;
+            }
+        }
+    </style>
+
+    <!-- SVG filter for film grain, defined once, reused -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+                <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+                <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blended"/>
+                <feComposite in="blended" in2="SourceGraphic" operator="in"/>
+            </filter>
+        </defs>
+    </svg>
+</head>
+<body>
+
+    <h1>Photo Booth</h1>
+
+    <div class="controls">
+        <label class="upload-btn" for="fileInput">uploads</label>
+        <input type="file" id="fileInput" accept="image/*" multiple />
+        <button onclick="exportImage()">Export as Image</button>
+        <button onclick="printStrip()">Print</button>
+        <button id="btnBW" onclick="toggleFilter('bw')">B&amp;W</button>
+        <button id="btnFilm" onclick="toggleFilter('film')">Film Color</button>
+        <button id="btnGrain" onclick="toggleFilter('grain')">Film Grain</button>
+        <button onclick="resetPhotos()">Reset</button>
+    </div>
+
+    <div id="print-target">
+        <div class="strip-wrapper" id="strip">
+            <div class="photo-slot" id="slot0"><span class="placeholder">Photo 1</span></div>
+            <div class="photo-slot" id="slot1"><span class="placeholder">Photo 2</span></div>
+            <div class="photo-slot" id="slot2"><span class="placeholder">Photo 3</span></div>
+            <div class="photo-slot" id="slot3"><span class="placeholder">Photo 4</span></div>
+            <div class="strip-label" contenteditable="true" title="Click to edit caption">photo booth</div>
+        </div>
+    </div>
+
+    <p id="hint">Select up to 4 images at once, or click slots individually.</p>
+
+    <!-- html2canvas for export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const activeFilters = { bw: false, film: false, grain: false };
+
+        fileInput.addEventListener('change', () => {
+            const files = Array.from(fileInput.files).slice(0, 4);
+            files.forEach((file, i) => loadIntoSlot(file, i));
+            fileInput.value = '';
+        });
+
+        for (let i = 0; i < 4; i++) {
+            document.getElementById('slot' + i).addEventListener('click', () => {
+                const tmp = document.createElement('input');
+                tmp.type = 'file';
+                tmp.accept = 'image/*';
+                tmp.onchange = () => { if (tmp.files[0]) loadIntoSlot(tmp.files[0], i); };
+                tmp.click();
+            });
+        }
+
+        function loadIntoSlot(file, index) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const slot = document.getElementById('slot' + index);
+                // Preserve filter classes
+                const classes = [...slot.classList].filter(c => c.startsWith('filter-'));
+                slot.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'photo';
+                slot.appendChild(img);
+                // Re-add grain overlay if needed
+                if (activeFilters.grain) addGrainOverlay(slot);
+                classes.forEach(c => slot.classList.add(c));
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addGrainOverlay(slot) {
+            if (slot.querySelector('.grain-overlay')) return;
+            const overlay = document.createElement('div');
+            overlay.className = 'grain-overlay';
+            // Animated SVG grain
+            overlay.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <filter id="g">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch">
+                        <animate attributeName="seed" values="0;100" dur="0.4s" repeatCount="indefinite"/>
+                    </feTurbulence>
+                    <feColorMatrix type="saturate" values="0"/>
+                </filter>
+                <rect width="100%" height="100%" filter="url(#g)" opacity="1"/>
+            </svg>`;
+            slot.appendChild(overlay);
+        }
+
+        const btnIdMap = { bw: 'btnBW', film: 'btnFilm', grain: 'btnGrain' };
+
+        function toggleFilter(type) {
+            activeFilters[type] = !activeFilters[type];
+            const btn = document.getElementById(btnIdMap[type]);
+            if (btn) btn.classList.toggle('active', activeFilters[type]);
+
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById('slot' + i);
+                if (type === 'grain') {
+                    if (activeFilters.grain) {
+                        slot.classList.add('filter-grain');
+                        addGrainOverlay(slot);
+                    } else {
+                        slot.classList.remove('filter-grain');
+                        const overlay = slot.querySelector('.grain-overlay');
+                        if (overlay) overlay.remove();
+                    }
+                } else {
+                    slot.classList.toggle('filter-' + type, activeFilters[type]);
+                }
+            }
+        }
+
+        function exportImage() {
+            html2canvas(document.getElementById('strip'), { scale: 2, useCORS: true }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'photobooth.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        function printStrip() {
+            html2canvas(document.getElementById('strip'), { scale: 3, useCORS: true }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+
+                // Remove any existing print iframe
+                const existing = document.getElementById('print-frame');
+                if (existing) existing.remove();
+
+                const iframe = document.createElement('iframe');
+                iframe.id = 'print-frame';
+                iframe.style.position = 'fixed';
+                iframe.style.right = '0';
+                iframe.style.bottom = '0';
+                iframe.style.width = '0';
+                iframe.style.height = '0';
+                iframe.style.border = '0';
+                document.body.appendChild(iframe);
+
+                const doc = iframe.contentWindow.document;
+                doc.open();
+                doc.write(`<!DOCTYPE html><html><head><title>Photo Strip</title><style>
+                    @page { size: auto; margin: 0.25in; }
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    html, body { background: #fff; }
+                    body { display: flex; justify-content: center; padding-top: 0.25in; }
+                    img { display: block; width: 2.6in; height: auto; }
+                </style></head><body><img id="stripimg" src="${imgData}"/></body></html>`);
+                doc.close();
+
+                const img = doc.getElementById('stripimg');
+                img.onload = () => {
+                    setTimeout(() => {
+                        iframe.contentWindow.focus();
+                        iframe.contentWindow.print();
+                    }, 100);
+                };
+            }).catch(err => {
+                alert('Print failed: ' + err.message);
+            });
+        }
+
+        function resetPhotos() {
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById('slot' + i);
+                slot.className = 'photo-slot';
+                slot.innerHTML = `<span class="placeholder">Photo ${i + 1}</span>`;
+            }
+            activeFilters.bw = false;
+            activeFilters.film = false;
+            activeFilters.grain = false;
+            ['BW', 'Film', 'Grain'].forEach(id => {
+                document.getElementById('btn' + id).classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
