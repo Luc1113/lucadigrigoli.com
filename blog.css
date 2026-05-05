@@ -481,11 +481,11 @@
       }
 
       .card-image-row {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 120px));
       }
 
       .card-image-row img {
-        max-width: 100%;
-        width: 100%;
+        max-width: 120px;
+        width: 120px;
       }
     }
