@@ -411,6 +411,22 @@
       width: 100%;
     }
 
+    .card-image-row {
+      align-items: flex-start;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .card-image-row img {
+      flex: 0 1 180px;
+      height: auto;
+      max-width: min(180px, 100%);
+      width: 100%;
+    }
+
     .back-link {
       display: inline-block;
       margin-top: 16px;
