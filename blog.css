@@ -413,18 +413,18 @@
 
     .card-image-row {
       align-items: flex-start;
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
       gap: 12px;
+      grid-template-columns: repeat(3, 160px);
       justify-content: center;
       margin-top: 18px;
     }
 
     .card-image-row img {
-      flex: 0 1 180px;
+      display: block;
       height: auto;
-      max-width: min(180px, 100%);
-      width: 100%;
+      max-width: 160px;
+      width: 160px;
     }
 
     .back-link {
@@ -478,5 +478,14 @@
       .entry-nav .back-link:last-child {
         justify-self: stretch;
         text-align: center;
+      }
+
+      .card-image-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card-image-row img {
+        max-width: 100%;
+        width: 100%;
       }
     }
