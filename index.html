@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luca DiGrigoli - Artist • Developer • Creator</title>
+  <meta name="description" content="Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.">
+  <link rel="canonical" href="https://lucadigrigoli.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Luca DiGrigoli - Artist, Developer, Creator">
+  <meta property="og:description" content="Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.">
+  <meta property="og:url" content="https://lucadigrigoli.com/">
+  <meta property="og:image" content="https://lucadigrigoli.com/beautifulGirl.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Luca DiGrigoli - Artist, Developer, Creator">
+  <meta name="twitter:description" content="Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.">
+  <meta name="twitter:image" content="https://lucadigrigoli.com/beautifulGirl.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Luca DiGrigoli","url":"https://lucadigrigoli.com/","image":"https://lucadigrigoli.com/beautifulGirl.png","jobTitle":["Artist","Developer","Creator"],"sameAs":["https://open.spotify.com/artist/2Ty5D7qGvHpZ7TJoG6AUS2"]}</script>
+    <title>Luca DiGrigoli - Artist, Developer, Creator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="beautifulGirl.webp" type="image/webp" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -80,6 +93,7 @@
         .sidebar-image:nth-child(even) { transform: translate3d(0,0,0) rotate(1deg); }
         .sidebar-image:nth-child(3n)   { transform: translate3d(0,0,0) rotate(-2deg); }
         .sidebar-image:nth-child(4n)   { transform: translate3d(0,0,0) rotate(2deg); }
+        .sidebar-image picture { display:block; width:100%; height:100%; }
         .sidebar-image img { width:100%; height:100%; object-fit:cover; filter:sepia(15%) contrast(1.1) saturate(.95); display:block; transition:filter .2s; }
         .sidebar-image:hover { transform: translate3d(0,0,0) scale(2.4) rotate(0deg) !important; box-shadow: 0 8px 22px rgba(139,69,19,.3); z-index:20; }
         .sidebar-image:hover img { filter: sepia(8%) contrast(1.2) saturate(1.1); }
@@ -291,6 +305,7 @@
             align-items: center;
             justify-content: center;
         }
+        .bg-artwork picture { display:block; width:100%; height:100%; }
         .bg-artwork img { width:100%; height:100%; object-fit:cover; }
 
         /* Artwork placeholder pattern */
@@ -697,23 +712,23 @@
 
 <!-- Sidebars -->
 <div class="left-sidebar">
-    <div class="sidebar-image"><img src="images/521cover.jpg"       alt="521 album"       loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/pretend.png"        alt="pretend"         loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/headshot.jpeg"      alt="me"              loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/valerie.jpeg"       alt="valerie"         loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/yuletide.jpeg"      alt="bing"            loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/binghamtonLogo.png" alt="christmas album" loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/gordon.png"         alt="gordon"          loading="lazy" width="110" height="110"></div>
+    <div class="sidebar-image"><picture><source srcset="images/521cover.webp" type="image/webp"><img src="images/521cover.jpg"       alt="521 album"       loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/pretend.webp" type="image/webp"><img src="images/pretend.png"        alt="pretend"         loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/headshot.webp" type="image/webp"><img src="images/headshot.jpeg"      alt="me"              loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/valerie.webp" type="image/webp"><img src="images/valerie.jpeg"       alt="valerie"         loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/yuletide.webp" type="image/webp"><img src="images/yuletide.jpeg"      alt="bing"            loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/binghamtonLogo.webp" type="image/webp"><img src="images/binghamtonLogo.png" alt="christmas album" loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/gordon.webp" type="image/webp"><img src="images/gordon.png"         alt="gordon"          loading="lazy" width="110" height="110"></picture></div>
 </div>
 
 <div class="right-sidebar">
-    <div class="sidebar-image"><img src="images/bridge.png"   alt="bridge"  loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/gang.png"     alt="gang"    loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/records.png"  alt="records" loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/station.png"  alt="station" loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/thecup.png"   alt="thecup"  loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/train.png"    alt="train"   loading="lazy" width="110" height="110"></div>
-    <div class="sidebar-image"><img src="images/aura.png"     alt="aura"    loading="lazy" width="110" height="110"></div>
+    <div class="sidebar-image"><picture><source srcset="images/bridge.webp" type="image/webp"><img src="images/bridge.png"   alt="bridge"  loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/gang.webp" type="image/webp"><img src="images/gang.png"     alt="gang"    loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/records.webp" type="image/webp"><img src="images/records.png"  alt="records" loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/station.webp" type="image/webp"><img src="images/station.png"  alt="station" loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/thecup.webp" type="image/webp"><img src="images/thecup.png"   alt="thecup"  loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/train.webp" type="image/webp"><img src="images/train.png"    alt="train"   loading="lazy" width="110" height="110"></picture></div>
+    <div class="sidebar-image"><picture><source srcset="images/aura.webp" type="image/webp"><img src="images/aura.png"     alt="aura"    loading="lazy" width="110" height="110"></picture></div>
 </div>
 
 <div class="container">
@@ -754,13 +769,14 @@
             <!-- Content -->
             <div class="bg-card-content">
                 <div class="bg-artwork">
-                    <img src="beautifulGirl.png" alt="Beautiful Girl"
+                    <picture><source srcset="beautifulGirl.webp" type="image/webp"><img src="beautifulGirl.png" alt="Beautiful Girl" width="150" height="150" fetchpriority="high" decoding="async"
                          onerror="this.parentElement.innerHTML=`
                             <div class='artwork-placeholder'>
                                 <span class='cherry'>🌸</span>
                                 <span>Beautiful Girl</span>
                                 <span style='opacity:.5'>album art</span>
                             </div>`">
+                    </picture>
                 </div>
 
                 <div class="bg-info">
