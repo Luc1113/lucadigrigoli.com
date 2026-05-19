@@ -1,316 +1,267 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Pizzeria Grande | Walpole, MA</title>
-    <!-- SEO Metadata -->
-    <meta name="description" content="Pizzeria Grande serves thin-crust pizza, pasta, catering, and Italian favorites in Walpole, MA. View the menu, order online, or plan your next event.">
-    <link rel="canonical" href="https://pizzeriagrande.com/">
-    <meta property="og:type" content="restaurant.restaurant">
-    <meta property="og:title" content="Pizzeria Grande | Walpole, MA">
-    <meta property="og:description" content="Pizzeria Grande serves thin-crust pizza, pasta, catering, and Italian favorites in Walpole, MA. View the menu, order online, or plan your next event.">
-    <meta property="og:url" content="https://pizzeriagrande.com/">
-    <meta property="og:image" content="https://www.hunts.com/sites/g/files/qyyrlu211/files/uploadedImages/img_6934_48664.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Pizzeria Grande | Walpole, MA">
-    <meta name="twitter:description" content="Pizzeria Grande serves thin-crust pizza, pasta, catering, and Italian favorites in Walpole, MA. View the menu, order online, or plan your next event.">
-    <meta name="twitter:image" content="https://www.hunts.com/sites/g/files/qyyrlu211/files/uploadedImages/img_6934_48664.jpg">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Pizzeria Grande","url":"https://pizzeriagrande.com/","image":"https://www.hunts.com/sites/g/files/qyyrlu211/files/uploadedImages/img_6934_48664.jpg","servesCuisine":["Pizza","Italian"],"address":{"@type":"PostalAddress","addressLocality":"Walpole","addressRegion":"MA","postalCode":"","addressCountry":"US"}}</script>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AVCO Pizza Co. | Wood-Fired Pizza, Pasta & Catering</title>
+    <meta name="description" content="AVCO Pizza Co. serves wood-fired pizza, fresh pasta, salads, wings, catering, pickup, and delivery from three neighborhood locations.">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <style>
-        body {
-            background: #f5f0e8;
-            font-family: Georgia, "Times New Roman", serif;
-            padding: 20px;
-            color: #222;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    <header class="site-header" data-header>
+      <a class="brand" href="#" aria-label="AVCO home">
+        <span class="brand-mark">A</span>
+        <span>
+          <strong data-brand-name>AVCO Pizza Co.</strong>
+          <small>Wood-fired pizza</small>
+        </span>
+      </a>
 
-        h1 {
-            font-size: 2rem;
-            color: #450b0b;
-            margin-bottom: 10px;
-        }
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Open navigation</span>
+      </button>
 
-        .controls {
-            margin-bottom: 10px;
-        }
+      <nav id="site-nav" class="site-nav" data-nav>
+        <a href="#menu">Menu</a>
+        <a href="#events">Events</a>
+        <a href="#catering">Catering</a>
+        <a href="#locations">Locations</a>
+        <a href="#story">Story</a>
+      </nav>
 
-        label.upload-btn, button {
-            background: #450b0b;
-            color: #fff;
-            border: 3px solid #2a0707;
-            padding: 6px 14px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 4px;
-        }
+      <a class="button button-primary header-cta" href="#order">Order online</a>
+    </header>
 
-        label.upload-btn:hover, button:hover {
-            background: #6b1010;
-        }
-
-        button.active {
-            background: #6b1010;
-            outline: 2px solid #f5c518;
-        }
-
-        #fileInput { display: none; }
-
-        .strip-wrapper {
-            background: #fff;
-            padding: 10px;
-            border: 4px solid #999;
-            display: inline-flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 250px;
-            align-items: center;
-        }
-
-        .photo-slot {
-            width: 228px;
-            height: 171px;
-            background: #ddd;
-            border: 2px dashed #aaa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .photo-slot img.photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .photo-slot .placeholder {
-            color: #999;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-
-        /* Film grain overlay using SVG feTurbulence */
-        .photo-slot .grain-overlay {
-            display: none;
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.35;
-            mix-blend-mode: multiply;
-        }
-
-        .photo-slot.filter-grain .grain-overlay {
-            display: block;
-        }
-
-        /* B&W filter */
-        .photo-slot.filter-bw img.photo {
-            filter: grayscale(100%);
-        }
-
-        /* Film color grade (sepia/vintage) */
-        .photo-slot.filter-film img.photo {
-            filter: sepia(60%) contrast(1.1) brightness(0.95) saturate(0.8);
-        }
-
-        /* Both at once */
-        .photo-slot.filter-bw.filter-film img.photo {
-            filter: grayscale(100%) sepia(30%) contrast(1.1) brightness(0.95);
-        }
-
-        .strip-label {
-            font-size: 0.7rem;
-            color: #aaa;
-            text-align: center;
-            margin-top: 2px;
-            outline: none;
-            cursor: text;
-        }
-
-        .strip-label:focus {
-            color: #450b0b;
-            border-bottom: 1px dashed #aaa;
-        }
-
-        #hint {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        /* ---- PRINT: only show the strip ---- */
-        @media print {
-            body > *:not(#print-target) {
-                display: none !important;
-            }
-            #print-target {
-                display: flex !important;
-                justify-content: center;
-            }
-            .strip-wrapper {
-                border: none;
-                margin: 0 auto;
-            }
-            .photo-slot {
-                border: none;
-            }
-        }
-    </style>
-
-    <!-- SVG filter for film grain, defined once, reused -->
-    <svg width="0" height="0" style="position:absolute">
-        <defs>
-            <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
-                <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
-                <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blended"/>
-                <feComposite in="blended" in2="SourceGraphic" operator="in"/>
-            </filter>
-        </defs>
-    </svg>
-</head>
-<body>
-
-    <h1>Photo Booth</h1>
-
-    <div class="controls">
-        <label class="upload-btn" for="fileInput">Upload Photos (up to 4)</label>
-        <input type="file" id="fileInput" accept="image/*" multiple />
-        <button onclick="exportImage()">Export as Image</button>
-        <button onclick="printStrip()">Print</button>
-        <button id="btnBW" onclick="toggleFilter('bw')">B&amp;W</button>
-        <button id="btnFilm" onclick="toggleFilter('film')">Film Color</button>
-        <button id="btnGrain" onclick="toggleFilter('grain')">Film Grain</button>
-        <button onclick="resetPhotos()">Reset</button>
-    </div>
-
-    <div id="print-target">
-        <div class="strip-wrapper" id="strip">
-            <div class="photo-slot" id="slot0"><span class="placeholder">Photo 1</span></div>
-            <div class="photo-slot" id="slot1"><span class="placeholder">Photo 2</span></div>
-            <div class="photo-slot" id="slot2"><span class="placeholder">Photo 3</span></div>
-            <div class="photo-slot" id="slot3"><span class="placeholder">Photo 4</span></div>
-            <div class="strip-label" contenteditable="true" title="Click to edit caption">photo booth</div>
+    <main id="main">
+      <section class="hero" id="order" aria-labelledby="hero-title">
+        <img
+          class="hero-image"
+          src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=2200&q=80"
+          alt="A hot pizza with basil on a wooden table">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Wood-fired pizza, pasta, wings & salads</p>
+          <h1 id="hero-title">AVCO Pizza Co.</h1>
+          <p class="hero-copy">Hand-stretched dough, bright tomato sauce, and neighborhood hospitality from lunch through late dinner.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#menu">Start an order</a>
+            <a class="button button-ghost" href="#locations">Find a location</a>
+          </div>
         </div>
+      </section>
+
+      <section class="quick-order" id="rewards" aria-label="Quick order">
+        <article>
+          <span>Pickup</span>
+          <strong>Ready in about 20 minutes</strong>
+          <a href="#menu">Order pickup</a>
+        </article>
+        <article>
+          <span>Delivery</span>
+          <strong>Hot pies straight to your door</strong>
+          <a href="#menu">Order delivery</a>
+        </article>
+        <article>
+          <span>Rewards</span>
+          <strong>Earn points toward free pizza</strong>
+          <a href="#rewards">Join rewards</a>
+        </article>
+      </section>
+
+      <section class="section section-tight" id="events">
+        <div class="split split-reverse">
+          <div class="media-frame">
+            <img src="https://images.unsplash.com/photo-1555992336-fb0d29498b13?auto=format&fit=crop&w=1200&q=80" alt="Friends sharing pizza at a restaurant table">
+          </div>
+          <div class="stack">
+            <p class="eyebrow dark">Events</p>
+            <h2>Trivia, slices, and weeknight regulars.</h2>
+            <p>Pull up with your crew for Tuesday trivia, half-price bottles on Wednesdays, and game-day specials every weekend. We keep the ovens hot and the room lively.</p>
+            <a class="button button-primary" href="#">View this week's events</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section menu-section" id="menu" aria-labelledby="menu-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">Featured</p>
+            <h2 id="menu-title">Menu favorites</h2>
+          </div>
+          <a class="button button-secondary" href="#">View full menu</a>
+        </div>
+
+        <div class="menu-scroller" tabindex="0" aria-label="Featured menu items">
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=800&q=80" alt="Cheese pizza">
+            <div>
+              <h3>Classic Cheese</h3>
+              <p>Whole milk mozzarella, tomato, olive oil, basil.</p>
+              <span>$16</span>
+            </div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?auto=format&fit=crop&w=800&q=80" alt="Pepperoni pizza">
+            <div>
+              <h3>Cup Pepperoni</h3>
+              <p>Crisped pepperoni cups, oregano, aged provolone.</p>
+              <span>$19</span>
+            </div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Vegetable pizza">
+            <div>
+              <h3>Garden Market</h3>
+              <p>Roasted peppers, mushrooms, onion, ricotta.</p>
+              <span>$21</span>
+            </div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?auto=format&fit=crop&w=800&q=80" alt="Chicken wings">
+            <div>
+              <h3>Oven Wings</h3>
+              <p>Buffalo, garlic parm, or Calabrian honey.</p>
+              <span>$14</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="story">
+        <div class="split">
+          <div class="media-frame">
+            <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1200&q=80" alt="Chef stretching pizza dough">
+          </div>
+          <div class="stack">
+            <p class="eyebrow dark">Story</p>
+            <h2>Dough made daily, sauce simmered slow.</h2>
+            <p>We start every morning with our naturally leavened dough, crushed tomato sauce, and whole milk mozzarella. Every pizza is stretched by hand and finished in a stone hearth oven.</p>
+            <ul class="check-list">
+              <li>Stone-fired crust with a crisp edge and soft center.</li>
+              <li>Seasonal vegetables, house meatballs, and imported cheeses.</li>
+              <li>Family-style trays, party packages, and easy catering pickup.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo-band" id="catering">
+        <img src="https://images.unsplash.com/photo-1529563021893-cc83c992d75d?auto=format&fit=crop&w=1800&q=80" alt="A restaurant dining room with warm lighting">
+        <div class="promo-card">
+          <p class="eyebrow dark">Catering</p>
+          <h2>Catering for office lunches, parties, and team nights.</h2>
+          <p>Feed the whole room with pizza bundles, baked pasta trays, chopped salads, wings, and desserts. Tell us the headcount and we'll handle the timing.</p>
+          <a class="button button-primary" href="#">Plan catering</a>
+        </div>
+      </section>
+
+      <section class="reviews section" aria-labelledby="reviews-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">Reviews</p>
+            <h2 id="reviews-title">What guests are saying</h2>
+          </div>
+        </div>
+        <div class="review-grid">
+          <article>
+            <span aria-label="5 stars">★★★★★</span>
+            <p>"The pepperoni cups were crisp, the crust had that perfect chew, and pickup was ready right when they said it would be."</p>
+            <strong>Maya R.</strong>
+          </article>
+          <article>
+            <span aria-label="5 stars">★★★★★</span>
+            <p>"We ordered catering for a staff lunch and everything arrived hot. The rigatoni tray disappeared first."</p>
+            <strong>Daniel P.</strong>
+          </article>
+          <article>
+            <span aria-label="5 stars">★★★★★</span>
+            <p>"Great neighborhood spot. The staff remembers our order and the Caesar salad is absurdly good."</p>
+            <strong>Elena G.</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="section faq" aria-labelledby="faq-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">FAQ</p>
+            <h2 id="faq-title">Common questions</h2>
+          </div>
+        </div>
+        <details>
+          <summary>Do you offer delivery and pickup?</summary>
+          <p>Yes. Order online for pickup or delivery from the closest AVCO Pizza Co. location.</p>
+        </details>
+        <details>
+          <summary>Do you have gluten-free crust?</summary>
+          <p>We offer a gluten-free crust option, prepared in a kitchen that also handles wheat flour.</p>
+        </details>
+        <details>
+          <summary>Can you cater large groups?</summary>
+          <p>Absolutely. We can prepare pizza bundles, salad bowls, pasta trays, wings, and desserts for groups of 10 or more.</p>
+        </details>
+      </section>
+
+      <section class="section locations" id="locations" aria-labelledby="locations-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow dark">Locations</p>
+            <h2 id="locations-title">Our locations</h2>
+          </div>
+        </div>
+
+        <div class="location-tabs" role="tablist" aria-label="Restaurant locations">
+          <button type="button" role="tab" aria-selected="true" data-location-tab="0">Downtown</button>
+          <button type="button" role="tab" aria-selected="false" data-location-tab="1">Westside</button>
+          <button type="button" role="tab" aria-selected="false" data-location-tab="2">North End</button>
+        </div>
+
+        <div class="location-card" data-location-panel>
+          <div class="map-placeholder" aria-hidden="true">Map</div>
+          <div>
+            <p class="eyebrow dark" data-location-label>AVCO Pizza Co.</p>
+            <h3 data-location-title>Downtown, CA</h3>
+            <p data-location-address>101 Market Street, Downtown, CA 90000</p>
+            <p data-location-hours>Today: 11:00 AM - 9:00 PM</p>
+            <div class="location-actions">
+              <a class="button button-secondary" href="#">Get directions</a>
+              <a class="button button-primary" href="#">Order online</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="mobile-order-bar">
+      <a class="button button-secondary" href="#rewards">Rewards</a>
+      <a class="button button-primary" href="#menu">Order online</a>
     </div>
 
-    <p id="hint">Select up to 4 images at once, or click slots individually.</p>
+    <footer class="site-footer">
+      <div>
+        <a class="brand" href="#">
+          <span class="brand-mark">A</span>
+          <span>
+            <strong>AVCO Pizza Co.</strong>
+            <small>Wood-fired pizza</small>
+          </span>
+        </a>
+        <p>Serving wood-fired pizza, pasta, wings, salads, and catering from three neighborhood shops.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#menu">Menu</a>
+        <a href="#catering">Catering</a>
+        <a href="#locations">Locations</a>
+        <a href="#story">Story</a>
+      </nav>
+    </footer>
 
-    <!-- html2canvas for export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const activeFilters = { bw: false, film: false, grain: false };
-
-        fileInput.addEventListener('change', () => {
-            const files = Array.from(fileInput.files).slice(0, 4);
-            files.forEach((file, i) => loadIntoSlot(file, i));
-            fileInput.value = '';
-        });
-
-        for (let i = 0; i < 4; i++) {
-            document.getElementById('slot' + i).addEventListener('click', () => {
-                const tmp = document.createElement('input');
-                tmp.type = 'file';
-                tmp.accept = 'image/*';
-                tmp.onchange = () => { if (tmp.files[0]) loadIntoSlot(tmp.files[0], i); };
-                tmp.click();
-            });
-        }
-
-        function loadIntoSlot(file, index) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                const slot = document.getElementById('slot' + index);
-                // Preserve filter classes
-                const classes = [...slot.classList].filter(c => c.startsWith('filter-'));
-                slot.innerHTML = '';
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'photo';
-                slot.appendChild(img);
-                // Re-add grain overlay if needed
-                if (activeFilters.grain) addGrainOverlay(slot);
-                classes.forEach(c => slot.classList.add(c));
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function addGrainOverlay(slot) {
-            if (slot.querySelector('.grain-overlay')) return;
-            const overlay = document.createElement('div');
-            overlay.className = 'grain-overlay';
-            // Animated SVG grain
-            overlay.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                <filter id="g">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch">
-                        <animate attributeName="seed" values="0;100" dur="0.4s" repeatCount="indefinite"/>
-                    </feTurbulence>
-                    <feColorMatrix type="saturate" values="0"/>
-                </filter>
-                <rect width="100%" height="100%" filter="url(#g)" opacity="1"/>
-            </svg>`;
-            slot.appendChild(overlay);
-        }
-
-        function toggleFilter(type) {
-            activeFilters[type] = !activeFilters[type];
-            const btn = document.getElementById('btn' + type.charAt(0).toUpperCase() + type.slice(1));
-            btn.classList.toggle('active', activeFilters[type]);
-
-            for (let i = 0; i < 4; i++) {
-                const slot = document.getElementById('slot' + i);
-                if (type === 'grain') {
-                    if (activeFilters.grain) {
-                        slot.classList.add('filter-grain');
-                        addGrainOverlay(slot);
-                    } else {
-                        slot.classList.remove('filter-grain');
-                        const overlay = slot.querySelector('.grain-overlay');
-                        if (overlay) overlay.remove();
-                    }
-                } else {
-                    slot.classList.toggle('filter-' + type, activeFilters[type]);
-                }
-            }
-        }
-
-        function exportImage() {
-            html2canvas(document.getElementById('strip'), { scale: 2, useCORS: true }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'photobooth.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
-
-        function printStrip() {
-            window.print();
-        }
-
-        function resetPhotos() {
-            for (let i = 0; i < 4; i++) {
-                const slot = document.getElementById('slot' + i);
-                slot.className = 'photo-slot';
-                slot.innerHTML = `<span class="placeholder">Photo ${i + 1}</span>`;
-            }
-            activeFilters.bw = false;
-            activeFilters.film = false;
-            activeFilters.grain = false;
-            ['BW', 'Film', 'Grain'].forEach(id => {
-                document.getElementById('btn' + id).classList.remove('active');
-            });
-        }
-    </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
