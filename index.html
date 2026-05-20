@@ -598,6 +598,194 @@
         .tc-link.apple    { background:linear-gradient(135deg,#fc3c44,#fa233b); color:#fff; }
         .tc-link.youtube  { background:#FF0000; color:#fff; }
         .tc-link.bandcamp { background:#1da0c3; color:#fff; }
+        .tc-link.disabled { background:#7d7a75; color:#2a2927; opacity:.48; filter:grayscale(1); pointer-events:none; }
+
+        /* Featured release: The Kiss and Tell Show */
+        .kiss-feature-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 330px;
+            border: 1px solid rgba(243,239,230,.12);
+            background: #07070a;
+            color: #f3efe6;
+            box-shadow: 0 24px 70px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.04) inset;
+            margin-bottom: 22px;
+        }
+        .kiss-feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 22% 28%, rgba(92,151,184,.26) 0%, transparent 42%),
+                radial-gradient(ellipse at 82% 74%, rgba(211,170,94,.16) 0%, transparent 44%),
+                linear-gradient(180deg, rgba(7,7,10,.92), rgba(7,7,10,.98));
+            pointer-events: none;
+        }
+        .kiss-feature-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px);
+            opacity: .12;
+            pointer-events: none;
+        }
+        .kiss-feature-content {
+            position: relative;
+            z-index: 2;
+            min-height: 330px;
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 34px;
+            align-items: center;
+            padding: 34px;
+        }
+        .kiss-feature-eyebrow {
+            font-family: 'Courier Prime', monospace;
+            font-size: .72rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(243,239,230,.58);
+            margin-bottom: 18px;
+        }
+        .kiss-feature-title {
+            font-size: clamp(2.4rem, 7vw, 5.3rem);
+            line-height: .92;
+            letter-spacing: 0;
+            color: #f3efe6;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .kiss-feature-title em { color: #8fc7e6; font-style: italic; }
+        .kiss-feature-title .bang { color: #d8b16a; }
+        .kiss-feature-copy {
+            font-family: 'Courier Prime', monospace;
+            color: rgba(243,239,230,.68);
+            font-size: .88rem;
+            margin-bottom: 12px;
+        }
+        .kiss-countdown {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            font-family: 'Courier Prime', monospace;
+            color: rgba(243,239,230,.72);
+            border: 1px solid rgba(243,239,230,.12);
+            background: rgba(243,239,230,.035);
+            padding: 7px 11px;
+            margin-bottom: 14px;
+            font-size: .78rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .kiss-countdown strong {
+            color: #f3efe6;
+            font-size: .92rem;
+            letter-spacing: .02em;
+        }
+        .kiss-feature-cover {
+            aspect-ratio: 1;
+            border: 1px solid rgba(243,239,230,.14);
+            background:
+                linear-gradient(135deg, rgba(143,199,230,.16), transparent 42%),
+                repeating-linear-gradient(135deg, rgba(243,239,230,.08) 0 1px, transparent 1px 12px),
+                #111116;
+            box-shadow: 0 28px 60px rgba(0,0,0,.45);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 24px;
+        }
+        .kiss-feature-cover span {
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: .9;
+            color: #f3efe6;
+            font-style: italic;
+        }
+        .kiss-release-link {
+            display: inline-flex;
+            width: fit-content;
+            color: #f3efe6;
+            border: 1px solid rgba(243,239,230,.22);
+            background: rgba(243,239,230,.06);
+            padding: 8px 13px;
+            margin: 0 0 12px;
+            font-family: 'Courier Prime', monospace;
+            font-size: .72rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            text-decoration: none;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+        .kiss-release-link:hover {
+            border-color: #8fc7e6;
+            background: rgba(143,199,230,.12);
+            transform: translateY(-1px);
+        }
+        .kiss-feature-links { display:flex; flex-wrap:wrap; gap:8px; }
+        @media(max-width:700px){
+            .kiss-feature-content { grid-template-columns: 1fr; padding: 26px 20px; }
+            .kiss-feature-cover { max-width: 280px; width: 100%; margin: 0 auto; }
+        }
+
+        /* Beautiful Girl compact card */
+        .project-card.beautiful-card {
+            background: linear-gradient(180deg, #b8d4f0 0%, #dceefb 45%, #f9ece8 100%);
+            border: 1px solid rgba(180,210,255,.55);
+            color: #3a2040;
+            overflow: hidden;
+        }
+        .beautiful-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(255,200,200,.22), transparent 62%);
+            pointer-events: none;
+        }
+        .beautiful-card::after {
+            content: '✿  ❀    ✿     ❀   ✿';
+            position: absolute;
+            inset: 0;
+            color: rgba(226,94,142,.28);
+            font-size: 1.15rem;
+            letter-spacing: .9rem;
+            line-height: 4.8rem;
+            transform: rotate(-8deg) translate(-10px, -8px);
+            text-shadow:
+                76px 26px 0 rgba(255,255,255,.32),
+                148px 78px 0 rgba(226,94,142,.22),
+                240px 38px 0 rgba(255,255,255,.28),
+                310px 118px 0 rgba(226,94,142,.2);
+            pointer-events: none;
+        }
+        .beautiful-card .project-title { color:#3a2040; }
+        .beautiful-card .project-subtitle { color:#7a5060; }
+        .beautiful-card .project-description { color:#5c3a50; }
+
+        /* Savannah compact card */
+        .project-card.savannah-card {
+            background:
+                linear-gradient(135deg, rgba(18,12,10,.88), rgba(18,12,10,.46)),
+                url("blogimg/oldOConnor.png");
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255,235,205,.22);
+            color: #fff5e8;
+            overflow: hidden;
+        }
+        .savannah-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.56)),
+                radial-gradient(ellipse at 20% 20%, rgba(255,235,205,.15), transparent 42%);
+            opacity: .9;
+            pointer-events: none;
+        }
+        .savannah-card .project-title { color:#fff0d2; text-shadow:0 1px 4px rgba(0,0,0,.35); }
+        .savannah-card .project-subtitle { color:rgba(255,235,205,.7); }
+        .savannah-card .project-description { color:rgba(255,246,232,.88); }
 
         /* ── RETRO BADGES ── */
         .retro-badge {
@@ -750,74 +938,61 @@
         <div class="scan-line"></div>
         <h2 class="section-title">latest music releases</h2>
 
-        <!-- ────── BEAUTIFUL GIRL HERO CARD ────── -->
-        <div class="beautiful-girl-card" id="bgCard">
-            <!-- Sky background -->
-            <div class="bg-card"></div>
-
-            <!-- Clouds -->
-            <div class="cloud cloud-1"></div>
-            <div class="cloud cloud-2"></div>
-            <div class="cloud cloud-3"></div>
-
-            <!-- Animated cherry blossom petals -->
-            <canvas id="petals-canvas"></canvas>
-
-            <!-- Horizon glow -->
-            <div class="horizon-glow"></div>
-
-            <!-- Content -->
-            <div class="bg-card-content">
-                <div class="bg-artwork">
-                    <picture><source srcset="beautifulGirl.webp" type="image/webp"><img src="beautifulGirl.png" alt="Beautiful Girl" width="150" height="150" fetchpriority="high" decoding="async"
-                         onerror="this.parentElement.innerHTML=`
-                            <div class='artwork-placeholder'>
-                                <span class='cherry'>🌸</span>
-                                <span>Beautiful Girl</span>
-                                <span style='opacity:.5'>album art</span>
-                            </div>`">
-                    </picture>
+        <!-- ────── FEATURED RELEASE ────── -->
+        <div class="kiss-feature-card">
+            <div class="kiss-feature-content">
+                <div>
+                    <p class="kiss-feature-eyebrow">Luca DiGrigoli · New Release</p>
+                    <h3 class="kiss-feature-title">The Kiss<br> and Tell <em>Show</em><span class="bang">!</span></h3>
+                    <p class="kiss-feature-copy">Luca's first major release in 5 years. you don't wanna miss it. 5.21.26</p>
+                    <div class="kiss-countdown" aria-live="polite">
+                        <span>Release in</span>
+                        <strong id="kissCountdown">00d · 00h · 00m · 00s</strong>
+                    </div>
+                    <a href="kissandtell.html" class="kiss-release-link">release page</a>
+                    <div class="kiss-feature-links">
+                        <a href="https://open.spotify.com/album/1sHb9ni9ggSghbxcn0fze2?si=M1xtNYcbRuezQ-NC8tBzGQ" class="tc-link spotify" target="_blank" rel="noopener">Spotify</a>
+                        <span class="tc-link disabled">Apple</span>
+                        <span class="tc-link disabled">YouTube</span>
+                        <span class="tc-link disabled">Bandcamp</span>
+                    </div>
                 </div>
-
-                <div class="bg-info">
-                    <div class="bg-badge">
-                        <span class="dot"></span>
-                        Out Now
-                    </div>
-                    <h3 class="bg-title">Beautiful Girl</h3>
-                    <p class="bg-artist">Luca DiGrigoli</p>
-                    <p style="font-family:'Courier Prime',monospace; font-size:0.85rem; color:#7a5060; margin-bottom:16px; font-style:italic;">🪼 a new song of recent happiness</p>
-
-                    <div class="bg-buttons">
-                        <a href="https://open.spotify.com/album/0fWHD6NUaWTXy9WXzNMWYR"
-                           class="stream-btn spotify" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                            </svg>
-                            Spotify
-                        </a>
-                        <a href="https://music.apple.com/us/album/beautiful-girl-single/1895520123"
-                           class="stream-btn apple" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                            </svg>
-                            Apple Music
-                        </a>
-                        <a href="https://music.youtube.com/playlist?list=OLAK5uy_kSUuOdcYLhR4IPEKSGsx8iPf6eKaTzU6g"
-                           class="stream-btn youtube" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                            </svg>
-                            YouTube
-                        </a>
-                    </div>
+                <div class="kiss-feature-cover" aria-hidden="true">
+                    <span>kiss &amp; tell</span>
                 </div>
             </div>
         </div>
-        <!-- end Beautiful Girl card -->
 
         <!-- Smaller release grid -->
         <div class="project-grid">
+
+            <!-- Beautiful Girl compact card -->
+            <div class="project-card beautiful-card">
+                <div class="tc-content">
+                    <h3 class="project-title">Beautiful Girl</h3>
+                    <p class="project-subtitle">Luca DiGrigoli</p>
+                    <p class="project-description">🪼 a new song of recent happiness &lt;3</p>
+                    <div class="tc-stream-links">
+                        <a href="https://open.spotify.com/album/0fWHD6NUaWTXy9WXzNMWYR" class="tc-link spotify" target="_blank" rel="noopener">Spotify</a>
+                        <a href="https://music.apple.com/us/album/beautiful-girl-single/1895520123" class="tc-link apple" target="_blank" rel="noopener">Apple</a>
+                        <a href="https://music.youtube.com/playlist?list=OLAK5uy_kSUuOdcYLhR4IPEKSGsx8iPf6eKaTzU6g" class="tc-link youtube" target="_blank" rel="noopener">YouTube</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savannah compact card -->
+            <div class="project-card savannah-card">
+                <div class="tc-content">
+                    <h3 class="project-title">Savannah</h3>
+                    <p class="project-subtitle">out now</p>
+                    <p class="project-description">a homage to a wonderful counsellor. thank you for everything.</p>
+                    <div class="tc-stream-links">
+                        <a href="https://open.spotify.com/track/2vsOzN7rhwBRdt41wjeTlS?si=580154938cb943a5" class="tc-link spotify" target="_blank" rel="noopener">Spotify</a>
+                        <a href="https://music.apple.com/us/song/savannah/6767574620" class="tc-link apple" target="_blank" rel="noopener">Apple</a>
+                        <a href="https://www.youtube.com/watch?v=LNHfQhDH1qw" class="tc-link youtube" target="_blank" rel="noopener">YouTube</a>
+                    </div>
+                </div>
+            </div>
 
             <!-- Technicolor Daydream compact card -->
             <div class="project-card technicolor-card">
@@ -996,86 +1171,27 @@
         alert(msgs[Math.floor(Math.random() * msgs.length)]);
     };
 
-    /* ── CHERRY BLOSSOM PETALS ── */
-    (function initPetals() {
-        const canvas = document.getElementById('petals-canvas');
-        const card   = document.getElementById('bgCard');
-        if (!canvas || !card) return;
-
-        const ctx = canvas.getContext('2d');
-        let W, H, petals, raf;
-
-        function resize() {
-            W = canvas.width  = card.offsetWidth;
-            H = canvas.height = card.offsetHeight;
+    /* ── KISS AND TELL COUNTDOWN ── */
+    var kissCountdown = document.getElementById('kissCountdown');
+    var kissRelease = new Date('2026-05-21T00:00:00');
+    function updateKissCountdown() {
+        if (!kissCountdown) return;
+        var diff = Math.floor((kissRelease - new Date()) / 1000);
+        if (diff <= 0) {
+            kissCountdown.textContent = 'OUT NOW';
+            return;
         }
-
-        function Petal() {
-            this.reset(true);
-        }
-        Petal.prototype.reset = function(random) {
-            this.x    = Math.random() * W;
-            this.y    = random ? Math.random() * H : -10;
-            this.r    = 3 + Math.random() * 5;
-            this.rot  = Math.random() * Math.PI * 2;
-            this.drot = (Math.random() - 0.5) * 0.06;
-            this.vx   = (Math.random() - 0.5) * 0.7;
-            this.vy   = 0.4 + Math.random() * 0.9;
-            this.life = 1;
-            // petal color: pinks and whites
-            const hue = 330 + Math.random() * 30;
-            const sat = 50 + Math.random() * 30;
-            const lit = 80 + Math.random() * 12;
-            this.color = `hsl(${hue},${sat}%,${lit}%)`;
-        };
-
-        function drawPetal(p) {
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(p.rot);
-            ctx.beginPath();
-            ctx.ellipse(0, 0, p.r * 0.55, p.r, 0, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.globalAlpha = 0.72 * p.life;
-            ctx.fill();
-            ctx.restore();
-        }
-
-        function tick() {
-            ctx.clearRect(0, 0, W, H);
-            petals.forEach(function(p) {
-                p.x   += p.vx + Math.sin(p.y * 0.02) * 0.4;
-                p.y   += p.vy;
-                p.rot += p.drot;
-                if (p.y > H + 15) p.reset(false);
-            });
-            petals.forEach(drawPetal);
-            raf = requestAnimationFrame(tick);
-        }
-
-        function start() {
-            resize();
-            petals = Array.from({length: 38}, function() { return new Petal(); });
-            raf = requestAnimationFrame(tick);
-        }
-
-        function stop() {
-            if (raf) { cancelAnimationFrame(raf); raf = null; }
-        }
-
-        // Only animate when visible
-        const io = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting) { if (!raf) { resize(); start(); } }
-                else { stop(); }
-            });
-        }, {threshold: 0.1});
-        io.observe(card);
-
-        window.addEventListener('resize', function() {
-            if (raf) { resize(); }
-        });
-    })();
+        var days = Math.floor(diff / 86400);
+        diff -= days * 86400;
+        var hours = Math.floor(diff / 3600);
+        diff -= hours * 3600;
+        var minutes = Math.floor(diff / 60);
+        var seconds = diff - minutes * 60;
+        function pad(n) { return String(n).padStart(2, '0'); }
+        kissCountdown.textContent = pad(days) + 'd · ' + pad(hours) + 'h · ' + pad(minutes) + 'm · ' + pad(seconds) + 's';
+    }
+    updateKissCountdown();
+    setInterval(updateKissCountdown, 1000);
 
     /* ── FADE-IN CARDS ── */
     const observer = new IntersectionObserver(function(entries) {
