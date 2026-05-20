@@ -685,22 +685,18 @@
         .kiss-feature-cover {
             aspect-ratio: 1;
             border: 1px solid rgba(243,239,230,.14);
-            background:
-                linear-gradient(135deg, rgba(143,199,230,.16), transparent 42%),
-                repeating-linear-gradient(135deg, rgba(243,239,230,.08) 0 1px, transparent 1px 12px),
-                #111116;
+            background: #111116;
             box-shadow: 0 28px 60px rgba(0,0,0,.45);
-            display: grid;
-            place-items: center;
-            text-align: center;
-            padding: 24px;
+            overflow: hidden;
         }
-        .kiss-feature-cover span {
-            font-family: Georgia, serif;
-            font-size: clamp(2rem, 5vw, 4rem);
-            line-height: .9;
-            color: #f3efe6;
-            font-style: italic;
+        .kiss-feature-cover picture,
+        .kiss-feature-cover img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .kiss-feature-cover img {
+            object-fit: cover;
         }
         .kiss-release-link {
             display: inline-flex;
@@ -957,8 +953,11 @@
                         <span class="tc-link disabled">Bandcamp</span>
                     </div>
                 </div>
-                <div class="kiss-feature-cover" aria-hidden="true">
-                    <span>kiss &amp; tell</span>
+                <div class="kiss-feature-cover">
+                    <picture>
+                        <source srcset="blogimg/kissAndTellCover.webp" type="image/webp">
+                        <img src="blogimg/kissAndTellCover.png" alt="The Kiss and Tell Show cover art" width="700" height="700" loading="eager" fetchpriority="high" decoding="async">
+                    </picture>
                 </div>
             </div>
         </div>
