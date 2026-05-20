@@ -1,0 +1,6 @@
+<Files "navigate.html">
+    AuthType Basic
+    AuthName "Site Navigator Access Required"
+    AuthUserFile /path/to/your/.htpasswd
+    Require valid-user
+</Files>
