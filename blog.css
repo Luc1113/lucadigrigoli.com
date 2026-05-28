@@ -442,6 +442,11 @@
       padding: 10px;
     }
 
+    .entry-panel>.qa-block:first-of-type .entry-media {
+      max-width: 440px;
+      width: min(100%, 440px);
+    }
+
     .music-embed {
       margin-top: 18px;
     }
