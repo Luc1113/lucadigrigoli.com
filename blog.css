@@ -427,6 +427,152 @@
       width: 160px;
     }
 
+    .entry-media {
+      display: block;
+      height: auto;
+      margin: 18px auto 0;
+      max-width: 620px;
+      width: min(100%, 620px);
+    }
+
+    .entry-media.framed {
+      background: #fff;
+      border: 1px solid rgba(139, 69, 19, 0.16);
+      box-shadow: 0 10px 24px rgba(139, 69, 19, 0.16);
+      padding: 10px;
+    }
+
+    .music-embed {
+      margin-top: 18px;
+    }
+
+    .music-embed iframe {
+      border: 0;
+      display: block;
+      width: 100%;
+    }
+
+    .app-store-button {
+      align-items: center;
+      background: #171717;
+      border: 2px solid #000;
+      color: #fff;
+      display: inline-flex;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.95rem;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 11px 16px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-store-button:hover {
+      box-shadow: 4px 4px 0 #8B4513;
+      color: #fff;
+      transform: translate(-2px, -2px);
+    }
+
+    .app-store-button::before {
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      height: 24px;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.05 12.42c-.03-2.93 2.39-4.34 2.5-4.41-1.37-2-3.49-2.27-4.24-2.3-1.8-.18-3.51 1.06-4.42 1.06-.92 0-2.33-1.03-3.83-1-1.97.03-3.79 1.15-4.8 2.91-2.05 3.56-.52 8.83 1.47 11.72.98 1.41 2.14 3 3.67 2.94 1.47-.06 2.03-.95 3.81-.95 1.77 0 2.28.95 3.84.92 1.59-.03 2.6-1.44 3.57-2.86 1.12-1.64 1.58-3.23 1.61-3.31-.04-.02-3.15-1.21-3.18-4.72zM14.13 3.81c.81-.98 1.36-2.35 1.21-3.71-1.17.05-2.58.78-3.42 1.76-.75.87-1.41 2.26-1.23 3.59 1.3.1 2.63-.66 3.44-1.64z'/%3E%3C/svg%3E") center / 16px 18px no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.05 12.42c-.03-2.93 2.39-4.34 2.5-4.41-1.37-2-3.49-2.27-4.24-2.3-1.8-.18-3.51 1.06-4.42 1.06-.92 0-2.33-1.03-3.83-1-1.97.03-3.79 1.15-4.8 2.91-2.05 3.56-.52 8.83 1.47 11.72.98 1.41 2.14 3 3.67 2.94 1.47-.06 2.03-.95 3.81-.95 1.77 0 2.28.95 3.84.92 1.59-.03 2.6-1.44 3.57-2.86 1.12-1.64 1.58-3.23 1.61-3.31-.04-.02-3.15-1.21-3.18-4.72zM14.13 3.81c.81-.98 1.36-2.35 1.21-3.71-1.17.05-2.58.78-3.42 1.76-.75.87-1.41 2.26-1.23 3.59 1.3.1 2.63-.66 3.44-1.64z'/%3E%3C/svg%3E") center / 16px 18px no-repeat;
+      background: #fff;
+      width: 24px;
+    }
+
+    .may-carousel {
+      margin-top: 18px;
+    }
+
+    .may-carousel-stage {
+      align-items: center;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 44px minmax(0, 1fr) 44px;
+    }
+
+    .carousel-button {
+      background: #fff7ea;
+      border: 2px solid rgba(139, 69, 19, 0.35);
+      color: #8B4513;
+      cursor: pointer;
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.7rem;
+      height: 44px;
+      line-height: 1;
+      transition: background 0.2s ease, transform 0.2s ease;
+      width: 44px;
+    }
+
+    .carousel-button:hover {
+      background: rgba(139, 69, 19, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .may-carousel-stack {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 0.55fr 1fr 0.55fr;
+      min-height: 420px;
+      position: relative;
+    }
+
+    .may-carousel-photo {
+      background: #fff;
+      border: 1px solid rgba(139, 69, 19, 0.16);
+      box-shadow: 0 10px 24px rgba(139, 69, 19, 0.16);
+      padding: 10px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .may-carousel-photo img {
+      aspect-ratio: 4 / 5;
+      display: block;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .may-carousel-photo.is-main {
+      grid-column: 2;
+      grid-row: 1;
+      transform: translateY(-4px);
+      z-index: 2;
+    }
+
+    .may-carousel-photo.is-prev,
+    .may-carousel-photo.is-next {
+      grid-row: 1;
+      opacity: 0.72;
+      z-index: 1;
+    }
+
+    .may-carousel-photo.is-prev {
+      grid-column: 1 / 3;
+      justify-self: start;
+      max-width: 52%;
+      transform: translate(4%, 28px) rotate(-5deg);
+    }
+
+    .may-carousel-photo.is-next {
+      grid-column: 2 / 4;
+      justify-self: end;
+      max-width: 52%;
+      transform: translate(-4%, 30px) rotate(5deg);
+    }
+
+    .may-carousel-caption {
+      color: #6b5a46;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      margin-top: 12px;
+      text-align: center;
+      text-transform: lowercase;
+    }
+
     .back-link {
       display: inline-block;
       margin-top: 16px;
@@ -487,5 +633,23 @@
       .card-image-row img {
         max-width: 120px;
         width: 120px;
+      }
+
+      .may-carousel-stage {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+      }
+
+      .carousel-button {
+        font-size: 1.35rem;
+        height: 36px;
+        width: 36px;
+      }
+
+      .may-carousel-stack {
+        min-height: 300px;
+      }
+
+      .may-carousel-photo {
+        padding: 7px;
       }
     }
