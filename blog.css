@@ -447,7 +447,7 @@
       border: 1px solid rgba(139, 69, 19, 0.16);
       box-shadow: 0 10px 24px rgba(139, 69, 19, 0.14);
       display: block;
-      height: auto;
+      height: clamp(180px, 22vw, 260px);
       object-fit: cover;
       padding: 8px;
       width: 100%;
@@ -468,7 +468,7 @@
       border: 1px solid rgba(139, 69, 19, 0.16);
       box-shadow: 0 10px 24px rgba(139, 69, 19, 0.14);
       display: block;
-      height: auto;
+      height: clamp(180px, 20vw, 240px);
       object-fit: cover;
       padding: 8px;
       width: 100%;
@@ -699,9 +699,17 @@
         max-width: min(420px, 100%);
       }
 
+      .photo-pair-row img {
+        height: clamp(190px, 58vw, 280px);
+      }
+
       .photo-trio-row {
         grid-template-columns: 1fr;
         max-width: min(420px, 100%);
+      }
+
+      .photo-trio-row img {
+        height: clamp(190px, 58vw, 280px);
       }
 
       .may-carousel-stage {
