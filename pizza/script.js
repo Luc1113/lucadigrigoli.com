@@ -1,62 +1,67 @@
-const locations = [
-  {
-    title: "Downtown, CA",
-    address: "101 Market Street, Downtown, CA 90000",
-    hours: "Today: 11:00 AM - 9:00 PM",
-    label: "AVCO Pizza Co."
-  },
-  {
-    title: "Westside, CA",
-    address: "22 Olive Avenue, Westside, CA 90001",
-    hours: "Today: 11:30 AM - 10:00 PM",
-    label: "AVCO Pizza Co."
-  },
-  {
-    title: "North End, CA",
-    address: "800 Hearth Lane, North End, CA 90002",
-    hours: "Today: 12:00 PM - 9:00 PM",
-    label: "AVCO Pizza Co."
-  }
-];
-
-const navToggle = document.querySelector("[data-nav-toggle]");
+const header = document.querySelector("[data-header]");
+const toggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
+const galleryImages = [...document.querySelectorAll(".hero-gallery img")];
+const motionToggle = document.querySelector("[data-motion-toggle]");
+let currentSlide = 0;
+let galleryPaused = false;
+let galleryTimer;
 
-if (navToggle && nav) {
-  navToggle.addEventListener("click", () => {
-    const open = navToggle.getAttribute("aria-expanded") === "true";
-    navToggle.setAttribute("aria-expanded", String(!open));
-    nav.classList.toggle("is-open", !open);
-    document.body.classList.toggle("nav-open", !open);
-  });
+function updateHeader() {
+  header?.classList.toggle("is-scrolled", window.scrollY > 18);
+}
 
-  nav.addEventListener("click", (event) => {
-    if (event.target instanceof HTMLAnchorElement) {
-      navToggle.setAttribute("aria-expanded", "false");
-      nav.classList.remove("is-open");
-      document.body.classList.remove("nav-open");
-    }
+function openNav(open) {
+  toggle?.setAttribute("aria-expanded", String(open));
+  nav?.classList.toggle("is-open", open);
+  header?.classList.toggle("is-open", open);
+}
+
+function showSlide(index) {
+  galleryImages.forEach((image, imageIndex) => {
+    image.classList.toggle("is-active", imageIndex === index);
   });
 }
 
-const tabs = document.querySelectorAll("[data-location-tab]");
-const panel = document.querySelector("[data-location-panel]");
-
-function setLocation(index) {
-  const location = locations[index] || locations[0];
-  tabs.forEach((tab, tabIndex) => {
-    tab.setAttribute("aria-selected", String(tabIndex === index));
-  });
-
-  if (!panel) return;
-  panel.querySelector("[data-location-label]").textContent = location.label;
-  panel.querySelector("[data-location-title]").textContent = location.title;
-  panel.querySelector("[data-location-address]").textContent = location.address;
-  panel.querySelector("[data-location-hours]").textContent = location.hours;
+function startGallery() {
+  clearInterval(galleryTimer);
+  galleryTimer = setInterval(() => {
+    if (galleryPaused || galleryImages.length < 2) return;
+    currentSlide = (currentSlide + 1) % galleryImages.length;
+    showSlide(currentSlide);
+  }, 3600);
 }
 
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    setLocation(Number(tab.dataset.locationTab || 0));
+window.addEventListener("scroll", updateHeader, { passive: true });
+updateHeader();
+startGallery();
+
+toggle?.addEventListener("click", () => {
+  openNav(toggle.getAttribute("aria-expanded") !== "true");
+});
+
+nav?.addEventListener("click", (event) => {
+  if (event.target instanceof HTMLAnchorElement || event.target instanceof HTMLButtonElement) {
+    openNav(false);
+  }
+});
+
+motionToggle?.addEventListener("click", () => {
+  galleryPaused = !galleryPaused;
+  motionToggle.setAttribute("aria-pressed", String(galleryPaused));
+  motionToggle.textContent = galleryPaused ? "Play gallery" : "Pause gallery";
+});
+
+document.querySelectorAll("[data-open-modal]").forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    const modalName = trigger.getAttribute("data-open-modal");
+    const modal = document.querySelector(`[data-modal="${modalName}"]`);
+    if (modal instanceof HTMLDialogElement) modal.showModal();
+  });
+});
+
+document.querySelectorAll(".modal").forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal && modal instanceof HTMLDialogElement) modal.close();
   });
 });
