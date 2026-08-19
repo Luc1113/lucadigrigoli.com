@@ -822,19 +822,6 @@
         }
         .music-link:hover { background:rgba(255,255,255,.12); transform:translateY(-2px); }
 
-        /* ── JESTERS CARD ── */
-        .jesters-card {
-            position:relative; overflow:hidden; cursor:pointer;
-            padding:20px; min-height:170px;
-            border: 1px solid #d4c4a0;
-            background: rgba(245,243,232,.85);
-            transition: box-shadow .2s, border-color .2s;
-        }
-        .jesters-card:hover { box-shadow:0 12px 30px rgba(139,69,19,.22); border-color:#8B4513; }
-        .jesters-bg-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.22; z-index:1; transition:opacity .2s; }
-        .jesters-card:hover .jesters-bg-video { opacity:.42; }
-        .jesters-content { position:relative; z-index:2; background:rgba(245,243,232,.88); padding:14px; backdrop-filter:blur(1px); }
-
         /* ── VINTAGE DIVIDER ── */
         .vintage-divider { text-align:center; margin:20px 0; position:relative; }
         .vintage-divider::before {
@@ -887,7 +874,7 @@
     <div class="news-scroll">
         <span class="news-item">Welcome to lucadigrigoli.com!</span>
         <span class="news-item">NEW SINGLE "Beautiful Girl" OUT NOW!</span>
-        <span class="news-item">Technicolor Daydream feat. Jesters — available everywhere</span>
+        <span class="news-item">Technicolor Daydream — available everywhere</span>
         <span class="news-item">it's never really over with you, isn't it?</span>
         <span class="news-item">test message (surely nobody sees this, right?)</span>
         <span class="news-item">SECRET MESSAGE WOAH</span>
@@ -999,9 +986,8 @@
                 </div>
                 <div class="tc-content">
                     <h3 class="project-title">Technicolor Daydream</h3>
-                    <p class="project-subtitle" style="color:rgba(255,255,255,.5)">feat. Jesters</p>
                     <p class="project-description" style="color:rgba(255,255,255,.72); font-size:.88rem; line-height:1.5;">
-                        A fun collab with Jesters, my little indie-pop/rock experiment from 2022 finally out everywhere!
+                        My little indie-pop/rock experiment from 2022 finally out everywhere!
                     </p>
                     <div class="tc-stream-links">
                         <a href="https://open.spotify.com/album/6oLRTkuyDXza5g3NWodXE5?si=KAFniuGFTomWYrRGb7uUEQ" class="tc-link spotify" target="_blank" rel="noopener">
@@ -1074,27 +1060,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <div class="vintage-divider"><span>~ creative projects ~</span></div>
-
-    <!-- ── OTHER MUSICAL ENDEAVORS ── -->
-    <div class="section">
-        <h2 class="section-title">other musical endeavors</h2>
-
-        <div class="project-card jesters-card" id="jesters">
-            <div class="jesters-content">
-                <h3 class="project-title">Jesters</h3>
-                <p class="project-subtitle">Long Island, NY</p>
-                <p class="project-description">
-                    Local band creating original pop-rock music, performing at venues across Long Island and building a community of music lovers.
-                    <br><a href="https://jestersband.com" target="_blank" rel="noopener" style="color:#8B4513;text-decoration:underline;">Visit site</a>
-                </p>
-            </div>
-            <video class="jesters-bg-video" muted loop playsinline preload="none">
-                <source src="videos/jesters-teaser.mp4" type="video/mp4">
-            </video>
         </div>
     </div>
 
@@ -1206,19 +1171,6 @@
         card.style.transition = 'opacity .4s ease, transform .4s ease';
         observer.observe(card);
     });
-
-    /* ── JESTERS VIDEO ── */
-    var jestersCard = document.getElementById('jesters');
-    var jestersVid  = jestersCard ? jestersCard.querySelector('video') : null;
-    if (jestersCard && jestersVid) {
-        var playing = false;
-        jestersCard.addEventListener('mouseenter', function() {
-            if (!playing) { jestersVid.play().catch(function(){}); playing = true; }
-        });
-        jestersCard.addEventListener('mouseleave', function() {
-            jestersVid.pause(); playing = false;
-        });
-    }
 
 })();
 </script>
