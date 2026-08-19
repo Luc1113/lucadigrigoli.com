@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="521 (5th Anniversary Deluxe Edition) — Luca DiGrigoli. Out 8/21/26.">
+    <link rel="canonical" href="https://lucadigrigoli.com/521.html">
+    <meta property="og:type" content="music.album">
+    <meta property="og:title" content="521 (5th Anniversary Deluxe Edition) - Luca DiGrigoli">
+    <meta property="og:description" content="521 (5th Anniversary Deluxe Edition) — out 8/21/26.">
+    <meta property="og:url" content="https://lucadigrigoli.com/521.html">
+    <meta property="og:image" content="https://lucadigrigoli.com/blogimg/521Deluxe.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="521 (5th Anniversary Deluxe Edition) - Luca DiGrigoli">
+    <meta name="twitter:description" content="521 (5th Anniversary Deluxe Edition) — out 8/21/26.">
+    <meta name="twitter:image" content="https://lucadigrigoli.com/blogimg/521Deluxe.png">
+    <title>521 (5th Anniversary Deluxe Edition) - Luca DiGrigoli</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 30px 15px 50px;
+            color: #eee;
+            font-family: Verdana, Geneva, sans-serif;
+            background: #201812;
+        }
+        a { color: #d8ac5c; }
+
+        .container { max-width: 640px; margin: 0 auto; }
+
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: .85rem; }
+
+        .hero { text-align: center; margin-bottom: 30px; }
+        .hero img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border: 2px solid #8b4513;
+            display: block;
+            margin: 0 auto 16px;
+        }
+        .hero h1 { color: #d8ac5c; margin: 0 0 4px; font-size: 1.7rem; }
+        .hero .subtitle { margin: 0 0 12px; font-size: .95rem; color: #cbb894; }
+        .hero .date { margin: 0 0 14px; font-size: .9rem; }
+        .countdown { font-size: 1rem; font-weight: bold; color: #d8ac5c; margin-bottom: 18px; }
+
+        .buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 10px; }
+        .btn {
+            display: inline-block;
+            padding: 7px 14px;
+            border: 1px solid #8b4513;
+            color: #eee;
+            text-decoration: none;
+            font-size: .85rem;
+        }
+        .btn.disabled { color: #888; border-color: #555; }
+        .btn.merch { background: #8b4513; border-color: #8b4513; }
+
+        h2 { color: #d8ac5c; font-size: 1.2rem; border-bottom: 1px solid #4a3a28; padding-bottom: 6px; }
+
+        ol.tracklist { padding-left: 22px; margin: 0 0 30px; }
+        ol.tracklist li { padding: 4px 0; }
+        .bonus { color: #cbb894; font-size: .8rem; }
+
+        .footer-note { text-align: center; font-size: .8rem; color: #998f7c; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">&larr; back home</a>
+
+    <div class="hero">
+        <img src="blogimg/521Deluxe.png" alt="521 (5th Anniversary Deluxe Edition) cover art" width="220" height="220">
+        <h1>521</h1>
+        <p class="subtitle">(5th Anniversary Deluxe Edition) — Luca DiGrigoli</p>
+        <p class="date">out 8.21.26</p>
+        <p class="countdown" id="albumCountdown" aria-live="polite">00d 00h 00m 00s</p>
+
+        <div class="buttons">
+            <span class="btn disabled">Spotify — coming soon</span>
+            <span class="btn disabled">Apple Music — coming soon</span>
+            <span class="btn disabled">iTunes — coming soon</span>
+            <span class="btn disabled">YouTube Music — coming soon</span>
+            <span class="btn disabled">Bandcamp — coming soon</span>
+        </div>
+        <div class="buttons">
+            <a href="https://lucadigrigoli.bandcamp.com/merch" class="btn merch" target="_blank" rel="noopener">merch</a>
+        </div>
+    </div>
+
+    <h2>tracklist</h2>
+    <ol class="tracklist">
+        <li>Without You</li>
+        <li>Comes Back Around</li>
+        <li>Felt The Same</li>
+        <li>Who You Are</li>
+        <li>Apologize</li>
+        <li>I Love You!</li>
+        <li>Lose Your Mind</li>
+        <li>I'll Be There</li>
+        <li>The One Who Got Away</li>
+        <li>I Can't Be The One</li>
+        <li>Valerie</li>
+        <li>Back In The Day</li>
+        <li>Rose Flavored Tea</li>
+        <li>I'm Not Funny</li>
+        <li>Walls</li>
+        <li>Nemesis</li>
+        <li>Who You Are (2020) <span class="bonus">(bonus)</span></li>
+        <li>Lose Your Mind (2020) <span class="bonus">(bonus)</span></li>
+        <li>Walls (2021) <span class="bonus">(bonus)</span></li>
+        <li>Without You (2019) <span class="bonus">(bonus)</span></li>
+    </ol>
+
+    <p class="footer-note">521 (5th Anniversary Deluxe Edition) — Luca DiGrigoli — out 8.21.26</p>
+</div>
+
+<script>
+(function() {
+    var el = document.getElementById('albumCountdown');
+    var release = new Date('2026-08-21T00:00:00');
+    function update() {
+        var diff = Math.floor((release - new Date()) / 1000);
+        if (diff <= 0) { el.textContent = 'OUT NOW'; return; }
+        var days = Math.floor(diff / 86400); diff -= days * 86400;
+        var hours = Math.floor(diff / 3600); diff -= hours * 3600;
+        var minutes = Math.floor(diff / 60);
+        var seconds = diff - minutes * 60;
+        function pad(n) { return String(n).padStart(2, '0'); }
+        el.textContent = pad(days) + 'd ' + pad(hours) + 'h ' + pad(minutes) + 'm ' + pad(seconds) + 's';
+    }
+    update();
+    setInterval(update, 1000);
+})();
+</script>
+</body>
+</html>

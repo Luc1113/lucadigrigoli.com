@@ -724,6 +724,55 @@
             .kiss-feature-cover { max-width: 280px; width: 100%; margin: 0 auto; }
         }
 
+        /* Two featured releases side by side */
+        .feature-split { margin-bottom: 22px; }
+
+        /* Plain 521 card */
+        .album-simple-card {
+            border: 1px solid #3d1f08;
+            background: #5d2f0a;
+            padding: 26px 30px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+        .album-simple-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,.4);
+            flex-shrink: 0;
+            display: block;
+        }
+        .album-simple-eyebrow {
+            font-family: 'Courier Prime', monospace;
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.7);
+            margin-bottom: 6px;
+        }
+        .album-simple-title { color: #fff; font-size: 1.4rem; margin-bottom: 6px; }
+        .album-simple-copy { font-size: .9rem; color: rgba(255,255,255,.8); margin-bottom: 10px; }
+        .album-simple-countdown {
+            font-family: 'Courier Prime', monospace;
+            font-size: .88rem;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .album-simple-link {
+            display: inline-block;
+            font-family: 'Courier Prime', monospace;
+            font-size: .82rem;
+            color: #fff;
+            text-decoration: underline;
+        }
+        @media(max-width:600px){
+            .album-simple-card { flex-direction: column; text-align: center; }
+        }
+
         /* Beautiful Girl compact card */
         .project-card.beautiful-card {
             background: linear-gradient(180deg, #b8d4f0 0%, #dceefb 45%, #f9ece8 100%);
@@ -909,7 +958,8 @@
         <h1 class="site-title">Luca DiGrigoli</h1>
         <p class="subtitle typing-animation">artist • developer • creator</p>
         <div class="animated-bar"></div>
-        <div style="margin-top:20px;">
+        <div style="margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <a href="521.html" class="blog-btn">521 (deluxe)</a>
             <a href="https://lucadigrigoli.com/blog" class="blog-btn">blog</a>
         </div>
     </header>
@@ -921,29 +971,44 @@
         <div class="scan-line"></div>
         <h2 class="section-title">latest music releases</h2>
 
-        <!-- ────── FEATURED RELEASE ────── -->
-        <div class="kiss-feature-card">
-            <div class="kiss-feature-content">
+        <!-- ────── FEATURED RELEASES ────── -->
+        <div class="feature-split">
+
+            <div class="album-simple-card">
+                <img src="blogimg/521Deluxe.png" alt="521 (5th Anniversary Deluxe Edition) cover art" width="180" height="180" loading="eager" decoding="async">
                 <div>
-                    <p class="kiss-feature-eyebrow">Luca DiGrigoli · New Release</p>
-                    <h3 class="kiss-feature-title">The Kiss<br> and Tell <em>Show</em><span class="bang">!</span></h3>
-                    <p class="kiss-feature-copy">Luca's first major release in 5 years. you don't wanna miss it. 5.21.26</p>
-                    <div class="kiss-countdown" aria-live="polite">
-                        <span>Release in</span>
-                        <strong id="kissCountdown">00d · 00h · 00m · 00s</strong>
-                    </div>
-                    <a href="kissandtell.html" class="kiss-release-link">release page</a>
-                    <div class="kiss-feature-links">
-                        <a href="https://open.spotify.com/album/1sHb9ni9ggSghbxcn0fze2?si=M1xtNYcbRuezQ-NC8tBzGQ" class="tc-link spotify" target="_blank" rel="noopener">Spotify</a>
-                        <a href="https://music.apple.com/us/album/the-kiss-and-tell-show/6771307730" class="tc-link apple" target="_blank" rel="noopener">Apple</a>
-                        <a href="https://youtube.com/playlist?list=OLAK5uy_mba6i6KBjq9bKnBoz8z_H0PGTzgM1O-tk&si=oG5Tulzd3oMDAHQ9" class="tc-link youtube" target="_blank" rel="noopener">YouTube</a>
-                        <span class="tc-link disabled">Bandcamp</span>
-                    </div>
-                </div>
-                <div class="kiss-feature-cover">
-                    <img src="images/kissandtell-cover-preview.jpg" alt="The Kiss and Tell Show cover art" width="700" height="700" loading="eager" fetchpriority="high" decoding="async">
+                    <p class="album-simple-eyebrow">Luca DiGrigoli · Reissue</p>
+                    <h3 class="album-simple-title">521 (5th Anniversary Deluxe)</h3>
+                    <p class="album-simple-copy">16 originals plus 4 bonus tracks from ancient days. out 8.21.26</p>
+                    <p class="album-simple-countdown" id="albumCountdown" aria-live="polite">00d 00h 00m 00s</p>
+                    <a href="521.html" class="album-simple-link">release page &rarr;</a>
                 </div>
             </div>
+
+            <div class="kiss-feature-card">
+                <div class="kiss-feature-content">
+                    <div>
+                        <p class="kiss-feature-eyebrow">Luca DiGrigoli · New Release</p>
+                        <h3 class="kiss-feature-title">The Kiss<br> and Tell <em>Show</em><span class="bang">!</span></h3>
+                        <p class="kiss-feature-copy">Luca's first major release in 5 years. you don't wanna miss it. 5.21.26</p>
+                        <div class="kiss-countdown" aria-live="polite">
+                            <span>Release in</span>
+                            <strong id="kissCountdown">00d · 00h · 00m · 00s</strong>
+                        </div>
+                        <a href="kissandtell.html" class="kiss-release-link">release page</a>
+                        <div class="kiss-feature-links">
+                            <a href="https://open.spotify.com/album/1sHb9ni9ggSghbxcn0fze2?si=M1xtNYcbRuezQ-NC8tBzGQ" class="tc-link spotify" target="_blank" rel="noopener">Spotify</a>
+                            <a href="https://music.apple.com/us/album/the-kiss-and-tell-show/6771307730" class="tc-link apple" target="_blank" rel="noopener">Apple</a>
+                            <a href="https://youtube.com/playlist?list=OLAK5uy_mba6i6KBjq9bKnBoz8z_H0PGTzgM1O-tk&si=oG5Tulzd3oMDAHQ9" class="tc-link youtube" target="_blank" rel="noopener">YouTube</a>
+                            <span class="tc-link disabled">Bandcamp</span>
+                        </div>
+                    </div>
+                    <div class="kiss-feature-cover">
+                        <img src="images/kissandtell-cover-preview.jpg" alt="The Kiss and Tell Show cover art" width="700" height="700" loading="eager" fetchpriority="high" decoding="async">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Smaller release grid -->
@@ -1153,6 +1218,28 @@
     }
     updateKissCountdown();
     setInterval(updateKissCountdown, 1000);
+
+    /* ── 521 DELUXE COUNTDOWN ── */
+    var albumCountdown = document.getElementById('albumCountdown');
+    var albumRelease = new Date('2026-08-21T00:00:00');
+    function updateAlbumCountdown() {
+        if (!albumCountdown) return;
+        var diff = Math.floor((albumRelease - new Date()) / 1000);
+        if (diff <= 0) {
+            albumCountdown.textContent = 'OUT NOW';
+            return;
+        }
+        var days = Math.floor(diff / 86400);
+        diff -= days * 86400;
+        var hours = Math.floor(diff / 3600);
+        diff -= hours * 3600;
+        var minutes = Math.floor(diff / 60);
+        var seconds = diff - minutes * 60;
+        function pad(n) { return String(n).padStart(2, '0'); }
+        albumCountdown.textContent = pad(days) + 'd ' + pad(hours) + 'h ' + pad(minutes) + 'm ' + pad(seconds) + 's';
+    }
+    updateAlbumCountdown();
+    setInterval(updateAlbumCountdown, 1000);
 
     /* ── FADE-IN CARDS ── */
     const observer = new IntersectionObserver(function(entries) {
