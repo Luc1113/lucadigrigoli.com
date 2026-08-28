@@ -1,0 +1,706 @@
+---
+const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://lucadigrigoli.com/#person","name":"Luca DiGrigoli","url":"https://lucadigrigoli.com/","image":"https://lucadigrigoli.com/images/headshot-suit.webp","jobTitle":["Artist","Developer","Creator"],"sameAs":["https://open.spotify.com/artist/2Ty5D7qGvHpZ7TJoG6AUS2","https://github.com/Luc1113","https://www.linkedin.com/in/lucadigrigoli/","https://www.instagram.com/luca.digrigoli/"]},{"@type":"WebSite","@id":"https://lucadigrigoli.com/#website","url":"https://lucadigrigoli.com/","name":"Luca DiGrigoli","description":"Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.","publisher":{"@id":"https://lucadigrigoli.com/#person"}},{"@type":"WebPage","@id":"https://lucadigrigoli.com/#webpage","url":"https://lucadigrigoli.com/","name":"Luca DiGrigoli - Artist, Developer, Creator","description":"Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.","isPartOf":{"@id":"https://lucadigrigoli.com/#website"},"about":{"@id":"https://lucadigrigoli.com/#person"}}]}`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.">
+  <link rel="canonical" href="https://lucadigrigoli.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Luca DiGrigoli - Artist, Developer, Creator">
+  <meta property="og:description" content="Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.">
+  <meta property="og:url" content="https://lucadigrigoli.com/">
+  <meta property="og:image" content="https://lucadigrigoli.com/images/kissandtell-cover-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Luca DiGrigoli - Artist, Developer, Creator">
+  <meta name="twitter:description" content="Official website of Luca DiGrigoli, an artist, musician, developer, and creator sharing music releases, projects, blog updates, and computer science work.">
+  <meta name="twitter:image" content="https://lucadigrigoli.com/images/kissandtell-cover-preview.jpg">
+  <script type="application/ld+json" set:html={ldJson} />
+    <title>Luca DiGrigoli - Artist, Developer, Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="images/kissandtell-cover-preview.jpg" fetchpriority="high">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style is:global>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        :root{
+            --cream:#f5f3e8;
+            --paper:#fffdf8;
+            --ink:#2b241d;
+            --ink-soft:#6b6153;
+            --rule:#e6dcc9;
+            --rust:#8B4513;
+            --rust-deep:#A0522D;
+            --olive:#6b6b47;
+            --teal:#2f7a72;
+            --pink:#c05a7a;
+            --mustard:#c68a1f;
+            --blue:#3a6ea8;
+        }
+
+        body{
+            font-family:'Times New Roman', 'Inter', serif;
+            background-color:var(--cream);
+            color:var(--ink);
+            line-height:1.6;
+            -webkit-font-smoothing:antialiased;
+            background-image:
+                radial-gradient(circle at 25% 25%, #f9f7f0 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #f0ede0 0%, transparent 50%);
+            background-attachment:fixed;
+        }
+
+
+        a{ color:inherit; }
+
+        .wrap{ max-width:920px; margin:0 auto; padding:0 24px; }
+
+        /* ── SIDE RAILS (break at the code-fold / lamp section) ── */
+        .rail-grid{
+            display:grid;
+            grid-template-columns:minmax(0,1fr) 920px minmax(0,1fr);
+            column-gap:0;
+            width:100%;
+        }
+        .rail{
+            display:flex; flex-direction:column; gap:0;
+            height:100%;
+            padding-top:28px;
+        }
+        .rail-left{ align-items:flex-start; padding-left:14px; }
+        .rail-right{ align-items:flex-end; padding-right:14px; }
+        .rail-image{
+            width:100%; max-width:250px;
+            overflow:hidden; cursor:pointer;
+            opacity:.88;
+            transition:opacity .2s ease, filter .2s ease;
+        }
+        .rail-image:hover{ opacity:1; filter:brightness(1.06); }
+        .rail-image picture{ display:block; width:100%; height:100%; }
+        .rail-image img{ width:100%; height:auto; display:block; filter:sepia(10%) contrast(1.05) saturate(.95); }
+        /* let the last photo in the upper rails stretch down to meet the lamp section */
+        .rail-grid-upper .rail-image:last-child{ flex:1 1 auto; min-height:140px; }
+        .rail-grid-upper .rail-image:last-child picture{ height:100%; }
+        .rail-grid-upper .rail-image:last-child img{ height:100%; object-fit:cover; }
+        @media(max-width:1300px){
+            .rail-grid{ display:block; }
+            .rail{ display:none; }
+        }
+
+        /* ── NEWS BANNER ── */
+        .news-banner{
+            background:var(--rust);
+            color:#fff;
+            padding:10px 0;
+            overflow:hidden;
+        }
+        .news-scroll{
+            display:flex; white-space:nowrap;
+            animation:scroll-left 24s linear infinite;
+            font-family:'Courier Prime',monospace;
+            font-size:.85rem;
+            will-change:transform;
+        }
+        .news-item{ padding-right:70px; display:inline-block; }
+        .news-item::before{ content:"★ "; margin-right:5px; color:var(--cream); }
+        @keyframes scroll-left{ 0%{transform:translateX(100vw)} 100%{transform:translateX(-100%)} }
+
+        /* ── NAV ── */
+        .nav{
+            position:sticky; top:0; z-index:50;
+            background:rgba(250,246,239,.88);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid var(--rule);
+        }
+        .nav-inner{
+            display:flex; align-items:center; justify-content:space-between;
+            padding:16px 24px; max-width:920px; margin:0 auto;
+        }
+        .nav-name{
+            font-family:'Times New Roman',serif; font-weight:700; font-size:1.2rem;
+            letter-spacing:-.01em; text-decoration:none;
+            text-shadow:1px 1px 0 var(--rule);
+        }
+        .nav-links{ display:flex; gap:26px; list-style:none; }
+        .nav-links a{
+            font-family:'Courier Prime',monospace;
+            font-size:.85rem; text-decoration:none; color:var(--ink-soft);
+            text-transform:lowercase;
+            transition:color .15s;
+        }
+        .nav-links a:hover{ color:var(--rust); }
+        @media(max-width:560px){ .nav-links{ gap:16px; } }
+
+        /* ── HERO ── */
+        .hero{
+            padding:76px 0 56px;
+            display:grid;
+            grid-template-columns:auto 1fr;
+            gap:36px;
+            align-items:center;
+        }
+        .hero-photo{
+            width:132px; height:132px; border-radius:50%;
+            overflow:hidden; flex-shrink:0;
+            box-shadow:0 8px 24px rgba(43,36,29,.14);
+            border:3px solid var(--paper);
+            transform:rotate(-4deg);
+            transition:transform .3s ease;
+        }
+        .hero-photo:hover{ transform:rotate(2deg) scale(1.03); }
+        .hero-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+        .eyebrow{
+            font-family:'Courier Prime',monospace;
+            font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+            color:var(--rust); font-weight:700; margin-bottom:8px;
+            display:inline-block;
+        }
+        .typing-sub{
+            font-size:.9rem; color:var(--ink-soft); font-family:'Courier Prime',monospace;
+            overflow:hidden; white-space:nowrap; display:inline-block;
+            border-right:2px solid var(--rust);
+            animation:typing 2.2s steps(28,end) 1, blink-caret .8s step-end infinite;
+            max-width:fit-content; margin-bottom:14px;
+        }
+        @keyframes typing{ from{width:0} to{width:100%} }
+        @keyframes blink-caret{ from,to{border-color:transparent} 50%{border-color:var(--rust)} }
+        .hero h1{
+            font-family:'Times New Roman',serif; font-weight:800;
+            font-size:clamp(2.6rem,6.5vw,4.2rem);
+            letter-spacing:-.02em; line-height:1.05; margin-bottom:4px;
+            color:var(--rust);
+            text-shadow:2px 2px 0 var(--rule);
+        }
+        .hero p{ color:var(--ink-soft); font-size:1.02rem; max-width:52ch; }
+
+        .animated-bar{
+            height:3px; width:150px; margin:18px 0;
+            background:linear-gradient(90deg,var(--rust) 0%,#CD853F 25%,#DEB887 50%,#CD853F 75%,var(--rust) 100%);
+            animation:shimmer 3s ease-in-out infinite;
+            will-change:transform;
+        }
+        @keyframes shimmer{ 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.12)} }
+
+        .hero-links{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+        .pill{
+            display:inline-flex; align-items:center; gap:6px;
+            font-size:.84rem; text-decoration:none; padding:8px 16px;
+            border:1px solid var(--rule); border-radius:100px;
+            color:var(--ink); transition:border-color .15s, background .15s, transform .15s;
+            background:var(--paper);
+        }
+        .pill:hover{ border-color:var(--rust); transform:translateY(-1px); }
+        .pill.primary{ background:var(--rust); color:#fff; border-color:var(--rust); }
+        .pill.primary:hover{ background:var(--rust-deep); border-color:var(--rust-deep); }
+
+        .box-btn{
+            display:inline-block;
+            font-family:'Courier Prime',monospace;
+            font-size:.9rem;
+            color:var(--rust);
+            text-decoration:none;
+            border:1.5px solid var(--rust);
+            padding:10px 22px;
+            border-radius:2px;
+            transition:background .2s, color .2s, transform .2s;
+        }
+        .box-btn:hover{ background:var(--rust); color:var(--cream); transform:translateY(-2px); }
+        @media(max-width:600px){
+            .hero{ grid-template-columns:1fr; text-align:center; padding-top:52px; }
+            .hero-photo{ margin:0 auto; }
+            .hero-links{ justify-content:center; }
+            .hero p{ margin:0 auto; }
+        }
+
+        /* ── SECTION HEADINGS ── */
+        section{ padding:52px 0; border-top:1px solid var(--rule); }
+        section:first-of-type{ border-top:none; }
+
+        /* ── PANEL (boxed section card, old-site feel) ── */
+        .panel{
+            background:rgba(255,255,255,.62);
+            border:1px solid var(--rule);
+            border-radius:16px;
+            padding:32px;
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 0 0 1px rgba(139,69,19,.06), 0 10px 28px rgba(139,69,19,.1);
+        }
+        .panel::before{
+            content:''; position:absolute; top:0; left:0; right:0; height:2px;
+            background:linear-gradient(90deg,transparent 0%,var(--rust) 50%,transparent 100%);
+        }
+
+        /* ── VINTAGE DIVIDER ── */
+        .vintage-divider{ text-align:center; margin:44px 0; position:relative; }
+        .vintage-divider::before{
+            content:''; position:absolute; top:50%; left:0; right:0; height:1px;
+            background:linear-gradient(90deg,transparent,var(--rule),transparent);
+        }
+        .vintage-divider span{
+            background:var(--cream); padding:0 18px; position:relative;
+            font-family:'Courier Prime',monospace; font-size:.85rem; color:var(--rust);
+        }
+        .section-head{
+            display:flex; align-items:baseline; justify-content:space-between;
+            margin-bottom:28px; gap:16px; flex-wrap:wrap;
+        }
+        .section-head h2{
+            font-family:'Times New Roman',serif; font-weight:700;
+            font-size:1.5rem; letter-spacing:-.01em;
+        }
+        .section-head .more{ font-family:'Courier Prime',monospace; font-size:.82rem; color:var(--ink-soft); text-decoration:none; white-space:nowrap; }
+        .section-head .more:hover{ color:var(--rust); }
+
+        .lede{
+            font-family:'Times New Roman',serif; font-weight:700; color:var(--rust);
+            font-size:clamp(1.5rem,3.4vw,2rem); margin:0 0 8px;
+        }
+
+        /* ── FEATURED RELEASE ── */
+        .feature{
+            display:grid; grid-template-columns:220px 1fr; gap:32px;
+            background:var(--paper); border:1px solid var(--rule);
+            border-radius:14px; padding:28px; align-items:center;
+            margin-bottom:18px;
+        }
+        .feature-cover{
+            width:100%; aspect-ratio:1; border-radius:8px; overflow:hidden;
+            box-shadow:0 14px 34px rgba(43,36,29,.16);
+            transition:transform .25s ease;
+        }
+        .feature:hover .feature-cover{ transform:scale(1.02); }
+        .feature-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
+        .feature-tag{
+            display:inline-block; font-family:'Courier Prime',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+            color:var(--rust); font-weight:700; margin-bottom:10px;
+        }
+        .feature h3{
+            font-family:'Fraunces',serif; font-weight:600;
+            font-size:clamp(1.6rem,3.4vw,2.15rem); line-height:1.08; margin-bottom:10px;
+        }
+        .feature p{ color:var(--ink-soft); font-size:.95rem; margin-bottom:16px; max-width:46ch; }
+
+        /* ── RETRO BUTTON ── */
+        .retro-button{
+            background:linear-gradient(135deg,var(--rust),var(--rust-deep));
+            color:#fff; border:none; padding:11px 22px; border-radius:8px;
+            font-family:'Courier Prime',monospace; cursor:pointer;
+            transition:transform .2s, box-shadow .2s;
+            text-transform:uppercase; letter-spacing:1px; font-size:.88rem;
+            box-shadow:0 4px 10px rgba(139,69,19,.28);
+        }
+        .retro-button:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(139,69,19,.38); }
+
+        .stream-row{ display:flex; flex-wrap:wrap; gap:8px; }
+        .stream-link{
+            display:inline-flex; align-items:center; gap:6px;
+            padding:7px 14px; border-radius:100px; font-size:.78rem; font-weight:600;
+            text-decoration:none; transition:transform .15s, filter .15s;
+        }
+        .stream-link svg{ width:12px; height:12px; }
+        .stream-link:hover{ transform:translateY(-1px); filter:brightness(1.08); }
+        .stream-link.spotify{ background:#1DB954; color:#06210e; }
+        .stream-link.apple{ background:linear-gradient(135deg,#fc3c44,#fa233b); color:#fff; }
+        .stream-link.youtube{ background:#FF0000; color:#fff; }
+        .stream-link.bandcamp{ background:#1da0c3; color:#fff; }
+        .stream-link.ghost{ background:transparent; border:1px solid var(--rule); color:var(--ink); }
+        @media(max-width:640px){
+            .feature{ grid-template-columns:1fr; text-align:center; }
+            .feature-cover{ max-width:200px; margin:0 auto; }
+            .feature p{ margin:0 auto 16px; }
+            .stream-row{ justify-content:center; }
+        }
+
+        /* ── RELEASE GRID ── */
+        .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+        @media(max-width:760px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+        @media(max-width:480px){ .grid{ grid-template-columns:1fr; } }
+
+        .card{
+            position:relative;
+            background:var(--ink) center/cover no-repeat;
+            border:1px solid var(--rule); border-radius:12px;
+            padding:20px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+            transform:rotate(var(--tilt,0deg));
+            overflow:hidden;
+            isolation:isolate;
+        }
+        .card::before{
+            content:''; position:absolute; inset:0; z-index:0;
+            background:linear-gradient(190deg, rgba(20,16,12,.32) 0%, rgba(20,16,12,.72) 60%, rgba(20,16,12,.88) 100%);
+        }
+        .card > *{ position:relative; z-index:1; }
+        .card:nth-child(1){ --tilt:-.6deg; }
+        .card:nth-child(2){ --tilt:.5deg; }
+        .card:nth-child(3){ --tilt:-.4deg; }
+        .card:nth-child(4){ --tilt:.6deg; }
+        .card:nth-child(5){ --tilt:-.5deg; }
+        .card:nth-child(6){ --tilt:.4deg; }
+        .card:hover{ transform:rotate(0deg) translateY(-4px); box-shadow:0 14px 30px rgba(43,36,29,.22); border-color:#d8c9a8; }
+        .card h4{ font-family:'Fraunces',serif; font-size:1.08rem; font-weight:600; margin-bottom:4px; color:#fff; }
+        .card .sub{ font-family:'Courier Prime',monospace; font-size:.76rem; color:rgba(255,255,255,.6); margin-bottom:10px; }
+        .card p.desc{ font-size:.87rem; color:rgba(255,255,255,.82); margin-bottom:14px; line-height:1.5; }
+        .card .stream-row{ gap:6px; }
+        .card .stream-link{ padding:5px 11px; font-size:.7rem; }
+        .card .stream-link.ghost{ border-color:rgba(255,255,255,.35); color:#fff; }
+        .card .stream-link.ghost:hover{ background:rgba(255,255,255,.12); }
+
+        /* ── WORK / CS ── */
+        /* full-bleed: break the fold out of .wrap so the lamp photo spans the whole viewport width */
+        .code-fold{
+            position:relative;
+            width:100vw;
+            margin-left:calc(50% - 50vw);
+            background:#0f0b08 url('/images/lamp.jpg') center 30%/cover no-repeat;
+            padding:48px 20px;
+            overflow:hidden;
+            isolation:isolate;
+        }
+        .code-fold::before{
+            content:''; position:absolute; inset:0; z-index:0;
+            background:linear-gradient(180deg, rgba(10,7,5,.72) 0%, rgba(10,7,5,.85) 100%);
+        }
+        .code-fold-inner{
+            position:relative; z-index:2;
+            max-width:920px; margin:0 auto;
+        }
+        .code-fold .section-head h2{ color:#fff5e8; }
+        .code-fold .section-head .more{ color:rgba(255,235,210,.65); }
+        .code-fold .section-head .more:hover{ color:#ffd8a0; }
+
+        .work-item{
+            background:rgba(20,15,10,.55); border:1px solid rgba(255,220,180,.16); border-radius:12px;
+            padding:22px 24px; margin-bottom:14px;
+            backdrop-filter:blur(2px);
+        }
+        .work-item h4{ font-family:'Times New Roman',serif; font-size:1.15rem; font-weight:700; margin-bottom:3px; color:#fff5e8; }
+        .work-item .sub{ font-family:'Courier Prime',monospace; font-size:.8rem; color:#e8b479; margin-bottom:8px; font-weight:400; }
+        .work-item p{ font-size:.92rem; color:rgba(255,240,225,.78); }
+        .work-item a.link{ text-decoration:underline; color:#ffd8a0; font-size:.87rem; }
+        .tag-row{ margin-top:12px; display:flex; gap:6px; flex-wrap:wrap; }
+        .tag{
+            font-family:'Courier Prime',monospace;
+            font-size:.72rem; padding:3px 10px; border-radius:100px;
+            background:rgba(255,220,180,.14); color:#f3d9b8;
+        }
+
+        /* ── ABOUT ── */
+
+        /* ── CONTACT / FOOTER ── */
+        .contact{ text-align:center; padding:40px 30px; }
+        .panel.contact{ box-shadow:none; width:calc(100% + 80px); margin-left:-40px; }
+        @media(max-width:700px){ .panel.contact{ width:100%; margin-left:0; } }
+        .panel.contact::before{ display:none; }
+        .contact h2{
+            font-family:'Times New Roman',serif; font-weight:700; font-size:1.9rem; margin-bottom:10px;
+        }
+        .contact p{ color:var(--ink-soft); margin-bottom:24px; }
+        .contact-links{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+        footer{ font-family:'Courier Prime',monospace; text-align:center; padding:24px 0 50px; font-size:.8rem; color:var(--ink-soft); }
+    </style>
+</head>
+<body>
+
+<div class="news-banner">
+    <div class="news-scroll">
+        <span class="news-item">Welcome to lucadigrigoli.com!</span>
+        <span class="news-item">The Kiss and Tell Show — out now</span>
+        <span class="news-item">521 (5th Anniversary Deluxe) — out now</span>
+        <span class="news-item">thanks for stopping by!</span>
+    </div>
+</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-name">Luca DiGrigoli</a>
+        <ul class="nav-links">
+            <li><a href="#music">music</a></li>
+            <li><a href="#work">work</a></li>
+            <li><a href="/blog">blog</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="rail-grid rail-grid-upper">
+    <aside class="rail rail-left">
+        <div class="rail-image"><picture><source srcset="images/sidebar/blossoms.webp" type="image/webp"><img src="images/sidebar/blossoms.jpg" alt="cherry blossoms" loading="lazy" width="180" height="180"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/suit-bridge.webp" type="image/webp"><img src="images/sidebar/suit-bridge.jpg" alt="brick alley" loading="lazy" width="180" height="225"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/cafe.webp" type="image/webp"><img src="images/sidebar/cafe.jpg" alt="cafe with friends" loading="lazy" width="180" height="144"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/newyears.webp" type="image/webp"><img src="images/sidebar/newyears.jpg" alt="new years" loading="lazy" width="180" height="180"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/camera.webp" type="image/webp"><img src="images/sidebar/camera.jpg" alt="taking a photo" loading="lazy" width="180" height="144"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/guitar.webp" type="image/webp"><img src="images/sidebar/guitar.jpg" alt="guitar practice" loading="lazy" width="180" height="225"></picture></div>
+    </aside>
+
+    <div class="wrap">
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-photo">
+            <picture><source srcset="images/headshot-suit.webp" type="image/webp"><img src="images/headshot-suit.jpg" alt="Luca DiGrigoli" width="132" height="132" loading="eager" fetchpriority="high"></picture>
+        </div>
+        <div>
+            <h1>Luca DiGrigoli</h1>
+            <span class="typing-sub">artist &middot; developer &middot; creator</span>
+            <div class="animated-bar"></div>
+            <p>Welcome to my personal website! I'm Luca, a singer-songwriter and software engineer. This is where I share cool updates about the things I'm doing, and maintain my personal blog.</p>
+            <div class="hero-links">
+                <a href="521" class="box-btn">521 (deluxe)</a>
+                <a href="/blog" class="box-btn">blog</a>
+            </div>
+        </div>
+    </header>
+
+    <p class="lede">here's what's going on lately!</p>
+
+    <!-- Music -->
+    <section id="music" style="padding-bottom:24px;">
+        <div class="panel">
+        <div class="section-head">
+            <h2>latest music</h2>
+            <a href="https://open.spotify.com/artist/2Ty5D7qGvHpZ7TJoG6AUS2" class="more" target="_blank" rel="noopener">follow on Spotify &rarr;</a>
+        </div>
+
+        <div class="feature">
+            <div class="feature-cover">
+                <img src="images/kissandtell-cover-preview.jpg" alt="The Kiss and Tell Show cover art" width="440" height="440" loading="eager" fetchpriority="high">
+            </div>
+            <div>
+                <span class="feature-tag">out now</span>
+                <h3>The Kiss and Tell Show</h3>
+                <p>My first major release in five years. You don't wanna miss it.</p>
+                <div class="stream-row">
+                    <a href="https://open.spotify.com/album/1sHb9ni9ggSghbxcn0fze2?si=M1xtNYcbRuezQ-NC8tBzGQ" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
+                    <a href="https://music.apple.com/us/album/the-kiss-and-tell-show/6771307730" class="stream-link apple" target="_blank" rel="noopener">Apple Music</a>
+                    <a href="https://youtube.com/playlist?list=OLAK5uy_mba6i6KBjq9bKnBoz8z_H0PGTzgM1O-tk&si=oG5Tulzd3oMDAHQ9" class="stream-link youtube" target="_blank" rel="noopener">YouTube</a>
+                    <a href="kissandtell" class="stream-link ghost">release page</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-cover">
+                <img src="blogimg/521Deluxe.png" alt="521 (5th Anniversary Deluxe Edition) cover art" width="440" height="440" loading="lazy">
+            </div>
+            <div>
+                <span class="feature-tag">out now</span>
+                <h3>521 (5th Anniversary Deluxe)</h3>
+                <p>16 originals plus 4 bonus tracks pulled from the archives — a five-years-later look back at where this all started.</p>
+                <div class="stream-row">
+                    <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
+                    <a href="521" class="stream-link ghost">release page</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid" style="margin-top:8px;">
+            <div class="card" style="background-image:url('beautifulGirl.webp');">
+                <h4>Beautiful Girl</h4>
+                <p class="sub">single &middot; out now</p>
+                <p class="desc">🪼 a new song of recent happiness &lt;3</p>
+                <div class="stream-row">
+                    <a href="https://open.spotify.com/album/0fWHD6NUaWTXy9WXzNMWYR" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
+                    <a href="https://music.apple.com/us/album/beautiful-girl-single/1895520123" class="stream-link apple" target="_blank" rel="noopener">Apple</a>
+                    <a href="https://music.youtube.com/playlist?list=OLAK5uy_kSUuOdcYLhR4IPEKSGsx8iPf6eKaTzU6g" class="stream-link youtube" target="_blank" rel="noopener">YouTube</a>
+                </div>
+            </div>
+
+            <div class="card" style="background-image:url('blogimg/oldOConnor.png');">
+                <h4>Savannah</h4>
+                <p class="sub">single &middot; out now</p>
+                <p class="desc">A homage to a wonderful counsellor — thank you for everything.</p>
+                <div class="stream-row">
+                    <a href="https://open.spotify.com/track/2vsOzN7rhwBRdt41wjeTlS?si=580154938cb943a5" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
+                    <a href="https://music.apple.com/us/song/savannah/6767574620" class="stream-link apple" target="_blank" rel="noopener">Apple</a>
+                    <a href="https://www.youtube.com/watch?v=LNHfQhDH1qw" class="stream-link youtube" target="_blank" rel="noopener">YouTube</a>
+                </div>
+            </div>
+
+            <div class="card" style="background-image:url('images/technicolor.png');">
+                <h4>Technicolor Daydream</h4>
+                <p class="sub">single &middot; out now</p>
+                <p class="desc">My little indie-pop/rock experiment from 2022, finally out everywhere.</p>
+                <div class="stream-row">
+                    <a href="https://open.spotify.com/album/6oLRTkuyDXza5g3NWodXE5?si=KAFniuGFTomWYrRGb7uUEQ" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
+                    <a href="https://music.apple.com/us/album/technicolor-daydream-feat-jesters-single/1862170698" class="stream-link apple" target="_blank" rel="noopener">Apple</a>
+                    <a href="https://lucadigrigoli.bandcamp.com/track/technicolor-daydream" class="stream-link bandcamp" target="_blank" rel="noopener">Bandcamp</a>
+                </div>
+            </div>
+
+            <div class="card" style="background-image:url('images/pretend.webp');">
+                <h4>pretend</h4>
+                <p class="sub">single &middot; out now</p>
+                <p class="desc">A song about betrayal, and the closure you'll never get.</p>
+                <div class="stream-row">
+                    <a href="https://distrokid.com/hyperfollow/lucadigrigoli/pretend-demo" class="stream-link ghost" target="_blank" rel="noopener">listen</a>
+                </div>
+            </div>
+
+            <div class="card" style="background-image:url('images/valerie.webp');">
+                <h4>valerie</h4>
+                <p class="sub">single &middot; acoustic pop</p>
+                <p class="desc">A song about the search for "Valerie," whoever she may be.</p>
+                <div class="stream-row">
+                    <a href="https://distrokid.com/hyperfollow/lucadigrigoli/valerie-2" class="stream-link ghost" target="_blank" rel="noopener">listen</a>
+                </div>
+            </div>
+
+            <div class="card" style="background-image:url('images/521cover.webp');">
+                <h4>521 — debut album</h4>
+                <p class="sub">feat. "lose your mind" &amp; "apologize"</p>
+                <p class="desc">My first full-length release, exploring growth, loss, and self-discovery.</p>
+                <div class="stream-row">
+                    <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" class="stream-link ghost" target="_blank" rel="noopener">listen</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    </div>
+
+    <aside class="rail rail-right">
+        <div class="rail-image"><picture><source srcset="images/sidebar/riverwalk.webp" type="image/webp"><img src="images/sidebar/riverwalk.jpg" alt="riverside walk" loading="lazy" width="180" height="225"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/graduation.webp" type="image/webp"><img src="images/sidebar/graduation.jpg" alt="graduation hug" loading="lazy" width="180" height="225"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/crowns.webp" type="image/webp"><img src="images/sidebar/crowns.jpg" alt="paper crowns" loading="lazy" width="180" height="144"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/lakefriends.webp" type="image/webp"><img src="images/sidebar/lakefriends.jpg" alt="lake with friends" loading="lazy" width="180" height="144"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/laufey.webp" type="image/webp"><img src="images/sidebar/laufey.jpg" alt="laufey" loading="lazy" width="180" height="180"></picture></div>
+        <div class="rail-image"><picture><source srcset="images/sidebar/funmom.webp" type="image/webp"><img src="images/sidebar/funmom.jpg" alt="fun mom hat" loading="lazy" width="180" height="225"></picture></div>
+    </aside>
+</div>
+
+    <!-- Work / CS -->
+    <section id="work" style="padding-top:16px;">
+        <div class="code-fold">
+            <div class="code-fold-inner">
+                <div class="section-head">
+                    <h2>&#123; computer science &amp; code &#125;</h2>
+                    <a href="https://github.com/Luc1113" class="more" target="_blank" rel="noopener">github &rarr;</a>
+                </div>
+
+                <div class="work-item">
+                    <h4>Computer Science, B.S.</h4>
+                    <p class="sub">Binghamton University &middot; Class of 2025</p>
+                    <p>Specializing in systems programming, cybersecurity, and creative coding — building tools that bridge technical functionality and artistic expression.</p>
+                    <div class="tag-row">
+                        <span class="tag">systems</span>
+                        <span class="tag">security</span>
+                        <span class="tag">creative code</span>
+                    </div>
+                </div>
+
+                <div class="work-item">
+                    <h4>Wax</h4>
+                    <p class="sub">rate music like Letterboxd rates movies</p>
+                    <p>A social music-rating app — build your shelf, rate albums, and climb the leaderboard. <a class="link" href="https://trywax.app" target="_blank" rel="noopener">trywax.app</a></p>
+                    <div class="tag-row">
+                        <span class="tag">music</span>
+                        <span class="tag">social app</span>
+                    </div>
+                </div>
+
+                <div class="work-item">
+                    <h4>Luca Web Designs</h4>
+                    <p class="sub">web design &amp; development studio</p>
+                    <p>Building clean, custom websites for small businesses and creators. <a class="link" href="https://www.lucawebdesigns.com" target="_blank" rel="noopener">lucawebdesigns.com</a></p>
+                    <div class="tag-row">
+                        <span class="tag">web design</span>
+                        <span class="tag">freelance</span>
+                    </div>
+                </div>
+
+                <div class="work-item">
+                    <h4>Today</h4>
+                    <p class="sub">a mindfulness and productivity app</p>
+                    <p>An iOS app designed to help users build focus through daily mood and habit tracking. <a class="link" href="https://github.com/Luc1113/mindscapes" target="_blank" rel="noopener">view on GitHub</a></p>
+                    <div class="tag-row">
+                        <span class="tag">mindfulness</span>
+                        <span class="tag">mobile app</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="rail-grid">
+    <aside class="rail rail-left"></aside>
+
+    <div class="wrap">
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="panel contact" style="background:rgba(139,69,19,.04);">
+            <h2>get in touch</h2>
+            <p>let's collaborate, talk music, or chat about a project</p>
+            <div class="contact-links">
+                <a href="https://linktr.ee/lucadigrigoli" class="pill" target="_blank" rel="noopener">linktree</a>
+                <a href="https://github.com/Luc1113" class="pill" target="_blank" rel="noopener">github</a>
+                <a href="https://www.youtube.com/@lucadigrigoli7513" class="pill" target="_blank" rel="noopener">youtube</a>
+                <a href="https://www.linkedin.com/in/lucadigrigoli/" class="pill" target="_blank" rel="noopener">linkedin</a>
+                <a href="https://www.instagram.com/luca.digrigoli/" class="pill" target="_blank" rel="noopener">instagram</a>
+                <a href="https://www.tiktok.com/@luca_digrigoli" class="pill" target="_blank" rel="noopener">tiktok</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>&copy; 2026 Luca DiGrigoli</footer>
+
+    </div>
+
+    <aside class="rail rail-right"></aside>
+</div>
+
+<div style="text-align:center; padding:0 24px 50px;">
+    <button class="retro-button" onclick="showMessage()">thanks for stopping by!</button>
+</div>
+
+<script is:inline>
+(function(){
+    'use strict';
+
+    window.showMessage = function(){
+        const msgs = ["you're the best kind of person", "seriously, thank you", "ok now go listen to Beautiful Girl", "secret handshake unlocked 🤝", "come back soon!"];
+        let toast = document.getElementById('toast');
+        if (!toast){
+            toast = document.createElement('div');
+            toast.id = 'toast';
+            toast.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#2b241d;color:#faf6ef;padding:10px 20px;border-radius:100px;font-family:Inter,sans-serif;font-size:.88rem;font-weight:600;opacity:0;transition:opacity .25s ease, transform .25s ease;z-index:100;pointer-events:none;';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        requestAnimationFrame(function(){
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        });
+        clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(function(){
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+        }, 2200);
+    };
+
+    const observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if (entry.isIntersecting){
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {threshold:.08, rootMargin:'40px'});
+
+    document.querySelectorAll('.card, .work-item, .feature').forEach(function(el){
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(14px)';
+        el.style.transition = 'opacity .4s ease, transform .4s ease';
+        observer.observe(el);
+    });
+})();
+</script>
+</body>
+</html>
