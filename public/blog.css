@@ -346,6 +346,17 @@
       margin-top: 14px;
     }
 
+    .song-title {
+      color: #8B4513;
+      font-size: 1.15rem;
+      line-height: 1.3;
+      margin: 28px 0 10px;
+    }
+
+    .qa-answer .song-title:first-child {
+      margin-top: 0;
+    }
+
     .qa-image-wrap {
       margin-top: 22px;
       display: flex;
