@@ -346,6 +346,15 @@
       margin-top: 14px;
     }
 
+    .qa-answer ol {
+      margin: 14px 0 14px 2rem;
+      padding-left: 1.25rem;
+    }
+
+    .qa-answer li+li {
+      margin-top: 8px;
+    }
+
     .song-title {
       color: #8B4513;
       font-size: 1.15rem;
