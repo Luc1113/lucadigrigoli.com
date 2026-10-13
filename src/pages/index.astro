@@ -380,7 +380,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .code-fold .section-head h2{ color:var(--fg); }
         .code-fold .section-head .more{ color:var(--fg-soft); }
         .code-fold .section-head .more:hover{ color:var(--accent); }
-        .section-head-links{ display:flex; align-items:baseline; gap:18px; }
+        .section-head-links{ display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; }
         .car-pause{
             padding:0; border:0; background:none; cursor:pointer; font-family:'Courier Prime',monospace; font-size:.82rem; white-space:nowrap;
             color:var(--fg-soft); transition:color .7s ease;
@@ -432,7 +432,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .proj-bing-year span{ display:block; margin-top:8px; font-family:'Courier Prime',monospace; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:#cfe8dd; }
         @media(max-width:720px){
             .proj-bing-band{ padding:10px 22px; flex-wrap:wrap; }
-            .proj-bing-body{ grid-template-columns:1fr; padding:24px 22px; }
+            .proj-bing-body{ grid-template-columns:minmax(0,1fr); padding:24px 22px; }
             .proj-bing-year{ order:-1; text-align:left; }
         }
 
@@ -546,7 +546,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             font-size:.68rem;
         }
         @media(max-width:720px){
-            .doodle-promo{ grid-template-columns:1fr; }
+            .doodle-promo{ grid-template-columns:minmax(0,1fr); }
             .doodle-promo-visual{ min-height:0; aspect-ratio:16 / 9; border-right:0; border-bottom:2px solid #2b2731; }
             .doodle-promo-copy{ padding:25px 22px 27px; }
         }
@@ -625,14 +625,14 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             .proj-wax-copy, .proj-wax-feed-label{ padding-left:22px; padding-right:22px; }
             .proj-wax-track img{ width:92px; height:92px; }
             .proj-lwd{ padding:26px 22px; }
-            .proj-today{ grid-template-columns:1fr; padding:26px 22px 0; gap:0; }
-            .proj-today-phone{ margin:0 auto; width:180px; }
+            .proj-today{ grid-template-columns:minmax(0,1fr); padding:26px 22px 0; gap:0; }
+            .proj-today-phone{ margin:0 auto; width:170px; max-height:150px; }
         }
 
 
         /* ── PROJECT CAROUSEL ── */
         .carousel{ position:relative; }
-        .slides{ display:grid; align-items:stretch; }
+        .slides{ display:grid; grid-template-columns:minmax(0,1fr); align-items:stretch; }
         .slide > *{ height:100%; }
         .slide{
             grid-area:1/1; min-width:0;
@@ -671,7 +671,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .car-tab[aria-selected="true"]::after{ animation:car-fill 6s linear forwards; }
         .carousel.is-held .car-tab[aria-selected="true"]::after{ animation-play-state:paused; }
         @keyframes car-fill{ from{ width:0; } to{ width:100%; } }
-        @media(max-width:600px){ .car-tab{ font-size:.68rem; } }
+        @media(max-width:720px){ .slides{ align-items:center; } .slide > *{ height:auto; } }
+        @media(max-width:600px){ .car-tab{ font-size:0; padding-top:14px; } .car-tabs{ gap:6px; } .carousel-controls{ gap:10px; } }
         @media(prefers-reduced-motion:reduce){
             .slide, .slide.is-active, .fold-theme.is-reveal{ transition:none; filter:none; }
             .car-tab[aria-selected="true"]::after{ animation:none; width:100%; }
@@ -1050,7 +1051,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         const tabs = slides.map(function(sl, i){
             const t = document.createElement('button');
             t.type = 'button'; t.className = 'car-tab'; t.setAttribute('role', 'tab');
-            t.textContent = sl.dataset.name;
+            t.textContent = sl.dataset.name; t.setAttribute('aria-label', sl.dataset.name);
             t.addEventListener('click', function(e){ go(i, e); });
             tabsEl.appendChild(t);
             return t;
