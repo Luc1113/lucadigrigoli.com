@@ -532,16 +532,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             outline:3px solid #326dcc;
             outline-offset:3px;
         }
-        .doodle-tags{ margin-top:18px; display:flex; flex-wrap:wrap; gap:6px; }
-        .doodle-tags span{
-            padding:3px 8px;
-            border:1px solid #766f81;
-            border-radius:4px;
-            background:rgba(255,255,255,.82);
-            color:#514b5c;
-            font-family:'Courier Prime',monospace;
-            font-size:.68rem;
-        }
+        .doodle-tags{ margin-top:18px; display:flex; flex-wrap:wrap; }
+        .doodle-tags span{ color:#514b5c; font-family:'Courier Prime',monospace; font-size:.74rem; }
         @media(max-width:720px){
             .doodle-promo{ grid-template-columns:minmax(0,1fr); }
             .doodle-promo-visual{ min-height:0; aspect-ratio:16 / 9; border-right:0; border-bottom:2px solid #2b2731; }
@@ -568,8 +560,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         }
         .proj-wax-btn:hover{ background:#f05a3f; }
         .proj-wax-btn:focus-visible{ outline:2px solid #f4f4f5; outline-offset:3px; }
-        .proj-wax-tags{ margin-top:18px; display:flex; gap:6px; flex-wrap:wrap; }
-        .proj-wax-tags span{ padding:3px 10px; border:1px solid #2e2e33; border-radius:100px; color:#a1a1aa; font-size:.72rem; }
+        .proj-wax-tags{ margin-top:18px; display:flex; flex-wrap:wrap; }
+        .proj-wax-tags span{ color:#a1a1aa; font-size:.8rem; }
         .proj-wax-feed{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); }
         .proj-wax-feed-label{ display:block; padding:0 32px 10px; color:#f4f4f5; font-size:.8rem; font-weight:500; }
         .proj-wax-track{ display:flex; gap:12px; width:max-content; animation:wax-feed 45s linear infinite; }
@@ -603,6 +595,13 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             background:linear-gradient(160deg,#151a2c 0%,#0f1322 100%); color:#fff;
             font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;
         }
+        .proj-today-waves{ position:absolute; left:0; right:0; bottom:0; height:60%; pointer-events:none; overflow:hidden; }
+        .today-wave{ position:absolute; left:0; bottom:0; width:200%; height:100%; animation:today-wave 14s linear infinite; }
+        .today-wave.tw2{ animation-duration:20s; animation-direction:reverse; height:85%; }
+        .today-wave.tw3{ animation-duration:27s; height:65%; }
+        @keyframes today-wave{ to{ transform:translateX(-50%); } }
+        .proj-today-copy, .proj-today-phone{ position:relative; z-index:1; }
+        @media(prefers-reduced-motion:reduce){ .today-wave{ animation:none; } }
         .proj-today-copy{ padding-bottom:30px; display:flex; flex-direction:column; align-items:flex-start; }
         .proj-today h4{ font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:2.8rem; letter-spacing:.02em; line-height:1; color:#fff; }
         .proj-today-sub{ margin:4px 0 10px; color:#8b90a3; font-size:.85rem; }
@@ -613,8 +612,9 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         }
         .proj-today-link:hover{ background:#74d27e; }
         .proj-today-link:focus-visible{ outline:2px solid #0a84ff; outline-offset:3px; }
-        .proj-today-tags{ margin-top:16px; display:flex; gap:6px; flex-wrap:wrap; }
-        .proj-today-tags span{ padding:4px 11px; border-radius:8px; background:#2a2d38; color:#c4c8d6; font-size:.72rem; }
+        .proj-today-tags{ margin-top:16px; display:flex; flex-wrap:wrap; }
+        .proj-today-tags span{ color:#8b90a3; font-size:.82rem; }
+        .doodle-tags span + span::before, .proj-wax-tags span + span::before, .proj-today-tags span + span::before{ content:'\00b7'; margin:0 .6em; }
         .proj-today-phone{ margin-right:28px; overflow:hidden; border:3px solid #2a2d38; border-bottom:0; border-radius:24px 24px 0 0; align-self:end; max-height:260px; }
         .proj-today-phone img{ display:block; width:100%; height:auto; }
         @media(max-width:720px){
@@ -939,6 +939,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                     </div>
                     <div class="slide" role="tabpanel" aria-label="Today" data-name="Today" data-theme-id="3">
                         <article class="proj proj-today">
+                        <div class="proj-today-waves" aria-hidden="true"><svg class="today-wave tw1" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 70 Q150 32 300 70 T600 70 T900 70 T1200 70 V160 H0Z" fill="url(#tw-blue)"/></svg><svg class="today-wave tw2" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 88 Q150 58 300 88 T600 88 T900 88 T1200 88 V160 H0Z" fill="url(#tw-green)"/></svg><svg class="today-wave tw3" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 104 Q150 80 300 104 T600 104 T900 104 T1200 104 V160 H0Z" fill="url(#tw-ind)"/></svg><svg width="0" height="0" style="position:absolute"><defs><linearGradient id="tw-blue" x1="0" x2="1"><stop offset="0" stop-color="#0a84ff" stop-opacity=".0"/><stop offset=".5" stop-color="#0a84ff" stop-opacity=".38"/><stop offset="1" stop-color="#0a84ff" stop-opacity=".05"/></linearGradient><linearGradient id="tw-green" x1="0" x2="1"><stop offset="0" stop-color="#5fc46a" stop-opacity=".05"/><stop offset=".5" stop-color="#5fc46a" stop-opacity=".34"/><stop offset="1" stop-color="#5fc46a" stop-opacity=".0"/></linearGradient><linearGradient id="tw-ind" x1="0" x2="1"><stop offset="0" stop-color="#6a6fd8" stop-opacity=".25"/><stop offset="1" stop-color="#0a84ff" stop-opacity=".1"/></linearGradient></defs></svg></div>
                     <div class="proj-today-copy">
                         <h4>Today</h4>
                         <p class="proj-today-sub">a mindfulness and productivity app</p>
