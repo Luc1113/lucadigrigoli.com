@@ -413,28 +413,19 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             background:var(--chip); color:var(--fg);
         }
 
-        /* B.S. slide: the whole card is Binghamton green with a cream band and collegiate serif. */
+        /* B.S. slide: green card, plain type; the automaton graph behind it does the talking. */
         .proj-bing{
-            border-radius:4px; background:#005a43; color:#fff; border:1px solid rgba(255,255,255,.2);
-            box-shadow:0 18px 40px rgba(0,0,0,.3); display:flex; flex-direction:column;
+            border-radius:12px; background:#005a43; color:#fff; border:1px solid rgba(255,255,255,.2);
+            box-shadow:0 18px 40px rgba(0,0,0,.3); display:flex; flex-direction:column; justify-content:center;
         }
-        .proj-bing-band{
-            display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px 12px; padding:12px 32px; background:#f3f1e8; color:#005a43;
-            font-family:'Courier Prime',monospace; font-size:.74rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
-        }
-        .proj-bing-body{ flex:1; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:28px; padding:26px 32px 30px; }
-        .proj-bing h4{ font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:clamp(1.7rem,4vw,2.4rem); letter-spacing:-.01em; line-height:1.1; color:#fff; }
-        .proj-bing p{ max-width:56ch; margin:12px 0 18px; color:rgba(255,255,255,.9); font-size:.98rem; line-height:1.55; }
-        .proj-bing-tags{ display:flex; flex-wrap:wrap; gap:6px; }
-        .proj-bing-tags span{ padding:4px 11px; border:1px solid rgba(255,255,255,.5); border-radius:2px; font-family:'Courier Prime',monospace; font-size:.72rem; }
-        .proj-bing-year{ text-align:center; font-family:'Fraunces',Georgia,serif; }
-        .proj-bing-year b{ display:block; font-size:clamp(3.5rem,9vw,6rem); font-weight:700; line-height:.9; color:transparent; -webkit-text-stroke:2px #f3f1e8; letter-spacing:.02em; }
-        .proj-bing-year span{ display:block; margin-top:8px; font-family:'Courier Prime',monospace; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:#cfe8dd; }
-        @media(max-width:720px){
-            .proj-bing-band{ padding:10px 22px; flex-wrap:wrap; }
-            .proj-bing-body{ grid-template-columns:minmax(0,1fr); padding:24px 22px; }
-            .proj-bing-year{ order:-1; text-align:left; }
-        }
+        .proj-bing-graph{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+        .proj-bing-body{ position:relative; z-index:1; padding:40px 36px; }
+        .proj-bing-sub{ margin:0 0 6px; font-family:'Courier Prime',monospace; font-size:.8rem; color:#cfe8dd; }
+        .proj-bing h4{ font-family:'Times New Roman',serif; font-weight:700; font-size:clamp(1.6rem,4vw,2.2rem); line-height:1.1; color:#fff; }
+        .proj-bing-label{ margin:18px 0 10px; font-family:'Courier Prime',monospace; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:#cfe8dd; }
+        .proj-bing-tags{ display:flex; flex-wrap:wrap; gap:6px; max-width:640px; }
+        .proj-bing-tags span{ padding:4px 11px; border-radius:100px; background:rgba(0,0,0,.28); font-family:'Courier Prime',monospace; font-size:.74rem; }
+        @media(max-width:720px){ .proj-bing-body{ padding:28px 22px; } }
 
         .projects-heading{
             margin:30px 0 12px;
@@ -885,15 +876,13 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 <div class="carousel" aria-roledescription="carousel" aria-label="School and projects">
                     <div class="slides">
                     <div class="slide" role="tabpanel" aria-label="Binghamton University" data-name="Binghamton" data-theme-id="0">
-                        <article class="proj proj-bing">
-                            <div class="proj-bing-band"><span>Binghamton University</span><span>Thomas J. Watson College of Engineering &amp; Applied Science</span></div>
+                        <article class="proj proj-bing" id="bing-card">
+                            <canvas class="proj-bing-graph" id="bing-graph" aria-hidden="true"></canvas>
                             <div class="proj-bing-body">
-                                <div class="proj-bing-copy">
-                                    <h4>Computer Science, B.S.</h4>
-                                    <p>Specializing in systems programming, cybersecurity, and creative coding &mdash; building tools that bridge technical functionality and artistic expression.</p>
-                                    <div class="proj-bing-tags"><span>systems</span><span>security</span><span>creative code</span></div>
-                                </div>
-                                <div class="proj-bing-year" aria-hidden="true"><b>B.S.</b><span>Class of 2025</span></div>
+                                <p class="proj-bing-sub">Binghamton University &middot; Class of 2025</p>
+                                <h4>B.S. Computer Science</h4>
+                                <p class="proj-bing-label">Relevant coursework</p>
+                                <div class="proj-bing-tags"><span>Discrete Math</span><span>Finite Automata</span><span>Cybersecurity</span><span>Algorithms</span><span>Design Patterns</span><span>Operating Systems</span><span>Machine Learning</span></div>
                             </div>
                         </article>
                     </div>
@@ -1171,6 +1160,95 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             raf = requestAnimationFrame(frame);
         }
         new IntersectionObserver(function(en){ vis = en[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(cv);
+    })();
+
+    (function(){
+        const card = document.getElementById('bing-card'), cv = document.getElementById('bing-graph');
+        if (!card || !cv) return;
+        const d = cv.getContext('2d');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const R = 9, LABELS = ['a','b','0','1'];
+        let w = 0, h = 0, nodes = [], edges = [], vis = false, raf = 0, pulse = null;
+        function build(){
+            const n = Math.max(6, Math.round(w * h / 13000));
+            nodes = [];
+            for (let tries = 0; nodes.length < n && tries < n * 40; tries++){
+                const x = 24 + Math.random() * (w - 48), y = 24 + Math.random() * (h - 48);
+                if (nodes.every(function(o){ return Math.hypot(o.x - x, o.y - y) > 70; }))
+                    nodes.push({x:x, y:y, ph:Math.random() * 6.28, acc:Math.random() < .2});
+            }
+            nodes.forEach(function(a){ a.dx = 0; a.dy = 0; });
+            edges = [];
+            const seen = {};
+            nodes.forEach(function(a, i){
+                const near = nodes.map(function(b, j){ return {j:j, d:Math.hypot(a.x - b.x, a.y - b.y)}; })
+                    .filter(function(o){ return o.j !== i; }).sort(function(p, q){ return p.d - q.d; }).slice(0, 2);
+                near.forEach(function(o){
+                    if (seen[i + '-' + o.j] || seen[o.j + '-' + i] || Math.random() < .2) return;
+                    seen[i + '-' + o.j] = 1;
+                    const flip = Math.random() < .5;
+                    edges.push({a:flip ? i : o.j, b:flip ? o.j : i, eps:Math.random() < .35, label:LABELS[Math.floor(Math.random() * 4)], bend:(Math.random() < .5 ? -1 : 1) * (14 + Math.random() * 14)});
+                });
+                if (Math.random() < .18) edges.push({a:i, b:i, eps:Math.random() < .3, label:LABELS[Math.floor(Math.random() * 4)], bend:0});
+            });
+            nodes[0].start = true;
+        }
+        function pos(nd, t){ return {x:nd.x + Math.sin(t / 2600 + nd.ph) * 4, y:nd.y + Math.cos(t / 3100 + nd.ph) * 4}; }
+        function arrow(x, y, ang){
+            d.beginPath(); d.moveTo(x, y);
+            d.lineTo(x - 7 * Math.cos(ang - .4), y - 7 * Math.sin(ang - .4));
+            d.lineTo(x - 7 * Math.cos(ang + .4), y - 7 * Math.sin(ang + .4));
+            d.closePath(); d.fill();
+        }
+        function draw(t){
+            d.clearRect(0, 0, w, h);
+            d.lineWidth = 1.2; d.font = "italic 12px 'Fraunces',Georgia,serif"; d.textAlign = 'center'; d.textBaseline = 'middle';
+            const P = nodes.map(function(nd){ return pos(nd, t); });
+            edges.forEach(function(e, k){
+                const A = P[e.a], B = P[e.b], on = pulse && pulse.k === k;
+                d.strokeStyle = d.fillStyle = on ? 'rgba(255,255,255,.75)' : 'rgba(243,241,232,.22)';
+                d.setLineDash(e.eps ? [5, 4] : []);
+                let lx, ly;
+                if (e.a === e.b){
+                    d.beginPath(); d.arc(A.x, A.y - R - 6, 7, 0, Math.PI * 2); d.stroke();
+                    d.setLineDash([]); arrow(A.x + 5, A.y - R - 1, 2.2); lx = A.x; ly = A.y - R - 22;
+                } else {
+                    const mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2, dx = B.x - A.x, dy = B.y - A.y, len = Math.hypot(dx, dy) || 1;
+                    const cx = mx - dy / len * e.bend, cy = my + dx / len * e.bend;
+                    let a1 = Math.atan2(cy - A.y, cx - A.x), a2 = Math.atan2(B.y - cy, B.x - cx);
+                    const sx = A.x + Math.cos(a1) * R, sy = A.y + Math.sin(a1) * R, ex = B.x - Math.cos(a2) * (R + 1), ey = B.y - Math.sin(a2) * (R + 1);
+                    d.beginPath(); d.moveTo(sx, sy); d.quadraticCurveTo(cx, cy, ex, ey); d.stroke();
+                    d.setLineDash([]); arrow(ex, ey, a2);
+                    lx = .25 * sx + .5 * cx + .25 * ex; ly = .25 * sy + .5 * cy + .25 * ey;
+                    lx += (cx - mx) / Math.abs(e.bend) * 8; ly += (cy - my) / Math.abs(e.bend) * 8;
+                    if (on){ const u = pulse.u, ux = (1 - u) * (1 - u) * sx + 2 * (1 - u) * u * cx + u * u * ex, uy = (1 - u) * (1 - u) * sy + 2 * (1 - u) * u * cy + u * u * ey; d.beginPath(); d.arc(ux, uy, 3.2, 0, Math.PI * 2); d.fill(); }
+                }
+                d.setLineDash([]); d.fillStyle = on ? 'rgba(255,255,255,.9)' : 'rgba(243,241,232,.5)';
+                d.fillText(e.eps ? '\u03b5' : e.label, lx, ly);
+            });
+            nodes.forEach(function(nd, i){
+                const p = P[i];
+                d.strokeStyle = 'rgba(243,241,232,.4)'; d.fillStyle = 'rgba(0,50,36,.55)';
+                d.beginPath(); d.arc(p.x, p.y, R, 0, Math.PI * 2); d.fill(); d.stroke();
+                if (nd.acc){ d.beginPath(); d.arc(p.x, p.y, R - 3.5, 0, Math.PI * 2); d.stroke(); }
+                if (nd.start){ d.fillStyle = 'rgba(243,241,232,.4)'; d.beginPath(); d.moveTo(p.x - R, p.y); d.lineTo(p.x - R - 14, p.y); d.stroke(); arrow(p.x - R, p.y, 0); }
+            });
+        }
+        function frame(t){
+            if (!vis){ raf = 0; return; }
+            if (!pulse && edges.length && Math.random() < .02) pulse = {k:Math.floor(Math.random() * edges.length), u:0};
+            if (pulse){ pulse.u += .02; if (pulse.u >= 1) pulse = null; }
+            draw(t);
+            raf = requestAnimationFrame(frame);
+        }
+        new ResizeObserver(function(){
+            const r = Math.min(window.devicePixelRatio || 1, 2);
+            w = cv.clientWidth; h = cv.clientHeight;
+            if (!w || !h) return;
+            cv.width = w * r; cv.height = h * r; d.setTransform(r, 0, 0, r, 0, 0);
+            build(); draw(0);
+        }).observe(cv);
+        if (!reduce) new IntersectionObserver(function(en){ vis = en[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(cv);
     })();
 </script>
 </body>
