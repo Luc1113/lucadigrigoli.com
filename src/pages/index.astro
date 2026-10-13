@@ -370,9 +370,9 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             --fg:#fff5e8; --fg-soft:rgba(255,240,225,.78); --accent:#e8b479; --item-bg:rgba(20,15,10,.55); --item-bd:rgba(255,220,180,.16); --chip:rgba(255,220,180,.14);
         }
         .code-fold[data-theme="0"]{ --fg:#fff; --fg-soft:rgba(255,255,255,.88); --accent:#f0f0f0; --item-bg:rgba(0,0,0,.18); --item-bd:rgba(255,255,255,.3); --chip:rgba(255,255,255,.16); }
-        .code-fold[data-theme="1"]{ --fg:#2b2731; --fg-soft:#514b5c; --accent:#326dcc; --item-bg:rgba(255,255,255,.62); --item-bd:rgba(43,39,49,.28); --chip:rgba(50,109,204,.12); }
+        .code-fold[data-theme="3"]{ --fg:#2b2731; --fg-soft:#514b5c; --accent:#326dcc; --item-bg:rgba(255,255,255,.62); --item-bd:rgba(43,39,49,.28); --chip:rgba(50,109,204,.12); }
         .code-fold[data-theme="2"]{ --fg:#f4f4f5; --fg-soft:#a1a1aa; --accent:#e0482d; --item-bg:rgba(255,255,255,.04); --item-bd:rgba(255,255,255,.12); --chip:rgba(224,72,45,.16); }
-        .code-fold[data-theme="3"]{ --fg:#ecebe3; --fg-soft:rgba(236,235,227,.78); --accent:#ecebe3; --item-bg:rgba(0,0,0,.16); --item-bd:rgba(236,235,227,.28); --chip:rgba(236,235,227,.14); }
+        .code-fold[data-theme="1"]{ --fg:#ecebe3; --fg-soft:rgba(236,235,227,.78); --accent:#ecebe3; --item-bg:rgba(0,0,0,.16); --item-bd:rgba(236,235,227,.28); --chip:rgba(236,235,227,.14); }
         .code-fold[data-theme="4"]{ --fg:#ffffff; --fg-soft:#aab0c4; --accent:#5fc46a; --item-bg:rgba(255,255,255,.05); --item-bd:rgba(255,255,255,.12); --chip:rgba(95,196,106,.16); }
         .code-fold .section-head h2, .code-fold .section-head .more, .projects-heading, .work-item, .work-item h4, .work-item .sub, .work-item p, .tag, .car-btn, .car-tab{
             transition:color .7s ease, background-color .7s ease, border-color .7s ease;
@@ -865,9 +865,9 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         <div class="code-fold" data-theme="0">
             <div class="fold-themes" aria-hidden="true">
                 <div class="fold-theme ft-bing"></div>
-                <div class="fold-theme ft-doodle"></div>
-                <div class="fold-theme ft-wax"></div>
                 <div class="fold-theme ft-lwd"></div>
+                <div class="fold-theme ft-wax"></div>
+                <div class="fold-theme ft-doodle"></div>
                 <div class="fold-theme ft-today"></div>
             </div>
             <div class="code-fold-inner">
@@ -892,24 +892,19 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                             </div>
                         </article>
                     </div>
-                    <div class="slide" role="tabpanel" aria-label="Doodle Mages" data-name="Doodle Mages" data-theme-id="0">
-                        <article class="doodle-promo">
-                    <div class="doodle-promo-visual">
-                        <img src="/blogimg/doodleMages.png" alt="Doodle Mages card battle against the Inkblot boss" width="1343" height="737" loading="lazy">
-                    </div>
-                    <div class="doodle-promo-copy">
-                        <h4>Doodle Mages</h4>
-                        <p>Build a spell deck, choose your mage, and battle hand-drawn bosses solo or with a friend.</p>
-                        <a class="doodle-promo-link" href="https://www.doodlemages.app" target="_blank" rel="noopener">play Doodle Mages &rarr;</a>
-                        <div class="doodle-tags" aria-label="Doodle Mages features">
-                            <span>deck builder</span>
-                            <span>browser game</span>
-                            <span>online co-op</span>
+                    <div class="slide" role="tabpanel" aria-label="Luca Web Designs" data-name="Luca Web Designs" data-theme-id="1">
+                        <article class="proj proj-lwd" id="lwd-card">
+                    <canvas class="proj-lwd-dust" id="lwd-dust" aria-hidden="true"></canvas>
+                    <div class="proj-lwd-copy">
+                        <span class="proj-lwd-mark">luca/<small>web designs</small></span>
+                        <h4>Web design that feels like you.</h4>
+                        <p>Clean, custom websites for small businesses and creators.</p>
+                        <div class="proj-lwd-actions">
+                            <a class="proj-lwd-btn" href="https://www.lucawebdesigns.com" target="_blank" rel="noopener">Start a project</a>
+                            <span class="proj-lwd-tags">web design &bull; freelance</span>
                         </div>
                     </div>
-                </article>
-                    </div>
-                    <div class="slide" role="tabpanel" aria-label="Wax" data-name="Wax" data-theme-id="1">
+                    <div class="slide" role="tabpanel" aria-label="Wax" data-name="Wax" data-theme-id="2">
                         <article class="proj proj-wax">
                             <div class="proj-wax-copy">
                                 <h4>wax</h4>
@@ -923,21 +918,12 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                             </div>
                         </article>
                     </div>
-                    <div class="slide" role="tabpanel" aria-label="Luca Web Designs" data-name="Luca Web Designs" data-theme-id="2">
-                        <article class="proj proj-lwd" id="lwd-card">
-                    <canvas class="proj-lwd-dust" id="lwd-dust" aria-hidden="true"></canvas>
-                    <div class="proj-lwd-copy">
-                        <span class="proj-lwd-mark">luca/<small>web designs</small></span>
-                        <h4>Web design that feels like you.</h4>
-                        <p>Clean, custom websites for small businesses and creators.</p>
-                        <div class="proj-lwd-actions">
-                            <a class="proj-lwd-btn" href="https://www.lucawebdesigns.com" target="_blank" rel="noopener">Start a project</a>
-                            <span class="proj-lwd-tags">web design &bull; freelance</span>
-                        </div>
+                    <div class="slide" role="tabpanel" aria-label="Doodle Mages" data-name="Doodle Mages" data-theme-id="3">
+                        <article class="doodle-promo">
+                    <div class="doodle-promo-visual">
+                        <img src="/blogimg/doodleMages.png" alt="Doodle Mages card battle against the Inkblot boss" width="1343" height="737" loading="lazy">
                     </div>
-                </article>
-                    </div>
-                    <div class="slide" role="tabpanel" aria-label="Today" data-name="Today" data-theme-id="3">
+                    <div class="slide" role="tabpanel" aria-label="Today" data-name="Today" data-theme-id="4">
                         <article class="proj proj-today">
                         <div class="proj-today-waves" aria-hidden="true"><svg class="today-wave tw1" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 70 Q150 32 300 70 T600 70 T900 70 T1200 70 V160 H0Z" fill="url(#tw-blue)"/></svg><svg class="today-wave tw2" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 88 Q150 58 300 88 T600 88 T900 88 T1200 88 V160 H0Z" fill="url(#tw-green)"/></svg><svg class="today-wave tw3" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 104 Q150 80 300 104 T600 104 T900 104 T1200 104 V160 H0Z" fill="url(#tw-ind)"/></svg><svg width="0" height="0" style="position:absolute"><defs><linearGradient id="tw-blue" x1="0" x2="1"><stop offset="0" stop-color="#0a84ff" stop-opacity=".0"/><stop offset=".5" stop-color="#0a84ff" stop-opacity=".38"/><stop offset="1" stop-color="#0a84ff" stop-opacity=".05"/></linearGradient><linearGradient id="tw-green" x1="0" x2="1"><stop offset="0" stop-color="#5fc46a" stop-opacity=".05"/><stop offset=".5" stop-color="#5fc46a" stop-opacity=".34"/><stop offset="1" stop-color="#5fc46a" stop-opacity=".0"/></linearGradient><linearGradient id="tw-ind" x1="0" x2="1"><stop offset="0" stop-color="#6a6fd8" stop-opacity=".25"/><stop offset="1" stop-color="#0a84ff" stop-opacity=".1"/></linearGradient></defs></svg></div>
                     <div class="proj-today-copy">

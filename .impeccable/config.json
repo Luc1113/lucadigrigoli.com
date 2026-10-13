@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "src/pages/index.astro"
+        ],
+        "createdAt": "2026-10-13T16:43:52.910Z",
+        "reason": "user requested: Wax card album feed mirrors trywax.app homepage marquee; it pauses via the pause button and is static under reduced motion"
+      }
+    ]
+  }
+}
