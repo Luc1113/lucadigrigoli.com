@@ -547,25 +547,25 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .proj h4{ margin:0; }
 
         .proj-wax{
-            display:flex; flex-direction:column; gap:22px; padding:30px 0 26px; border-radius:6px; border:1px solid #26262a;
+            display:flex; flex-direction:column; gap:16px; padding:26px 0 22px; border-radius:6px; border:1px solid #26262a;
             background:radial-gradient(120% 140% at 85% 0%, #1d1d21 0%, #0c0c0d 60%);
             color:#f4f4f5; font-family:'Geist',system-ui,sans-serif;
         }
         .proj-wax-copy{ padding:0 32px; }
         .proj-wax h4{ font-family:'Geist',system-ui,sans-serif; font-weight:600; font-size:2rem; letter-spacing:-.05em; color:#f4f4f5; }
-        .proj-wax .proj-lead{ margin:8px 0 20px; max-width:30ch; color:#a1a1aa; font-size:.95rem; line-height:1.5; }
+        .proj-wax .proj-lead{ margin:6px 0 16px; max-width:30ch; color:#a1a1aa; font-size:.95rem; line-height:1.5; }
         .proj-wax-btn{
             display:inline-block; padding:10px 20px; border-radius:100px; background:#e0482d; color:#fff;
             font-size:.88rem; font-weight:500; text-decoration:none; transition:background .15s ease;
         }
         .proj-wax-btn:hover{ background:#f05a3f; }
         .proj-wax-btn:focus-visible{ outline:2px solid #f4f4f5; outline-offset:3px; }
-        .proj-wax-tags{ margin-top:18px; display:flex; flex-wrap:wrap; }
+        .proj-wax-tags{ margin-top:14px; display:flex; flex-wrap:wrap; }
         .proj-wax-tags span{ color:#a1a1aa; font-size:.8rem; }
         .proj-wax-feed{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); }
         .proj-wax-feed-label{ display:block; padding:0 32px 10px; color:#f4f4f5; font-size:.8rem; font-weight:500; }
         .proj-wax-track{ display:flex; gap:12px; width:max-content; animation:wax-feed 45s linear infinite; }
-        .proj-wax-track img{ flex:none; width:112px; height:112px; object-fit:cover; border-radius:3px; background:#1d1d21; }
+        .proj-wax-track img{ flex:none; width:96px; height:96px; object-fit:cover; border-radius:3px; background:#1d1d21; }
         .carousel.is-held .proj-wax-track{ animation-play-state:paused; }
         @keyframes wax-feed{ to{ transform:translateX(calc(-50% - 6px)); } }
         @media(prefers-reduced-motion:reduce){ .proj-wax-track{ animation:none; } }
@@ -904,6 +904,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                             <span class="proj-lwd-tags">web design &bull; freelance</span>
                         </div>
                     </div>
+                </article>
+                    </div>
                     <div class="slide" role="tabpanel" aria-label="Wax" data-name="Wax" data-theme-id="2">
                         <article class="proj proj-wax">
                             <div class="proj-wax-copy">
@@ -923,6 +925,18 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                     <div class="doodle-promo-visual">
                         <img src="/blogimg/doodleMages.png" alt="Doodle Mages card battle against the Inkblot boss" width="1343" height="737" loading="lazy">
                     </div>
+                    <div class="doodle-promo-copy">
+                        <h4>Doodle Mages</h4>
+                        <p>Build a spell deck, choose your mage, and battle hand-drawn bosses solo or with a friend.</p>
+                        <a class="doodle-promo-link" href="https://www.doodlemages.app" target="_blank" rel="noopener">play Doodle Mages &rarr;</a>
+                        <div class="doodle-tags" aria-label="Doodle Mages features">
+                            <span>deck builder</span>
+                            <span>browser game</span>
+                            <span>online co-op</span>
+                        </div>
+                    </div>
+                </article>
+                    </div>
                     <div class="slide" role="tabpanel" aria-label="Today" data-name="Today" data-theme-id="4">
                         <article class="proj proj-today">
                         <div class="proj-today-waves" aria-hidden="true"><svg class="today-wave tw1" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 70 Q150 32 300 70 T600 70 T900 70 T1200 70 V160 H0Z" fill="url(#tw-blue)"/></svg><svg class="today-wave tw2" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 88 Q150 58 300 88 T600 88 T900 88 T1200 88 V160 H0Z" fill="url(#tw-green)"/></svg><svg class="today-wave tw3" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="M0 104 Q150 80 300 104 T600 104 T900 104 T1200 104 V160 H0Z" fill="url(#tw-ind)"/></svg><svg width="0" height="0" style="position:absolute"><defs><linearGradient id="tw-blue" x1="0" x2="1"><stop offset="0" stop-color="#0a84ff" stop-opacity=".0"/><stop offset=".5" stop-color="#0a84ff" stop-opacity=".38"/><stop offset="1" stop-color="#0a84ff" stop-opacity=".05"/></linearGradient><linearGradient id="tw-green" x1="0" x2="1"><stop offset="0" stop-color="#5fc46a" stop-opacity=".05"/><stop offset=".5" stop-color="#5fc46a" stop-opacity=".34"/><stop offset="1" stop-color="#5fc46a" stop-opacity=".0"/></linearGradient><linearGradient id="tw-ind" x1="0" x2="1"><stop offset="0" stop-color="#6a6fd8" stop-opacity=".25"/><stop offset="1" stop-color="#0a84ff" stop-opacity=".1"/></linearGradient></defs></svg></div>
@@ -938,6 +952,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                     </div>
                 </article>
                     </div>
+                    
                     </div>
                     <div class="carousel-controls">
                         <button type="button" class="car-btn" data-dir="-1" aria-label="Previous project">&larr;</button>
