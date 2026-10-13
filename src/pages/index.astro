@@ -418,14 +418,20 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             border-radius:12px; background:#005a43; color:#fff; border:1px solid rgba(255,255,255,.2);
             box-shadow:0 18px 40px rgba(0,0,0,.3); display:flex; flex-direction:column; justify-content:center;
         }
-        .proj-bing-graph{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+        .proj-bing-graph{
+            position:absolute; inset:0; width:100%; height:100%; pointer-events:none;
+            -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.1) 48%,#000 82%); mask-image:linear-gradient(90deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.1) 48%,#000 82%);
+        }
         .proj-bing-body{ position:relative; z-index:1; padding:40px 36px; }
         .proj-bing-sub{ margin:0 0 6px; font-family:'Courier Prime',monospace; font-size:.8rem; color:#cfe8dd; }
         .proj-bing h4{ font-family:'Times New Roman',serif; font-weight:700; font-size:clamp(1.6rem,4vw,2.2rem); line-height:1.1; color:#fff; }
         .proj-bing-label{ margin:18px 0 10px; font-family:'Courier Prime',monospace; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; color:#cfe8dd; }
-        .proj-bing-tags{ display:flex; flex-wrap:wrap; gap:6px; max-width:640px; }
-        .proj-bing-tags span{ padding:4px 11px; border-radius:100px; background:rgba(0,0,0,.28); font-family:'Courier Prime',monospace; font-size:.74rem; }
-        @media(max-width:720px){ .proj-bing-body{ padding:28px 22px; } }
+        .proj-bing-courses{ list-style:none; margin:0; padding:0; max-width:560px; display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:6px 24px; font-family:'Courier Prime',monospace; font-size:.9rem; color:#fff; }
+        .proj-bing-courses li::before{ content:'> '; color:#cfe8dd; }
+        @media(max-width:720px){
+            .proj-bing-body{ padding:28px 22px; }
+            .proj-bing-graph{ -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.1) 28%,rgba(0,0,0,.1) 80%,#000 100%); mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.1) 28%,rgba(0,0,0,.1) 80%,#000 100%); }
+        }
 
         .projects-heading{
             margin:30px 0 12px;
@@ -882,7 +888,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                                 <p class="proj-bing-sub">Binghamton University &middot; Class of 2025</p>
                                 <h4>B.S. Computer Science</h4>
                                 <p class="proj-bing-label">Relevant coursework</p>
-                                <div class="proj-bing-tags"><span>Discrete Math</span><span>Finite Automata</span><span>Cybersecurity</span><span>Algorithms</span><span>Design Patterns</span><span>Operating Systems</span><span>Machine Learning</span></div>
+                                <ul class="proj-bing-courses"><li>Discrete Math</li><li>Finite Automata</li><li>Cybersecurity</li><li>Algorithms</li><li>Design Patterns</li><li>Operating Systems</li><li>Machine Learning</li></ul>
                             </div>
                         </article>
                     </div>
