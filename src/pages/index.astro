@@ -23,7 +23,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="images/kissandtell-cover-preview.jpg" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=Geist:wght@400;500;600&family=Inter+Tight:wght@500;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style is:global>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -352,42 +352,329 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .card .stream-link.ghost:hover{ background:rgba(255,255,255,.12); }
 
         /* ── WORK / CS ── */
-        /* full-bleed: break the fold out of .wrap so the lamp photo spans the whole viewport width */
+        /* full-bleed: break the fold out of .wrap so the themed backdrops span the whole viewport width */
         .code-fold{
             position:relative;
             width:100vw;
             margin-left:calc(50% - 50vw);
-            background:#0f0b08 url('/images/lamp.jpg') center 30%/cover no-repeat;
-            padding:48px 20px;
+            background:#0f0b08;
+            padding:30px 20px 26px;
             overflow:hidden;
             isolation:isolate;
-        }
-        .code-fold::before{
-            content:''; position:absolute; inset:0; z-index:0;
-            background:linear-gradient(180deg, rgba(10,7,5,.72) 0%, rgba(10,7,5,.85) 100%);
         }
         .code-fold-inner{
             position:relative; z-index:2;
             max-width:920px; margin:0 auto;
         }
-        .code-fold .section-head h2{ color:#fff5e8; }
-        .code-fold .section-head .more{ color:rgba(255,235,210,.65); }
-        .code-fold .section-head .more:hover{ color:#ffd8a0; }
+        .code-fold{
+            --fg:#fff5e8; --fg-soft:rgba(255,240,225,.78); --accent:#e8b479; --item-bg:rgba(20,15,10,.55); --item-bd:rgba(255,220,180,.16); --chip:rgba(255,220,180,.14);
+        }
+        .code-fold[data-theme="0"]{ --fg:#fff; --fg-soft:rgba(255,255,255,.88); --accent:#f0f0f0; --item-bg:rgba(0,0,0,.18); --item-bd:rgba(255,255,255,.3); --chip:rgba(255,255,255,.16); }
+        .code-fold[data-theme="1"]{ --fg:#2b2731; --fg-soft:#514b5c; --accent:#326dcc; --item-bg:rgba(255,255,255,.62); --item-bd:rgba(43,39,49,.28); --chip:rgba(50,109,204,.12); }
+        .code-fold[data-theme="2"]{ --fg:#f4f4f5; --fg-soft:#a1a1aa; --accent:#e0482d; --item-bg:rgba(255,255,255,.04); --item-bd:rgba(255,255,255,.12); --chip:rgba(224,72,45,.16); }
+        .code-fold[data-theme="3"]{ --fg:#ecebe3; --fg-soft:rgba(236,235,227,.78); --accent:#ecebe3; --item-bg:rgba(0,0,0,.16); --item-bd:rgba(236,235,227,.28); --chip:rgba(236,235,227,.14); }
+        .code-fold[data-theme="4"]{ --fg:#ffffff; --fg-soft:#aab0c4; --accent:#5fc46a; --item-bg:rgba(255,255,255,.05); --item-bd:rgba(255,255,255,.12); --chip:rgba(95,196,106,.16); }
+        .code-fold .section-head h2, .code-fold .section-head .more, .projects-heading, .work-item, .work-item h4, .work-item .sub, .work-item p, .tag, .car-btn, .car-tab{
+            transition:color .7s ease, background-color .7s ease, border-color .7s ease;
+        }
+        .code-fold .section-head h2{ color:var(--fg); }
+        .code-fold .section-head .more{ color:var(--fg-soft); }
+        .code-fold .section-head .more:hover{ color:var(--accent); }
+        .section-head-links{ display:flex; align-items:baseline; gap:18px; }
+        .car-pause{
+            padding:0; border:0; background:none; cursor:pointer; font-family:'Courier Prime',monospace; font-size:.82rem; white-space:nowrap;
+            color:var(--fg-soft); transition:color .7s ease;
+        }
+        .car-pause:hover{ color:var(--accent); }
+        .car-pause:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+        .fold-themes{ position:absolute; inset:0; z-index:0; isolation:isolate; pointer-events:none; }
+        .fold-theme{ position:absolute; inset:0; clip-path:circle(0% at var(--ox,50%) var(--oy,100%)); }
+        .fold-theme.is-on{ clip-path:circle(150% at var(--ox,50%) var(--oy,100%)); }
+        .fold-theme.is-reveal{ transition:clip-path 1s cubic-bezier(.65,0,.2,1); }
+        .ft-bing{ background:radial-gradient(70% 60% at 100% 0%, rgba(255,255,255,.08), transparent 60%), linear-gradient(160deg,#0b2a22 0%,#04140f 100%); }
+        .ft-doodle{ background-color:#f6f0dc; background-image:linear-gradient(rgba(61,105,180,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(61,105,180,.13) 1px,transparent 1px); background-size:28px 28px; }
+        .ft-wax{ background:radial-gradient(70% 55% at 85% 0%, rgba(224,72,45,.32), transparent 65%), radial-gradient(50% 50% at 10% 100%, rgba(244,244,245,.06), transparent 70%), #060607; }
+        .ft-lwd{ background:linear-gradient(160deg,#565c47 0%,#454a38 100%); }
+        .ft-today{ background:radial-gradient(60% 50% at 20% 0%, rgba(10,132,255,.25), transparent 65%), linear-gradient(170deg,#0b1020,#05070f); }
 
         .work-item{
-            background:rgba(20,15,10,.55); border:1px solid rgba(255,220,180,.16); border-radius:12px;
+            background:var(--item-bg); border:1px solid var(--item-bd); border-radius:12px;
             padding:22px 24px; margin-bottom:14px;
             backdrop-filter:blur(2px);
         }
-        .work-item h4{ font-family:'Times New Roman',serif; font-size:1.15rem; font-weight:700; margin-bottom:3px; color:#fff5e8; }
-        .work-item .sub{ font-family:'Courier Prime',monospace; font-size:.8rem; color:#e8b479; margin-bottom:8px; font-weight:400; }
-        .work-item p{ font-size:.92rem; color:rgba(255,240,225,.78); }
+        .work-item h4{ font-family:'Times New Roman',serif; font-size:1.15rem; font-weight:700; margin-bottom:3px; color:var(--fg); }
+        .work-item .sub{ font-family:'Courier Prime',monospace; font-size:.8rem; color:var(--accent); margin-bottom:8px; font-weight:400; }
+        .work-item p{ font-size:.92rem; color:var(--fg-soft); }
         .work-item a.link{ text-decoration:underline; color:#ffd8a0; font-size:.87rem; }
         .tag-row{ margin-top:12px; display:flex; gap:6px; flex-wrap:wrap; }
         .tag{
             font-family:'Courier Prime',monospace;
             font-size:.72rem; padding:3px 10px; border-radius:100px;
-            background:rgba(255,220,180,.14); color:#f3d9b8;
+            background:var(--chip); color:var(--fg);
+        }
+
+        /* B.S. slide: the whole card is Binghamton green with a cream band and collegiate serif. */
+        .proj-bing{
+            border-radius:4px; background:#005a43; color:#fff; border:1px solid rgba(255,255,255,.2);
+            box-shadow:0 18px 40px rgba(0,0,0,.3); display:flex; flex-direction:column;
+        }
+        .proj-bing-band{
+            display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px 12px; padding:12px 32px; background:#f3f1e8; color:#005a43;
+            font-family:'Courier Prime',monospace; font-size:.74rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+        }
+        .proj-bing-body{ flex:1; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:28px; padding:26px 32px 30px; }
+        .proj-bing h4{ font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:clamp(1.7rem,4vw,2.4rem); letter-spacing:-.01em; line-height:1.1; color:#fff; }
+        .proj-bing p{ max-width:56ch; margin:12px 0 18px; color:rgba(255,255,255,.9); font-size:.98rem; line-height:1.55; }
+        .proj-bing-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+        .proj-bing-tags span{ padding:4px 11px; border:1px solid rgba(255,255,255,.5); border-radius:2px; font-family:'Courier Prime',monospace; font-size:.72rem; }
+        .proj-bing-year{ text-align:center; font-family:'Fraunces',Georgia,serif; }
+        .proj-bing-year b{ display:block; font-size:clamp(3.5rem,9vw,6rem); font-weight:700; line-height:.9; color:transparent; -webkit-text-stroke:2px #f3f1e8; letter-spacing:.02em; }
+        .proj-bing-year span{ display:block; margin-top:8px; font-family:'Courier Prime',monospace; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:#cfe8dd; }
+        @media(max-width:720px){
+            .proj-bing-band{ padding:10px 22px; flex-wrap:wrap; }
+            .proj-bing-body{ grid-template-columns:1fr; padding:24px 22px; }
+            .proj-bing-year{ order:-1; text-align:left; }
+        }
+
+        .projects-heading{
+            margin:30px 0 12px;
+            font-family:'Times New Roman',serif;
+            font-size:1.25rem;
+            color:var(--fg);
+        }
+
+        /* Doodle Mages keeps the game's graph-paper and hand-drawn card language. */
+        .doodle-promo{
+            position:relative;
+            display:grid;
+            grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr);
+            gap:0;
+            margin-bottom:14px;
+            overflow:hidden;
+            border:2px solid #2b2731;
+            border-radius:12px;
+            background-color:#fffefb;
+            background-image:
+                linear-gradient(rgba(61,105,180,.11) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(61,105,180,.11) 1px,transparent 1px);
+            background-size:22px 22px;
+            box-shadow:5px 6px 0 rgba(255,238,184,.78);
+            color:#2b2731;
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .doodle-promo:hover{
+            transform:translateY(-3px) rotate(-.15deg);
+            box-shadow:7px 9px 0 rgba(255,238,184,.86);
+        }
+        .doodle-promo::after{
+            content:'';
+            position:absolute;
+            top:-8px;
+            left:24%;
+            width:86px;
+            height:22px;
+            background:rgba(244,211,119,.64);
+            transform:rotate(-2deg);
+            pointer-events:none;
+        }
+        .doodle-promo-visual{
+            min-height:270px;
+            border-right:2px solid #2b2731;
+            background:#f8f8f8;
+        }
+        .doodle-promo-visual img{
+            display:block;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            object-position:center;
+        }
+        .doodle-promo-copy{
+            display:flex;
+            flex-direction:column;
+            align-items:flex-start;
+            justify-content:center;
+            padding:30px 28px;
+        }
+        .doodle-promo-copy h4{
+            margin-bottom:7px;
+            font-family:'Courier Prime',monospace;
+            font-size:clamp(1.45rem,3vw,2rem);
+            line-height:1;
+            letter-spacing:-.04em;
+            color:#2b2731;
+        }
+        .doodle-promo-copy p{
+            margin-bottom:18px;
+            color:#514b5c;
+            font-size:.92rem;
+            line-height:1.5;
+        }
+        .doodle-promo-link{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:42px;
+            padding:9px 16px;
+            border:2px solid #2b2731;
+            border-radius:5px;
+            background:#8fce78;
+            box-shadow:3px 3px 0 #2b2731;
+            color:#172315;
+            font-family:'Courier Prime',monospace;
+            font-size:.82rem;
+            font-weight:700;
+            text-decoration:none;
+            transition:transform .15s ease, box-shadow .15s ease;
+        }
+        .doodle-promo-link:hover{
+            transform:translate(2px,2px);
+            box-shadow:1px 1px 0 #2b2731;
+        }
+        .doodle-promo-link:focus-visible{
+            outline:3px solid #326dcc;
+            outline-offset:3px;
+        }
+        .doodle-tags{ margin-top:18px; display:flex; flex-wrap:wrap; gap:6px; }
+        .doodle-tags span{
+            padding:3px 8px;
+            border:1px solid #766f81;
+            border-radius:4px;
+            background:rgba(255,255,255,.82);
+            color:#514b5c;
+            font-family:'Courier Prime',monospace;
+            font-size:.68rem;
+        }
+        @media(max-width:720px){
+            .doodle-promo{ grid-template-columns:1fr; }
+            .doodle-promo-visual{ min-height:0; aspect-ratio:16 / 9; border-right:0; border-bottom:2px solid #2b2731; }
+            .doodle-promo-copy{ padding:25px 22px 27px; }
+        }
+
+
+        /* Wax, Luca Web Designs and Today each borrow their own site/app look. */
+        .proj{ position:relative; overflow:hidden; margin-bottom:14px; transition:transform .2s ease, box-shadow .2s ease; }
+        .proj:hover{ transform:translateY(-3px); }
+        .proj h4{ margin:0; }
+
+        .proj-wax{
+            display:flex; flex-direction:column; gap:22px; padding:30px 0 26px; border-radius:6px; border:1px solid #26262a;
+            background:radial-gradient(120% 140% at 85% 0%, #1d1d21 0%, #0c0c0d 60%);
+            color:#f4f4f5; font-family:'Geist',system-ui,sans-serif;
+        }
+        .proj-wax-copy{ padding:0 32px; }
+        .proj-wax h4{ font-family:'Geist',system-ui,sans-serif; font-weight:600; font-size:2rem; letter-spacing:-.05em; color:#f4f4f5; }
+        .proj-wax .proj-lead{ margin:8px 0 20px; max-width:30ch; color:#a1a1aa; font-size:.95rem; line-height:1.5; }
+        .proj-wax-btn{
+            display:inline-block; padding:10px 20px; border-radius:100px; background:#e0482d; color:#fff;
+            font-size:.88rem; font-weight:500; text-decoration:none; transition:background .15s ease;
+        }
+        .proj-wax-btn:hover{ background:#f05a3f; }
+        .proj-wax-btn:focus-visible{ outline:2px solid #f4f4f5; outline-offset:3px; }
+        .proj-wax-tags{ margin-top:18px; display:flex; gap:6px; flex-wrap:wrap; }
+        .proj-wax-tags span{ padding:3px 10px; border:1px solid #2e2e33; border-radius:100px; color:#a1a1aa; font-size:.72rem; }
+        .proj-wax-feed{ overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); }
+        .proj-wax-feed-label{ display:block; padding:0 32px 10px; color:#f4f4f5; font-size:.8rem; font-weight:500; }
+        .proj-wax-track{ display:flex; gap:12px; width:max-content; animation:wax-feed 45s linear infinite; }
+        .proj-wax-track img{ flex:none; width:112px; height:112px; object-fit:cover; border-radius:3px; background:#1d1d21; }
+        .carousel.is-held .proj-wax-track{ animation-play-state:paused; }
+        @keyframes wax-feed{ to{ transform:translateX(calc(-50% - 6px)); } }
+        @media(prefers-reduced-motion:reduce){ .proj-wax-track{ animation:none; } }
+
+        .proj-lwd{
+            padding:32px 34px; border-radius:2px; background:#ecebe3; color:#353a2c;
+            border-left:12px solid #4f5441; font-family:'Inter Tight','Inter',sans-serif;
+        }
+        .proj-lwd-dust{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+        .proj-lwd-copy{ position:relative; z-index:1; }
+        .proj-lwd-mark{ display:block; margin-bottom:14px; font-weight:800; font-size:1.5rem; letter-spacing:-.06em; color:#4f5441; line-height:1; }
+        .proj-lwd-mark small{ display:block; margin-top:3px; font-size:.5rem; font-weight:600; letter-spacing:.32em; text-transform:uppercase; }
+        .proj-lwd h4{ font-family:'Inter Tight','Inter',sans-serif; font-weight:800; font-size:clamp(1.6rem,4vw,2.3rem); letter-spacing:-.045em; line-height:1.05; color:#4f5441; }
+        .proj-lwd p{ margin:10px 0 20px; color:#5a5f4d; font-size:.95rem; }
+        .proj-lwd-actions{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+        .proj-lwd-btn{
+            display:inline-block; padding:11px 22px; border-radius:2px; background:#4f5441; color:#ecebe3;
+            font-weight:600; font-size:.92rem; letter-spacing:-.01em; text-decoration:none; transition:background .15s ease;
+        }
+        .proj-lwd-btn:hover{ background:#3e4333; }
+        .proj-lwd-btn:focus-visible{ outline:2px solid #353a2c; outline-offset:3px; }
+        .proj-lwd-tags{ font-weight:500; font-size:.82rem; color:#5a5f4d; }
+
+        .proj-today{
+            display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:24px; align-items:stretch;
+            padding:30px 0 0 32px; border-radius:22px; border:1px solid #2c2f3a;
+            background:linear-gradient(160deg,#151a2c 0%,#0f1322 100%); color:#fff;
+            font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;
+        }
+        .proj-today-copy{ padding-bottom:30px; display:flex; flex-direction:column; align-items:flex-start; }
+        .proj-today h4{ font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:2.8rem; letter-spacing:.02em; line-height:1; color:#fff; }
+        .proj-today-sub{ margin:4px 0 10px; color:#8b90a3; font-size:.85rem; }
+        .proj-today p{ color:rgba(255,255,255,.82); font-size:.92rem; line-height:1.5; }
+        .proj-today-link{
+            margin-top:16px; padding:8px 16px; border-radius:10px; background:#5fc46a; color:#0f1a12;
+            font-size:.85rem; font-weight:600; text-decoration:none;
+        }
+        .proj-today-link:hover{ background:#74d27e; }
+        .proj-today-link:focus-visible{ outline:2px solid #0a84ff; outline-offset:3px; }
+        .proj-today-tags{ margin-top:16px; display:flex; gap:6px; flex-wrap:wrap; }
+        .proj-today-tags span{ padding:4px 11px; border-radius:8px; background:#2a2d38; color:#c4c8d6; font-size:.72rem; }
+        .proj-today-phone{ margin-right:28px; overflow:hidden; border:3px solid #2a2d38; border-bottom:0; border-radius:24px 24px 0 0; align-self:end; max-height:260px; }
+        .proj-today-phone img{ display:block; width:100%; height:auto; }
+        @media(max-width:720px){
+            .proj-wax{ padding:26px 0 22px; }
+            .proj-wax-copy, .proj-wax-feed-label{ padding-left:22px; padding-right:22px; }
+            .proj-wax-track img{ width:92px; height:92px; }
+            .proj-lwd{ padding:26px 22px; }
+            .proj-today{ grid-template-columns:1fr; padding:26px 22px 0; gap:0; }
+            .proj-today-phone{ margin:0 auto; width:180px; }
+        }
+
+
+        /* ── PROJECT CAROUSEL ── */
+        .carousel{ position:relative; }
+        .slides{ display:grid; align-items:stretch; }
+        .slide > *{ height:100%; }
+        .slide{
+            grid-area:1/1; min-width:0;
+            opacity:0; visibility:hidden; pointer-events:none;
+            transform:translateX(calc(var(--dir,1) * 70px)) scale(.94) rotate(calc(var(--dir,1) * 1.5deg));
+            filter:blur(6px);
+            transition:opacity .55s ease, transform .9s cubic-bezier(.2,.8,.2,1), filter .55s ease, visibility 0s linear .9s;
+        }
+        .slide.is-active{
+            opacity:1; visibility:visible; pointer-events:auto; transform:none; filter:none;
+            transition:opacity .6s ease .25s, transform .9s cubic-bezier(.2,.8,.2,1) .25s, filter .6s ease .25s, visibility 0s;
+        }
+        .slide.is-leaving{
+            transform:translateX(calc(var(--dir,1) * -70px)) scale(.94) rotate(calc(var(--dir,1) * -1.5deg));
+            visibility:visible;
+        }
+        .slide .doodle-promo, .slide .proj{ margin-bottom:0; }
+        .proj-lwd{ display:flex; flex-direction:column; justify-content:center; }
+        .proj-wax-feed{ margin-top:auto; }
+        .carousel-controls{ display:flex; align-items:center; gap:14px; margin-top:16px; }
+        .car-btn{
+            flex:none; width:42px; height:42px; border-radius:50%; cursor:pointer;
+            border:1.5px solid var(--item-bd); background:var(--item-bg); color:var(--fg); font-size:1.1rem;
+        }
+        .car-btn:hover{ border-color:var(--accent); color:var(--accent); }
+        .car-btn:focus-visible, .car-tab:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+        .car-tabs{ flex:1; display:flex; gap:8px; }
+        .car-tab{
+            flex:1; min-width:0; padding:10px 4px 0; border:0; background:none; cursor:pointer; text-align:left;
+            font-family:'Courier Prime',monospace; font-size:.78rem; color:var(--fg-soft);
+            position:relative; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
+        .car-tab::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:2px; background:var(--item-bd); }
+        .car-tab::after{ content:''; position:absolute; top:0; left:0; height:3px; width:0; border-radius:2px; background:var(--accent); }
+        .car-tab[aria-selected="true"]{ color:var(--fg); }
+        .car-tab[aria-selected="true"]::after{ animation:car-fill 6s linear forwards; }
+        .carousel.is-held .car-tab[aria-selected="true"]::after{ animation-play-state:paused; }
+        @keyframes car-fill{ from{ width:0; } to{ width:100%; } }
+        @media(max-width:600px){ .car-tab{ font-size:.68rem; } }
+        @media(prefers-reduced-motion:reduce){
+            .slide, .slide.is-active, .fold-theme.is-reveal{ transition:none; filter:none; }
+            .car-tab[aria-selected="true"]::after{ animation:none; width:100%; }
         }
 
         /* ── ABOUT ── */
@@ -577,51 +864,102 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
 
     <!-- Work / CS -->
     <section id="work" style="padding-top:16px;">
-        <div class="code-fold">
+        <div class="code-fold" data-theme="0">
+            <div class="fold-themes" aria-hidden="true">
+                <div class="fold-theme ft-bing"></div>
+                <div class="fold-theme ft-doodle"></div>
+                <div class="fold-theme ft-wax"></div>
+                <div class="fold-theme ft-lwd"></div>
+                <div class="fold-theme ft-today"></div>
+            </div>
             <div class="code-fold-inner">
                 <div class="section-head">
-                    <h2>&#123; computer science &amp; code &#125;</h2>
-                    <a href="https://github.com/Luc1113" class="more" target="_blank" rel="noopener">github &rarr;</a>
-                </div>
-
-                <div class="work-item">
-                    <h4>Computer Science, B.S.</h4>
-                    <p class="sub">Binghamton University &middot; Class of 2025</p>
-                    <p>Specializing in systems programming, cybersecurity, and creative coding — building tools that bridge technical functionality and artistic expression.</p>
-                    <div class="tag-row">
-                        <span class="tag">systems</span>
-                        <span class="tag">security</span>
-                        <span class="tag">creative code</span>
+                    <h2>My personal projects</h2>
+                    <div class="section-head-links">
+                        <button type="button" class="car-pause" aria-pressed="false" aria-label="Pause project slideshow">&#10074;&#10074; pause</button>
+                        <a href="https://github.com/Luc1113" class="more" target="_blank" rel="noopener">github &rarr;</a>
                     </div>
                 </div>
 
-                <div class="work-item">
-                    <h4>Wax</h4>
-                    <p class="sub">rate music like Letterboxd rates movies</p>
-                    <p>A social music-rating app — build your shelf, rate albums, and climb the leaderboard. <a class="link" href="https://trywax.app" target="_blank" rel="noopener">trywax.app</a></p>
-                    <div class="tag-row">
-                        <span class="tag">music</span>
-                        <span class="tag">social app</span>
+                <div class="carousel" aria-roledescription="carousel" aria-label="School and projects">
+                    <div class="slides">
+                    <div class="slide" role="tabpanel" aria-label="Binghamton University" data-name="Binghamton" data-theme-id="0">
+                        <article class="proj proj-bing">
+                            <div class="proj-bing-band"><span>Binghamton University</span><span>Thomas J. Watson College of Engineering &amp; Applied Science</span></div>
+                            <div class="proj-bing-body">
+                                <div class="proj-bing-copy">
+                                    <h4>Computer Science, B.S.</h4>
+                                    <p>Specializing in systems programming, cybersecurity, and creative coding &mdash; building tools that bridge technical functionality and artistic expression.</p>
+                                    <div class="proj-bing-tags"><span>systems</span><span>security</span><span>creative code</span></div>
+                                </div>
+                                <div class="proj-bing-year" aria-hidden="true"><b>B.S.</b><span>Class of 2025</span></div>
+                            </div>
+                        </article>
                     </div>
-                </div>
-
-                <div class="work-item">
-                    <h4>Luca Web Designs</h4>
-                    <p class="sub">web design &amp; development studio</p>
-                    <p>Building clean, custom websites for small businesses and creators. <a class="link" href="https://www.lucawebdesigns.com" target="_blank" rel="noopener">lucawebdesigns.com</a></p>
-                    <div class="tag-row">
-                        <span class="tag">web design</span>
-                        <span class="tag">freelance</span>
+                    <div class="slide" role="tabpanel" aria-label="Doodle Mages" data-name="Doodle Mages" data-theme-id="0">
+                        <article class="doodle-promo">
+                    <div class="doodle-promo-visual">
+                        <img src="/blogimg/doodleMages.png" alt="Doodle Mages card battle against the Inkblot boss" width="1343" height="737" loading="lazy">
                     </div>
-                </div>
-
-                <div class="work-item">
-                    <h4>Today</h4>
-                    <p class="sub">a mindfulness and productivity app</p>
-                    <p>An iOS app designed to help users build focus through daily mood and habit tracking. <a class="link" href="https://github.com/Luc1113/mindscapes" target="_blank" rel="noopener">view on GitHub</a></p>
-                    <div class="tag-row">
-                        <span class="tag">mindfulness</span>
-                        <span class="tag">mobile app</span>
+                    <div class="doodle-promo-copy">
+                        <h4>Doodle Mages</h4>
+                        <p>Build a spell deck, choose your mage, and battle hand-drawn bosses solo or with a friend.</p>
+                        <a class="doodle-promo-link" href="https://www.doodlemages.app" target="_blank" rel="noopener">play Doodle Mages &rarr;</a>
+                        <div class="doodle-tags" aria-label="Doodle Mages features">
+                            <span>deck builder</span>
+                            <span>browser game</span>
+                            <span>online co-op</span>
+                        </div>
+                    </div>
+                </article>
+                    </div>
+                    <div class="slide" role="tabpanel" aria-label="Wax" data-name="Wax" data-theme-id="1">
+                        <article class="proj proj-wax">
+                            <div class="proj-wax-copy">
+                                <h4>wax</h4>
+                                <p class="proj-lead">Rate albums, keep a shelf, and see what your friends are spinning.</p>
+                                <a class="proj-wax-btn" href="https://trywax.app" target="_blank" rel="noopener">Start your shelf</a>
+                                <div class="proj-wax-tags" aria-label="Wax features"><span>music</span><span>social app</span></div>
+                            </div>
+                            <div class="proj-wax-feed" aria-hidden="true">
+                                <span class="proj-wax-feed-label">Reviewed right now</span>
+                                <div class="proj-wax-track"><img src="/images/wax/1.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/2.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/3.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/4.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/5.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/6.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/7.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/8.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/9.jpg" alt="" width="300" height="300" loading="lazy"><img src="/images/wax/10.jpg" alt="" width="300" height="300" loading="lazy"></div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="slide" role="tabpanel" aria-label="Luca Web Designs" data-name="Luca Web Designs" data-theme-id="2">
+                        <article class="proj proj-lwd" id="lwd-card">
+                    <canvas class="proj-lwd-dust" id="lwd-dust" aria-hidden="true"></canvas>
+                    <div class="proj-lwd-copy">
+                        <span class="proj-lwd-mark">luca/<small>web designs</small></span>
+                        <h4>Web design that feels like you.</h4>
+                        <p>Clean, custom websites for small businesses and creators.</p>
+                        <div class="proj-lwd-actions">
+                            <a class="proj-lwd-btn" href="https://www.lucawebdesigns.com" target="_blank" rel="noopener">Start a project</a>
+                            <span class="proj-lwd-tags">web design &bull; freelance</span>
+                        </div>
+                    </div>
+                </article>
+                    </div>
+                    <div class="slide" role="tabpanel" aria-label="Today" data-name="Today" data-theme-id="3">
+                        <article class="proj proj-today">
+                    <div class="proj-today-copy">
+                        <h4>Today</h4>
+                        <p class="proj-today-sub">a mindfulness and productivity app</p>
+                        <p>An iOS app that builds focus through daily mood and habit tracking.</p>
+                        <a class="proj-today-link" href="https://github.com/Luc1113/mindscapes" target="_blank" rel="noopener">view on GitHub &rarr;</a>
+                        <div class="proj-today-tags"><span>mindfulness</span><span>mobile app</span></div>
+                    </div>
+                    <div class="proj-today-phone">
+                        <img src="/images/today-preview.jpeg" alt="Today app dashboard with daily rating, to-do list and weekly mood" width="1179" height="1991" loading="lazy">
+                    </div>
+                </article>
+                    </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button type="button" class="car-btn" data-dir="-1" aria-label="Previous project">&larr;</button>
+                        <div class="car-tabs" role="tablist"></div>
+                        <button type="button" class="car-btn" data-dir="1" aria-label="Next project">&rarr;</button>
                     </div>
                 </div>
             </div>
@@ -702,6 +1040,137 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         observer.observe(el);
     });
 })();
+
+    (function(){
+        const fold = document.querySelector('.code-fold');
+        if (!fold) return;
+        const slides = Array.from(fold.querySelectorAll('.slide'));
+        const layers = Array.from(fold.querySelectorAll('.fold-theme'));
+        const tabsEl = fold.querySelector('.car-tabs');
+        const tabs = slides.map(function(sl, i){
+            const t = document.createElement('button');
+            t.type = 'button'; t.className = 'car-tab'; t.setAttribute('role', 'tab');
+            t.textContent = sl.dataset.name;
+            t.addEventListener('click', function(e){ go(i, e); });
+            tabsEl.appendChild(t);
+            return t;
+        });
+        let cur = -1, z = 1, busy = false;
+        function origin(e){
+            const r = fold.getBoundingClientRect();
+            let x = r.width / 2, y = r.height;
+            if (e && e.currentTarget && e.clientX !== undefined){
+                const b = e.currentTarget.getBoundingClientRect();
+                x = b.left + b.width / 2 - r.left; y = b.top + b.height / 2 - r.top;
+            }
+            return [x + 'px', y + 'px'];
+        }
+        function go(i, e, dir){
+            i = (i + slides.length) % slides.length;
+            if (i === cur || busy) return;
+            const first = cur < 0;
+            if (dir === undefined) dir = first ? 1 : (i > cur ? 1 : -1);
+            const prev = first ? null : slides[cur], prevLayer = first ? null : layers[cur];
+            fold.style.setProperty('--dir', dir);
+            slides.forEach(function(sl){ sl.style.setProperty('--dir', dir); });
+            if (prev){ prev.classList.remove('is-active'); prev.classList.add('is-leaving'); setTimeout(function(){ prev.classList.remove('is-leaving'); }, 950); }
+            slides[i].classList.add('is-active');
+            const layer = layers[i], o = origin(e);
+            layer.style.setProperty('--ox', o[0]); layer.style.setProperty('--oy', o[1]);
+            layer.style.zIndex = ++z;
+            if (first){ layer.classList.add('is-on'); }
+            else {
+                busy = true;
+                void layer.offsetWidth;
+                layer.classList.add('is-reveal', 'is-on');
+                setTimeout(function(){
+                    prevLayer.classList.remove('is-on');
+                    layer.classList.remove('is-reveal');
+                    busy = false;
+                }, 1000);
+            }
+            fold.setAttribute('data-theme', i);
+            tabs.forEach(function(t, k){ t.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+            cur = i;
+        }
+        fold.querySelectorAll('.car-btn').forEach(function(b){
+            b.addEventListener('click', function(e){ const d = +b.dataset.dir; go(cur + d, e, d); });
+        });
+        const car = fold.querySelector('.carousel');
+        car.addEventListener('keydown', function(e){
+            if (e.key === 'ArrowRight') go(cur + 1, null, 1);
+            if (e.key === 'ArrowLeft') go(cur - 1, null, -1);
+        });
+        let sx = null;
+        car.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+        car.addEventListener('touchend', function(e){
+            if (sx === null) return;
+            const dx = e.changedTouches[0].clientX - sx; sx = null;
+            if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1), null, dx < 0 ? 1 : -1);
+        });
+        go(0);
+        // The active tab's bar fills over 6s; when the fill finishes, advance to the next card.
+        let heldByUser = false, offscreen = false;
+        const pauseBtn = fold.querySelector('.car-pause');
+        function sync(){ car.classList.toggle('is-held', heldByUser || offscreen || document.hidden); }
+        tabs.forEach(function(t){
+            t.addEventListener('animationend', function(){ if (t.getAttribute('aria-selected') === 'true') go(cur + 1, null, 1); });
+        });
+        pauseBtn.addEventListener('click', function(){
+            heldByUser = !heldByUser;
+            pauseBtn.setAttribute('aria-pressed', heldByUser);
+            pauseBtn.setAttribute('aria-label', heldByUser ? 'Resume project slideshow' : 'Pause project slideshow');
+            pauseBtn.innerHTML = heldByUser ? '&#9654; play' : '&#10074;&#10074; pause';
+            sync();
+        });
+        document.addEventListener('visibilitychange', sync);
+        if ('IntersectionObserver' in window){
+            new IntersectionObserver(function(en){ offscreen = !en[0].isIntersecting; sync(); }, {threshold:.3}).observe(fold);
+        }
+        sync();
+    })();
+
+    (function(){
+        const track = document.querySelector('.proj-wax-track');
+        if (!track) return;
+        const imgs = Array.from(track.children);
+        for (let i = imgs.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); track.insertBefore(imgs[j], imgs[i]); }
+        Array.from(track.children).forEach(function(n){ const c = n.cloneNode(); c.loading = 'eager'; track.appendChild(c); });
+    })();
+    (function(){
+        const card = document.getElementById('lwd-card'), cv = document.getElementById('lwd-dust');
+        if (!card || !cv || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const d = cv.getContext('2d');
+        let w = 0, h = 0, ps = [], vis = false, raf = 0;
+        const mouse = {x:-9999, y:-9999};
+        const mk = function(y){ return {x:Math.random()*w, y:y === undefined ? Math.random()*h : y, size:1+Math.random()*2.2, speed:.08+Math.random()*.22, sway:.2+Math.random()*.5, phase:Math.random()*Math.PI*2, square:Math.random()<.35, px:0, py:0}; };
+        new ResizeObserver(function(){
+            const r = Math.min(window.devicePixelRatio || 1, 2);
+            w = cv.clientWidth; h = cv.clientHeight;
+            cv.width = w * r; cv.height = h * r; d.setTransform(r,0,0,r,0,0);
+            ps = Array.from({length:Math.round(w * h / 9000)}, function(){ return mk(); });
+        }).observe(cv);
+        card.addEventListener('pointermove', function(e){ const b = cv.getBoundingClientRect(); mouse.x = e.clientX - b.left; mouse.y = e.clientY - b.top; });
+        card.addEventListener('pointerleave', function(){ mouse.x = mouse.y = -9999; });
+        function frame(t){
+            if (!vis){ raf = 0; return; }
+            d.clearRect(0,0,w,h);
+            d.fillStyle = '#4f5441';
+            for (const p of ps){
+                p.y -= p.speed;
+                const dx = p.x - mouse.x, dy = p.y - mouse.y, c = Math.hypot(dx, dy);
+                if (c < 110 && c > 0){ const f = (1 - c / 110) * .6; p.px += dx / c * f; p.py += dy / c * f; }
+                p.px *= .94; p.py *= .94; p.x += p.px; p.y += p.py;
+                if (p.y < -10 || p.x < -20 || p.x > w + 20) Object.assign(p, mk(h + 10));
+                const x = p.x + Math.sin(t / 1800 + p.phase) * p.sway * 6;
+                d.globalAlpha = .3 + .3 * Math.sin(t / 900 + p.phase * 3);
+                if (p.square) d.fillRect(x, p.y, p.size * 1.4, p.size * 1.4);
+                else { d.beginPath(); d.arc(x, p.y, p.size, 0, Math.PI * 2); d.fill(); }
+            }
+            raf = requestAnimationFrame(frame);
+        }
+        new IntersectionObserver(function(en){ vis = en[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(cv);
+    })();
 </script>
 </body>
 </html>
