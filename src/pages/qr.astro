@@ -47,6 +47,10 @@
             <option value="custom">custom image…</option>
         </select>
         <input type="file" id="logoFile" accept="image/*" hidden>
+        <div id="customRow" hidden>
+            <button type="button" id="browseBtn">browse…</button>
+            <span id="fileName">no file chosen</span>
+        </div>
         <button type="submit">generate</button>
     </form>
     <div id="result"></div>
@@ -64,8 +68,18 @@
             spotify: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#1DB954"/><g fill="none" stroke="#000" stroke-linecap="round"><path d="M22 36c19-6 42-4 58 6" stroke-width="8"/><path d="M25 51c16-5 35-3 49 5" stroke-width="7"/><path d="M28 65c13-4 28-2 40 4" stroke-width="6"/></g></svg>'
         };
 
+        var customRow = document.getElementById('customRow');
+        var browseBtn = document.getElementById('browseBtn');
+        var fileName = document.getElementById('fileName');
+
         select.addEventListener('change', function () {
-            if (select.value === 'custom') file.click();
+            var isCustom = select.value === 'custom';
+            customRow.hidden = !isCustom;
+            if (isCustom && !file.files[0]) file.click();
+        });
+        browseBtn.addEventListener('click', function () { file.click(); });
+        file.addEventListener('change', function () {
+            fileName.textContent = file.files[0] ? file.files[0].name : 'no file chosen';
         });
 
         function loadImage(src) {
