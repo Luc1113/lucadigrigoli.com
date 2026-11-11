@@ -30,7 +30,7 @@
             font-size: 1rem;
             cursor: pointer;
         }
-        .colors { display: flex; gap: 20px; margin-bottom: 12px; }
+        .colors { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 12px; }
         .colors label { display: flex; align-items: center; gap: 8px; }
         input[type=color] { width: 40px; height: 30px; padding: 0; border: 1px solid #ccc; cursor: pointer; }
         #result { margin-top: 20px; }
@@ -57,6 +57,7 @@
         <div class="colors">
             <label>foreground <input type="color" id="fgColor" value="#000000"></label>
             <label>background <input type="color" id="bgColor" value="#ffffff"></label>
+            <label><input type="checkbox" id="outlineOn"> outline <input type="color" id="outlineColor" value="#ff0000"></label>
         </div>
         <button type="submit">generate</button>
     </form>
@@ -71,6 +72,8 @@
         var result = document.getElementById('result');
         var fgInput = document.getElementById('fgColor');
         var bgInput = document.getElementById('bgColor');
+        var outlineOn = document.getElementById('outlineOn');
+        var outlineInput = document.getElementById('outlineColor');
 
         var LOGOS = {
             youtube: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="4" y="20" width="92" height="60" rx="18" fill="#FF0000"/><path d="M41 36v28l24-14z" fill="#fff"/></svg>',
@@ -126,6 +129,14 @@
                 var ctx = canvas.getContext('2d');
                 ctx.fillStyle = bgInput.value;
                 ctx.fillRect(0, 0, size, size);
+                if (outlineOn.checked) {
+                    // paint each dark module slightly enlarged first; the real modules go on top
+                    var o = Math.max(1, Math.round(cell * 0.25));
+                    ctx.fillStyle = outlineInput.value;
+                    for (var r0 = 0; r0 < n; r0++)
+                        for (var c0 = 0; c0 < n; c0++)
+                            if (qr.isDark(r0, c0)) ctx.fillRect((c0 + quiet) * cell - o, (r0 + quiet) * cell - o, cell + o * 2, cell + o * 2);
+                }
                 ctx.fillStyle = fgInput.value;
                 for (var r = 0; r < n; r++)
                     for (var c = 0; c < n; c++)
