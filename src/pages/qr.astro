@@ -26,10 +26,24 @@
             margin-bottom: 10px;
         }
         button {
-            padding: 8px 16px;
+            padding: 10px 20px;
+            font-family: inherit;
             font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background: #222;
+            border: 2px solid #222;
+            border-radius: 6px;
             cursor: pointer;
         }
+        button:hover { background: #000; border-color: #000; }
+        button:focus-visible { outline: 3px solid #4d90fe; outline-offset: 2px; }
+        #qrForm > button[type=submit] { width: 100%; font-size: 1.05rem; padding: 12px 20px; }
+        #browseBtn { color: #222; background: #fff; }
+        #browseBtn:hover { background: #eee; }
+        #customRow { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        #customRow[hidden] { display: none; }
+        #fileName { font-size: 0.85rem; color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .colors { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-bottom: 12px; }
         .colors label { display: flex; align-items: center; gap: 8px; }
         input[type=color] { width: 40px; height: 30px; padding: 0; border: 1px solid #ccc; cursor: pointer; }
