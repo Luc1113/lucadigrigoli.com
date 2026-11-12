@@ -150,9 +150,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             box-shadow:0 8px 24px rgba(43,36,29,.14);
             border:3px solid var(--paper);
             transform:rotate(-4deg);
-            transition:transform .3s ease;
         }
-        .hero-photo:hover{ transform:rotate(2deg) scale(1.03); }
         .hero-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
         .eyebrow{
             font-family:'Courier Prime',monospace;
@@ -180,11 +178,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
 
         .animated-bar{
             height:3px; width:150px; margin:18px 0;
-            background:linear-gradient(90deg,var(--rust) 0%,#CD853F 25%,#DEB887 50%,#CD853F 75%,var(--rust) 100%);
-            animation:shimmer 3s ease-in-out infinite;
-            will-change:transform;
+            background:var(--rust);
         }
-        @keyframes shimmer{ 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.12)} }
 
         .hero-links{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
         .pill{
@@ -233,7 +228,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         }
         .panel::before{
             content:''; position:absolute; top:0; left:0; right:0; height:2px;
-            background:linear-gradient(90deg,transparent 0%,var(--rust) 50%,transparent 100%);
+            background:var(--rust);
         }
 
         /* ── VINTAGE DIVIDER ── */
@@ -321,6 +316,9 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
         @media(max-width:760px){ .grid{ grid-template-columns:repeat(2,1fr); } }
         @media(max-width:480px){ .grid{ grid-template-columns:1fr; } }
+
+        .grid-feature{ grid-template-columns:repeat(2,1fr); }
+        @media(max-width:760px){ .grid-feature{ grid-template-columns:1fr; } }
 
         .card{
             position:relative;
@@ -752,14 +750,11 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             <a href="https://open.spotify.com/artist/2Ty5D7qGvHpZ7TJoG6AUS2" class="more" target="_blank" rel="noopener">follow on Spotify &rarr;</a>
         </div>
 
-        <div class="feature">
-            <div class="feature-cover">
-                <img src="images/kissandtell-cover-preview.jpg" alt="The Kiss and Tell Show cover art" width="440" height="440" loading="eager" fetchpriority="high">
-            </div>
-            <div>
-                <span class="feature-tag">out now</span>
-                <h3>The Kiss and Tell Show</h3>
-                <p>My first major release in five years. You don't wanna miss it.</p>
+        <div class="grid grid-feature">
+            <div class="card" style="background-image:url('images/kissandtell-cover-preview.jpg');">
+                <h4>The Kiss and Tell Show</h4>
+                <p class="sub">album &middot; out now</p>
+                <p class="desc">My first major release in five years. You don't wanna miss it.</p>
                 <div class="stream-row">
                     <a href="https://open.spotify.com/album/1sHb9ni9ggSghbxcn0fze2?si=M1xtNYcbRuezQ-NC8tBzGQ" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
                     <a href="https://music.apple.com/us/album/the-kiss-and-tell-show/6771307730" class="stream-link apple" target="_blank" rel="noopener">Apple Music</a>
@@ -767,16 +762,11 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                     <a href="kissandtell" class="stream-link ghost">release page</a>
                 </div>
             </div>
-        </div>
 
-        <div class="feature">
-            <div class="feature-cover">
-                <img src="blogimg/521Deluxe.png" alt="521 (5th Anniversary Deluxe Edition) cover art" width="440" height="440" loading="lazy">
-            </div>
-            <div>
-                <span class="feature-tag">out now</span>
-                <h3>521 (5th Anniversary Deluxe)</h3>
-                <p>16 originals plus 4 bonus tracks pulled from the archives — a five-years-later look back at where this all started.</p>
+            <div class="card" style="background-image:url('blogimg/521Deluxe.png');">
+                <h4>521 (5th Anniversary Deluxe)</h4>
+                <p class="sub">album &middot; out now</p>
+                <p class="desc">16 originals plus 4 bonus tracks pulled from the archives — a five-years-later look back at where this all started.</p>
                 <div class="stream-row">
                     <a href="https://distrokid.com/hyperfollow/lucadigrigoli/521" class="stream-link spotify" target="_blank" rel="noopener">Spotify</a>
                     <a href="521" class="stream-link ghost">release page</a>
@@ -784,7 +774,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             </div>
         </div>
 
-        <div class="grid" style="margin-top:8px;">
+        <div class="grid" style="margin-top:16px;">
             <div class="card" style="background-image:url('beautifulGirl.webp');">
                 <h4>Beautiful Girl</h4>
                 <p class="sub">single &middot; out now</p>
