@@ -113,8 +113,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         /* ── NAV ── */
         .nav{
             position:sticky; top:0; z-index:50;
-            background:rgba(250,246,239,.88);
-            backdrop-filter:blur(8px);
+            background:var(--cream);
             border-bottom:1px solid var(--rule);
         }
         .nav-inner{
@@ -123,8 +122,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         }
         .nav-name{
             font-family:'Times New Roman',serif; font-weight:700; font-size:1.2rem;
-            letter-spacing:-.01em; text-decoration:none;
-            text-shadow:1px 1px 0 var(--rule);
+            text-decoration:none;
         }
         .nav-links{ display:flex; gap:26px; list-style:none; }
         .nav-links a{
@@ -147,9 +145,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .hero-photo{
             width:132px; height:132px; border-radius:50%;
             overflow:hidden; flex-shrink:0;
-            box-shadow:0 8px 24px rgba(43,36,29,.14);
-            border:3px solid var(--paper);
-            transform:rotate(-4deg);
+            border:1px solid var(--rule);
         }
         .hero-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
         .eyebrow{
@@ -160,19 +156,15 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         }
         .typing-sub{
             font-size:.9rem; color:var(--ink-soft); font-family:'Courier Prime',monospace;
-            overflow:hidden; white-space:nowrap; display:inline-block;
-            border-right:2px solid var(--rust);
-            animation:typing 2.2s steps(28,end) 1, blink-caret .8s step-end infinite;
-            max-width:fit-content; margin-bottom:14px;
+            display:inline-block; margin-bottom:14px;
         }
         @keyframes typing{ from{width:0} to{width:100%} }
         @keyframes blink-caret{ from,to{border-color:transparent} 50%{border-color:var(--rust)} }
         .hero h1{
             font-family:'Times New Roman',serif; font-weight:800;
             font-size:clamp(2.6rem,6.5vw,4.2rem);
-            letter-spacing:-.02em; line-height:1.05; margin-bottom:4px;
+            line-height:1.1; margin-bottom:4px;
             color:var(--rust);
-            text-shadow:2px 2px 0 var(--rule);
         }
         .hero p{ color:var(--ink-soft); font-size:1.02rem; max-width:52ch; }
 
@@ -185,11 +177,11 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .pill{
             display:inline-flex; align-items:center; gap:6px;
             font-size:.84rem; text-decoration:none; padding:8px 16px;
-            border:1px solid var(--rule); border-radius:100px;
-            color:var(--ink); transition:border-color .15s, background .15s, transform .15s;
+            border:1px solid var(--rule); border-radius:2px;
+            color:var(--ink);
             background:var(--paper);
         }
-        .pill:hover{ border-color:var(--rust); transform:translateY(-1px); }
+        .pill:hover{ border-color:var(--rust); }
         .pill.primary{ background:var(--rust); color:#fff; border-color:var(--rust); }
         .pill.primary:hover{ background:var(--rust-deep); border-color:var(--rust-deep); }
 
@@ -202,9 +194,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             border:1.5px solid var(--rust);
             padding:10px 22px;
             border-radius:2px;
-            transition:background .2s, color .2s, transform .2s;
         }
-        .box-btn:hover{ background:var(--rust); color:var(--cream); transform:translateY(-2px); }
+        .box-btn:hover{ background:var(--rust); color:var(--cream); }
         @media(max-width:600px){
             .hero{ grid-template-columns:1fr; text-align:center; padding-top:52px; }
             .hero-photo{ margin:0 auto; }
@@ -218,17 +209,10 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
 
         /* ── PANEL (boxed section card, old-site feel) ── */
         .panel{
-            background:rgba(255,255,255,.62);
+            background:var(--paper);
             border:1px solid var(--rule);
-            border-radius:16px;
-            padding:32px;
-            position:relative;
-            overflow:hidden;
-            box-shadow:0 0 0 1px rgba(139,69,19,.06), 0 10px 28px rgba(139,69,19,.1);
-        }
-        .panel::before{
-            content:''; position:absolute; top:0; left:0; right:0; height:2px;
-            background:var(--rust);
+            border-radius:3px;
+            padding:28px;
         }
 
         /* ── VINTAGE DIVIDER ── */
@@ -257,97 +241,31 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             font-size:clamp(1.5rem,3.4vw,2rem); margin:0 0 8px;
         }
 
-        /* ── FEATURED RELEASE ── */
-        .feature{
-            display:grid; grid-template-columns:220px 1fr; gap:32px;
-            background:var(--paper); border:1px solid var(--rule);
-            border-radius:14px; padding:28px; align-items:center;
-            margin-bottom:18px;
-        }
-        .feature-cover{
-            width:100%; aspect-ratio:1; border-radius:8px; overflow:hidden;
-            box-shadow:0 14px 34px rgba(43,36,29,.16);
-            transition:transform .25s ease;
-        }
-        .feature:hover .feature-cover{ transform:scale(1.02); }
-        .feature-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
-        .feature-tag{
-            display:inline-block; font-family:'Courier Prime',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
-            color:var(--rust); font-weight:700; margin-bottom:10px;
-        }
-        .feature h3{
-            font-family:'Fraunces',serif; font-weight:600;
-            font-size:clamp(1.6rem,3.4vw,2.15rem); line-height:1.08; margin-bottom:10px;
-        }
-        .feature p{ color:var(--ink-soft); font-size:.95rem; margin-bottom:16px; max-width:46ch; }
-
         /* ── RETRO BUTTON ── */
         .retro-button{
-            background:linear-gradient(135deg,var(--rust),var(--rust-deep));
-            color:#fff; border:none; padding:11px 22px; border-radius:8px;
-            font-family:'Courier Prime',monospace; cursor:pointer;
-            transition:transform .2s, box-shadow .2s;
-            text-transform:uppercase; letter-spacing:1px; font-size:.88rem;
-            box-shadow:0 4px 10px rgba(139,69,19,.28);
+            background:var(--rust); color:#fff; border:none; padding:10px 20px; border-radius:2px;
+            font-family:'Courier Prime',monospace; cursor:pointer; font-size:.88rem;
         }
-        .retro-button:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(139,69,19,.38); }
+        .retro-button:hover{ background:var(--rust-deep); }
 
-        .stream-row{ display:flex; flex-wrap:wrap; gap:8px; }
-        .stream-link{
-            display:inline-flex; align-items:center; gap:6px;
-            padding:7px 14px; border-radius:100px; font-size:.78rem; font-weight:600;
-            text-decoration:none; transition:transform .15s, filter .15s;
-        }
-        .stream-link svg{ width:12px; height:12px; }
-        .stream-link:hover{ transform:translateY(-1px); filter:brightness(1.08); }
-        .stream-link.spotify{ background:#1DB954; color:#06210e; }
-        .stream-link.apple{ background:linear-gradient(135deg,#fc3c44,#fa233b); color:#fff; }
-        .stream-link.youtube{ background:#FF0000; color:#fff; }
-        .stream-link.bandcamp{ background:#1da0c3; color:#fff; }
-        .stream-link.ghost{ background:transparent; border:1px solid var(--rule); color:var(--ink); }
-        @media(max-width:640px){
-            .feature{ grid-template-columns:1fr; text-align:center; }
-            .feature-cover{ max-width:200px; margin:0 auto; }
-            .feature p{ margin:0 auto 16px; }
-            .stream-row{ justify-content:center; }
-        }
-
-        /* ── RELEASE GRID ── */
-        .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-        @media(max-width:760px){ .grid{ grid-template-columns:repeat(2,1fr); } }
-        @media(max-width:480px){ .grid{ grid-template-columns:1fr; } }
-
-        .grid-feature{ grid-template-columns:repeat(2,1fr); }
-        @media(max-width:760px){ .grid-feature{ grid-template-columns:1fr; } }
-
+        /* ── RELEASES: plain list, cover on the left ── */
+        .grid, .grid-feature{ display:grid; grid-template-columns:1fr; gap:0; }
         .card{
-            position:relative;
-            background:var(--ink) center/cover no-repeat;
-            border:1px solid var(--rule); border-radius:12px;
-            padding:20px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-            transform:rotate(var(--tilt,0deg));
-            overflow:hidden;
-            isolation:isolate;
+            display:grid; grid-template-columns:104px 1fr; column-gap:20px; align-content:start;
+            padding:18px 0; border-top:1px solid var(--rule);
         }
-        .card::before{
-            content:''; position:absolute; inset:0; z-index:0;
-            background:linear-gradient(190deg, rgba(20,16,12,.32) 0%, rgba(20,16,12,.72) 60%, rgba(20,16,12,.88) 100%);
+        .grid-feature .card:first-child{ border-top:none; padding-top:0; }
+        .card-cover{ grid-row:1 / span 4; width:104px; height:104px; object-fit:cover; display:block; border:1px solid var(--rule); }
+        .card h4{ font-family:'Times New Roman',serif; font-size:1.15rem; font-weight:700; line-height:1.2; }
+        .card .sub{ font-family:'Courier Prime',monospace; font-size:.76rem; color:var(--ink-soft); margin:2px 0 6px; }
+        .card p.desc{ font-size:.95rem; color:var(--ink); margin-bottom:8px; line-height:1.5; }
+        .stream-row{ display:flex; flex-wrap:wrap; gap:4px 16px; font-family:'Courier Prime',monospace; font-size:.82rem; }
+        .stream-link{ color:var(--rust); text-decoration:underline; text-underline-offset:3px; }
+        .stream-link:hover{ color:var(--rust-deep); }
+        @media(max-width:480px){
+            .card{ grid-template-columns:72px 1fr; column-gap:14px; }
+            .card-cover{ width:72px; height:72px; }
         }
-        .card > *{ position:relative; z-index:1; }
-        .card:nth-child(1){ --tilt:-.6deg; }
-        .card:nth-child(2){ --tilt:.5deg; }
-        .card:nth-child(3){ --tilt:-.4deg; }
-        .card:nth-child(4){ --tilt:.6deg; }
-        .card:nth-child(5){ --tilt:-.5deg; }
-        .card:nth-child(6){ --tilt:.4deg; }
-        .card:hover{ transform:rotate(0deg) translateY(-4px); box-shadow:0 14px 30px rgba(43,36,29,.22); border-color:#d8c9a8; }
-        .card h4{ font-family:'Fraunces',serif; font-size:1.08rem; font-weight:600; margin-bottom:4px; color:#fff; }
-        .card .sub{ font-family:'Courier Prime',monospace; font-size:.76rem; color:rgba(255,255,255,.6); margin-bottom:10px; }
-        .card p.desc{ font-size:.87rem; color:rgba(255,255,255,.82); margin-bottom:14px; line-height:1.5; }
-        .card .stream-row{ gap:6px; }
-        .card .stream-link{ padding:5px 11px; font-size:.7rem; }
-        .card .stream-link.ghost{ border-color:rgba(255,255,255,.35); color:#fff; }
-        .card .stream-link.ghost:hover{ background:rgba(255,255,255,.12); }
 
         /* ── WORK / CS ── */
         /* full-bleed: break the fold out of .wrap so the themed backdrops span the whole viewport width */
@@ -386,9 +304,9 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .car-pause:hover{ color:var(--accent); }
         .car-pause:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
         .fold-themes{ position:absolute; inset:0; z-index:0; isolation:isolate; pointer-events:none; }
-        .fold-theme{ position:absolute; inset:0; clip-path:circle(0% at var(--ox,50%) var(--oy,100%)); }
-        .fold-theme.is-on{ clip-path:circle(150% at var(--ox,50%) var(--oy,100%)); }
-        .fold-theme.is-reveal{ transition:clip-path 1s cubic-bezier(.65,0,.2,1); }
+        .fold-theme{ position:absolute; inset:0; opacity:0; }
+        .fold-theme.is-on{ opacity:1; }
+        .fold-theme.is-reveal{ transition:opacity .6s ease; }
         .ft-bing{ background:radial-gradient(70% 60% at 100% 0%, rgba(255,255,255,.08), transparent 60%), linear-gradient(160deg,#0b2a22 0%,#04140f 100%); }
         .ft-doodle{ background-color:#f6f0dc; background-image:linear-gradient(rgba(61,105,180,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(61,105,180,.13) 1px,transparent 1px); background-size:28px 28px; }
         .ft-wax{ background:radial-gradient(70% 55% at 85% 0%, rgba(224,72,45,.32), transparent 65%), radial-gradient(50% 50% at 10% 100%, rgba(244,244,245,.06), transparent 70%), #060607; }
@@ -457,10 +375,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             color:#2b2731;
             transition:transform .2s ease, box-shadow .2s ease;
         }
-        .doodle-promo:hover{
-            transform:translateY(-3px) rotate(-.15deg);
-            box-shadow:7px 9px 0 rgba(255,238,184,.86);
-        }
+        
         .doodle-promo::after{
             content:'';
             position:absolute;
@@ -541,7 +456,7 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
 
         /* Wax, Luca Web Designs and Today each borrow their own site/app look. */
         .proj{ position:relative; overflow:hidden; margin-bottom:14px; transition:transform .2s ease, box-shadow .2s ease; }
-        .proj:hover{ transform:translateY(-3px); }
+        
         .proj h4{ margin:0; }
 
         .proj-wax{
@@ -632,16 +547,13 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         .slide{
             grid-area:1/1; min-width:0;
             opacity:0; visibility:hidden; pointer-events:none;
-            transform:translateX(calc(var(--dir,1) * 70px)) scale(.94) rotate(calc(var(--dir,1) * 1.5deg));
-            filter:blur(6px);
-            transition:opacity .55s ease, transform .9s cubic-bezier(.2,.8,.2,1), filter .55s ease, visibility 0s linear .9s;
+            transition:opacity .4s ease, visibility 0s linear .4s;
         }
         .slide.is-active{
-            opacity:1; visibility:visible; pointer-events:auto; transform:none; filter:none;
-            transition:opacity .6s ease .25s, transform .9s cubic-bezier(.2,.8,.2,1) .25s, filter .6s ease .25s, visibility 0s;
+            opacity:1; visibility:visible; pointer-events:auto;
+            transition:opacity .4s ease .15s, visibility 0s;
         }
         .slide.is-leaving{
-            transform:translateX(calc(var(--dir,1) * -70px)) scale(.94) rotate(calc(var(--dir,1) * -1.5deg));
             visibility:visible;
         }
         .slide .doodle-promo, .slide .proj{ margin-bottom:0; }
@@ -684,7 +596,31 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             font-family:'Times New Roman',serif; font-weight:700; font-size:1.9rem; margin-bottom:10px;
         }
         .contact p{ color:var(--ink-soft); margin-bottom:24px; }
-        .contact-links{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+        .contact-links{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:700px; margin:0 auto; text-align:left; }
+        @media(max-width:640px){ .contact-links{ grid-template-columns:repeat(2,1fr); } }
+        @media(max-width:400px){ .contact-links{ grid-template-columns:1fr; } }
+        .tone-peach{ --tone:#f5dccb; --tone-deep:#b8704a; }
+        .tone-lavender{ --tone:#e0daf0; --tone-deep:#6e5fa3; }
+        .tone-mint{ --tone:#d3ead9; --tone-deep:#3f8a57; }
+        .tone-rose{ --tone:#f5d5dc; --tone-deep:#b0506a; }
+        .tone-butter{ --tone:#f3e7c4; --tone-deep:#9c7a26; }
+        .tone-sky{ --tone:#d5e3ee; --tone-deep:#467196; }
+        .social{
+            display:flex; align-items:center; gap:12px; padding:12px 14px; min-width:0;
+            background:var(--paper); border:1.5px solid var(--rule); border-radius:6px; text-decoration:none;
+            transition:background .2s, border-color .2s, transform .2s, box-shadow .2s;
+        }
+        .social:hover, .social:focus-visible{
+            background:var(--tone); border-color:var(--tone-deep);
+            box-shadow:0 4px 0 -1px var(--tone-deep); transform:translateY(-2px);
+        }
+        .social-icon{ flex:none; width:36px; height:36px; display:grid; place-items:center; border-radius:50%; background:var(--cream); color:var(--ink-soft); transition:background .2s, color .2s; }
+        .social-icon svg{ width:18px; height:18px; }
+        .social:hover .social-icon, .social:focus-visible .social-icon{ background:var(--paper); color:var(--tone-deep); }
+        .social-text{ display:flex; flex-direction:column; min-width:0; line-height:1.3; }
+        .social-name{ color:var(--ink); font-weight:700; }
+        .social-handle{ color:var(--ink-soft); font-size:.78rem; font-family:'Courier Prime',monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        @media(prefers-reduced-motion:reduce){ .social{ transition:none; } .social:hover{ transform:none; } }
         footer{ font-family:'Courier Prime',monospace; text-align:center; padding:24px 0 50px; font-size:.8rem; color:var(--ink-soft); }
     </style>
 </head>
@@ -751,7 +687,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         </div>
 
         <div class="grid grid-feature">
-            <div class="card" style="background-image:url('images/kissandtell-cover-preview.jpg');">
+            <div class="card">
+                <img class="card-cover" src="images/kissandtell-cover-preview.jpg" alt="" width="104" height="104" loading="lazy">
                 <h4>The Kiss and Tell Show</h4>
                 <p class="sub">album &middot; out now</p>
                 <p class="desc">My first major release in five years. You don't wanna miss it.</p>
@@ -763,7 +700,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 </div>
             </div>
 
-            <div class="card" style="background-image:url('blogimg/521Deluxe.png');">
+            <div class="card">
+                <img class="card-cover" src="blogimg/521Deluxe.png" alt="" width="104" height="104" loading="lazy">
                 <h4>521 (5th Anniversary Deluxe)</h4>
                 <p class="sub">album &middot; out now</p>
                 <p class="desc">16 originals plus 4 bonus tracks pulled from the archives — a five-years-later look back at where this all started.</p>
@@ -774,8 +712,9 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             </div>
         </div>
 
-        <div class="grid" style="margin-top:16px;">
-            <div class="card" style="background-image:url('beautifulGirl.webp');">
+        <div class="grid">
+            <div class="card">
+                <img class="card-cover" src="beautifulGirl.webp" alt="" width="104" height="104" loading="lazy">
                 <h4>Beautiful Girl</h4>
                 <p class="sub">single &middot; out now</p>
                 <p class="desc">🪼 a new song of recent happiness &lt;3</p>
@@ -786,7 +725,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 </div>
             </div>
 
-            <div class="card" style="background-image:url('blogimg/oldOConnor.png');">
+            <div class="card">
+                <img class="card-cover" src="blogimg/oldOConnor.png" alt="" width="104" height="104" loading="lazy">
                 <h4>Savannah</h4>
                 <p class="sub">single &middot; out now</p>
                 <p class="desc">A homage to a wonderful counsellor — thank you for everything.</p>
@@ -797,7 +737,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 </div>
             </div>
 
-            <div class="card" style="background-image:url('images/technicolor.png');">
+            <div class="card">
+                <img class="card-cover" src="images/technicolor.png" alt="" width="104" height="104" loading="lazy">
                 <h4>Technicolor Daydream</h4>
                 <p class="sub">single &middot; out now</p>
                 <p class="desc">My little indie-pop/rock experiment from 2022, finally out everywhere.</p>
@@ -808,7 +749,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 </div>
             </div>
 
-            <div class="card" style="background-image:url('images/pretend.webp');">
+            <div class="card">
+                <img class="card-cover" src="images/pretend.webp" alt="" width="104" height="104" loading="lazy">
                 <h4>pretend</h4>
                 <p class="sub">single &middot; out now</p>
                 <p class="desc">A song about betrayal, and the closure you'll never get.</p>
@@ -817,7 +759,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 </div>
             </div>
 
-            <div class="card" style="background-image:url('images/valerie.webp');">
+            <div class="card">
+                <img class="card-cover" src="images/valerie.webp" alt="" width="104" height="104" loading="lazy">
                 <h4>valerie</h4>
                 <p class="sub">single &middot; acoustic pop</p>
                 <p class="desc">A song about the search for "Valerie," whoever she may be.</p>
@@ -826,7 +769,8 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
                 </div>
             </div>
 
-            <div class="card" style="background-image:url('images/521cover.webp');">
+            <div class="card">
+                <img class="card-cover" src="images/521cover.webp" alt="" width="104" height="104" loading="lazy">
                 <h4>521 — debut album</h4>
                 <p class="sub">feat. "lose your mind" &amp; "apologize"</p>
                 <p class="desc">My first full-length release, exploring growth, loss, and self-discovery.</p>
@@ -965,12 +909,12 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
             <h2>get in touch</h2>
             <p>let's collaborate, talk music, or chat about a project</p>
             <div class="contact-links">
-                <a href="https://linktr.ee/lucadigrigoli" class="pill" target="_blank" rel="noopener">linktree</a>
-                <a href="https://github.com/Luc1113" class="pill" target="_blank" rel="noopener">github</a>
-                <a href="https://www.youtube.com/@lucadigrigoli7513" class="pill" target="_blank" rel="noopener">youtube</a>
-                <a href="https://www.linkedin.com/in/lucadigrigoli/" class="pill" target="_blank" rel="noopener">linkedin</a>
-                <a href="https://www.instagram.com/luca.digrigoli/" class="pill" target="_blank" rel="noopener">instagram</a>
-                <a href="https://www.tiktok.com/@luca_digrigoli" class="pill" target="_blank" rel="noopener">tiktok</a>
+                <a class="social tone-peach" href="https://linktr.ee/lucadigrigoli" target="_blank" rel="noopener"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg></span><span class="social-text"><span class="social-name">linktree</span><span class="social-handle">linktr.ee</span></span></a>
+                <a class="social tone-lavender" href="https://github.com/Luc1113" target="_blank" rel="noopener"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"></path></svg></span><span class="social-text"><span class="social-name">github</span><span class="social-handle">@Luc1113</span></span></a>
+                <a class="social tone-rose" href="https://www.youtube.com/@lucadigrigoli7513" target="_blank" rel="noopener"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.3 5 12 5 12 5s-6.3 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.76 2 12 2 12s0 3.24.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.7 19 12 19 12 19s6.3 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.24 22 12 22 12s0-3.24-.4-4.8zM10 15V9l5.2 3z"/></svg></span><span class="social-text"><span class="social-name">youtube</span><span class="social-handle">@lucadigrigoli7513</span></span></a>
+                <a class="social tone-mint" href="https://www.linkedin.com/in/lucadigrigoli/" target="_blank" rel="noopener"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.54h.06c.53-1 1.82-2.04 3.75-2.04 4 0 4.75 2.63 4.75 6.05V21h-4v-4.9c0-1.17 0-2.67-1.63-2.67s-1.88 1.27-1.88 2.58V21h-4z"/></svg></span><span class="social-text"><span class="social-name">linkedin</span><span class="social-handle">in/lucadigrigoli</span></span></a>
+                <a class="social tone-butter" href="https://www.instagram.com/luca.digrigoli/" target="_blank" rel="noopener"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg></span><span class="social-text"><span class="social-name">instagram</span><span class="social-handle">@luca.digrigoli</span></span></a>
+                <a class="social tone-sky" href="https://www.tiktok.com/@luca_digrigoli" target="_blank" rel="noopener"><span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3h-3.1v12.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.3a6.1 6.1 0 1 0 5.1 6V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-4.3-4.4z"></path></svg></span><span class="social-text"><span class="social-name">tiktok</span><span class="social-handle">@luca_digrigoli</span></span></a>
             </div>
         </div>
     </section>
@@ -1011,22 +955,6 @@ const ldJson = `{"@context":"https://schema.org","@graph":[{"@type":"Person","@i
         }, 2200);
     };
 
-    const observer = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-            if (entry.isIntersecting){
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {threshold:.08, rootMargin:'40px'});
-
-    document.querySelectorAll('.card, .work-item, .feature').forEach(function(el){
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(14px)';
-        el.style.transition = 'opacity .4s ease, transform .4s ease';
-        observer.observe(el);
-    });
 })();
 
     (function(){
